@@ -1,15 +1,17 @@
 <template>
     <div :class="inputWrapCls">
-        <Icon class="iconCls" size="0.1rem" :type="icon"/>
+        <Icon v-if="icon" class="iconCls" size="0.1rem" :type="icon"/>
         <input :style="inputStyles" :type="inputType" :class="inputCls" :placeholder="placeholder"/>
         <Icon @click="showEye" position="right" v-if="withEye" v-show="!eyeVisible" size="0.1rem" type="eye"/>
         <Icon @click="showEye" position="right" v-if="withEye" v-show="eyeVisible" size="0.1rem" type="eye-close"/>
+        <Button :className="sendCodeCls" v-if="sendCode" type="send-code">发送验证码</Button>
         <slot wx-if="this.$slots"/>
     </div>
 </template>
 
 <script>
     import Icon from './Icon'
+    import Button from './Button'
     const prefix = 'z13';
 
     export default {
@@ -23,10 +25,12 @@
             placeholder: [String],
             icon: [String],
             type: [String],
-            withEye: [Boolean]
+            withEye: [Boolean],
+            sendCode: [Boolean]
         },
         components: {
-            Icon
+            Icon,
+            Button
         },
         computed: {
             inputWrapCls() {
@@ -56,9 +60,9 @@
                 }
                 return style;
             },
-            eyeCls() {
+            sendCodeCls() {
                 return [
-                    `${prefix}-eye`
+                    `${prefix}-send-code`
                 ]
             }
         },
@@ -86,6 +90,10 @@
             background: $white;
             width: 100%;
             padding: $padding-base 0;
+        }
+        .{$prefix}-send-code {
+            position: absolute;
+            right: 0;
         }
     }
 </style>

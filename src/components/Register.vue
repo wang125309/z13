@@ -10,13 +10,13 @@
                 <Input type="text" icon="img" placeholder="图片验证码"/>
             </Cell>
             <Cell>
-                <Input type="text" icon="verification" placeholder="验证码"/>
+                <Input type="text" icon="verification" sendCode placeholder="验证码"/>
             </Cell>
             <Cell>
                 <Input type="password" icon="lock" placeholder="设置密码"/>
             </Cell>
         </CellGroup>
-        <Button className="register-btn" type="circle" full width="75%">注册</Button>
+        <Button className="register-btn" circle full width="75%">注册</Button>
     </LayoutWhite>
 </template>
 

@@ -1,6 +1,6 @@
 <template>
     <div :class="navbarCls">
-        <Icon v-if="arrowLeft" type="arrow-left"/>
+        <Icon @click="previous" v-if="arrowLeft" type="arrow-left"/>
         <slot></slot>
     </div>
 </template>
@@ -18,6 +18,11 @@
         computed: {
             navbarCls() {
                 return [`${prefix}-navbar`]
+            }
+        },
+        methods: {
+            previous() {
+                this.$router.go(-1);
             }
         }
     }

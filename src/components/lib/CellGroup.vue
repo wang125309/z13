@@ -7,12 +7,14 @@
     const prefix = 'z13';
     export default {
         props: {
-            className: [String]
+            className: [String],
+            full: [Boolean]
         },
         computed: {
             cellGroupCls() {
                 return [
                     `${prefix}-cell-group`, {
+                        [`${prefix}-cell-group-full`]: this.full,
                         [this.className]: this.className
                     }
                 ]
@@ -25,5 +27,8 @@
     .{$prefix}-cell-group {
         position: relative;
         margin: $margin-base 0;
+        &-full {
+            background-color: $white;
+        }
     }
 </style>

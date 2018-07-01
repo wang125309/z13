@@ -13,7 +13,7 @@
         <div class="forget-password">
             <a href="javascript:;">忘记密码</a>
         </div>
-        <Button className="login-btn" type="circle" full width="75%">登录</Button>
+        <Button className="login-btn" circle full width="75%">登录</Button>
         <div class="go-register">
             <a @click="goRegister" href="javascript:;">没有账号？立即注册</a>
         </div>

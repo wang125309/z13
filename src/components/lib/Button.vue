@@ -10,10 +10,12 @@
     const prefix = 'z13';
     export default {
         props: {
+            circle: [Boolean],
             type: [String],
             width: [String],
             full: [Boolean],
-            className: [String]
+            className: [String],
+            color: [String]
         },
         computed: {
             buttonWrapCls() {
@@ -27,14 +29,17 @@
             buttonCls() {
                 return [
                     `${prefix}-button`, {
+                        [`${prefix}-button-circle`]: this.circle,
                         [`${prefix}-button-${this.type}`]: this.type
                     }
                 ]
             },
             buttonStyles() {
-                return this.width ? {
-                    width: this.width
-                } : {}
+                let style = {};
+                if (this.width) {
+                    style['width'] = this.width;
+                }
+                return style;
             }
         }
     }
@@ -58,11 +63,20 @@
             color: $white;
             border: none;
             text-align: center;
-            &:hover {
-                background-color: $brand-color * $hover-percent;
-            }
             &-circle {
                 border-radius: $padding-base * 2 + $font-size-base;
+            }
+            &-default {
+                border: 1px solid $border-color;
+                color: $font-color;
+                background-color: $white;
+            }
+            &-send-code {
+                flex: 1;
+                background-color: $brand-color-yellow;
+                padding: $padding-small;
+                font-size: $font-size-small;
+                border-radius: 3px;
             }
         }
     }
