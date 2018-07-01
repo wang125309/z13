@@ -8,14 +8,16 @@
     export default {
         props: {
             className: [String],
-            full: [Boolean]
+            full: [Boolean],
+            noMargin: [Boolean]
         },
         computed: {
             cellGroupCls() {
                 return [
                     `${prefix}-cell-group`, {
                         [`${prefix}-cell-group-full`]: this.full,
-                        [this.className]: this.className
+                        [this.className]: this.className,
+                        [`${prefix}-cell-group-no-margin`]: this.noMargin
                     }
                 ]
             }
@@ -29,6 +31,9 @@
         margin: $margin-base 0;
         &-full {
             background-color: $white;
+        }
+        &-no-margin {
+            margin: 0;
         }
     }
 </style>

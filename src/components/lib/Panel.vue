@@ -9,12 +9,17 @@
     export default {
         props: {
             full: [Boolean],
-            withoutBorder: [Boolean]
+            withoutBorder: [Boolean],
+            className: [String],
+            noPadding: [Boolean]
         },
         computed: {
             panelCls() {
                 return [
-                    `${prefix}-panel`
+                    `${prefix}-panel`, {
+                        [`${this.className}`]: this.className,
+                        [`${prefix}-panel-no-padding`]: this.noPadding
+                    }
                 ]
             }
         }
@@ -28,5 +33,8 @@
         padding: $padding-base;
         background-color: $white;
         border-bottom: 1px solid $border-color;
+        &-no-padding {
+            padding: 0;
+        }
     }
 </style>

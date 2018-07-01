@@ -11,6 +11,8 @@ const ResetPassword = r => require.ensure([], ()=>r(require('@/components/ResetP
 const ResetPasswordSuccess = r => require.ensure([], ()=>r(require('@/components/ResetPasswordSuccess.vue')))
 const My = r => require.ensure([], ()=>r(require('@/components/My.vue')))
 const MyActivity = r => require.ensure([], ()=>r(require('@/components/MyActivity.vue')))
+const Activity = r => require.ensure([], ()=>r(require('@/components/Activity.vue')))
+const Operation = r => require.ensure([], ()=>r(require('@/components/Operation.vue')))
 
 
 export default new Router({
@@ -60,6 +62,16 @@ export default new Router({
             path: '/my-activity',
             name: 'MyActivity',
             component: MyActivity
+        },
+        {
+            path: '/activity',
+            name: 'Activity',
+            component: Activity
+        },
+        {
+            path: '/operation',
+            name: 'Operation',
+            component: Operation
         }
     ]
 })
