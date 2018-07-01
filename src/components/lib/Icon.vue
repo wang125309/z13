@@ -1,5 +1,5 @@
 <template>
-    <span :class="iconCls" :style="iconStyle"/>
+    <span @click="onClick" :class="iconCls" :style="iconStyle"/>
 </template>
 
 <script>
@@ -7,7 +7,8 @@
     export default {
         props: {
             type: [String],
-            size: [String]
+            size: [String],
+            position: [String]
         },
         computed: {
             iconCls() {
@@ -21,7 +22,16 @@
                     style['width']=  this.size;
                 }
                 style['background-image'] = 'url("/assets/icon/' + this.type + '.png")';
+                if (this.position === 'right') {
+                    style['left'] = 'initial';
+                    style['right'] = 0;
+                }
                 return style;
+            }
+        },
+        methods: {
+            onClick() {
+                this.$emit('click');
             }
         }
     }

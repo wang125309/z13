@@ -1,7 +1,9 @@
 <template>
     <div :class="inputWrapCls">
         <Icon class="iconCls" size="0.1rem" :type="icon"/>
-        <input :style="inputStyles" :type="type" :class="inputCls" v-model="model" :placeholder="placeholder"/>
+        <input :style="inputStyles" :type="inputType" :class="inputCls" :placeholder="placeholder"/>
+        <Icon @click="showEye" position="right" v-if="withEye" v-show="!eyeVisible" size="0.1rem" type="eye"/>
+        <Icon @click="showEye" position="right" v-if="withEye" v-show="eyeVisible" size="0.1rem" type="eye-close"/>
         <slot wx-if="this.$slots"/>
     </div>
 </template>
@@ -11,11 +13,17 @@
     const prefix = 'z13';
 
     export default {
+        data() {
+            return {
+                eyeVisible: false,
+                inputType: this.type
+            }
+        },
         props: {
             placeholder: [String],
-            model: [String],
             icon: [String],
-            type: [String]
+            type: [String],
+            withEye: [Boolean]
         },
         components: {
             Icon
@@ -43,7 +51,21 @@
                 if (this.icon) {
                     style['margin-left'] = '0.12rem';
                 }
+                if (this.withEye) {
+                    style['margin-right'] = '0.12rem';
+                }
                 return style;
+            },
+            eyeCls() {
+                return [
+                    `${prefix}-eye`
+                ]
+            }
+        },
+        methods: {
+            showEye() {
+                this.eyeVisible = !this.eyeVisible;
+                this.eyeVisible? this.inputType = 'text' : this.inputType = 'password';
             }
         }
     }

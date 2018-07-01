@@ -1,16 +1,22 @@
 <template>
     <LayoutWhite>
-        <Navbar>注册</Navbar>
+        <Navbar>登录</Navbar>
         <Z13Icon/>
         <CellGroup class="cell-group">
             <Cell>
                 <Input type="text" icon="phone" placeholder="手机号/注册邮箱"/>
             </Cell>
             <Cell>
-                <Input type="password" icon="lock" placeholder="登录密码"/>
+                <Input withEye type="password" icon="lock" placeholder="登录密码"/>
             </Cell>
         </CellGroup>
-        <Button className="register-btn" type="circle" full width="75%">登录</Button>
+        <div class="forget-password">
+            <a href="javascript:;">忘记密码</a>
+        </div>
+        <Button className="login-btn" type="circle" full width="75%">登录</Button>
+        <div class="go-register">
+            <a @click="goRegister" href="javascript:;">没有账号？立即注册</a>
+        </div>
     </LayoutWhite>
 </template>
 
@@ -37,6 +43,13 @@
         data () {
             return {
             }
+        },
+        methods: {
+            goRegister() {
+                this.$router.push({
+                    path: '/register'
+                })
+            }
         }
     }
 </script>
@@ -48,5 +61,20 @@
     }
     .register-btn {
         margin-top: $margin-large;
+    }
+    .forget-password {
+        a {
+            position: absolute;
+            right: 0;
+            color: $font-second;
+            margin-right: $margin-base;
+        }
+    }
+    .login-btn {
+        margin-top: $margin-large*2;
+    }
+    .go-register {
+        margin-top: $margin-large;
+        text-align: center;
     }
 </style>

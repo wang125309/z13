@@ -53,3 +53,14 @@ setBackgroundImage(name) {
   background-repeat: no-repeat;
   background-position: center;
 }
+
+* {
+  outline: none;
+  -webkit-user-select: none;
+  &:active {
+    outline: none;
+  }
+  input {
+    -webkit-user-select: initial;
+  }
+}
