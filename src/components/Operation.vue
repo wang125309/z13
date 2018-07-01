@@ -3,11 +3,11 @@
         <Navbar arrowLeft>百叶窗控制</Navbar>
         <div class="operation-tabs">
             <div class="operation-tab">
-                <Icon size="0.2rem" type="operation-open"></Icon>
+                <Icon size="0.15rem" type="operation-open"></Icon>
                 <div class="operation-text">全部开启</div>
             </div>
             <div class="operation-tab">
-                <Icon size="0.2rem" type="operation-close"></Icon>
+                <Icon size="0.15rem" type="operation-close"></Icon>
                 <div class="operation-text">全部关闭</div>
             </div>
         </div>
