@@ -1,6 +1,6 @@
 <template>
     <div :class="inputWrapCls">
-        <Icon v-if="icon" class="iconCls" size="0.1rem" :type="icon"/>
+        <Icon v-if="icon" position="lefe" class="iconCls" size="0.1rem" :type="icon"/>
         <input :style="inputStyles" :type="inputType" :class="inputCls" :placeholder="placeholder"/>
         <Icon @click="showEye" position="right" v-if="withEye" v-show="!eyeVisible" size="0.1rem" type="eye"/>
         <Icon @click="showEye" position="right" v-if="withEye" v-show="eyeVisible" size="0.1rem" type="eye-close"/>
@@ -46,7 +46,7 @@
             inputCls() {
                 return [
                     `${prefix}-input`, {
-                        [`$prefix-input-${this.size}`]: this.size
+                        [`${prefix}-input-${this.size}`]: this.size
                     }
                 ]
             },
@@ -61,9 +61,7 @@
                 return style;
             },
             sendCodeCls() {
-                return [
-                    `${prefix}-send-code`
-                ]
+                return `${prefix}-send-code`
             }
         },
         methods: {

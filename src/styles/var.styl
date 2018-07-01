@@ -50,11 +50,14 @@ $hover-percent                              = 0.85;
 $situation-logo-size                        = 0.25rem;
 
 
-setBackgroundImage(name) {
+// banner
+$banner-height                              = 0.46rem;
+
+setBackgroundImage(name, position=center) {
   background-image: url(name);
   background-size: 100% auto;
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: position;
 }
 
 * {

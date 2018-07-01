@@ -22,7 +22,7 @@
                 return [
                     `${prefix}-button-wrap`, {
                         [`${prefix}-button-wrap-full`]: this.full,
-                        [this.className]: this.className
+                        [`${this.className}`]: this.className
                     }
                 ]
             },
