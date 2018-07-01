@@ -1,29 +1,28 @@
 <template>
-    <span @click="onClick" :class="iconCls" :style="iconStyle"/>
+    <div :class="avatarCls" :style="avatarStyle"/>
 </template>
 
 <script>
     const prefix = 'z13';
     export default {
         props: {
-            type: [String],
+            src: [String],
             size: [String],
-            position: [String],
-            top: [String]
+            position: [String]
         },
         computed: {
-            iconCls() {
+            avatarCls() {
                 return [
-                    `${prefix}-icon`
+                    `${prefix}-avatar`
                 ]
             },
-            iconStyle() {
+            avatarStyle() {
                 let style = {};
                 if (this.size) {
                     style['width'] =  this.size;
                     style['height'] = this.size;
                 }
-                style['background-image'] = 'url("/assets/icon/' + this.type + '.png")';
+                style['background-image'] = 'url(' + this.src + ')';
                 if (this.position === 'left') {
                     style['left'] = 0;
                     style['right'] = 'initial';
@@ -35,15 +34,7 @@
                 if (this.position) {
                     style['position'] = 'absolute';
                 }
-                if (this.top) {
-                    style['top'] = this.top;
-                }
                 return style;
-            }
-        },
-        methods: {
-            onClick() {
-                this.$emit('click');
             }
         }
     }
@@ -51,12 +42,12 @@
 
 <style lang="stylus">
     @import '../../styles/var.styl';
-    .{$prefix}-icon {
-        display: block;
+    .{$prefix}-avatar {
+        border-radius: 100%;
         margin: 0 auto;
-        width: $icon-size-default;
-        height: $icon-size-default;
-        background-size: contain;
+        width: $avatar-size-base;
+        height: $avatar-size-base;
+        background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
     }

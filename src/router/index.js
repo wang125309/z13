@@ -9,6 +9,9 @@ const Login = r => require.ensure([], ()=>r(require('@/components/Login.vue')))
 const ForgetPassword = r => require.ensure([], ()=>r(require('@/components/ForgetPassword.vue')))
 const ResetPassword = r => require.ensure([], ()=>r(require('@/components/ResetPassword.vue')))
 const ResetPasswordSuccess = r => require.ensure([], ()=>r(require('@/components/ResetPasswordSuccess.vue')))
+const My = r => require.ensure([], ()=>r(require('@/components/My.vue')))
+const MyActivity = r => require.ensure([], ()=>r(require('@/components/MyActivity.vue')))
+
 
 export default new Router({
     scrollBehavior: () => ({y: 0}),
@@ -47,6 +50,16 @@ export default new Router({
             path: '/reset-password-success',
             name: 'ResetPasswordSuccess',
             component: ResetPasswordSuccess
+        },
+        {
+            path: '/personal-info',
+            name: 'My',
+            component: My
+        },
+        {
+            path: '/my-activity',
+            name: 'MyActivity',
+            component: MyActivity
         }
     ]
 })

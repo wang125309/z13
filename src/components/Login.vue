@@ -11,7 +11,7 @@
             </Cell>
         </CellGroup>
         <div class="forget-password">
-            <a href="javascript:;">忘记密码</a>
+            <a href="javascript:;" @click="goForgetPassword">忘记密码</a>
         </div>
         <Button className="login-btn" circle full width="75%">登录</Button>
         <div class="go-register">
@@ -48,6 +48,11 @@
             goRegister() {
                 this.$router.push({
                     path: '/register'
+                })
+            },
+            goForgetPassword() {
+                this.$router.push({
+                    path: '/forget-password'
                 })
             }
         }

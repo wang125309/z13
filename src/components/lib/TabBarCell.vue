@@ -1,5 +1,5 @@
 <template>
-    <div :class="tabBarCellCls">
+    <div @click="go" :class="tabBarCellCls">
         <Icon size="0.06rem" :type="getIconType"/>
         <div :class="tabBarCellTextCls">
             <slot/>
@@ -16,7 +16,8 @@
         },
         props: {
             icon: [String],
-            active: [Boolean]
+            active: [Boolean],
+            url: [String]
         },
         computed: {
             tabBarCellCls() {
@@ -33,6 +34,13 @@
                 return [
                     `${prefix}-tab-bar-cell-text`
                 ]
+            }
+        },
+        methods: {
+            go() {
+                this.$router.push({
+                    path: this.url
+                })
             }
         }
     }

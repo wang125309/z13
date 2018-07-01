@@ -1,6 +1,6 @@
 <template>
     <div :class="inputWrapCls">
-        <Icon v-if="icon" position="lefe" class="iconCls" size="0.1rem" :type="icon"/>
+        <Icon v-if="icon" position="left" class="iconCls" size="0.07rem" :type="icon"/>
         <input :style="inputStyles" :type="inputType" :class="inputCls" :placeholder="placeholder"/>
         <Icon @click="showEye" position="right" v-if="withEye" v-show="!eyeVisible" size="0.1rem" type="eye"/>
         <Icon @click="showEye" position="right" v-if="withEye" v-show="eyeVisible" size="0.1rem" type="eye-close"/>

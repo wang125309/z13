@@ -21,8 +21,8 @@
             buttonWrapCls() {
                 return [
                     `${prefix}-button-wrap`, {
-                        [`${prefix}-button-wrap-full`]: this.full,
-                        [`${this.className}`]: this.className
+                        [`${prefix}-button-wrap-full`]: this.full
+
                     }
                 ]
             },
@@ -30,7 +30,8 @@
                 return [
                     `${prefix}-button`, {
                         [`${prefix}-button-circle`]: this.circle,
-                        [`${prefix}-button-${this.type}`]: this.type
+                        [`${prefix}-button-${this.type}`]: this.type,
+                        [`${this.className}`]: this.className
                     }
                 ]
             },
@@ -59,7 +60,7 @@
             display: block;
             position: relative;
             background-color: $brand-color;
-            padding: $padding-small 0;
+            padding: $padding-base 0;
             color: $white;
             border: none;
             text-align: center;
