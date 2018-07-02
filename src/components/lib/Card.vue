@@ -17,7 +17,8 @@
             height: [String],
             className: [String],
             full: [Boolean],
-            title: [String]
+            title: [String],
+            noPadding: [Boolean]
         },
         computed: {
             cardWrapCls() {
@@ -42,6 +43,9 @@
             cardStyle() {
                 let style = {};
                 style['height'] = this.height;
+                if (this.noPadding) {
+                    style['padding'] = 0;
+                }
                 return style;
             },
             cardOverflowCls() {

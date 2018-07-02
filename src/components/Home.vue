@@ -20,7 +20,6 @@
             </Card>
             <TabBar :active="0"/>
         </Scrollable>
-
     </LayoutBase>
 </template>
 

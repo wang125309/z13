@@ -36,7 +36,7 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 11、公司认证
 12、办公位置
 13、百叶窗 *
-14、百叶窗详情
+14、百叶窗详情 *
 15、就餐服务列表
 16、就餐服务详情
 17、可租单元列表

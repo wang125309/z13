@@ -6,7 +6,7 @@
             <TabsCell @onClick="setActive(1)" :active="getActive(1)">进行中</TabsCell>
             <TabsCell @onClick="setActive(2)" :active="getActive(2)">已结束</TabsCell>
         </Tabs>
-        <Card full className="activity-card">
+        <Card @click="goActive" full className="activity-card">
             <ActivityImages src="/assets/banner.png" title="中秋节抽奖活动" status="进行中" date="2017-06-03" location="平顶山" tag="已有29192人参与"/>
         </Card>
         <Card full className="activity-card">
@@ -43,6 +43,11 @@
             },
             setActive(n) {
                 this.active = n;
+            },
+            goActive() {
+                this.$router.push({
+                    path: '/activity'
+                })
             }
         },
         data () {

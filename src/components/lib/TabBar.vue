@@ -53,7 +53,7 @@
         border-top: 1px solid $border-color;
         background-color: $white;
         &-placeholder {
-            height: $padding-small + $padding-base + $font-size-base + $icon-size-large;
+            height: $padding-small + $padding-base * 2+ $icon-size-large;
         }
     }
 
