@@ -33,7 +33,7 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 8、我的活动 *
 9、常见问题
 10、我的公司
-11、公司认证
+11、公司认证 *
 12、办公位置
 13、百叶窗 *
 14、百叶窗详情 *
@@ -41,7 +41,7 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 16、就餐服务详情
 17、可租单元列表
 18、可租单元详情
-19、大楼布局
+19、大楼布局 !
 20、送水列表
 21、送水详情
 22、保洁列表
@@ -50,3 +50,9 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 25、洗车详情
 26、大厦服务列表
 27、大厦服务详情
+28、活动详情 *
+29、公司认证详情 *
+30、公司认证成功
+31、注册成功 *
+32、密码找回成功 *
+33、设置新密码 *
