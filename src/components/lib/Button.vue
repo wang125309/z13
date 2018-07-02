@@ -65,6 +65,7 @@
             color: $white;
             border: none;
             text-align: center;
+            white-space: nowrap;
             &-circle {
                 border-radius: $padding-base * 3;
             }
