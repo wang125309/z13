@@ -11,14 +11,16 @@
             full: [Boolean],
             withoutBorder: [Boolean],
             className: [String],
-            noPadding: [Boolean]
+            noPadding: [Boolean],
+            noBoard: [Boolean]
         },
         computed: {
             panelCls() {
                 return [
                     `${prefix}-panel`, {
                         [`${this.className}`]: this.className,
-                        [`${prefix}-panel-no-padding`]: this.noPadding
+                        [`${prefix}-panel-no-padding`]: this.noPadding,
+                        [`${prefix}-panel-no-board`]: this.noBorder
                     }
                 ]
             }
@@ -35,6 +37,9 @@
         border-bottom: 1px solid $border-color;
         &-no-padding {
             padding: 0;
+        }
+        &-no-border {
+            border: none;
         }
     }
 </style>

@@ -1,5 +1,7 @@
 <template>
-    <span @click="onClick" :class="iconCls" :style="iconStyle"/>
+    <span @click="onClick" :class="iconCls" :style="iconStyle">
+        <slot/>
+    </span>
 </template>
 
 <script>
@@ -9,12 +11,15 @@
             type: [String],
             size: [String],
             position: [String],
-            top: [String]
+            top: [String],
+            className: [String]
         },
         computed: {
             iconCls() {
                 return [
-                    `${prefix}-icon`
+                    `${prefix}-icon`, {
+                        [`${this.className}`]: this.className
+                    }
                 ]
             },
             iconStyle() {
