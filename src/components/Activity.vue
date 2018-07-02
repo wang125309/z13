@@ -36,6 +36,13 @@
                 快来发表评论吧
             </ActivityCardItem>
         </Panel>
+        <div class="sign-bar-placeholder"/>
+        <div class="sign-bar">
+            <div class="sign-item-wrap">
+                <Icon position="left" size="0.08rem" className="comment" type="comment"/>
+                <Button size="small-padding" width="0.2rem" circle className="sign-up-button">报名</Button>
+            </div>
+        </div>
     </LayoutBase>
 </template>
 
@@ -49,9 +56,11 @@
     import Button from "./lib/Button";
     import ActivityCardItem from "./lib/ActivityCardItem";
     import Panel from "./lib/Panel";
+    import Icon from "./lib/Icon";
     export default {
         name: 'Activity',
         components: {
+            Icon,
             Panel,
             ActivityCardItem,
             Navbar,
@@ -88,5 +97,25 @@
         &-message {
             padding-top: $padding-small;
         }
+    }
+    .sign-bar {
+        position: fixed;
+        padding: $padding-base 0;
+        width: 100%;
+        bottom: 0;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        background-color: $white;
+        border-top: 1px solid $border-color;
+    }
+    .comment {
+        left: $margin-base !important;
+    }
+    .sign-bar-placeholder {
+        height: $padding-base * 5;
+    }
+    .sign-item-wrap {
+        padding: 0 $padding-base;
     }
 </style>

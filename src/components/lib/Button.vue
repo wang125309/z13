@@ -15,14 +15,14 @@
             width: [String],
             full: [Boolean],
             className: [String],
-            color: [String]
+            color: [String],
+            size: [String]
         },
         computed: {
             buttonWrapCls() {
                 return [
                     `${prefix}-button-wrap`, {
                         [`${prefix}-button-wrap-full`]: this.full
-
                     }
                 ]
             },
@@ -31,7 +31,8 @@
                     `${prefix}-button`, {
                         [`${prefix}-button-circle`]: this.circle,
                         [`${prefix}-button-${this.type}`]: this.type,
-                        [`${this.className}`]: this.className
+                        [`${this.className}`]: this.className,
+                        [`${prefix}-button-${this.size}`]: this.size,
                     }
                 ]
             },
@@ -65,7 +66,7 @@
             border: none;
             text-align: center;
             &-circle {
-                border-radius: $padding-base * 2 + $font-size-base;
+                border-radius: $padding-base * 3;
             }
             &-default {
                 border: 1px solid $border-color;
@@ -78,6 +79,9 @@
                 padding: $padding-small;
                 font-size: $font-size-small;
                 border-radius: 3px;
+            }
+            &-small-padding {
+                padding: $padding-small 0;
             }
         }
     }
