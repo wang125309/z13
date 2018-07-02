@@ -12,7 +12,7 @@
             color: [String],
             backgroundColor: [String],
             borderColor: [String],
-            className: [String]
+            className: [String, Array]
         },
         computed: {
             tagCls() {

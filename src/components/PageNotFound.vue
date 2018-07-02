@@ -2,7 +2,7 @@
     <LayoutBase>
         <Navbar arrow-left>404</Navbar>
         <div class="main">
-            <Icon type="404" size="0.48rem"/>
+            <Icon type="404" size="0.5rem"/>
         </div>
     </LayoutBase>
 </template>

@@ -56,3 +56,4 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 31、注册成功 *
 32、密码找回成功 *
 33、设置新密码 *
+34、404       *

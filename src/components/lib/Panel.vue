@@ -10,7 +10,7 @@
         props: {
             full: [Boolean],
             withoutBorder: [Boolean],
-            className: [String],
+            className: [String, Array],
             noPadding: [Boolean],
             noBoard: [Boolean]
         },

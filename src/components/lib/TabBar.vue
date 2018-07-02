@@ -42,7 +42,7 @@
 
 <style lang="stylus">
     @import '../../styles/var.styl'
-
+    @import '../../styles/hairline.styl';
     .{$prefix}-tab-bar {
         position: fixed;
         bottom: 0;
@@ -50,7 +50,7 @@
         display: flex;
         justify-content: space-around;
         align-items: center;
-        border-top: 1px solid $border-color;
+        hairline('top');
         background-color: $white;
         &-placeholder {
             height: $padding-small + $padding-base * 2+ $icon-size-large;
