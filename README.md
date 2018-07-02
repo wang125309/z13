@@ -21,7 +21,7 @@ npm run build --report
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
 
-功能模块
+## 功能模块
 
 1、登录 *
 2、注册 *
@@ -52,7 +52,7 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 27、大厦服务详情
 28、活动详情 *
 29、公司认证详情 *
-30、公司认证成功
+30、公司认证成功 *
 31、注册成功 *
 32、密码找回成功 *
 33、设置新密码 *
