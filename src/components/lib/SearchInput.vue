@@ -1,7 +1,7 @@
 <template>
     <div :class="searchInputWrapCls">
         <Icon  size="0.04rem"  :class-name="searchInputIconCls" position="left" type="search"/>
-        <input :class="searchInputCls" type="text" :placeholder="placeholder"/>
+        <input :class="searchInputCls" type="text"/>
     </div>
 </template>
 

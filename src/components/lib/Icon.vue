@@ -12,7 +12,7 @@
             size: [String],
             position: [String],
             top: [String],
-            className: [String]
+            className: [String, Array]
         },
         computed: {
             iconCls() {

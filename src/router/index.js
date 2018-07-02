@@ -18,6 +18,7 @@ const CompanyList = r => require.ensure([], ()=>r(require('@/components/CompanyL
 const CompanyIdentification = r => require.ensure([], ()=>r(require('@/components/CompanyIdentification.vue')))
 const CompanyIdentificationSuccess = r => require.ensure([], ()=>r(require('@/components/CompanyIdentificationSuccess.vue')))
 const BuildingLayout = r => require.ensure([], ()=>r(require('@/components/BuildingLayout.vue')))
+const ActivityList = r => require.ensure([], ()=>r(require('@/components/ActivityList.vue')))
 
 export default new Router({
     scrollBehavior: () => ({y: 0}),
@@ -102,5 +103,10 @@ export default new Router({
             name: 'BuildingLayout',
             component: BuildingLayout
         },
+        {
+            path: '/activity-list',
+            name: 'ActivityList',
+            component: ActivityList
+        }
     ]
 })

@@ -1,5 +1,5 @@
 <template>
-    <div :class="cardWrapCls">
+    <div @click="handleClick" :class="cardWrapCls">
         <div v-if="title" :class="cardTitleCls">{{title}}</div>
         <div :class="cardCls" :style="cardStyle">
             <slot></slot>
@@ -55,6 +55,9 @@
             }
         },
         methods: {
+            handleClick() {
+                this.$emit('click')
+            }
         }
     }
 </script>

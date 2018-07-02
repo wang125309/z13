@@ -1,6 +1,6 @@
 <template>
     <LayoutBase>
-        <Navbar>我的活动</Navbar>
+        <Navbar arrow-left>我的活动</Navbar>
         <Tabs>
             <TabsCell @onClick="setActive(0)" :active="getActive(0)">全部</TabsCell>
             <TabsCell @onClick="setActive(1)" :active="getActive(1)">进行中</TabsCell>
@@ -9,7 +9,7 @@
         <Card @click="goActive" full className="activity-card">
             <ActivityImages src="/assets/banner.png" title="中秋节抽奖活动" status="进行中" date="2017-06-03" location="平顶山" tag="已有29192人参与"/>
         </Card>
-        <Card full className="activity-card">
+        <Card @click="goActive" full className="activity-card">
             <ActivityImages src="/assets/banner.png" title="中秋节抽奖活动" status="已结束" date="2018-09-19" location="二期就上盯上" tag="已有21312人参与"/>
         </Card>
         <Button circle width="92%" className="bottom-btn">发现更多活动</Button>
