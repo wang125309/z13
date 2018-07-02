@@ -57,6 +57,7 @@
     import ActivityCardItem from "./lib/ActivityCardItem";
     import Panel from "./lib/Panel";
     import Icon from "./lib/Icon";
+    import Toast from "./lib/Toast";
     export default {
         name: 'Activity',
         components: {
@@ -69,15 +70,8 @@
             LayoutBase,
             ActivityDetailImage,
             CellGroup,
-            Cell
-        },
-        methods: {
-            getActive(n) {
-                return n === this.active
-            },
-            setActive(n) {
-                this.active = n;
-            }
+            Cell,
+            Toast
         },
         data () {
             return {
