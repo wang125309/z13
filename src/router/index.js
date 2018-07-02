@@ -19,6 +19,7 @@ const CompanyIdentification = r => require.ensure([], ()=>r(require('@/component
 const CompanyIdentificationSuccess = r => require.ensure([], ()=>r(require('@/components/CompanyIdentificationSuccess.vue')))
 const BuildingLayout = r => require.ensure([], ()=>r(require('@/components/BuildingLayout.vue')))
 const ActivityList = r => require.ensure([], ()=>r(require('@/components/ActivityList.vue')))
+const PageNotFound = r => require.ensure([], ()=>r(require('@/components/PageNotFound.vue')))
 
 export default new Router({
     scrollBehavior: () => ({y: 0}),
@@ -107,6 +108,11 @@ export default new Router({
             path: '/activity-list',
             name: 'ActivityList',
             component: ActivityList
+        },
+        {
+            path: '/404',
+            name: 'PageNotFound',
+            component: PageNotFound
         }
     ]
 })
