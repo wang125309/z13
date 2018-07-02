@@ -34,6 +34,9 @@
                        path: this.isLink
                    })
                }
+               else {
+                   this.$emit('click');
+               }
             }
         }
     }

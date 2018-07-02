@@ -14,6 +14,8 @@ const MyActivity = r => require.ensure([], ()=>r(require('@/components/MyActivit
 const Activity = r => require.ensure([], ()=>r(require('@/components/Activity.vue')))
 const Operation = r => require.ensure([], ()=>r(require('@/components/Operation.vue')))
 const OperationDetail = r => require.ensure([], ()=>r(require('@/components/OperationDetail.vue')))
+const CompanyList = r => require.ensure([], ()=>r(require('@/components/CompanyList.vue')))
+const CompanyIdentification = r => require.ensure([], ()=>r(require('@/components/CompanyIdentification.vue')))
 
 export default new Router({
     scrollBehavior: () => ({y: 0}),
@@ -77,6 +79,16 @@ export default new Router({
             path: '/operation-detail',
             name: 'OperationDetail',
             component: OperationDetail
+        },
+        {
+            path: '/company-list',
+            name: 'CompanyList',
+            component: CompanyList
+        },
+        {
+            path: '/company-identification',
+            name: 'CompanyIdentification',
+            component: CompanyIdentification
         },
     ]
 })

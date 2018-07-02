@@ -43,10 +43,7 @@
             },
             setActive(n) {
                 this.active = n;
-                let toast = this.$root.$children[0].$refs.toast;
-                toast.type = 'success';
-                toast.message = '修改成功';
-                toast.show();
+
             },
             goActive() {
                 this.$router.push({

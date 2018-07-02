@@ -34,6 +34,7 @@
         position: relative;
         padding: $padding-base;
         background-color: $white;
+        border-top: 1px solid $border-color;
         border-bottom: 1px solid $border-color;
         &-no-padding {
             padding: 0;
