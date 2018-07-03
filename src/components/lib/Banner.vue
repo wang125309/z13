@@ -27,7 +27,7 @@
 <style lang="stylus">
     @import '../../styles/var.styl';
     .{$prefix}-banner {
-        setBackgroundImage('/assets/banner.png', bottom);
+        setBackgroundImage('../../assets/banner.png', bottom);
         background-size: cover;
         height: $banner-height;
     }

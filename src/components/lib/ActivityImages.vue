@@ -64,7 +64,6 @@
     @import '../../styles/var.styl';
     .{$prefix}-activity-images {
         position: relative;
-        setBackgroundImage('')
         width: 100%;
         height: 0.4rem;
         &-title {

@@ -34,7 +34,7 @@
         .{$prefix}-main-logo {
             padding: $padding-large 0;
             height: 0.3rem;
-            setBackgroundImage('/assets/icon/z13-logo.png');
+            setBackgroundImage('../../assets/icon/z13-logo.png');
         }
         .{$prefix}-main-logo-text {
             text-align: center;
