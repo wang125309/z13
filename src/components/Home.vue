@@ -71,7 +71,7 @@
                 </ServiceCellGroup>
             </Panel>
 
-            <Card class-name="rent-card" full title="可租单元">
+            <Card class-name="rent-card" details="" full title="可租单元">
                 <div class="rent-wrap">
                     <Icon class-name="rent-img" type="rent-img" size="0.35rem"/>
                     <div class="rent-details">
