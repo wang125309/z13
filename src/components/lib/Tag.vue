@@ -43,12 +43,11 @@
 
 <style lang="stylus">
     @import '../../styles/var.styl';
-
+    @import '../../styles/hairline.styl';
     .{$prefix}-tag {
         padding: $padding-tag $padding-small;
         display: inline-block;
         background-color: $white;
-        border: 1px solid $brand-color;
         color: $brand-color;
         font-size: $font-size-small;
         &-circle {

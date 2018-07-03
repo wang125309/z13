@@ -59,12 +59,16 @@
 
 <style lang="stylus">
     @import '../../styles/var.styl';
+    @import '../../styles/hairline.styl';
     .{$prefix}-service-cell {
+        position: relative;
+        hairline('right')
         margin: $margin-base 0;
-        border-right: 1px solid $border-color;
+        //border-right: 1px solid $border-color;
         flex: 1;
         &:last-child {
-            border: 0;
+            //border: 0;
+            hairline-remove('right');
         }
         &-text {
             text-align: center;

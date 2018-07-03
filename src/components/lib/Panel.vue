@@ -30,12 +30,15 @@
 
 <style lang="stylus">
     @import '../../styles/var.styl';
+    @import '../../styles/hairline.styl';
     .{$prefix}-panel {
         position: relative;
         padding: $padding-base;
         background-color: $white;
-        border-top: 1px solid $border-color;
-        border-bottom: 1px solid $border-color;
+        //border-top: 1px solid $border-color;
+        //border-bottom: 1px solid $border-color;
+        hairline('top');
+        hairline('bottom');
         &-no-padding {
             padding: 0;
         }

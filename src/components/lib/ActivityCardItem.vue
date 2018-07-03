@@ -43,6 +43,7 @@
 
 <style lang="stylus">
     @import '../../styles/var.styl';
+    @import '../../styles/hairline.styl';
     .{$prefix}-active-card-item {
         padding: $padding-base 0 0 0;
         &-title {
@@ -51,9 +52,11 @@
             padding: 0 $padding-base;
         }
         &-message {
+            position: relative;
             margin: 0 $margin-base;
             padding: $padding-base 0 $padding-base 0;
-            border-bottom: 1px solid $border-color;
+            //border-bottom: 1px solid $border-color;
+            hairline('bottom');
         }
     }
 </style>

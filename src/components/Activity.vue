@@ -83,6 +83,7 @@
 
 <style lang="stylus">
     @import '../styles/var.styl';
+    @import '../styles/hairline.styl';
     .activity-card {
         margin-top: $margin-small;
         &-title {
@@ -101,7 +102,8 @@
         justify-content: flex-end;
         align-items: center;
         background-color: $white;
-        border-top: 1px solid $border-color;
+        //border-top: 1px solid $border-color;
+        hairline('top');
     }
     .comment {
         left: $margin-base !important;

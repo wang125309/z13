@@ -52,6 +52,7 @@
         align-items: center;
         hairline('top');
         background-color: $white;
+        z-index: 10;
         &-placeholder {
             height: $padding-small + $padding-base * 2+ $icon-size-large;
         }

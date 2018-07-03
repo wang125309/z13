@@ -64,20 +64,23 @@
 
 <style lang="stylus">
     @import '../../styles/var.styl';
-
+    @import '../../styles/hairline.styl'
     .{$prefix}-card-wrap {
-        positon: relative;
         .{$prefix}-card-title {
+            position: relative;
             border-left: 3px solid $brand-color;
-            border-top: 1px solid $border-color;
-            border-bottom: 1px solid $border-color;
+            //border-top: 1px solid $border-color;
+            //border-bottom: 1px solid $border-color;
+            hairline('top');
+            hairline('bottom');
             padding: $padding-base;
             color: $font-second;
             background-color: $white;
         }
         .{$prefix}-card {
             position: relative;
-            border: 1px solid $border-color;
+            //border: 1px solid $border-color;
+            hairline('all');
             margin: $margin-base;
             background-color: $white;
             padding: $padding-small;
@@ -90,9 +93,11 @@
                 background: -webkit-linear-gradient(rgba(255, 255, 255, 0), $white)
             }
             &-full {
+                position: relative;
                 margin: 0 0 $margin-base 0;
-                border: 0;
-                border-bottom: 1px solid $border-color;
+                hairline-remove('all');
+                hairline('bottom');
+                //border-bottom: 1px solid $border-color;
             }
         }
     }

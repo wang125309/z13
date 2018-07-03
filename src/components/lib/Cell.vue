@@ -44,15 +44,18 @@
 
 <style lang="stylus">
     @import '../../styles/var.styl';
+    @import '../../styles/hairline.styl';
     .{$prefix}-cell {
         position: relative;
         margin: 0 $margin-base;
-        border-bottom: 1px solid $border-color;
+        //border-bottom: 1px solid $border-color;
+        hairline('bottom');
         &-full {
             margin: 0  0 0 $margin-base;
         }
         &-no-border {
-            border: none;
+            //border: none;
+            hairline-remove('bottom');
         }
         &-padding {
             padding: $padding-base $padding-base $padding-base 0;

@@ -21,8 +21,10 @@
     @import "../../styles/var.styl";
     @import "../../styles/hairline.styl";
     .{$prefix}-service-cell-group {
+        position: relative;
         background-color: $white;
-        border-bottom: 1px solid $border-color;
+        //border-bottom: 1px solid $border-color;
+        hairline('bottom');
         display: flex;
         align-items: center;
         &:last-child {

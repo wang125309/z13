@@ -26,12 +26,15 @@
 
 <style lang="stylus">
     @import '../../styles/var.styl'
+    @import '../../styles/hairline.styl'
 
     .{$prefix}-tabs {
+        position: relative;
         display: flex;
         justify-content: space-around;
         align-items: center;
-        border-bottom: 1px solid $border-color;
+        //border-bottom: 1px solid $border-color;
+        hairline('bottom');
         background-color: $white;
     }
 

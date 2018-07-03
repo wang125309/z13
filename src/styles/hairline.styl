@@ -4,7 +4,7 @@ scale-hairline-common(color, top, right, bottom, left) {
   position: absolute;
   background-color: color;
   display: block;
-  z-index: 2000;
+  z-index: 5;
   top: top;
   right: right;
   bottom: bottom;
@@ -15,7 +15,7 @@ hairline(direction = 'all', color = $border-color-base, radius = 0){
     if direction == 'top' {
         border-top: 1px solid color;
 
-        @media (min-resolution: 2dppx) {
+        @media (-webkit-min-device-pixel-ratio: 2),(min-resolution: 2dppx) {
             border-top: none;
             &::before {
                 scale-hairline-common($border-color-base, 0, auto, auto, 0);
@@ -24,7 +24,7 @@ hairline(direction = 'all', color = $border-color-base, radius = 0){
                 transform-origin: 50% 50%;
                 transform: scaleY(0.5);
 
-                @media (min-resolution: 3dppx) {
+                @media (-webkit-min-device-pixel-ratio: 3),(min-resolution: 3dppx) {
                     transform: scaleY(0.33);
                 }
             }
@@ -33,7 +33,7 @@ hairline(direction = 'all', color = $border-color-base, radius = 0){
     else if direction == 'right' {
         border-right: 1px solid color;
 
-        @media (min-resolution: 2dppx) {
+        @media (-webkit-min-device-pixel-ratio: 2),(min-resolution: 2dppx) {
             border-right: none;
 
             &::after {
@@ -43,7 +43,7 @@ hairline(direction = 'all', color = $border-color-base, radius = 0){
                 transform-origin: 100% 50%;
                 transform: scaleX(0.5);
 
-                @media (min-resolution: 3dppx) {
+                @media (-webkit-min-device-pixel-ratio: 3),(min-resolution: 3dppx) {
                     transform: scaleX(0.33);
                 }
             }
@@ -53,7 +53,7 @@ hairline(direction = 'all', color = $border-color-base, radius = 0){
 
         border-bottom: 1px solid color;
 
-        @media (min-resolution: 2dppx) {
+        @media (-webkit-min-device-pixel-ratio: 2),(min-resolution: 2dppx) {
             border-bottom: none;
 
             &::after {
@@ -62,7 +62,7 @@ hairline(direction = 'all', color = $border-color-base, radius = 0){
                 height: 1px;
                 transform-origin: 50% 100%;
                 transform: scaleY(0.5);
-                @media (min-resolution: 4dppx) {
+                @media (-webkit-min-device-pixel-ratio: 3),(min-resolution: 3dppx) {
                     transform: scaleY(0.33);
                 }
             }
@@ -71,7 +71,7 @@ hairline(direction = 'all', color = $border-color-base, radius = 0){
     else if direction == 'left' {
         border-left: 1px solid color;
 
-        @media (min-resolution: 2dppx) {
+        @media (-webkit-min-device-pixel-ratio: 2),(min-resolution: 2dppx) {
             border-left: none;
 
             &::before {
@@ -81,7 +81,7 @@ hairline(direction = 'all', color = $border-color-base, radius = 0){
                 transform-origin: 100% 50%;
                 transform: scaleX(0.5);
 
-                @media (min-resolution: 3dppx) {
+                @media (-webkit-min-device-pixel-ratio: 3),(min-resolution: 3dppx) {
                     transform: scaleX(0.33);
                 }
             }
@@ -92,32 +92,28 @@ hairline(direction = 'all', color = $border-color-base, radius = 0){
         border: 1px solid color;
         border-radius: radius;
 
-        @media (min-resolution: 2dppx) {
+        @media (-webkit-min-device-pixel-ratio: 2),(min-resolution: 2dppx) {
 
             position: relative;
             border: none;
 
             &::before {
-                content: '';
+                content: "";
                 position: absolute;
                 left: 0;
                 top: 0;
                 width: 200%;
                 height: 200%;
-                border: 1px solid color;
-                border-radius: radius * 2;
+                border: 1px solid #ddd;
+                -webkit-transform-origin: 0 0;
+                -ms-transform-origin: 0 0;
                 transform-origin: 0 0;
-                transform: scale(0.5);
+                -webkit-transform: scale(.5);
+                -ms-transform: scale(.5);
+                transform: scale(.5);
+                -webkit-box-sizing: border-box;
                 box-sizing: border-box;
                 pointer-events: none;
-
-                @media (min-resolution: 3dppx) {
-                    width: 300%;
-                    height: 300%;
-                    border: 1px solid color;
-                    border-radius: radius * 3;
-                    transform: scale(0.33);
-                }
             }
         }
     }

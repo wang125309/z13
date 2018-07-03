@@ -142,6 +142,7 @@
 </script>
 <style scoped lang="stylus">
     @import '../styles/var.styl';
+    @import '../styles/hairline.styl';
     .main-banner {
         position: absolute;
         width: 100%;
@@ -172,9 +173,11 @@
         }
     }
     .env-card {
+        position: relative;
         margin: $margin-base;
         padding: $padding-base;
-        border: 1px solid $border-color;
+        //border: 1px solid $border-color;
+        hairline('all')
         background-color: $white;
         display: flex;
         justify-content: flex-start;
@@ -182,7 +185,9 @@
         white-space: nowrap;
         .temperature-area {
             flex: 3;
-            border-right: 1px solid $border-color;
+            position: relative;
+            hairline('right');
+            //border-right: 1px solid $border-color;
             .now-temperature {
                 display: flex;
                 align-items: flex-start;
