@@ -13,9 +13,11 @@
         <div class="forget-password">
             <a href="javascript:;" @click="goForgetPassword">忘记密码</a>
         </div>
-        <Button className="login-btn" circle full width="75%">登录</Button>
-        <div class="go-register">
-            <a @click="goRegister" href="javascript:;">没有账号？立即注册</a>
+        <div class="btn-area">
+            <Button className="login-btn" circle full width="75%">登录</Button>
+            <div class="go-register">
+                <a @click="goRegister" href="javascript:;">没有账号？立即注册</a>
+            </div>
         </div>
     </LayoutWhite>
 </template>
@@ -75,11 +77,11 @@
             margin-right: $margin-base;
         }
     }
-    .login-btn {
-        margin-top: $margin-large*2;
-    }
     .go-register {
         margin-top: $margin-large;
         text-align: center;
+    }
+    .btn-area {
+        margin-top: $margin-large * 2;
     }
 </style>
