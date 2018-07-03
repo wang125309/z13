@@ -71,8 +71,22 @@
                 </ServiceCellGroup>
             </Panel>
 
-            <Card full title="可租单元">
-                asdf
+            <Card class-name="rent-card" full title="可租单元">
+                <div class="rent-wrap">
+                    <Icon class-name="rent-img" type="rent-img" size="0.35rem"/>
+                    <div class="rent-details">
+                        <div class="rent-title">13楼大面积精装修</div>
+                        <div class="rent-area">
+                            <p>300平米|13层</p>
+                            <p>100-200工位</p>
+                            <p>精装修</p>
+                            <p>
+                                <span class="price">10元</span>
+                                <span>/平米</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </Card>
             <Card full title="社区活动">
                 互动
@@ -123,7 +137,6 @@
         }
     }
 </script>
-
 <style scoped lang="stylus">
     @import '../styles/var.styl';
     .main-banner {
@@ -224,5 +237,31 @@
                 margin-left: 3px;
             }
         }
+
     }
+    .rent-wrap {
+        display: flex;
+        .rent-img {
+            flex: 2;
+            background-size: cover;
+        }
+        .rent-details {
+            flex: 3;
+            padding-left: $padding-small;
+            .rent-title {
+                font-size: $font-size-head;
+            }
+            .rent-area {
+                color: $font-second;
+                p {
+                    margin: $margin-small 0 0 0;
+                }
+                .price {
+                    color: red;
+                }
+            }
+        }
+    }
+
 </style>
+
