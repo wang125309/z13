@@ -7,16 +7,17 @@
 
 <script>
     import Toast from "./components/lib/Toast";
+
     export default {
         name: 'App',
         components: {
             Toast
         },
         methods: {
-            toggleToast() {
+            toggleToast(type, text) {
                 let toast = this.$root.$children[0].$refs.toast;
-                toast.type = 'success';
-                toast.message = '修改成功';
+                toast.type = type;
+                toast.message = text;
                 toast.show();
             }
         }

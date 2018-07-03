@@ -89,7 +89,17 @@
                 </div>
             </Card>
             <Card full title="社区活动">
-                互动
+                <swiper :options="swiperOption">
+                    <swiper-slide>
+                        <div class="activity-item"></div>
+                    </swiper-slide>
+                    <swiper-slide>
+                        <div class="activity-item"></div>
+                    </swiper-slide>
+                    <swiper-slide>
+                        <div class="activity-item"></div>
+                    </swiper-slide>
+                </swiper>
             </Card>
             <TabBar :active="0"/>
         </Scrollable>
@@ -108,6 +118,7 @@
     import ServiceCell from "./lib/ServiceCell";
     import Panel from "./lib/Panel";
     import Tag from "./lib/Tag";
+    import { swiper, swiperSlide } from 'vue-awesome-swiper'
     export default {
         name: 'Home',
         components: {
@@ -121,10 +132,17 @@
             Navbar,
             Banner,
             Card,
-            Scrollable
+            Scrollable,
+            swiper,
+            swiperSlide
         },
         data () {
             return {
+                swiperOption: {
+                    slidesPerView: 'auto',
+                    spaceBetween: 10,
+                }
+
             }
         },
         methods: {
@@ -132,6 +150,9 @@
                 let url = '/';
                 if (n === 1) {
                     url = '/operation'
+                }
+                else if (n === 2 || n === 4 || n === 5 || n === 6) {
+                    this.$root.$children[0].toggleToast('warning', '即将上线，敬请期待')
                 }
                 this.$router.push({
                     path: url
@@ -143,6 +164,16 @@
 <style scoped lang="stylus">
     @import '../styles/var.styl';
     @import '../styles/hairline.styl';
+    @import '~swiper/dist/css/swiper.min.css';
+    .swiper-slide {
+        width: 80%;
+    }
+    .activity-item {
+        setBackgroundImage('../assets/activity-item.png', center);
+        width: 100%;
+        height: 0.4rem;
+        background-size: cover;
+    }
     .main-banner {
         position: absolute;
         width: 100%;

@@ -1,9 +1,9 @@
 <template>
     <div :class="toastWrapCls">
         <div :class="toastCls">
-            <Icon :className="toastIconCls" :type="iconType" size="0.1rem"/>
+            <Icon :className="toastIconCls" :type="iconType" size="0.09rem"/>
             <div :class="toastMessageCls">
-                {{message}}
+                {{getMessage}}
             </div>
         </div>
     </div>
@@ -22,6 +22,9 @@
             message: [String]
         },
         computed: {
+            getMessage() {
+                return this.message;
+            },
             toastWrapCls() {
                 return [
                     `${prefix}-toast-wrap`, {
@@ -85,14 +88,13 @@
             transform: translateX(-50%) translateY(-50%);
             background-color: $background-mask-dark;
             -webkit-transition: opacity visibility $transition-time ease-in-out;
-            width: 0.4rem;
             padding: $padding-base;
             border-radius: 3px;
             &-icon {
                 margin: 0 auto;
             }
             &-message {
-                padding: $padding-base;
+                padding: $padding-base $padding-base 0 $padding-base;
                 color: $white;
                 text-align: center;
             }
