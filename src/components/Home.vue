@@ -130,6 +130,9 @@
         methods: {
             go(n) {
                 let url = '/';
+                if (n === 1) {
+                    url = '/operation'
+                }
                 this.$router.push({
                     path: url
                 })
