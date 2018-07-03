@@ -1,6 +1,7 @@
 <template>
     <div @click="handleClick" :class="serviceCellCls">
-        <Icon :type="getType" size="0.07rem"/>
+        <Icon v-show="active" :type="getTypeActive" size="0.07rem"/>
+        <Icon v-show="!active" :type="getType" size="0.07rem"/>
         <div :class="serviceCellTextCls">{{ text }}</div>
     </div>
 </template>
@@ -32,12 +33,11 @@
                     `${prefix}-service-cell-text`
                 ]
             },
+            getTypeActive() {
+                return `${this.type}-active`;
+            },
             getType() {
-                let type = `${this.type}`;
-                if (this.active) {
-                    type += '-active';
-                }
-                return type;
+                return `${this.type}`;
             }
         },
         data() {
@@ -50,8 +50,8 @@
                 this.active = true;
                 setTimeout(() => {
                     this.active = false;
-                },100);
-                this.$emit('click');
+                    this.$emit('click');
+                },150);
             }
         }
     }
