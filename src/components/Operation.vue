@@ -43,14 +43,19 @@
 
 <style scoped lang="stylus">
     @import '../styles/var.styl';
+    @import '../styles/hairline.styl';
     .operation-tabs {
         display: flex;
         align-items: center;
-        border-bottom: 1px solid $border-color;
+        position: relative;
+        //border-bottom: 1px solid $border-color;
+        hairline('bottom');
         background-color: $white;
         .operation-tab {
             flex: 1;
-            border-right: 1px solid $border-color;
+            position: relative;
+            //border-right: 1px solid $border-color;
+            hairline('right');
             padding: $padding-large * 2 0;
             text-align: center;
             &:last-child {
@@ -64,8 +69,10 @@
     .panel {
         margin-top: $margin-base;
         .panel-title {
+            position: relative;
             padding: $padding-base;
-            border-bottom: 1px solid $border-color;
+            //border-bottom: 1px solid $border-color;
+            hairline('bottom');
         }
     }
 </style>
