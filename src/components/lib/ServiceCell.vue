@@ -1,6 +1,6 @@
 <template>
     <div @click="handleClick" :class="serviceCellCls">
-        <Icon :type="getType" size="0.1rem"/>
+        <Icon :type="getType" size="0.07rem"/>
         <div :class="serviceCellTextCls">{{ text }}</div>
     </div>
 </template>
