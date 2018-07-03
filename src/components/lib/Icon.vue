@@ -28,7 +28,7 @@
                     style['width'] =  this.size;
                     style['height'] = this.size;
                 }
-                style['background-image'] = 'url("/assets/icon/' + this.type + '.png")';
+                style['background-image'] = 'url("../assets/icon/' + this.type + '.png")';
                 if (this.position === 'left') {
                     style['left'] = 0;
                     style['right'] = 'initial';

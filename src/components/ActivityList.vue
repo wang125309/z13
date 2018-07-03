@@ -54,6 +54,6 @@
 <style scoped lang="stylus">
     @import '../styles/var.styl';
     .empty {
-        margin-top: $margin-large * 5;
+        margin-top: $margin-large * 3;
     }
 </style>
