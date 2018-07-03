@@ -16,7 +16,9 @@
                 <Input type="password" icon="lock" placeholder="设置密码"/>
             </Cell>
         </CellGroup>
-        <Button className="register-btn" circle full width="75%">注册</Button>
+        <div class="btn-area">
+            <Button className="register-btn" circle full width="75%">注册</Button>
+        </div>
     </LayoutWhite>
 </template>
 
@@ -54,5 +56,8 @@
     }
     .register-btn {
         margin-top: $margin-large;
+    }
+    .btn-area {
+        margin-top: $margin-large * 2;
     }
 </style>
