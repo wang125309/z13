@@ -229,6 +229,7 @@
 
 <style lang="stylus" scoped>
     @import '../styles/var.styl';
+    @import '../styles/hairline.styl';
     .{$prefix}-rent-building-area {
         padding: $padding-base 0;
         .{$prefix}-view-more {
@@ -243,16 +244,17 @@
                 margin: 0 0.01rem;
             }
         }
+
         .{$prefix}-rent-building-item {
+            position: relative;
             padding: $padding-small;
             background-color: $white;
-            position: relative;
-            hairline('top');
-            hairline('bottom');
 
+            hairline('bottom');
             &:last-child {
                 hairline-remove('bottom');
             }
+
             .{$prefix}-rent-img {
                 left: $padding-small !important;
             }
