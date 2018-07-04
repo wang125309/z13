@@ -1,17 +1,24 @@
 Arguments: 
-  /Users/wangbailin/.nvm/versions/node/v8.11.1/bin/node /usr/local/bin/yarn add vue-stylus-loader
+  /Users/wangbailin/.nvm/versions/node/v8.11.2/bin/node /Users/wangbailin/.nvm/versions/node/v8.11.2/bin/yarn install
 
 PATH: 
-  /Users/wangbailin/.nvm/versions/node/v8.11.1/bin:/Library/Frameworks/Python.framework/Versions/3.4/bin:/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/opt/X11/bin:/Users/wangbailin/.rvm/bin:/Users/wangbailin/.rvm/bin:/usr/local/bin
+  /usr/local/Cellar/pyenv-virtualenv/1.1.3/shims:/Users/wangbailin/.nvm/versions/node/v8.11.2/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 
 Yarn version: 
-  0.19.1
+  1.7.0
 
 Node version: 
-  8.11.1
+  8.11.2
 
 Platform: 
   darwin x64
+
+Trace: 
+  Error: https://registry.yarnpkg.com/swiper: ETIMEDOUT
+      at Timeout._onTimeout (/Users/wangbailin/.nvm/versions/node/v8.11.2/lib/node_modules/yarn/lib/cli.js:135339:19)
+      at ontimeout (timers.js:498:11)
+      at tryOnTimeout (timers.js:323:5)
+      at Timer.listOnTimeout (timers.js:290:5)
 
 npm manifest: 
   {
@@ -28,8 +35,11 @@ npm manifest:
     },
     "dependencies": {
       "normalize.css": "^8.0.0",
+      "stylus": "^0.54.5",
       "stylus-loader": "^3.0.2",
+      "swiper": "^4.3.3",
       "vue": "^2.5.2",
+      "vue-awesome-swiper": "^3.1.3",
       "vue-router": "^3.0.1",
       "vuex": "^3.0.1"
     },
@@ -228,8 +238,8 @@ Lockfile:
       json-schema-traverse "^0.3.0"
   
   ajv@^6.1.0:
-    version "6.5.1"
-    resolved "https://registry.yarnpkg.com/ajv/-/ajv-6.5.1.tgz#88ebc1263c7133937d108b80c5572e64e1d9322d"
+    version "6.5.2"
+    resolved "https://registry.yarnpkg.com/ajv/-/ajv-6.5.2.tgz#678495f9b82f7cca6be248dd92f59bff5e1f4360"
     dependencies:
       fast-deep-equal "^2.0.1"
       fast-json-stable-stringify "^2.0.0"
@@ -247,6 +257,10 @@ Lockfile:
   alphanum-sort@^1.0.1, alphanum-sort@^1.0.2:
     version "1.0.2"
     resolved "https://registry.yarnpkg.com/alphanum-sort/-/alphanum-sort-1.0.2.tgz#97a1119649b211ad33691d9f9f486a8ec9fbe0a3"
+  
+  amdefine@>=0.0.4:
+    version "1.0.1"
+    resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
   
   ansi-escapes@^3.0.0:
     version "3.1.0"
@@ -1473,9 +1487,13 @@ Lockfile:
     dependencies:
       color-name "1.1.1"
   
-  color-name@1.1.1, color-name@^1.0.0:
+  color-name@1.1.1:
     version "1.1.1"
     resolved "https://registry.yarnpkg.com/color-name/-/color-name-1.1.1.tgz#4b1415304cf50028ea81643643bd82ea05803689"
+  
+  color-name@^1.0.0:
+    version "1.1.3"
+    resolved "https://registry.yarnpkg.com/color-name/-/color-name-1.1.3.tgz#a7d0558bd89c42f795dd42328f740831ca53bc25"
   
   color-string@^0.3.0:
     version "0.3.0"
@@ -1511,9 +1529,9 @@ Lockfile:
     version "2.16.0"
     resolved "https://registry.yarnpkg.com/commander/-/commander-2.16.0.tgz#f16390593996ceb4f3eeb020b31d78528f7f8a50"
   
-  commander@~2.14.1:
-    version "2.14.1"
-    resolved "https://registry.yarnpkg.com/commander/-/commander-2.14.1.tgz#2235123e37af8ca3c65df45b026dbd357b01b9aa"
+  commander@~2.13.0:
+    version "2.13.0"
+    resolved "https://registry.yarnpkg.com/commander/-/commander-2.13.0.tgz#6964bca67685df7c1f1430c584f07d7597885b9c"
   
   commondir@^1.0.1:
     version "1.0.1"
@@ -1725,6 +1743,10 @@ Lockfile:
       postcss-value-parser "^3.3.0"
       source-list-map "^2.0.0"
   
+  css-parse@1.7.x:
+    version "1.7.0"
+    resolved "https://registry.yarnpkg.com/css-parse/-/css-parse-1.7.0.tgz#321f6cf73782a6ff751111390fc05e2c657d8c9b"
+  
   css-select@^1.1.0:
     version "1.2.0"
     resolved "https://registry.yarnpkg.com/css-select/-/css-select-1.2.0.tgz#2b3a110539c5355f1cd8d314623e870b121ec858"
@@ -1822,15 +1844,15 @@ Lockfile:
     version "1.0.2"
     resolved "https://registry.yarnpkg.com/de-indent/-/de-indent-1.0.2.tgz#b2038e846dc33baa5796128d0804b455b8c1e21d"
   
-  debug@2.6.9, debug@^2.1.2, debug@^2.2.0, debug@^2.3.3, debug@^2.6.6, debug@^2.6.8, debug@^2.6.9:
-    version "2.6.9"
-    resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.9.tgz#5d128515df134ff327e90a4c93f4e077a536341f"
+  debug@*, debug@^3.1.0:
+    version "3.1.0"
+    resolved "https://registry.yarnpkg.com/debug/-/debug-3.1.0.tgz#5bb5a0672628b64149566ba16819e61518c67261"
     dependencies:
       ms "2.0.0"
   
-  debug@^3.1.0:
-    version "3.1.0"
-    resolved "https://registry.yarnpkg.com/debug/-/debug-3.1.0.tgz#5bb5a0672628b64149566ba16819e61518c67261"
+  debug@2.6.9, debug@^2.1.2, debug@^2.2.0, debug@^2.3.3, debug@^2.6.6, debug@^2.6.8, debug@^2.6.9:
+    version "2.6.9"
+    resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.9.tgz#5d128515df134ff327e90a4c93f4e077a536341f"
     dependencies:
       ms "2.0.0"
   
@@ -2795,6 +2817,17 @@ Lockfile:
     dependencies:
       is-glob "^3.1.0"
       path-dirname "^1.0.0"
+  
+  glob@7.0.x:
+    version "7.0.6"
+    resolved "https://registry.yarnpkg.com/glob/-/glob-7.0.6.tgz#211bafaf49e525b8cd93260d14ab136152b3f57a"
+    dependencies:
+      fs.realpath "^1.0.0"
+      inflight "^1.0.4"
+      inherits "2"
+      minimatch "^3.0.2"
+      once "^1.3.0"
+      path-is-absolute "^1.0.0"
   
   glob@^7.0.0, glob@^7.0.3, glob@^7.0.5, glob@^7.1.2:
     version "7.1.2"
@@ -5159,11 +5192,11 @@ Lockfile:
     version "4.0.8"
     resolved "https://registry.yarnpkg.com/rx-lite/-/rx-lite-4.0.8.tgz#0b1e11af8bc44836f04a6407e92da42467b79444"
   
-  safe-buffer@5.1.1, safe-buffer@^5.0.1, safe-buffer@^5.1.0, safe-buffer@^5.1.1, safe-buffer@~5.1.0, safe-buffer@~5.1.1:
+  safe-buffer@5.1.1:
     version "5.1.1"
     resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.1.1.tgz#893312af69b2123def71f57889001671eeb2c853"
   
-  safe-buffer@^5.1.2:
+  safe-buffer@^5.0.1, safe-buffer@^5.1.0, safe-buffer@^5.1.1, safe-buffer@^5.1.2, safe-buffer@~5.1.0, safe-buffer@~5.1.1:
     version "5.1.2"
     resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.1.2.tgz#991ec69d296e0313747d59bdfd2b745c35f8828d"
   
@@ -5176,6 +5209,10 @@ Lockfile:
   "safer-buffer@>= 2.1.2 < 3":
     version "2.1.2"
     resolved "https://registry.yarnpkg.com/safer-buffer/-/safer-buffer-2.1.2.tgz#44fa161b0187b9549dd84bb91802f9bd8385cd6a"
+  
+  sax@0.5.x:
+    version "0.5.8"
+    resolved "https://registry.yarnpkg.com/sax/-/sax-0.5.8.tgz#d472db228eb331c2506b0e8c15524adb939d12c1"
   
   sax@^1.2.4, sax@~1.2.1:
     version "1.2.4"
@@ -5411,6 +5448,12 @@ Lockfile:
     version "0.4.0"
     resolved "https://registry.yarnpkg.com/source-map-url/-/source-map-url-0.4.0.tgz#3e935d7ddd73631b97659956d55128e87b5084a3"
   
+  source-map@0.1.x:
+    version "0.1.43"
+    resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.1.43.tgz#c24bc146ca517c1471f5dacbe2571b2b7f9e3346"
+    dependencies:
+      amdefine ">=0.0.4"
+  
   source-map@0.5.x, source-map@^0.5.0, source-map@^0.5.3, source-map@^0.5.6, source-map@^0.5.7, source-map@~0.5.1:
     version "0.5.7"
     resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.5.7.tgz#8a039d2d1021d22d1ea14c80d8ea468ba2ef3fcc"
@@ -5491,7 +5534,11 @@ Lockfile:
       define-property "^0.2.5"
       object-copy "^0.1.0"
   
-  "statuses@>= 1.3.1 < 2", "statuses@>= 1.4.0 < 2", statuses@~1.4.0:
+  "statuses@>= 1.3.1 < 2", "statuses@>= 1.4.0 < 2":
+    version "1.5.0"
+    resolved "https://registry.yarnpkg.com/statuses/-/statuses-1.5.0.tgz#161c7dac177659fd9811f43771fa99381478628c"
+  
+  statuses@~1.4.0:
     version "1.4.0"
     resolved "https://registry.yarnpkg.com/statuses/-/statuses-1.4.0.tgz#bb73d446da2796106efcc1b601a253d6c46bd087"
   
@@ -5595,6 +5642,17 @@ Lockfile:
       loader-utils "^1.0.2"
       lodash.clonedeep "^4.5.0"
       when "~3.6.x"
+  
+  stylus@^0.54.5:
+    version "0.54.5"
+    resolved "https://registry.yarnpkg.com/stylus/-/stylus-0.54.5.tgz#42b9560931ca7090ce8515a798ba9e6aa3d6dc79"
+    dependencies:
+      css-parse "1.7.x"
+      debug "*"
+      glob "7.0.x"
+      mkdirp "0.5.x"
+      sax "0.5.x"
+      source-map "0.1.x"
   
   supports-color@^2.0.0:
     version "2.0.0"
@@ -5764,10 +5822,10 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   
   uglify-es@^3.3.4:
-    version "3.3.10"
-    resolved "https://registry.yarnpkg.com/uglify-es/-/uglify-es-3.3.10.tgz#8b0b7992cebe20edc26de1bf325cef797b8f3fa5"
+    version "3.3.9"
+    resolved "https://registry.yarnpkg.com/uglify-es/-/uglify-es-3.3.9.tgz#0c1c4f0700bed8dbc124cdb304d2592ca203e677"
     dependencies:
-      commander "~2.14.1"
+      commander "~2.13.0"
       source-map "~0.6.1"
   
   uglify-js@3.4.x:
@@ -6288,16 +6346,3 @@ Lockfile:
       cliui "^2.1.0"
       decamelize "^1.0.0"
       window-size "0.1.0"
-
-Trace: 
-  Error: http://registry.npmjs.org/vue-stylus-loader: Not found
-      at Request.params.callback [as _callback] (/usr/local/lib/node_modules/yarn/lib/util/request-manager.js:313:18)
-      at Request.self.callback (/usr/local/lib/node_modules/yarn/node_modules/request/request.js:186:22)
-      at emitTwo (events.js:126:13)
-      at Request.emit (events.js:214:7)
-      at Request.<anonymous> (/usr/local/lib/node_modules/yarn/node_modules/request/request.js:1081:10)
-      at emitOne (events.js:116:13)
-      at Request.emit (events.js:211:7)
-      at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/yarn/node_modules/request/request.js:1001:12)
-      at Object.onceWrapper (events.js:313:30)
-      at emitNone (events.js:111:20)

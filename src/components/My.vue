@@ -16,7 +16,7 @@
             <!--<Cell full padding isLink>-->
                 <!--我的报修-->
             <!--</Cell>-->
-            <Cell full padding isLink="/problems" withoutBorder>
+            <Cell full padding isLink="/problem" withoutBorder>
                 常见问题
             </Cell>
         </CellGroup>
