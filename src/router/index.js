@@ -21,6 +21,7 @@ const BuildingLayout = r => require.ensure([], ()=>r(require('@/components/Build
 const ActivityList = r => require.ensure([], ()=>r(require('@/components/ActivityList.vue')))
 const PageNotFound = r => require.ensure([], ()=>r(require('@/components/PageNotFound.vue')))
 const Problem = r => require.ensure([], ()=>r(require('@/components/Problem.vue')))
+const RentBuilding = r => require.ensure([], ()=>r(require('@/components/RentBuilding.vue')))
 
 export default new Router({
     scrollBehavior: () => ({y: 0}),
@@ -119,6 +120,11 @@ export default new Router({
             path: '/problem',
             name: 'Problem',
             component: Problem
+        },
+        {
+            path: '/rent-building',
+            name: 'RentBuilding',
+            component: RentBuilding
         }
     ]
 })

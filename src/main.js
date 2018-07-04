@@ -14,5 +14,8 @@ new Vue({
   components: {
     App,
   },
+    mounted() {
+        document.body.addEventListener('touchstart', function () { });
+    },
   template: '<App/>'
 })
