@@ -4,7 +4,6 @@
             <slot></slot>
             <Icon top="0.036rem" v-if="isLink" type="arrow-right" position="right"/>
             <Icon :className="problemIconCls" top="0.036rem" v-if="problem" type="down" position="right"/>
-
         </div>
         <div v-if="problem" v-show="visible" :class="cellPanelCls">
             <div :class="cellPanelInfoCls">

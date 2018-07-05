@@ -58,7 +58,7 @@
             </div>
             <Panel class-name="service-panel" no-board no-padding>
                 <ServiceCellGroup>
-                    <ServiceCell @click="go(1)" type="blands-icon" text="百叶窗"/>
+                    <ServiceCell @click="go(1)" type="blands-icon" text="百叶帘"/>
                     <ServiceCell @click="go(2)" type="tools-icon" text="物业报修"/>
                     <ServiceCell @click="go(3)" type="delivery-icon" text="就餐服务"/>
                     <ServiceCell @click="go(4)" type="express-icon" text="快递"/>

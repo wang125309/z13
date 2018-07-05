@@ -1,30 +1,35 @@
 <template>
     <LayoutBase>
-        <Navbar arrowLeft>百叶帘控制</Navbar>
+        <Navbar arrowLeft>贴心服务</Navbar>
         <div class="operation-tabs">
             <div class="operation-tab">
                 <Icon size="0.15rem" type="operation-open"></Icon>
-                <div class="operation-text">全部开启</div>
+                <div class="operation-text">百叶帘</div>
             </div>
             <div class="operation-tab">
                 <Icon size="0.15rem" type="operation-close"></Icon>
-                <div class="operation-text">全部关闭</div>
+                <div class="operation-text">物业报修</div>
             </div>
         </div>
         <Panel noPadding className="panel">
-            <div class="panel-title">我的百叶帘</div>
-            <CellGroup full noMargin>
-                <Cell full padding isLink="/operation-detail">
-                    13层百叶窗
-                </Cell>
-                <Cell full padding isLink="/operation-detail">
-                    13层百叶窗
-                </Cell>
-                <Cell full padding withoutBorder isLink="/operation-detail">
-                    13层百叶窗
-                </Cell>
-            </CellGroup>
+            <ServiceCellGroup>
+                <ServiceCell @click="go(1)" type="blands-icon" text="百叶帘"/>
+                <ServiceCell @click="go(2)" type="tools-icon" text="物业报修"/>
+                <ServiceCell @click="go(3)" type="delivery-icon" text="就餐服务"/>
+
+            </ServiceCellGroup>
+            <ServiceCellGroup>
+                <ServiceCell @click="go(4)" type="express-icon" text="快递"/>
+                <ServiceCell @click="go(5)" type="visitor-icon" text="洗车"/>
+                <ServiceCell @click="go(6)" type="park-icon" text="停车"/>
+            </ServiceCellGroup>
+            <ServiceCellGroup>
+                <ServiceCell @click="go(7)" type="rent-icon" text="可租单元"/>
+                <ServiceCell @click="go(8)" type="building-icon" text="大厦服务"/>
+                <ServiceCell @click="go(8)" type="building-icon" text="大厦布局"/>
+            </ServiceCellGroup>
         </Panel>
+        <TabBar :active="2"/>
     </LayoutBase>
 
 </template>
@@ -36,8 +41,21 @@
     import CellGroup from "./lib/CellGroup";
     import Cell from "./lib/Cell";
     import Panel from "./lib/Panel";
+    import ServiceCellGroup from "./lib/ServiceCellGroup";
+    import ServiceCell from "./lib/ServiceCell";
+    import TabBar from "./lib/TabBar";
     export default {
-        components: {Panel, Cell, CellGroup, LayoutBase, Icon, Navbar}
+        components: {
+            Panel,
+            Cell,
+            CellGroup,
+            LayoutBase,
+            Icon,
+            Navbar,
+            ServiceCellGroup,
+            ServiceCell,
+            TabBar
+        }
     }
 </script>
 
