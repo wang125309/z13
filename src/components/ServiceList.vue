@@ -13,20 +13,19 @@
         </div>
         <Panel noPadding className="panel">
             <ServiceCellGroup>
-                <ServiceCell @click="go(1)" type="blands-icon" text="百叶帘"/>
-                <ServiceCell @click="go(2)" type="tools-icon" text="物业报修"/>
-                <ServiceCell @click="go(3)" type="delivery-icon" text="就餐服务"/>
-
+                <ServiceCell full @click="go(1)" type="blands-icon" text="百叶帘"/>
+                <ServiceCell full @click="go(2)" type="tools-icon" text="物业报修"/>
+                <ServiceCell full @click="go(3)" type="delivery-icon" text="就餐服务"/>
             </ServiceCellGroup>
             <ServiceCellGroup>
-                <ServiceCell @click="go(4)" type="express-icon" text="快递"/>
-                <ServiceCell @click="go(5)" type="visitor-icon" text="洗车"/>
-                <ServiceCell @click="go(6)" type="park-icon" text="停车"/>
+                <ServiceCell full @click="go(4)" type="express-icon" text="快递"/>
+                <ServiceCell full @click="go(5)" type="visitor-icon" text="洗车"/>
+                <ServiceCell full @click="go(6)" type="park-icon" text="停车"/>
             </ServiceCellGroup>
             <ServiceCellGroup>
-                <ServiceCell @click="go(7)" type="rent-icon" text="可租单元"/>
-                <ServiceCell @click="go(8)" type="building-icon" text="大厦服务"/>
-                <ServiceCell @click="go(8)" type="building-icon" text="大厦布局"/>
+                <ServiceCell full @click="go(7)" type="rent-icon" text="可租单元"/>
+                <ServiceCell full @click="go(8)" type="building-icon" text="大厦服务"/>
+                <ServiceCell full @click="go(8)" type="building-icon" text="大厦布局"/>
             </ServiceCellGroup>
         </Panel>
         <TabBar :active="2"/>

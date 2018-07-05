@@ -3,7 +3,7 @@
         <div :class="tabBarPlaceholderCls"></div>
         <div :class="tabBarCls">
             <TabBarCell :active="getActive(0)" url="/" icon="home">首页</TabBarCell>
-            <TabBarCell :active="getActive(1)" url="/" icon="service">贴心服务</TabBarCell>
+            <TabBarCell :active="getActive(1)" url="/service-list" icon="service">贴心服务</TabBarCell>
             <TabBarCell :active="getActive(2)" url="/activity-list" icon="activity">社区活动</TabBarCell>
             <TabBarCell :active="getActive(3)" url="/personal-info" icon="my">我的</TabBarCell>
         </div>

@@ -1,7 +1,7 @@
 <template>
     <div @click="handleClick" :class="serviceCellCls">
-        <Icon v-show="active" :type="getTypeActive" size="0.07rem"/>
-        <Icon v-show="!active" :type="getType" size="0.07rem"/>
+        <Icon v-show="active" :type="getTypeActive" size="0.09rem"/>
+        <Icon v-show="!active" :type="getType" size="0.09rem"/>
         <div :class="serviceCellTextCls">{{ text }}</div>
     </div>
 </template>
@@ -13,7 +13,8 @@
             type: [String],
             text: [String],
             noBorder: [Boolean],
-            className: [String, Array]
+            className: [String, Array],
+            full: [Boolean]
         },
         components: {
             Icon
@@ -24,7 +25,8 @@
                     `${prefix}-service-cell`, {
                         [`${prefix}-service-cell-no-board`]: this.noBoard,
                         [`${prefix}-service-cell-active`]: this.active,
-                        [`${this.className}`]: this.className
+                        [`${this.className}`]: this.className,
+                        [`${prefix}-service-cell-full`]: this.full
                     }
                 ]
             },
@@ -77,6 +79,9 @@
         &-active {
             color: $brand-color;
         }
-
+        &-full {
+            margin: 0;
+            padding: $padding-base;
+        }
     }
 </style>
