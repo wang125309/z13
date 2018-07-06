@@ -28,7 +28,7 @@
                 <ServiceCell full @click="go(8)" type="building-icon" text="大厦布局"/>
             </ServiceCellGroup>
         </Panel>
-        <TabBar :active="2"/>
+        <TabBar :active="1"/>
     </LayoutBase>
 
 </template>
