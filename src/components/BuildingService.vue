@@ -3,7 +3,7 @@
         <Navbar arrow-left>大厦服务</Navbar>
         <SearchInput></SearchInput>
         <div :class="panelCls">
-            <div :class="serviceItemCls">
+            <div :class="serviceItemCls" @click="go">
                 <div :class="messageCls">
                     <div :class="itemTitleCls">
                         大厦6月份杀虫计划的温馨提示
@@ -34,6 +34,13 @@
             SearchInput,
             Navbar,
             LayoutBase
+        },
+        methods: {
+            go () {
+                this.$router.push({
+                    'path': '/service-details'
+                })
+            }
         },
         computed: {
             panelCls () {
