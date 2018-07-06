@@ -101,7 +101,6 @@
                 .{$prefix}-item-title {
                     font-size: $font-size-head;
                 }
-
             }
             .{$prefix}-sub-item {
                 position: absolute;
