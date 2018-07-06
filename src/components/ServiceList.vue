@@ -13,19 +13,19 @@
         </div>
         <Panel noPadding className="panel">
             <ServiceCellGroup>
-                <ServiceCell full @click="go(1)" type="blands-icon" text="百叶帘"/>
-                <ServiceCell full @click="go(2)" type="tools-icon" text="物业报修"/>
-                <ServiceCell full @click="go(3)" type="delivery-icon" text="就餐服务"/>
+                <ServiceCell full @click="go(1)" type="blands-icon" text="就餐服务"/>
+                <ServiceCell full @click="go(2)" type="tools-icon" text="快递"/>
+                <ServiceCell full @click="go(3)" type="delivery-icon" text="访客管理"/>
             </ServiceCellGroup>
             <ServiceCellGroup>
-                <ServiceCell full @click="go(4)" type="express-icon" text="快递"/>
-                <ServiceCell full @click="go(5)" type="visitor-icon" text="洗车"/>
-                <ServiceCell full @click="go(6)" type="park-icon" text="停车"/>
+                <ServiceCell full @click="go(4)" type="express-icon" text="停车"/>
+                <ServiceCell full @click="go(5)" type="visitor-icon" text="可租单元"/>
+                <ServiceCell full @click="go(6)" type="park-icon" text="大楼布局"/>
             </ServiceCellGroup>
             <ServiceCellGroup>
-                <ServiceCell full @click="go(7)" type="rent-icon" text="可租单元"/>
-                <ServiceCell full @click="go(8)" type="building-icon" text="大厦服务"/>
-                <ServiceCell full @click="go(8)" type="building-icon" text="大厦布局"/>
+                <ServiceCell full @click="go(7)" type="rent-icon" text="送水"/>
+                <ServiceCell full @click="go(8)" type="building-icon" text="保洁"/>
+                <ServiceCell full @click="go(9)" type="building-icon" text="洗车"/>
             </ServiceCellGroup>
         </Panel>
         <TabBar :active="1"/>
@@ -54,6 +54,46 @@
             ServiceCellGroup,
             ServiceCell,
             TabBar
+        },
+        methods: {
+            go (n) {
+                let url = ''
+                if ( n === 1 ) {
+                    url = '/delivery-list';
+                }
+                else if ( n === 2 ) {
+                    url = '/express';
+                    this.$root.$children[0].toggleToast('warning', '即将上线，敬请期待')
+                }
+                else if ( n === 3 ) {
+                    url = '/visitor'
+                    this.$root.$children[0].toggleToast('warning', '即将上线，敬请期待')
+                }
+                else if ( n === 4 ) {
+                    url = '/park'
+                    this.$root.$children[0].toggleToast('warning', '即将上线，敬请期待')
+                }
+                else if ( n === 5 ) {
+                    url = '/rent-building'
+                }
+                else if ( n === 6 ) {
+                    url = '/building-layout'
+                }
+                else if ( n === 7 ) {
+                    url = '/service'
+                }
+                else if ( n === 8 ) {
+                    url = '/service'
+                }
+                else if ( n === 9 ) {
+                    url = 'service'
+                }
+                if (n !== 2 && n !== 3 && n !== 4) {
+                    this.$router.push({
+                        path: url
+                    })
+                }
+            }
         }
     }
 </script>

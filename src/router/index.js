@@ -26,7 +26,7 @@ const ServiceList = r => require.ensure([], ()=>r(require('@/components/ServiceL
 const DeliveryList = r => require.ensure([], ()=>r(require('@/components/DeliveryList.vue')))
 const BuildingService = r => require.ensure([], ()=>r(require('@/components/BuildingService.vue')))
 const ServiceDetails = r => require.ensure([], ()=>r(require('@/components/ServiceDetails.vue')))
-
+const Service = r => require.ensure([], ()=>r(require('@/components/Service.vue')))
 export default new Router({
     scrollBehavior: () => ({y: 0}),
     routes: [
@@ -149,6 +149,11 @@ export default new Router({
             path: '/service-details',
             name: 'ServiceDetails',
             component: ServiceDetails
+        },
+        {
+            path: '/service',
+            name: 'Service',
+            component: Service
         }
     ]
 })

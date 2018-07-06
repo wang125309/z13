@@ -261,10 +261,12 @@
         position: relative;
         padding: $padding-base;
         hairline('top');
-        hairline('bottom');
         &-icon {
             background-size: cover;
             left: initial !important;
+        }
+        &:last-child {
+            hairline('bottom')
         }
     }
     .{$prefix}-delivery-panel {

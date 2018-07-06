@@ -12,22 +12,31 @@
     export default {
         props: {
             title: [String],
-            noBorder: [Boolean]
+            noBorder: [Boolean],
+            full: [Boolean],
+            cut: [Boolean]
         },
         computed: {
             activeCardItemCls() {
                 return [
-                    `${prefix}-active-card-item`
+                    `${prefix}-active-card-item` , {
+                        [`${prefix}-active-card-item-full`]: this.full,
+                        [`${prefix}-active-card-item-cut`]: this.cut
+                    }
                 ]
             },
             activeCardItemTitleCls() {
                 return [
-                    `${prefix}-active-card-item-title`
+                    `${prefix}-active-card-item-title`, {
+                        [`${prefix}-active-card-item-title-cut`]: this.cut
+                    }
                 ]
             },
             activeCardItemMessage() {
                 return [
-                    `${prefix}-active-card-item-message`
+                    `${prefix}-active-card-item-message`, {
+                        [`${prefix}-active-card-item-message-cut`]: this.cut
+                    }
                 ]
             },
             messageStyle() {
@@ -46,17 +55,35 @@
     @import '../../styles/hairline.styl';
     .{$prefix}-active-card-item {
         padding: $padding-base 0 0 0;
+        position: relative;
+        hairline('bottom');
+        &-full {
+            background-color: $white;
+        }
         &-title {
             font-size: $font-size-head;
             border-left: 3px solid $brand-color;
             padding: 0 $padding-base;
+            position: relative;
+            &-cut {
+                margin-bottom: $padding-base;
+            }
         }
         &-message {
+            &-cut {
+                hairline('top')
+                margin: 0;
+                padding: $padding-base;
+            }
             position: relative;
             margin: 0 $margin-base;
             padding: $padding-base 0 $padding-base 0;
             //border-bottom: 1px solid $border-color;
-            hairline('bottom');
+        }
+        &-cut {
+            margin: 0;
+            padding: $padding-base 0 0 0;
+            margin-top: $margin-base;
         }
     }
 </style>

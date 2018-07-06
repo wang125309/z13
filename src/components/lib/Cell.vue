@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div :class="className">
         <div :class="cellCls" @click="go">
             <slot></slot>
             <Icon top="0.036rem" v-if="isLink" type="arrow-right" position="right"/>
@@ -25,7 +25,8 @@
             padding: [Boolean],
             isLink: [Boolean, String],
             problem: [Boolean],
-            visible: [Boolean]
+            visible: [Boolean],
+            className: [String, Array]
         },
         computed: {
             cellCls() {
@@ -78,7 +79,7 @@
     }
 </script>
 
-<style lang="stylus">
+<style scoped lang="stylus">
     @import '../../styles/var.styl';
     @import '../../styles/hairline.styl';
     .{$prefix}-cell {
@@ -111,8 +112,6 @@
         }
         &-panel {
             position: relative;
-
-
             padding-bottom: $padding-base;
             hairline('bottom');
             &-info {
