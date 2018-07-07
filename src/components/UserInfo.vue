@@ -48,6 +48,7 @@
             </CellGroup>
         </Panel>
         <Button circle width="92%" bottom-white @click="quit">退出登录</Button>
+        <ActionSheet :options="options" visible>退出后下次登录需要重新输入手机号及验证码<br>请确认</ActionSheet>
     </LayoutBase>
 </template>
 <script>
@@ -58,9 +59,11 @@
     import CellGroup from "./lib/CellGroup";
     import Icon from "./lib/Icon";
     import Button from "./lib/Button";
+    import ActionSheet from "./lib/ActionSheet";
 
     export default {
         components: {
+            ActionSheet,
             Button,
             Icon,
             CellGroup,
@@ -68,6 +71,16 @@
             Panel,
             Navbar,
             LayoutBase
+        },
+        data () {
+            return {
+                options: [
+                    {
+                        title: '确定退出',
+                        type: 'error'
+                    }
+                ]
+            }
         },
         methods: {
             quit () {

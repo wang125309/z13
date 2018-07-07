@@ -68,6 +68,9 @@
             border: none;
             text-align: center;
             white-space: nowrap;
+            &:active {
+                background-color: $brand-color * 0.95;
+            }
             &-circle {
                 border-radius: $padding-base * 3;
             }
@@ -93,6 +96,9 @@
                 background-color: $white;
                 border: none;
                 left: $padding-base;
+                &:active {
+                    background-color: $white * 0.95;
+                }
             }
         }
     }
