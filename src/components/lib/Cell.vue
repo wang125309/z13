@@ -26,7 +26,8 @@
             isLink: [Boolean, String],
             problem: [Boolean],
             visible: [Boolean],
-            className: [String, Array]
+            className: [String, Array],
+            flex: [Boolean]
         },
         computed: {
             cellCls() {
@@ -35,7 +36,8 @@
                         [`${prefix}-cell-full`]: this.full,
                         [`${prefix}-cell-no-border`]: this.withoutBorder,
                         [`${prefix}-cell-padding`]: this.padding,
-                        [`${prefix}-cell-problem`]: this.problem
+                        [`${prefix}-cell-problem`]: this.problem,
+                        [`${prefix}-cell-flex`]: this.flex
                     }
                 ]
             },
@@ -119,6 +121,11 @@
                 background-color: $background-default;
                 padding: $padding-base;
             }
+        }
+        &-flex {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
     }
 </style>

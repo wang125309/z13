@@ -16,7 +16,8 @@
             full: [Boolean],
             className: [String],
             color: [String],
-            size: [String]
+            size: [String],
+            bottomWhite: [Boolean]
         },
         computed: {
             buttonWrapCls() {
@@ -33,6 +34,7 @@
                         [`${prefix}-button-${this.type}`]: this.type,
                         [`${this.className}`]: this.className,
                         [`${prefix}-button-${this.size}`]: this.size,
+                        [`${prefix}-button-bottom-white`]: this.bottomWhite
                     }
                 ]
             },
@@ -83,6 +85,14 @@
             }
             &-small-padding {
                 padding: $padding-small 0;
+            }
+            &-bottom-white {
+                position: fixed;
+                bottom: $padding-base;
+                color: $brand-color;
+                background-color: $white;
+                border: none;
+                left: $padding-base;
             }
         }
     }
