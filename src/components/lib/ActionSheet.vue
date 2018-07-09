@@ -5,12 +5,11 @@
                 <slot/>
             </div>
             <div :class="actionSheetButtonWrapCls">
-                <div :class="actionSheetButtonCls" :type="i.type" v-for="i in options">{{i.title}}</div>
+                <div :class="actionSheetButtonTypeCls(i.type)" :type="i.type" v-for="i in options">{{i.title}}</div>
             </div>
             <div :class="actionSheetButtonCancelCls">
-                <div :class="actionSheetButtonCls">取消</div>
+                <div @click="actionCancel()" :class="actionSheetButtonCls">取消</div>
             </div>
-        </div>
         </div>
     </div>
 </template>
@@ -21,12 +20,15 @@
         props: {
             title: [String],
             options: [Array],
-            type: [String]
+            type: [String],
+            visible: [Boolean]
         },
         computed: {
             actionSheetWrapCls () {
                 return [
-                    `${prefix}-action-sheet-wrap`
+                    `${prefix}-action-sheet-wrap`, {
+                        [`${prefix}-action-sheet-wrap-visible`]: this.visible
+                    }
                 ]
             },
             actionSheetCls () {
@@ -56,6 +58,18 @@
                     `${prefix}-action-sheet-button-cancel`
                 ]
             }
+        },
+        methods: {
+            actionSheetButtonTypeCls (type) {
+                return [
+                    `${prefix}-action-sheet-button`, {
+                        [`${prefix}-action-sheet-button-${type}`]: type
+                    }
+                ]
+            },
+            actionCancel () {
+                this.visible = false;
+            }
         }
     }
 </script>
@@ -71,6 +85,10 @@
         top: 0;
         left: 0;
         background-color: $background-mask;
+        visibility: hidden;
+        &-visible {
+            visibility: visible;
+        }
         .{$prefix}-action-sheet {
             position: absolute;
             width: 100%;

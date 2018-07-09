@@ -1,6 +1,6 @@
 <template>
     <div :class="buttonWrapCls">
-        <button :class="buttonCls" :style="buttonStyles">
+        <button :class="buttonCls" @click="bindClick" :style="buttonStyles">
             <slot></slot>
         </button>
     </div>
@@ -44,6 +44,12 @@
                     style['width'] = this.width;
                 }
                 return style;
+            },
+
+        },
+        methods: {
+            bindClick () {
+                this.$emit('onClick');
             }
         }
     }
