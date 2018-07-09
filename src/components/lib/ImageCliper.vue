@@ -59,9 +59,30 @@
             }
         },
         mounted () {
-            let af = new AlloyFinger(this.$refs.cutTools, {
-                pinch: function (evt) {
-                    alert(evt.zoom);
+            let _self = this;
+            let af = new AlloyFinger(_self.$refs.cutTools, {
+                pinch: (evt) => {
+                    let zoom = evt.zoom;
+                    if (zoom > 1) {
+                        zoom = (zoom - 1) / 100 + 1;
+                    }
+                    if (zoom < 1) {
+                        zoom = 1 - zoom / 100;
+                    }
+                    let ele = _self.$refs.cutTools;
+                    let avatarArea = this.$refs.avatarArea;
+                    if (zoom * ele.clientWidth + ele.clientLeft > avatarArea.clientWidth) {
+                        _self.$refs.cutArea.style.width = avatarArea.clientWidth + 'px';
+                        _self.$refs.cutArea.style.height = avatarArea.clientHeight + 'px';
+                    }
+                    else if (zoom * ele.clientHeight + ele.clientTop > avatarArea.clientHeight) {
+                        _self.$refs.cutArea.style.width = avatarArea.clientWidth + 'px';
+                        _self.$refs.cutArea.style.height = avatarArea.clientHeight+ 'px';
+                    }
+                    else {
+                        _self.$refs.cutArea.style.width = zoom * _self.$refs.cutArea.clientWidth + 'px';
+                        _self.$refs.cutArea.style.height = zoom * _self.$refs.cutArea.clientHeight + 'px';
+                    }
                 }
             });
 
