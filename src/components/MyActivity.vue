@@ -59,7 +59,7 @@
     }
 </script>
 
-<style lang="stylus">
+<style scoped lang="stylus">
     @import '../styles/var.styl';
     .activity-card {
         margin-top: $margin-base;

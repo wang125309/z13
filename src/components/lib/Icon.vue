@@ -54,7 +54,7 @@
     }
 </script>
 
-<style lang="stylus">
+<style scoped lang="stylus">
     @import '../../styles/var.styl';
     .{$prefix}-icon {
         display: block;

@@ -50,7 +50,7 @@
     }
 </script>
 
-<style lang="stylus">
+<style scoped lang="stylus">
     @import "../styles/var.styl";
     .{$prefix}-title {
         font-size: $font-size-head;

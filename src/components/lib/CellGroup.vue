@@ -24,7 +24,7 @@
         }
     }
 </script>
-<style lang="stylus">
+<style scoped lang="stylus">
     @import '../../styles/var.styl';
     .{$prefix}-cell-group {
         position: relative;

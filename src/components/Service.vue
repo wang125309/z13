@@ -100,7 +100,7 @@
     }
 </script>
 
-<style lang="stylus">
+<style scoped lang="stylus">
     @import "../styles/var.styl";
     @import "../styles/hairline.styl";
     .{$prefix}-cell-group {

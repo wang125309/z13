@@ -253,7 +253,7 @@
     }
 </script>
 
-<style lang="stylus">
+<style scoped lang="stylus">
     @import '../styles/var.styl';
     @import '../styles/iconfont.css';
     @import '../styles/hairline.styl';
