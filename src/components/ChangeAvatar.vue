@@ -1,12 +1,10 @@
 <template>
     <LayoutBase>
         <Navbar arrowLeft>头像</Navbar>
-        <div :class="avatarAreaCls">
-            <div :class="avatarCls">
-
-            </div>
-            <div :class="cutAreaCls"></div>
+        <div class="avatar-area">
+            <ImageCliper/>
         </div>
+
         <Button bottom-white className="change-avatar" @onClick="selectVisible" circle full width="92%">更换头像</Button>
         <ActionSheet @onVisibleChange="selectVisible" :visible="visibleAction" capture @captureCamera="captureCamera" @captureActive="captureActive"></ActionSheet>
         <input :class="fileSelectorCls" type="file" ref="camera" capture="camera" accept="image/*"/>
@@ -22,11 +20,13 @@
     import Input from './lib/Input'
     import Button from './lib/Button'
     import ActionSheet from "./lib/ActionSheet";
+    import ImageCliper from "./lib/ImageCliper";
     const prefix = 'z13';
 
     export default {
         name: 'ChangeAvatar',
         components: {
+            ImageCliper,
             ActionSheet,
             Button,
             Navbar,
@@ -41,21 +41,6 @@
             }
         },
         computed: {
-            avatarCls () {
-                return [
-                    `${prefix}-avatar`
-                ]
-            },
-            cutAreaCls () {
-                return [
-                    `${prefix}-cut-area`
-                ]
-            },
-            avatarAreaCls () {
-                return [
-                    `${prefix}-avatar-area`
-                ]
-            },
             fileSelectorCls () {
                 return [
                     `${prefix}-file-selector`
@@ -90,5 +75,8 @@
         visibility: hidden;
         width: 0;
         height: 0;
+    }
+    .avatar-area {
+
     }
 </style>
