@@ -17,6 +17,10 @@
 <script>
     const prefix = 'z13';
     export default {
+        watch: {
+            visible () {
+            }
+        },
         props: {
             title: [String],
             options: [Array],
@@ -68,7 +72,7 @@
                 ]
             },
             actionCancel () {
-                this.visible = false;
+                this.$emit('onVisibleChange')
             }
         }
     }
@@ -86,10 +90,12 @@
         left: 0;
         background-color: $background-mask;
         visibility: hidden;
-        &-visible {
-            visibility: visible;
-        }
+        opacity: 0;
+        transition: all $transition-time ease-in-out;
+
         .{$prefix}-action-sheet {
+            transform: translateY(100%);
+            transition: all $transition-time ease-in-out;
             position: absolute;
             width: 100%;
             bottom: 0;
@@ -102,6 +108,15 @@
                 color: $font-second;
                 line-height: 1.5;
                 hairline('bottom');
+            }
+        }
+        &-visible {
+            transition: all $transition-time ease-in-out;
+            visibility: visible;
+            opacity: 1;
+            .{$prefix}-action-sheet {
+                transform: translateY(0);
+                transition: all $transition-time ease-in-out;
             }
         }
         .{$prefix}-action-sheet-button {

@@ -48,7 +48,7 @@
             </CellGroup>
         </Panel>
         <Button circle width="92%" bottom-white @onClick="quit">退出登录</Button>
-        <ActionSheet :visible="quitVisible" :options="options">退出后下次登录需要重新输入手机号及验证码<br>请确认</ActionSheet>
+        <ActionSheet @onVisibleChange="quit" :visible="quitVisible" :options="options">退出后下次登录需要重新输入手机号及验证码<br>请确认</ActionSheet>
     </LayoutBase>
 </template>
 <script>
@@ -85,9 +85,7 @@
         },
         methods: {
             quit () {
-                console.log('I do')
-                this.quitVisible = true
-                console.log(this.quitVisible)
+                this.quitVisible = !this.quitVisible
             }
         }
     }
