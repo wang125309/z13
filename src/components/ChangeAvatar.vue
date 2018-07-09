@@ -7,8 +7,8 @@
         </div>
         <Button bottom-white className="change-avatar" @onClick="selectVisible" circle full width="92%">更换头像</Button>
         <ActionSheet @onVisibleChange="selectVisible" :visible="visibleAction" capture @captureCamera="captureCamera" @captureActive="captureActive"></ActionSheet>
-        <input type="file" ref="camera" capture="camera"/>
-        <input type="file" ref="active" capture="accept"/>
+        <input type="file" ref="camera" capture="camera" accept="image/*"/>
+        <input type="file" ref="active" accept="image/*"/>
     </LayoutBase>
 </template>
 
