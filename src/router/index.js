@@ -28,6 +28,11 @@ const BuildingService = r => require.ensure([], ()=>r(require('@/components/Buil
 const ServiceDetails = r => require.ensure([], ()=>r(require('@/components/ServiceDetails.vue')))
 const Service = r => require.ensure([], ()=>r(require('@/components/Service.vue')))
 const UserInfo = r => require.ensure([], ()=>r(require('@/components/UserInfo.vue')))
+const ChangeAvatar = r => require.ensure([], ()=>r(require('@/components/ChangeAvatar.vue')))
+const ChangeName = r => require.ensure([], ()=>r(require('@/components/ChangeName.vue')))
+const ChangeCompany = r => require.ensure([], ()=>r(require('@/components/ChangeCompany.vue')))
+const ChangeCompanyPosition = r => require.ensure([], ()=>r(require('@/components/ChangeCompanyPosition.vue')))
+const ChangeMobile = r => require.ensure([], ()=>r(require('@/components/ChangeMobile.vue')))
 
 export default new Router({
     scrollBehavior: () => ({y: 0}),
@@ -161,6 +166,31 @@ export default new Router({
             path: '/user-info',
             name: 'UserInfo',
             component: UserInfo
+        },
+        {
+            path: '/change-avatar',
+            name: 'ChangeAvatar',
+            component: ChangeAvatar
+        },
+        {
+            path: '/change-name',
+            name: 'ChangeName',
+            component: ChangeName
+        },
+        {
+            path: '/change-mobile',
+            name: 'ChangeMobile',
+            component: ChangeMobile
+        },
+        {
+            path: '/change-company',
+            name: 'ChangeCompany',
+            component: ChangeCompany
+        },
+        {
+            path: '/change-avatar-position',
+            name: 'ChangeCompanyPosition',
+            component: ChangeCompanyPosition
         }
     ]
 })
