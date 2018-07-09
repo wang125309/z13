@@ -1,11 +1,19 @@
 <template>
     <div :class="actionSheetWrapCls">
         <div :class="actionSheetCls">
-            <div :class="actionSheetBodyCls">
+            <div v-if="!capture" :class="actionSheetBodyCls">
                 <slot/>
             </div>
-            <div :class="actionSheetButtonWrapCls">
+            <div v-if="!capture" :class="actionSheetButtonWrapCls">
                 <div :class="actionSheetButtonTypeCls(i.type)" :type="i.type" v-for="i in options">{{i.title}}</div>
+            </div>
+            <div v-if="capture" :class="actionSheetButtonWrapCls">
+                <div @click="captureCamera" :class="actionSheetButtonTypeCls()">
+                    拍照
+                </div>
+                <div @click="captureActive" :class="actionSheetButtonTypeCls()">
+                    从系统相册上传
+                </div>
             </div>
             <div :class="actionSheetButtonCancelCls">
                 <div @click="actionCancel()" :class="actionSheetButtonCls">取消</div>
@@ -25,7 +33,8 @@
             title: [String],
             options: [Array],
             type: [String],
-            visible: [Boolean]
+            visible: [Boolean],
+            capture: [Boolean]
         },
         computed: {
             actionSheetWrapCls () {
@@ -73,6 +82,12 @@
             },
             actionCancel () {
                 this.$emit('onVisibleChange')
+            },
+            captureCamera () {
+                this.$emit('captureCamera')
+            },
+            captureActive () {
+                this.$emit('captureActive')
             }
         }
     }
