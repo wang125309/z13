@@ -1,5 +1,6 @@
 <template>
     <div :class="actionSheetWrapCls">
+        <div :class="actionSheetMaskCls" @click="actionCancel"/>
         <div :class="actionSheetCls">
             <div v-if="!capture" :class="actionSheetBodyCls">
                 <slot/>
@@ -16,7 +17,7 @@
                 </div>
             </div>
             <div :class="actionSheetButtonCancelCls">
-                <div @click="actionCancel()" :class="actionSheetButtonCls">取消</div>
+                <div @click="actionCancel" :class="actionSheetButtonCls">取消</div>
             </div>
         </div>
     </div>
@@ -70,6 +71,11 @@
                 return [
                     `${prefix}-action-sheet-button-cancel`
                 ]
+            },
+            actionSheetMaskCls () {
+                return [
+                    `${prefix}-action-sheet-mask`
+                ]
             }
         },
         methods: {
@@ -105,8 +111,7 @@
         left: 0;
         background-color: $background-mask;
         visibility: hidden;
-        opacity: 0;
-        transition: all $transition-time ease-in-out;
+
 
         .{$prefix}-action-sheet {
             transform: translateY(100%);
@@ -116,6 +121,7 @@
             bottom: 0;
             background-color: $background-default;
             text-align: center;
+            z-index: 12;
             &-body {
                 position: relative;
                 background-color: $background-body;
@@ -124,14 +130,28 @@
                 line-height: 1.5;
                 hairline('bottom');
             }
+            &-mask {
+                background-color: $background-mask;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                position: absolute;
+                opacity: 0;
+                transition: all $transition-time ease-in-out;
+                z-index: 10;
+            }
         }
         &-visible {
-            transition: all $transition-time ease-in-out;
             visibility: visible;
-            opacity: 1;
             .{$prefix}-action-sheet {
                 transform: translateY(0);
                 transition: all $transition-time ease-in-out;
+                &-mask {
+                    opacity: 1;
+                    visibility: visible;
+                    transition: all $transition-time ease-in-out;
+                }
             }
         }
         .{$prefix}-action-sheet-button {

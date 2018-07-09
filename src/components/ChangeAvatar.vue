@@ -2,13 +2,15 @@
     <LayoutBase>
         <Navbar arrowLeft>头像</Navbar>
         <div :class="avatarAreaCls">
-            <div :class="avatarCls"></div>
+            <div :class="avatarCls">
+
+            </div>
             <div :class="cutAreaCls"></div>
         </div>
         <Button bottom-white className="change-avatar" @onClick="selectVisible" circle full width="92%">更换头像</Button>
         <ActionSheet @onVisibleChange="selectVisible" :visible="visibleAction" capture @captureCamera="captureCamera" @captureActive="captureActive"></ActionSheet>
-        <input type="file" ref="camera" capture="camera" accept="image/*"/>
-        <input type="file" ref="active" accept="image/*"/>
+        <input :class="fileSelectorCls" type="file" ref="camera" capture="camera" accept="image/*"/>
+        <input :class="fileSelectorCls" type="file" ref="active" accept="image/*"/>
     </LayoutBase>
 </template>
 
@@ -53,6 +55,11 @@
                 return [
                     `${prefix}-avatar-area`
                 ]
+            },
+            fileSelectorCls () {
+                return [
+                    `${prefix}-file-selector`
+                ]
             }
         },
         methods: {
@@ -78,5 +85,10 @@
     }
     .next-step {
         margin-top: $margin-large;
+    }
+    .{$prefix}-file-selector {
+        visibility: hidden;
+        width: 0;
+        height: 0;
     }
 </style>
