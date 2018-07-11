@@ -1,6 +1,8 @@
 import axios from 'axios'
+import cookie from '../Session/cookie'
 
 const requests = (url, options, success, error) => {
+    axios.defaults.headers.common['Authorization'] = cookie.getCookie() ? cookie.getCookie() : '';
     let type = 'GET';
     if (options.type === 'POST') {
         type = 'POST';

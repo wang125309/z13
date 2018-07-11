@@ -32,6 +32,7 @@
     import Button from './lib/Button'
     import API from '../service/api'
     import {mapState, mapActions} from 'vuex'
+    import cookies from '../Session/cookie'
     import requests from '../service/service'
     let loginClicked = false;
     export default {
@@ -73,7 +74,13 @@
                             data: this.user
                         }, (data) => {
                             this.$store.dispatch('SET_TOKEN', data.data);
+                            cookies.setCookie(data.data);
                             this.$root.$children[0].toggleToast('success', data.message);
+                            setTimeout(() => {
+                                this.$router.push({
+                                    path: '/'
+                                })
+                            }, 500);
                         }, (data) => {
                             this.$root.$children[0].toggleToast('error', data.message);
                         });

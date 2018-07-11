@@ -5,6 +5,7 @@ import Vuex from 'vuex'
 import App from './App'
 import router from './router'
 import s from './store/store'
+
 Vue.use(Vuex);
 Vue.config.productionTip = false;
 const store = new Vuex.Store(s);

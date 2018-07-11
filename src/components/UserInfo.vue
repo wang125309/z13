@@ -60,7 +60,8 @@
     import Icon from "./lib/Icon";
     import Button from "./lib/Button";
     import ActionSheet from "./lib/ActionSheet";
-
+    import requests from '../service/service';
+    import API from '../service/api';
     export default {
         components: {
             ActionSheet,
@@ -102,6 +103,13 @@
             changeComponyPosition () {
                 this.$router.push('/change-company-position')
             }
+        },
+        mounted () {
+            requests(API.get_user_info, {}, (data) => {
+                console.log(data);
+            }, (data) => {
+
+            });
         }
     }
 </script>
