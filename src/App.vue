@@ -16,8 +16,8 @@
         methods: {
             toggleToast(type, text) {
                 let toast = this.$root.$children[0].$refs.toast;
-                toast.type = type;
-                toast.message = text;
+                toast.setType(type);
+                toast.setMessage(text);
                 toast.show();
             }
         }

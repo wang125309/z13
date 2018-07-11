@@ -1,15 +1,12 @@
 <template>
     <LayoutBase>
-        <Navbar arrowLeft>忘记密码</Navbar>
+        <Navbar arrowLeft>更换手机号</Navbar>
         <CellGroup full class="cell-group">
             <Cell full>
-                <Input type="number" placeholder="手机号"/>
-            </Cell>
-            <Cell withoutBorder>
-                <Input type="text" sendCode placeholder="请输入验证码"/>
+                <Input type="text" v-model="mobile" withClear placeholder="请输入手机号"/>
             </Cell>
         </CellGroup>
-        <Button className="next-step" circle type="default" full width="92%">下一步</Button>
+        <Button class="next-step" circle type="primary" @onClick="save" full width="92%">更换手机号</Button>
     </LayoutBase>
 </template>
 
@@ -31,8 +28,17 @@
             Input,
             LayoutBase
         },
+        methods: {
+            save () {
+                console.log(this.mobile)
+                this.$router.push({
+                    path: '/valid-old-mobile'
+                })
+            }
+        },
         data () {
             return {
+                name: ''
             }
         }
     }
@@ -40,10 +46,12 @@
 
 <style scoped lang="stylus">
     @import '../styles/var.styl';
+    @import '../styles/hairline.styl';
     .cell-group {
-        margin-top: $margin-large;
-        border-top: 1px solid $border-color;
-        border-bottom: 1px solid $border-color;
+        margin-top: $margin-large !important;
+        position: relative;
+        hairline('top');
+        hairline('bottom');
     }
     .next-step {
         margin-top: $margin-large;

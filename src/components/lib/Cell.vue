@@ -5,7 +5,7 @@
             <Icon top="0.036rem" v-if="isLink" type="arrow-right" position="right"/>
             <Icon :className="problemIconCls" top="0.036rem" v-if="problem" type="down" position="right"/>
         </div>
-        <div v-if="problem" v-show="visible" :class="cellPanelCls">
+        <div v-if="problem" v-show="panelVisible" :class="cellPanelCls">
             <div :class="cellPanelInfoCls">
                 <slot name="answer"></slot>
             </div>
@@ -19,6 +19,16 @@
     const prefix = 'z13';
     export default {
         components: {Icon},
+        watch: {
+            panelVisible () {
+
+            }
+        },
+        data () {
+            return {
+                panelVisible: this.visible
+            }
+        },
         props: {
             full: [Boolean],
             withoutBorder: [Boolean],
@@ -43,14 +53,11 @@
             },
             problemIconCls() {
                 let cls = ''
-                if (this.problemVisible) {
+                if (this.panelVisible) {
                     cls = `${prefix}-cell-problem-icon-visible `
                 }
                 cls += `${prefix}-cell-problem-icon`
                 return cls
-            },
-            problemVisible() {
-                return this.$props.visible
             },
             cellPanelCls() {
                 return [
@@ -62,6 +69,7 @@
                     `${prefix}-cell-panel-info`
                 ]
             }
+
         },
         methods: {
             go() {
@@ -71,7 +79,7 @@
                    })
                }
                else if(this.problem) {
-                   this.visible = !this.visible;
+                   this.panelVisible = !this.panelVisible;
                }
                else {
                    this.$emit('click');

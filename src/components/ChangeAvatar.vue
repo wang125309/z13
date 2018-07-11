@@ -4,7 +4,6 @@
         <div class="avatar-area">
             <ImageCliper/>
         </div>
-
         <Button bottom-white className="change-avatar" @onClick="selectVisible" circle full width="92%">更换头像</Button>
         <ActionSheet @onVisibleChange="selectVisible" :visible="visibleAction" capture @captureCamera="captureCamera" @captureActive="captureActive"></ActionSheet>
         <input :class="fileSelectorCls" type="file" ref="camera" capture="camera" accept="image/*"/>

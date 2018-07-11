@@ -1,5 +1,5 @@
 <template>
-    <div :class="avatarCls" :style="avatarStyle"/>
+    <div @click="handleClick" :class="avatarCls" :style="avatarStyle"></div>
 </template>
 
 <script>
@@ -36,11 +36,16 @@
                 }
                 return style;
             }
+        },
+        methods: {
+            handleClick () {
+                this.$emit('click');
+            }
         }
     }
 </script>
 
-<style lang="stylus">
+<style scoped lang="stylus">
     @import '../../styles/var.styl';
     .{$prefix}-avatar {
         border-radius: 100%;

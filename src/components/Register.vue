@@ -4,20 +4,21 @@
         <Z13Icon/>
         <CellGroup class="cell-group">
             <Cell>
-                <Input type="number" icon="phone" placeholder="手机号"/>
+                <Input v-model="user.account" type="number" icon="phone" placeholder="手机号"/>
             </Cell>
             <Cell>
-                <Input type="text" icon="img" placeholder="图片验证码"/>
+                <Input v-model="user.image" type="text" icon="img" placeholder="图片验证码"/>
+                <img @click="refreshCode" class="image-code" :src="imageCode"/>
             </Cell>
             <Cell>
-                <Input type="text" icon="verification" sendCode placeholder="验证码"/>
+                <Input v-model="user.code" type="text" icon="verification" sendCode placeholder="验证码"/>
             </Cell>
             <Cell>
-                <Input type="password" icon="lock" placeholder="设置密码"/>
+                <Input v-model="user.password" type="password" icon="lock" placeholder="设置密码"/>
             </Cell>
         </CellGroup>
         <div class="btn-area">
-            <Button className="register-btn" circle full width="75%">注册</Button>
+            <Button @onClick="register" className="register-btn" circle full width="75%">注册</Button>
         </div>
     </LayoutWhite>
 </template>
@@ -30,6 +31,10 @@
     import CellGroup from './lib/CellGroup'
     import Input from './lib/Input'
     import Button from './lib/Button'
+    import API from '../service/api'
+    import requests from '../service/service'
+
+    let registerFlag = false;
 
     export default {
         name: 'Register',
@@ -44,6 +49,38 @@
         },
         data () {
             return {
+                user: {
+                    account: '',
+                    password: '',
+                    code: '',
+                    image: ''
+                },
+                imageCode: API.get_image_code
+            }
+        },
+        created () {
+        },
+        watch: {
+            imageCode () {}
+        },
+        methods: {
+            refreshCode () {
+                this.imageCode = '';
+                setTimeout(() => {
+                    this.imageCode = API.get_image_code;
+                }, 0);
+            },
+            register () {
+                if (!registerFlag) {
+                    requests(API.do_register, {
+                        type: 'POST',
+                        data: this.user
+                    }, (data) => {
+                        this.$root.$children[0].toggleToast('success', data.message);
+                    }, (data) => {
+                        this.$root.$children[0].toggleToast('error', data.message);
+                    });
+                }
             }
         }
     }
@@ -59,5 +96,11 @@
     }
     .btn-area {
         margin-top: $margin-large * 2;
+    }
+    .image-code {
+        position: absolute;
+        right: 0;
+        width: 0.3rem;
+        top: 0.02rem;
     }
 </style>

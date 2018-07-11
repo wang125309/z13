@@ -1,10 +1,11 @@
 <template>
     <div :class="inputWrapCls">
         <Icon v-if="icon" position="left" class="iconCls" size="0.07rem" :type="icon"/>
-        <input :style="inputStyles" :type="inputType" :class="inputCls" :placeholder="placeholder"/>
-        <Icon @click="showEye" position="right" v-if="withEye" v-show="!eyeVisible" size="0.1rem" type="eye"/>
-        <Icon @click="showEye" position="right" v-if="withEye" v-show="eyeVisible" size="0.1rem" type="eye-close"/>
+        <input @input="inputChange" :style="inputStyles" v-bind:value="value" :type="inputType" :class="inputCls" :placeholder="placeholder"/>
+        <Icon @click="showEye" position="right" v-if="withEye" v-show="!eyeVisible" size="0.07rem" type="eye"/>
+        <Icon @click="showEye" position="right" v-if="withEye" v-show="eyeVisible" size="0.07rem" type="eye-close"/>
         <Button :className="sendCodeCls" v-if="sendCode" type="send-code">发送验证码</Button>
+        <Icon @click="clear" v-if="withClear" :className="clearCls" size="0.04rem" top="0.04rem" type="delete" position="right"/>
         <slot wx-if="this.$slots"/>
     </div>
 </template>
@@ -15,10 +16,15 @@
     const prefix = 'z13';
 
     export default {
+        watch: {
+            model () {
+
+            }
+        },
         data() {
             return {
                 eyeVisible: false,
-                inputType: this.type
+                inputType: this.type,
             }
         },
         props: {
@@ -26,7 +32,9 @@
             icon: [String],
             type: [String],
             withEye: [Boolean],
-            sendCode: [Boolean]
+            sendCode: [Boolean],
+            withClear: [Boolean],
+            value: [String]
         },
         components: {
             Icon,
@@ -62,12 +70,23 @@
             },
             sendCodeCls() {
                 return `${prefix}-send-code`
+            },
+            clearCls () {
+                return [
+                    `${prefix}-input-clear`
+                ]
             }
         },
         methods: {
             showEye() {
                 this.eyeVisible = !this.eyeVisible;
                 this.eyeVisible? this.inputType = 'text' : this.inputType = 'password';
+            },
+            clear () {
+
+            },
+            inputChange ($evt) {
+                this.$emit('input', $evt.target.value)
             }
         }
     }
@@ -75,6 +94,9 @@
 
 <style lang="stylus">
     @import '../../styles/var.styl'
+    input:-webkit-autofill {
+        -webkit-box-shadow: 0 0 0 1000px white inset !important;
+    }
     .{$prefix}-input-wrap {
         display: flex;
         justify-content: left;
@@ -88,6 +110,10 @@
             background: $white;
             width: 100%;
             padding: $padding-base 0;
+
+            &-clear {
+                margin-right: $padding-base;
+            }
         }
         .{$prefix}-send-code {
             position: absolute;

@@ -1,9 +1,9 @@
 <template>
     <div :class="toastWrapCls">
         <div :class="toastCls">
-            <Icon :className="toastIconCls" :type="iconType" size="0.09rem"/>
+            <Icon :className="toastIconCls" :type="`toast-${iconType}`" size="0.09rem"/>
             <div :class="toastMessageCls">
-                {{getMessage}}
+                {{toastMessage}}
             </div>
         </div>
     </div>
@@ -22,9 +22,6 @@
             message: [String]
         },
         computed: {
-            getMessage() {
-                return this.message;
-            },
             toastWrapCls() {
                 return [
                     `${prefix}-toast-wrap`, {
@@ -37,9 +34,6 @@
                     `${prefix}-toast`
                 ]
             },
-            iconType() {
-                return `toast-${this.type}`
-            },
             toastMessageCls() {
                 return [
                     `${prefix}-toast-message`
@@ -51,7 +45,9 @@
         },
         data() {
             return {
-                visible: false
+                visible: false,
+                toastMessage: this.message,
+                iconType: this.type
             }
         },
         methods: {
@@ -60,6 +56,12 @@
                 setTimeout(() => {
                     this.visible = false;
                 }, 1500);
+            },
+            setMessage (val) {
+                this.toastMessage = val;
+            },
+            setType (val) {
+                this.iconType = val;
             }
         }
     }

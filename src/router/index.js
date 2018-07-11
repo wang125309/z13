@@ -6,7 +6,7 @@ const Home = r => require.ensure([], ()=>r(require('@/components/Home.vue')))
 const Register = r => require.ensure([], ()=>r(require('@/components/Register.vue')))
 const RegisterSuccess = r => require.ensure([], ()=>r(require('@/components/RegisterSuccess.vue')))
 const Login = r => require.ensure([], ()=>r(require('@/components/Login.vue')))
-const ForgetPassword = r => require.ensure([], ()=>r(require('@/components/ForgetPassword.vue')))
+const ValidMobile = r => require.ensure([], ()=>r(require('@/components/ValidMobile.vue')))
 const ResetPassword = r => require.ensure([], ()=>r(require('@/components/ResetPassword.vue')))
 const ResetPasswordSuccess = r => require.ensure([], ()=>r(require('@/components/ResetPasswordSuccess.vue')))
 const My = r => require.ensure([], ()=>r(require('@/components/My.vue')))
@@ -58,9 +58,14 @@ export default new Router({
             component: Login
         },
         {
+            path: '/valid-mobile',
+            name: 'ValidMobile',
+            component: ValidMobile
+        },
+        {
             path: '/forget-password',
-            name: 'ForgetPassword',
-            component: ForgetPassword
+            name: 'ValidMobile',
+            component: ValidMobile
         },
         {
             path: '/reset-password',

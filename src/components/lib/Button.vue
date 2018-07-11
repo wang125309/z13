@@ -84,6 +84,9 @@
                 border: 1px solid $border-color;
                 color: $font-color;
                 background-color: $white;
+                &:active {
+                    background-color: $white * 0.95;
+                }
             }
             &-send-code {
                 flex: 1;
@@ -91,6 +94,9 @@
                 padding: $padding-small;
                 font-size: $font-size-small;
                 border-radius: 3px;
+                &:active {
+                    background-color: $brand-color-yellow * 0.95;
+                }
             }
             &-small-padding {
                 padding: $padding-small 0;

@@ -1,8 +1,8 @@
 <template>
     <div ref="avatarArea" :class="avatarAreaCls">
         <div :class="avatarCls">
-            <div :class="avatarMaskCls"/>
-            <div ref="cutArea" :class="cutAreaCls">
+            <div v-if="showCutArea" :class="avatarMaskCls"></div>
+            <div v-if="showCutArea" ref="cutArea" :class="cutAreaCls">
                 <div ref="cutAreaAvatar" :class="cutAreaAvatarCls"></div>
                 <div  @touchstart="cutStart" @touchend="cutEnd" @touchmove="cut" ref="cutTools" :class="cutToolsCls">
                 </div>
@@ -93,6 +93,14 @@
                 top: 0,
                 flag: false
             }
+        },
+        watch: {
+            showCutArea () {
+
+            }
+        },
+        props: {
+            showCutArea: false
         },
         methods: {
             cutStart ($evt) {

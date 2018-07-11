@@ -2,7 +2,7 @@
     <LayoutBase>
         <Navbar>我的</Navbar>
         <Panel>
-            <Avatar src="/assets/banner.png"/>
+            <Avatar @click="go" :src="avatar"/>
             <div class="user-name">张三</div>
             <div class="sub-name">182627362721</div>
         </Panel>
@@ -32,6 +32,8 @@
     import Avatar from "./lib/Avatar";
     import CellGroup from "./lib/CellGroup";
     import Cell from "./lib/Cell";
+    import avatar from '../assets/avatar.png';
+
     export default {
         name: 'My',
         components: {
@@ -45,6 +47,14 @@
         },
         data () {
             return {
+                avatar: avatar
+            }
+        },
+        methods: {
+            go () {
+                this.$router.push({
+                    path: '/user-info'
+                })
             }
         }
     }
