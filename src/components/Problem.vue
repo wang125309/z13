@@ -22,6 +22,9 @@
     import CellGroup from './lib/CellGroup'
     import Cell from './lib/Cell'
     import Navbar from "./lib/Navbar";
+    import requests from '../service/service'
+    import API from '../service/api'
+
     export default {
         components: {
             Navbar,
@@ -29,7 +32,21 @@
             CellGroup,
             Cell
         },
-
+        data () {
+            return {
+                data: {}
+            }
+        },
+        created () {
+            requests(API.get_problem, {
+                type: 'GET'
+            }, (data) => {
+                this.data = data.data
+            }, (data) => {
+                console.log(data)
+                this.$root.$children[0].toggleToast('warning', data)
+            })
+        }
     }
 </script>
 <style scoped lang="stylus">

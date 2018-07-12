@@ -119,6 +119,9 @@
     import Panel from "./lib/Panel";
     import Tag from "./lib/Tag";
     import { swiper, swiperSlide } from 'vue-awesome-swiper'
+    import requests from '../service/service'
+    import API from '../service/api'
+
     export default {
         name: 'Home',
         components: {
@@ -141,8 +144,8 @@
                 swiperOption: {
                     slidesPerView: 'auto',
                     spaceBetween: 10,
-                }
-
+                },
+                pageData: {}
             }
         },
         methods: {
@@ -161,6 +164,16 @@
                     path: url
                 })
             }
+        },
+        created () {
+            requests(API.get_homepage, {
+                type: 'GET'
+            }, (data) => {
+                this.pageData = data.data
+            }, (data) => {
+                console.log(data)
+                this.$root.$children[0].toggleToast('warning', data)
+            })
         }
     }
 </script>

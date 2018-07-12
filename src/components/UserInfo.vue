@@ -62,6 +62,7 @@
     import ActionSheet from "./lib/ActionSheet";
     import requests from '../service/service';
     import API from '../service/api';
+    import cookies from '../Session/cookie';
     export default {
         components: {
             ActionSheet,
@@ -74,11 +75,25 @@
             LayoutBase
         },
         data () {
+            let _this = this;
             return {
                 options: [
                     {
                         title: '确定退出',
-                        type: 'error'
+                        type: 'error',
+                        event () {
+                            requests(API.do_logout, {
+                                type: 'PUT'
+                            }, (data) => {
+                                cookies.quit();
+                                _this.$router.push({
+                                    path: '/login'
+                                })
+                            }, (data) => {
+                                _this.$root.$children[0].toggleToast('error', data.message);
+                            });
+
+                        }
                     }
                 ],
                 quitVisible: false

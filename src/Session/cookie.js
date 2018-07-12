@@ -7,7 +7,11 @@ cookies.setCookie = (token) => {
 }
 
 cookies.getCookie = () => {
-    return Cookies.get('token')
+    return Cookies.get('token');
+}
+
+cookies.quit = () => {
+    Cookies.set('token', '');
 }
 
 export default cookies;

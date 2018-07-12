@@ -77,6 +77,11 @@
                         data: this.user
                     }, (data) => {
                         this.$root.$children[0].toggleToast('success', data.message);
+                        setTimeout(() => {
+                            this.$router.push({
+                                path: '/login'
+                            })
+                        })
                     }, (data) => {
                         this.$root.$children[0].toggleToast('error', data.message);
                     });

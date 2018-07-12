@@ -6,7 +6,7 @@
                 <slot/>
             </div>
             <div v-if="!capture" :class="actionSheetButtonWrapCls">
-                <div :class="actionSheetButtonTypeCls(i.type)" :type="i.type" v-for="i in options">{{i.title}}</div>
+                <div @click="i.event" :class="actionSheetButtonTypeCls(i.type)" :type="i.type" v-for="i in options">{{i.title}}</div>
             </div>
             <div v-if="capture" :class="actionSheetButtonWrapCls">
                 <div @click="captureCamera" :class="actionSheetButtonTypeCls()">

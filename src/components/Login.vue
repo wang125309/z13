@@ -31,7 +31,6 @@
     import Input from './lib/Input'
     import Button from './lib/Button'
     import API from '../service/api'
-    import {mapState, mapActions} from 'vuex'
     import cookies from '../Session/cookie'
     import requests from '../service/service'
     let loginClicked = false;

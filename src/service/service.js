@@ -7,6 +7,9 @@ const requests = (url, options, success, error) => {
     if (options.type === 'POST') {
         type = 'POST';
     }
+    else if (options.type === 'PUT') {
+        type = 'PUT';
+    }
     const callback = (response) => {
         if (response.status === 200) {
             if (response.data.success === true) {
@@ -32,6 +35,13 @@ const requests = (url, options, success, error) => {
     }
     else if (type === 'POST') {
         axios.post(`${url}`, options.data).then((response) => {
+            callback(response);
+        }).catch((err) => {
+            callback(err);
+        });
+    }
+    else if (type === 'PUT') {
+        axios.put(`${url}`, options.data).then((response) => {
             callback(response);
         }).catch((err) => {
             callback(err);

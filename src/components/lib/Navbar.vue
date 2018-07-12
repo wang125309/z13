@@ -7,6 +7,7 @@
 
 <script>
     import Icon from './Icon'
+
     const prefix = 'z13';
     export default {
         components: {
@@ -24,6 +25,9 @@
             previous() {
                 this.$router.go(-1);
             }
+        },
+        created () {
+            this.$store.dispatch('SET_USER_INFO', this)
         }
     }
 </script>
