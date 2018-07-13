@@ -172,7 +172,7 @@
                 this.pageData = data.data
             }, (data) => {
                 console.log(data)
-                this.$root.$children[0].toggleToast('warning', data)
+                this.$root.$children[0].toggleToast('fail', data)
             })
         }
     }

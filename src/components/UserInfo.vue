@@ -90,7 +90,7 @@
                                     path: '/login'
                                 })
                             }, (data) => {
-                                _this.$root.$children[0].toggleToast('error', data.message);
+                                _this.$root.$children[0].toggleToast('fail', data.message);
                             });
 
                         }

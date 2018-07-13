@@ -81,14 +81,14 @@
                                 })
                             }, 500);
                         }, (data) => {
-                            this.$root.$children[0].toggleToast('error', data.message);
+                            this.$root.$children[0].toggleToast('fail', data.message);
                         });
                     }
                     else if (this.user.account.length === 0) {
-                        this.$root.$children[0].toggleToast('error', '手机号不能为空');
+                        this.$root.$children[0].toggleToast('fail', '手机号不能为空');
                     }
                     else if (this.user.password.length === 0) {
-                        this.$root.$children[0].toggleToast('error', '密码不能为空');
+                        this.$root.$children[0].toggleToast('fail', '密码不能为空');
                     }
                     setTimeout(() => {
                         loginClicked = false;

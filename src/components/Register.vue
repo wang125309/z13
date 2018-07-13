@@ -83,7 +83,7 @@
                             })
                         })
                     }, (data) => {
-                        this.$root.$children[0].toggleToast('error', data.message);
+                        this.$root.$children[0].toggleToast('fail', data.message);
                     });
                 }
             }
