@@ -98,8 +98,7 @@
         margin: 0 auto;
     }
     .{$prefix}-icon {
-        display: block;
-        margin: 0 auto;
+        display:block;
         transform-origin: left top;
     }
 

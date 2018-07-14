@@ -1,6 +1,6 @@
 <template>
     <div :class="navbarCls">
-        <Icon position="left" size="0.07rem" @click="previous" v-if="arrowLeft" type="arrow-left"/>
+        <Icon position="left" size="0.06rem" @click="previous" v-if="arrowLeft" type="arrow-left"/>
         <slot></slot>
     </div>
 </template>
