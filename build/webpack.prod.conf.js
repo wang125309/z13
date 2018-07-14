@@ -10,6 +10,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const SpritesmithPlugin = require('webpack-spritesmith')
 
 const env = require('../config/prod.env')
 
@@ -115,7 +116,20 @@ const webpackConfig = merge(baseWebpackConfig, {
         to: config.build.assetsSubDirectory,
         ignore: ['.*']
       }
-    ])
+    ]),
+    new SpritesmithPlugin({
+        src: {
+            cwd: path.resolve(__dirname, 'src/assets/icon'),
+            glob: '*.png'
+        },
+        target: {
+            image: path.resolve(__dirname, 'src/assets/sprite.png'),
+            css: path.resolve(__dirname, 'src/styles/sprite.styl')
+        },
+        apiOptions: {
+            cssImageRef: "~sprite.png"
+        }
+    })
   ]
 })
 

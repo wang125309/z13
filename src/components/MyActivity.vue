@@ -12,7 +12,7 @@
         <Card @click="goActive" full className="activity-card">
             <ActivityImages src="/assets/banner.png" title="中秋节抽奖活动" status="已结束" date="2018-09-19" location="二期就上盯上" tag="已有21312人参与"/>
         </Card>
-        <Button circle width="92%" className="bottom-btn">发现更多活动</Button>
+        <Button circle full width="92%" class="bottom-btn">发现更多活动</Button>
     </LayoutBase>
 </template>
 
@@ -68,8 +68,6 @@
         position: fixed !important;
         bottom: $padding-base !important;
         color: $brand-color !important;
-        background-color: $white !important;
         border: none !important;
-        left: $padding-base !important;
     }
 </style>

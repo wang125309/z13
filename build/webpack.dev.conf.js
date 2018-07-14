@@ -7,6 +7,7 @@ const path = require('path')
 const baseWebpackConfig = require('./webpack.base.conf')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const SpritesmithPlugin = require('webpack-spritesmith')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
 
@@ -64,7 +65,23 @@ const devWebpackConfig = merge(baseWebpackConfig, {
         to: config.dev.assetsSubDirectory,
         ignore: ['.*']
       }
-    ])
+    ]),
+    new SpritesmithPlugin({
+        src: {
+            cwd: path.resolve(__dirname, '../src/assets/icon'),
+            glob: '*.png'
+        },
+        target: {
+            image: path.resolve(__dirname, '../src/assets/sprite.png'),
+            css: path.resolve(__dirname, '../src/styles/sprite.css')
+        },
+        apiOptions: {
+            cssImageRef: "../assets/sprite.png"
+        },
+        spritesmithOptions: {
+            algorithm: 'top-down'
+        }
+    })
   ]
 })
 
