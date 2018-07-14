@@ -3,18 +3,20 @@
         <Navbar arrow-left>送水</Navbar>
         <CellGroup :class-name="cellGroupCls" full no-margin>
             <div :class="cellCls">
-                <Icon size="0.2rem" :class-name="iconCls" type="rent-img" position="left"/>
+                <Icon size="0.2rem" :class="iconCls" type="rent-img" position="left"/>
                 <div :class="wrapCls">
                     <div :class="titleCls">洗车店名字</div>
                     <div :class="timeCls">08:00 - 22:00</div>
                 </div>
             </div>
-            <Cell :class-name="cellBottomCls">
+            <Cell without-border :class-name="cellBottomCls">
                 <div :class="itemCls">
                     <div>地点：A座1层1002房间</div>
                     <div>电话：010-2321424</div>
                 </div>
-                <Icon :class-name="callCls" size="0.11rem" position="right" type="call"/>
+                <a href="tel: 010-2321424">
+                    <Icon :class="callCls" size="0.11rem" position="right" type="call"/>
+                </a>
             </Cell>
         </CellGroup>
         <ActivityCardItem cut full title="服务说明">
@@ -120,12 +122,14 @@
         padding-left: $padding-base;
     }
     .{$prefix}-cell {
+        hairline('bottom');
         position: relative;
         padding: $padding-base;
         margin-right: 0 !important;
         height: 0.2rem;
-        hairline('bottom');
+
         &-bottom {
+            padding: $padding-base 0;
             .{$prefix}-cell {
                 height: initial;
                 margin-left: 0 !important;
@@ -134,11 +138,8 @@
         }
     }
     .{$prefix}-call {
-        right: $padding-base !important;
-        top: 50%;
+        top: 0;
         left: initial;
-        transform: translateY(-50%);
-
     }
     .{$prefix}-item {
         color: $font-second;

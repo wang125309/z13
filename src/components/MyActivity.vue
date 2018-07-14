@@ -12,7 +12,7 @@
         <Card @click="goActive" full className="activity-card">
             <ActivityImages src="/assets/banner.png" title="中秋节抽奖活动" status="已结束" date="2018-09-19" location="二期就上盯上" tag="已有21312人参与"/>
         </Card>
-        <Button circle full width="92%" class="bottom-btn">发现更多活动</Button>
+        <Button @click="more" circle full width="92%" class="bottom-btn">发现更多活动</Button>
     </LayoutBase>
 </template>
 
@@ -48,6 +48,11 @@
             goActive() {
                 this.$router.push({
                     path: '/activity'
+                })
+            },
+            more () {
+                this.$router.push({
+                    path: '/activity-list'
                 })
             }
         },

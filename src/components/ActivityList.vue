@@ -7,9 +7,15 @@
             <TabsCell @onClick="setActive(1)" :active="getActive(1)">进行中</TabsCell>
             <TabsCell @onClick="setActive(2)" :active="getActive(2)">已结束</TabsCell>
         </Tabs>
-        <div class="empty">
-            <Icon type="no-activity" size="0.25rem"/>
-        </div>
+        <!--<div class="empty">-->
+            <!--<Icon type="no-activity" size="0.25rem"/>-->
+        <!--</div>-->
+        <Card @click="goActive" full className="activity-card">
+            <ActivityImages src="../assets/banner.png" title="中秋节抽奖活动" status="进行中" date="2017-06-03" location="平顶山" tag="已有29192人参与"/>
+        </Card>
+        <Card @click="goActive" full className="activity-card">
+            <ActivityImages src="../assets/banner.png" title="中秋节抽奖活动" status="已结束" date="2018-09-19" location="二期就上盯上" tag="已有21312人参与"/>
+        </Card>
         <TabBar :active="2"/>
     </LayoutBase>
 </template>
@@ -22,17 +28,20 @@
     import TabBar from "./lib/TabBar";
     import Tabs from "./lib/Tabs";
     import TabsCell from "./lib/TabsCell";
-
+    import ActivityImages from './lib/ActivityImages';
+    import Card from "./lib/Card";
     export default {
         name: 'Login',
         components: {
+            Card,
             TabsCell,
             Tabs,
             TabBar,
             Icon,
             SearchInput,
             Navbar,
-            LayoutBase
+            LayoutBase,
+            ActivityImages
         },
         data () {
             return {
@@ -46,6 +55,11 @@
             setActive(n) {
                 this.active = n;
 
+            },
+            goActive() {
+                this.$router.push({
+                    path: '/activity'
+                })
             }
         }
     }
@@ -53,6 +67,9 @@
 
 <style scoped lang="stylus">
     @import '../styles/var.styl';
+    .activity-card {
+        margin-top: $margin-base;
+    }
     .empty {
         margin-top: $margin-large * 3;
     }

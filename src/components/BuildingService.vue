@@ -13,7 +13,7 @@
                     物业部
                     <span :class="timeCls">2分钟前</span>
                 </div>
-                <Icon :class-name="iconCls" type="rent-img" size="0.25rem" position="right"/>
+                <Icon :class="iconCls" type="rent-img" size="0.25rem" position="right"/>
             </div>
 
         </div>
@@ -89,7 +89,6 @@
         margin-top: $padding-base;
         .{$prefix}-service-item {
             position: relative;
-            hairline('top');
             background-color: $background-body;
             padding: $padding-base;
             height: 0.25rem;

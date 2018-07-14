@@ -4,7 +4,7 @@
         <div :class="activityImagesDateCls">{{date}}</div>
         <Tag backgroundColor="rgba(0, 0, 0, 0.4)" borderColor="rgba(0, 0, 0, 0)" :className="activityImagesStatusTagCls">{{status}}</Tag>
         <div :class="activityImagesLocationCls">
-            <Icon position="left" type="location"/>
+            <Icon position="left" size="0.04rem" type="location"/>
             <span>
                 {{location}}
             </span>
@@ -66,11 +66,8 @@
         position: relative;
         width: 100%;
         height: 0.4rem;
-        &-title {
-            padding: $padding-base;
-        }
         &-date {
-            padding: 0 $padding-base;
+            padding: $padding-base 0;
             color: $font-second;
             font-size: $font-size-small;
         }
@@ -79,22 +76,18 @@
             position: absolute;
             left: 0;
             bottom: 0;
-            padding: $padding-base;
-            span {
-                padding-left: $padding-base;
-            }
+            padding: $padding-base 0 0 $padding-base;
         }
         &-status-tag {
             position: absolute;
             right: 0;
             top: 0;
-            margin: $padding-base - $padding-tag;
         }
         &-tag {
             position: absolute;
             right: 0;
             bottom: 0;
-            margin: $padding-base - $padding-tag;
+            margin: $padding-base - $padding-tag 0 0 0;
         }
     }
 </style>

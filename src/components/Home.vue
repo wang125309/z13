@@ -157,8 +157,14 @@
                 else if (n === 2 || n === 4 || n === 5 || n === 6) {
                     this.$root.$children[0].toggleToast('warning', '即将上线，敬请期待')
                 }
+                else if (n === 3) {
+                    url = '/delivery-list'
+                }
                 else if (n === 7) {
                     url = '/rent-building'
+                }
+                else if (n === 8) {
+                    url = '/building-service'
                 }
                 this.$router.push({
                     path: url

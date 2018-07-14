@@ -1,9 +1,8 @@
 <template>
     <LayoutBase>
         <Navbar arrow-left>餐饮服务</Navbar>
-        <SearchInput></SearchInput>
         <Panel no-padding>
-            <div @click="itemClick" :class="deliveryItemCls">
+            <div :class="deliveryItemCls">
                 <Icon :class="deliveryItemIconCls" type="rent-img" size="0.21rem" position="left"/>
                 <div :class="deliveryPanelCls">
                     <Icon :class="callCls" type="call" position="right" size="0.12rem"/>
@@ -42,7 +41,6 @@
                     </div>
                 </div>
             </div>
-
         </Panel>
     </LayoutBase>
 </template>
@@ -70,13 +68,6 @@
             Navbar,
             LayoutBase,
             Tag
-        },
-        methods: {
-            itemClick () {
-                this.$router.push({
-                    path: '/delivery-details'
-                })
-            }
         },
         computed: {
             deliveryItemCls () {
@@ -233,7 +224,6 @@
         color: $font-second;
     }
     .{$prefix}-panel {
-        margin-top: $margin-base;
         background-color: $white;
     }
     .{$prefix}-tag-blue {
@@ -262,5 +252,4 @@
         transform: translateY(-50%);
         margin-right: $padding-base;
     }
-
 </style>
