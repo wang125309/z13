@@ -30,6 +30,10 @@
     import TabsCell from "./lib/TabsCell";
     import ActivityImages from './lib/ActivityImages';
     import Card from "./lib/Card";
+    import API from "../service/api";
+    import request from "../service/service"
+    import pageResult from "../service/pageResult";
+
     export default {
         name: 'Login',
         components: {
@@ -45,18 +49,35 @@
         },
         data () {
             return {
-                active: 0
+                active: localStorage['activity-busiType'] ? parseInt(localStorage['activity-busiType']) : 0
             }
         },
+        created () {
+            request(API.get_activitys, {
+                type: 'GET',
+                data: {
+                    busiType: this.getBusiType()
+                }
+            }, (data) => {
+                this.data = pageResult(data.data);
+                console.log(this.data)
+            }, (data) => {
+                this.$root.$children[0].toggleToast('fail', data.message);
+            })
+        },
         methods: {
-            getActive(n) {
+            getBusiType () {
+                return localStorage['activity-busiType'] ? parseInt(localStorage['activity-busiType']) : 0;
+            },
+            getActive (n) {
+                console.log(n, this.active)
                 return n === this.active
             },
-            setActive(n) {
+            setActive (n) {
+                localStorage['activity-busiType'] = n;
                 this.active = n;
-
             },
-            goActive() {
+            goActive () {
                 this.$router.push({
                     path: '/activity'
                 })

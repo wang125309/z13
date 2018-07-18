@@ -6,7 +6,8 @@ const API = {
     get_homepage: '/front/homepage',
     do_register: '/front/register',
     get_user_info: '/front/user/info',
-    get_problem: '/front/problem'
+    get_problem: '/front/problem',
+    get_activitys: '/front/operation/activitys'
 };
 
 export default API;

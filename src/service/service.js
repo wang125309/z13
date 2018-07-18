@@ -27,7 +27,10 @@ const requests = (url, options, success, error) => {
         }
     };
     if (type === 'GET') {
-        axios.get(`${url}`, options.data).then((response) => {
+        console.log(options.data)
+        axios.get(`${url}`, {
+            params: options.data
+        }).then((response) => {
             callback(response);
         }).catch((err) => {
             callback(err);
