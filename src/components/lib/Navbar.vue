@@ -1,6 +1,6 @@
 <template>
     <div :class="navbarCls">
-        <Icon position="left" size="0.06rem" @click="previous" v-if="arrowLeft" type="arrow-left"/>
+        <Icon class="arrow-left" position="left" size="0.05rem" @click="previous" v-if="arrowLeft" type="arrow-left"/>
         <slot></slot>
     </div>
 </template>
@@ -32,8 +32,11 @@
     }
 </script>
 
-<style lang="stylus">
+<style scoped lang="stylus">
     @import '../../styles/var.styl';
+    .arrow-left {
+        margin-left: $padding-base;
+    }
     .{$prefix}-navbar {
         height: $navbar-height;
         background-color: $brand-color;

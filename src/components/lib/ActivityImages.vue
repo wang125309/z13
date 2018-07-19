@@ -64,8 +64,8 @@
     @import '../../styles/var.styl';
     .{$prefix}-activity-images {
         position: relative;
-        width: 100%;
         height: 0.4rem;
+        padding: $padding-base;
         &-date {
             padding: $padding-base 0;
             color: $font-second;
@@ -74,19 +74,19 @@
 
         &-location {
             position: absolute;
-            left: 0;
-            bottom: 0;
+            left: $padding-base;
+            bottom: $padding-base;
             padding: $padding-base 0 0 $padding-base;
         }
         &-status-tag {
             position: absolute;
-            right: 0;
-            top: 0;
+            right: $padding-base;
+            top: $padding-base;
         }
         &-tag {
             position: absolute;
-            right: 0;
-            bottom: 0;
+            right: $padding-base;
+            bottom: $padding-base;
             margin: $padding-base - $padding-tag 0 0 0;
         }
     }

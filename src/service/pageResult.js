@@ -1,4 +1,4 @@
-const pageResult = (data, pageSize=10) => {
+const pageResult = (data, page=1) => {
     return data.pageResult;
 }
 

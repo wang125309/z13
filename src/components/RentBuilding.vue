@@ -8,9 +8,9 @@
         </Tabs>
         <div :class="rentBuildingAreaCls">
             <div :class="rentBuildingItemCls">
-                <Icon :class-name="rentImgCls" type="rent-img" position="left" size="0.25rem"/>
+                <Icon :class="rentImgCls" type="rent-img" position="left" size="0.25rem"/>
                 <div :class="rentBuildingItemInfoCls">
-                    <div :class="titleCls">300平米 | 13层</div>
+                    <div :class="titleCls"A>300平米 | 13层</div>
                     <div :class="descAreaCls">
                         <div :class="descCls">
                             <span :class="subTitleCls">容纳人数：</span>

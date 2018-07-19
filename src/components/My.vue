@@ -2,9 +2,9 @@
     <LayoutBase>
         <Navbar>我的</Navbar>
         <Panel>
-            <Avatar @click="go" :src="avatar"/>
-            <div class="user-name">张三</div>
-            <div class="sub-name">182627362721</div>
+            <Avatar @click="go" :src="user.image"/>
+            <div class="user-name">{{user.nick_name}}</div>
+            <div class="sub-name">{{user.account}}</div>
         </Panel>
         <CellGroup full>
             <!--<Cell full padding isLink>-->
@@ -44,6 +44,11 @@
             LayoutBase,
             Navbar,
             Panel
+        },
+        computed: {
+            user () {
+                return this.$store.state.user;
+            }
         },
         data () {
             return {
