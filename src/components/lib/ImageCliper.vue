@@ -111,7 +111,6 @@
             }
         },
         mounted () {
-
         },
         data () {
             return {
@@ -132,46 +131,39 @@
         },
         methods: {
             completeCliper (uploadType) {
-
                 let _self = this;
-                let file = document.getElementById(uploadType).files[0];
-                console.log(file)
                 let image = new Image();
-                let freader = new FileReader();
                 let base64, cc, can = null;
-                freader.onloadend = (e) => {
-                    let image = new Image();
-                    image.src = e.target.result;
-                    image.onload = function () {
-                        let _this = this;
-                        let naturalWidth = _this.naturalWidth;
-                        let naturalHeight = _this.naturalHeight;
-                        let canvas = document.createElement("canvas");
-                        let ctx = canvas.getContext("2d");
-                        canvas.width = naturalWidth;
-                        canvas.height = naturalHeight;
+                image.src = _self.image;
+                image.onload = function () {
+                    let _this = this;
+                    let naturalWidth = _this.naturalWidth;
+                    let naturalHeight = _this.naturalHeight;
+                    let canvas = document.createElement("canvas");
+                    let ctx = canvas.getContext("2d");
+                    canvas.width = naturalWidth;
+                    canvas.height = naturalHeight;
 
-                        console.log(_self.$refs.cutArea);
-                        console.log(_self.$refs.cutArea.style.left,_self.$refs.cutArea.style.top, _self.$refs.cutArea.clientWidth, _self.$refs.cutArea.clientHeight);
-                        let cutLeft, cutTop, cutWidth, cutHeight;
-                        cutLeft = parseFloat(_self.$refs.cutArea.style.left) / _self.$refs.avatarArea.clientWidth * naturalWidth;
-                        cutTop = parseFloat(_self.$refs.cutArea.style.top) / _self.$refs.avatarArea.clientWidth * naturalWidth;
-                        cutWidth = _self.$refs.cutArea.clientWidth / _self.$refs.avatarArea.clientWidth * naturalWidth;
-                        cutHeight = _self.$refs.cutArea.clientHeight /  _self.$refs.avatarArea.clientWidth * naturalWidth;
-                        ctx.drawImage(_this, cutLeft, cutTop, cutWidth, cutHeight, 0, 0, _this.naturalWidth, _this.naturalWidth);
-                        can = canvas;
-                        cc = canvas.toDataURL("image/jpeg", 1);
-                        base64 = can.toDataURL("image/jpeg", 1);
-                        _self.image = base64;
-                        _self.cutVisible = false;
-                    }
+                    console.log(_self.$refs.cutArea);
+                    console.log(_self.$refs.cutArea.style.left,_self.$refs.cutArea.style.top, _self.$refs.cutArea.clientWidth, _self.$refs.cutArea.clientHeight);
+                    let cutLeft, cutTop, cutWidth, cutHeight;
+                    cutLeft = parseFloat(_self.$refs.cutArea.style.left) / _self.$refs.avatarArea.clientWidth * naturalWidth;
+                    cutTop = parseFloat(_self.$refs.cutArea.style.top) / _self.$refs.avatarArea.clientWidth * naturalWidth;
+                    cutWidth = _self.$refs.cutArea.clientWidth / _self.$refs.avatarArea.clientWidth * naturalWidth;
+                    cutHeight = _self.$refs.cutArea.clientHeight /  _self.$refs.avatarArea.clientWidth * naturalWidth;
+                    ctx.drawImage(_this, cutLeft, cutTop, cutWidth, cutHeight, 0, 0, _this.naturalWidth, _this.naturalWidth);
+                    can = canvas;
+                    cc = canvas.toDataURL("image/jpeg", 1);
+                    base64 = can.toDataURL("image/jpeg", 1);
+                    _self.image = base64;
+                    _self.cutVisible = false;
                 }
-                freader.readAsDataURL(file);
 
             },
             startCliper (imgId) {
                 let _self = this;
                 this.reRotate(imgId)
+                _self.cutVisible = true;
                 new AlloyFinger(_self.$refs.cutTools, {
                     pinch: (evt) => {
                         let zoom = evt.zoom;
@@ -211,6 +203,7 @@
             cutEnd ($evt) {
             },
             cut ($evt) {
+                $evt.preventDefault();
                 if (this.flag) {
                     let avatarArea = this.$refs.avatarArea;
                     let cutTools = this.$refs.cutTools;

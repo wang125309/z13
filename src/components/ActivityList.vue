@@ -10,7 +10,7 @@
         <div v-if="!data.length" class="empty">
             <Icon type="no-activity" size="0.25rem"/>
         </div>
-        <Card v-if="data.length" v-for="i in data" v-bind:key="'card'+i.id" @click="goActive" full className="activity-card">
+        <Card v-if="data.length" v-for="i in data" v-bind:key="'card'+i.id" @click="goActive(i.id)" full className="activity-card">
             <ActivityImages v-bind:key="'images' + i.id" :src="i.image" :title="i.name" :status="i.status === 0 ? '全部' : i.status === 1 ? '进行中' : '已结束'" :date="i.begin_time.split(' ')[0]" :location="i.address" :tag="'已有' + i.signupCount + '人参与'"/>
         </Card>
         <TabBar :active="2"/>
@@ -79,9 +79,9 @@
                 this.active = n;
                 this.refresh(1);
             },
-            goActive () {
+            goActive (id) {
                 this.$router.push({
-                    path: '/activity'
+                    path: '/activity/' + id + '/'
                 })
             }
         }

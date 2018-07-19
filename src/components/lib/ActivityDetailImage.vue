@@ -3,7 +3,7 @@
         <div :class="activityDetailImagesTitleCls">{{title}}</div>
         <Tag backgroundColor="rgba(0, 0, 0, 0.4)" borderColor="rgba(0, 0, 0, 0)" color="#666" :className="activityDetailImagesStatusTagCls">{{status}}</Tag>
         <div :class="activityDetailImagesLocationCls">
-            <Icon position="left" type="location"/>
+            <Icon class="location-icon" size="0.05rem" position="left" type="location"/>
             <span>
                 {{location}}
             </span>
@@ -13,6 +13,7 @@
 <script>
     import Tag from "./Tag";
     import Icon from "./Icon";
+
     const prefix = 'z13';
     export default {
         components: {Icon, Tag},
@@ -46,12 +47,15 @@
             activityDetailImagesStatusTagCls() {
                 return `${prefix}-activity-detail-images-status-tag`
             }
-        },
+        }
 
     }
 </script>
-<style lang="stylus">
+<style scoped lang="stylus">
     @import '../../styles/var.styl';
+    .location-icon {
+        margin-left: $margin-base;
+    }
     .{$prefix}-activity-detail-images {
         position: relative;
         width: 100%;

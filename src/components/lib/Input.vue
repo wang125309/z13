@@ -5,7 +5,7 @@
         <Icon @click="showEye" position="right" v-if="withEye" v-show="!eyeVisible" size="0.07rem" type="eye"/>
         <Icon @click="showEye" position="right" v-if="withEye" v-show="eyeVisible" size="0.07rem" type="eye-close"/>
         <Button :className="sendCodeCls" v-if="sendCode" type="send-code">发送验证码</Button>
-        <Icon @click="clear" v-if="withClear" :className="clearCls" size="0.04rem" top="0.04rem" type="delete" position="right"/>
+        <Icon @click="clear" v-if="withClear" :class="clearCls" size="0.04rem" top="0.04rem" type="delete" position="right"/>
         <slot wx-if="this.$slots"/>
     </div>
 </template>
@@ -83,7 +83,7 @@
                 this.eyeVisible? this.inputType = 'text' : this.inputType = 'password';
             },
             clear () {
-
+                this.value = ''
             },
             inputChange ($evt) {
                 this.$emit('input', $evt.target.value)

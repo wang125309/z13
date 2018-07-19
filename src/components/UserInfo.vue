@@ -14,7 +14,7 @@
                 <Cell @click="changeName" flex class-name="cell" padding full>
                     <span class="left">昵称</span>
                     <span class="right">
-                        <span class="right-span">{{user.accoun}}</span>
+                        <span class="right-span">{{user.account}}</span>
                         <Icon type="arrow-right" size="0.05rem"/>
                     </span>
                 </Cell>
@@ -41,7 +41,7 @@
                 <Cell @click="changeComponyPosition" noBorder flex class-name="cell" padding full>
                     <span class="left">办公位置</span>
                     <span class="right">
-                        <span class="right-span">G1-93-12</span>
+                        <span class="right-span">{{user.office_location}}</span>
                         <Icon type="arrow-right" size="0.05rem"/>
                     </span>
                 </Cell>

@@ -89,7 +89,7 @@ export default new Router({
             component: MyActivity
         },
         {
-            path: '/activity',
+            path: '/activity/:id/',
             name: 'Activity',
             component: Activity
         },
