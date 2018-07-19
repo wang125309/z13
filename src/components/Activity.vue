@@ -6,11 +6,11 @@
             <CellGroup noMargin>
                 <Cell padding>
                     <div class="activity-card-title">报名时间：</div>
-                    <div class="activity-card-message">{{data.signup_begin_time.split(' ')[0]}}-{{data.signup_end_time.split(' ')[0]}}</div>
+                    <div class="activity-card-message">{{data.signup_begin_time.split(' ')[0]}}  {{data.signup_end_time.split(' ')[0]}}</div>
                 </Cell>
                 <Cell padding>
                     <div class="activity-card-title">活动时间：</div>
-                    <div class="activity-card-message">{{data.begin_time.split(' ')[0]}}-{{data.end_time.split(' ')[0]}}</div>
+                    <div class="activity-card-message">{{data.begin_time.split(' ')[0]}}  {{data.end_time.split(' ')[0]}}</div>
                 </Cell>
                 <Cell padding>
                     <div class="activity-card-title">活动地点：</div>
@@ -77,7 +77,8 @@
         },
         data () {
             return {
-                active: 0
+                active: 0,
+                data: {}
             }
         },
         created () {
