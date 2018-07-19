@@ -2,12 +2,18 @@
     <LayoutBase>
         <Navbar arrowLeft>头像</Navbar>
         <div class="avatar-area">
-            <ImageCliper/>
+            <ImageCliper ref="imageCliper" v-show="imageCliperVisible"/>
         </div>
-        <Button bottom-white className="change-avatar" @onClick="selectVisible" circle full width="92%">更换头像</Button>
+        <Button v-if="changeButtonVisible" bottom-white className="change-avatar" @onClick="selectVisible" circle full width="92%">更换头像</Button>
+        <div v-if="!changeButtonVisible" :class="actionToolsCls">
+            <div @click="cancelCliper" :class="actionToolsCancelCls">取消</div>
+            <div @click="completeCliper" :class="actionToolsSureCls">完成</div>
+        </div>
         <ActionSheet @onVisibleChange="selectVisible" :visible="visibleAction" capture @captureCamera="captureCamera" @captureActive="captureActive"></ActionSheet>
-        <input :class="fileSelectorCls" type="file" ref="camera" capture="camera" accept="image/*"/>
-        <input :class="fileSelectorCls" type="file" ref="active" accept="image/*"/>
+        <form id="image-form">
+            <input id="camera-file" @change="cliper" :class="fileSelectorCls" type="file" ref="camera" capture="camera" accept="image/*"/>
+            <input id="file" @change="cliper" :class="fileSelectorCls" type="file" ref="active" accept="image/*"/>
+        </form>
     </LayoutBase>
 </template>
 
@@ -36,7 +42,10 @@
         },
         data () {
             return {
-                visibleAction: false
+                visibleAction: false,
+                uploadType: 'file',
+                imageCliperVisible: false,
+                changeButtonVisible: true
             }
         },
         computed: {
@@ -44,17 +53,47 @@
                 return [
                     `${prefix}-file-selector`
                 ]
+            },
+            actionToolsCls () {
+                return [
+                    `${prefix}-action-tools`
+                ]
+            },
+            actionToolsCancelCls () {
+                return [
+                    `${prefix}-action-tools-cancel`
+                ]
+            },
+            actionToolsSureCls () {
+                return [
+                    `${prefix}-action-tools-sure`
+                ]
             }
         },
         methods: {
             captureActive () {
                 this.$refs.active.click()
+                this.uploadType = 'file'
             },
             captureCamera () {
                 this.$refs.camera.click()
+                this.uploadType = 'camera-file'
             },
             selectVisible () {
                 this.visibleAction = !this.visibleAction;
+            },
+            cliper () {
+                this.selectVisible();
+                this.imageCliperVisible = true;
+                this.$refs.imageCliper.startCliper(this.uploadType);
+                this.changeButtonVisible = false;
+            },
+            cancelCliper () {
+                this.changeButtonVisible = true;
+            },
+            completeCliper () {
+                this.changeButtonVisible = true;
+                this.$refs.imageCliper.completeCliper(this.uploadType);
             }
         }
     }
@@ -62,6 +101,27 @@
 
 <style scoped lang="stylus">
     @import '../styles/var.styl';
+    .{$prefix}-action-tools {
+        display: flex;
+        background-color: $white;
+        justify-content: space-between;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        &-cancel {
+            padding: $padding-base;
+            &:active {
+                background-color: $white * 0.95;
+            }
+        }
+        &-sure {
+            padding: $padding-base;
+            color: $brand-color;
+            &:active {
+                background-color: $white * 0.95;
+            }
+        }
+    }
     .cell-group {
         margin-top: $margin-large;
         border-top: 1px solid $border-color;

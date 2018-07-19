@@ -1,10 +1,10 @@
 <template>
     <div ref="avatarArea" :class="avatarAreaCls">
-        <div :class="avatarCls">
-            <div v-if="showCutArea" :class="avatarMaskCls"></div>
-            <div v-if="showCutArea" ref="cutArea" :class="cutAreaCls">
-                <div ref="cutAreaAvatar" :class="cutAreaAvatarCls"></div>
-                <div  @touchstart="cutStart" @touchend="cutEnd" @touchmove="cut" ref="cutTools" :class="cutToolsCls">
+        <div :class="avatarCls" :style="getImage">
+            <div v-show="cutVisible" :class="avatarMaskCls"></div>
+            <div v-show="cutVisible" ref="cutArea" :class="cutAreaCls">
+                <div ref="cutAreaAvatar" :style="getImage" :class="cutAreaAvatarCls"></div>
+                <div @touchstart="cutStart" @touchend="cutEnd" @touchmove="cut" ref="cutTools" :class="cutToolsCls">
                 </div>
             </div>
         </div>
@@ -13,7 +13,54 @@
 
 <script>
     import AlloyFinger from 'alloyfinger'
+    import EXIF from 'exif-js/exif'
     const prefix = 'z13';
+    const rotateImg = (img, direction, canvas) => {
+        let min_step = 0;
+        let max_step = 3;
+        if (img == null)return;
+        let height = img.height;
+        let width = img.width;
+        //var step = img.getAttribute('step');
+        let step = 2;
+        if (step == null) {
+            step = min_step;
+        }
+        if (direction === 'right') {
+            step++;
+            step > max_step && (step = min_step);
+        } else {
+            step--;
+            step < min_step && (step = max_step);
+        }
+        let degree = step * 90 * Math.PI / 180;
+        let ctx = canvas.getContext('2d');
+        switch (step) {
+            case 0:
+                canvas.width = width;
+                canvas.height = height;
+                ctx.drawImage(img, 0, 0);
+                break;
+            case 1:
+                canvas.width = height;
+                canvas.height = width;
+                ctx.rotate(degree);
+                ctx.drawImage(img, 0, -height);
+                break;
+            case 2:
+                canvas.width = width;
+                canvas.height = height;
+                ctx.rotate(degree);
+                ctx.drawImage(img, -width, -height);
+                break;
+            case 3:
+                canvas.width = height;
+                canvas.height = width;
+                ctx.rotate(degree);
+                ctx.drawImage(img, -width, 0);
+                break;
+        }
+    };
     export default {
         computed: {
             cutMaskCls () {
@@ -56,42 +103,23 @@
                 return [
                     `${prefix}-cut-tools-inner`
                 ]
+            },
+            getImage () {
+                return {
+                    'background-image': 'url(' + this.image + ')'
+                }
             }
         },
         mounted () {
-            let _self = this;
-            let af = new AlloyFinger(_self.$refs.cutTools, {
-                pinch: (evt) => {
-                    let zoom = evt.zoom;
-                    if (zoom > 1) {
-                        zoom = (zoom - 1) / 100 + 1;
-                    }
-                    if (zoom < 1) {
-                        zoom = 1 - zoom / 100;
-                    }
-                    let ele = _self.$refs.cutTools;
-                    let avatarArea = this.$refs.avatarArea;
-                    if (zoom * ele.clientWidth + ele.clientLeft > avatarArea.clientWidth) {
-                        _self.$refs.cutArea.style.width = avatarArea.clientWidth + 'px';
-                        _self.$refs.cutArea.style.height = avatarArea.clientHeight + 'px';
-                    }
-                    else if (zoom * ele.clientHeight + ele.clientTop > avatarArea.clientHeight) {
-                        _self.$refs.cutArea.style.width = avatarArea.clientWidth + 'px';
-                        _self.$refs.cutArea.style.height = avatarArea.clientHeight+ 'px';
-                    }
-                    else {
-                        _self.$refs.cutArea.style.width = zoom * _self.$refs.cutArea.clientWidth + 'px';
-                        _self.$refs.cutArea.style.height = zoom * _self.$refs.cutArea.clientHeight + 'px';
-                    }
-                }
-            });
 
         },
         data () {
             return {
                 left: 0,
                 top: 0,
-                flag: false
+                flag: false,
+                image: '',
+                cutVisible: true
             }
         },
         watch: {
@@ -103,6 +131,73 @@
             showCutArea: false
         },
         methods: {
+            completeCliper (uploadType) {
+
+                let _self = this;
+                let file = document.getElementById(uploadType).files[0];
+                console.log(file)
+                let image = new Image();
+                let freader = new FileReader();
+                let base64, cc, can = null;
+                freader.onloadend = (e) => {
+                    let image = new Image();
+                    image.src = e.target.result;
+                    image.onload = function () {
+                        let _this = this;
+                        let naturalWidth = _this.naturalWidth;
+                        let naturalHeight = _this.naturalHeight;
+                        let canvas = document.createElement("canvas");
+                        let ctx = canvas.getContext("2d");
+                        canvas.width = naturalWidth;
+                        canvas.height = naturalHeight;
+
+                        console.log(_self.$refs.cutArea);
+                        console.log(_self.$refs.cutArea.style.left,_self.$refs.cutArea.style.top, _self.$refs.cutArea.clientWidth, _self.$refs.cutArea.clientHeight);
+                        let cutLeft, cutTop, cutWidth, cutHeight;
+                        cutLeft = parseFloat(_self.$refs.cutArea.style.left) / _self.$refs.avatarArea.clientWidth * naturalWidth;
+                        cutTop = parseFloat(_self.$refs.cutArea.style.top) / _self.$refs.avatarArea.clientWidth * naturalWidth;
+                        cutWidth = _self.$refs.cutArea.clientWidth / _self.$refs.avatarArea.clientWidth * naturalWidth;
+                        cutHeight = _self.$refs.cutArea.clientHeight /  _self.$refs.avatarArea.clientWidth * naturalWidth;
+                        ctx.drawImage(_this, cutLeft, cutTop, cutWidth, cutHeight, 0, 0, _this.naturalWidth, _this.naturalWidth);
+                        can = canvas;
+                        cc = canvas.toDataURL("image/jpeg", 1);
+                        base64 = can.toDataURL("image/jpeg", 1);
+                        _self.image = base64;
+                        _self.cutVisible = false;
+                    }
+                }
+                freader.readAsDataURL(file);
+
+            },
+            startCliper (imgId) {
+                let _self = this;
+                this.reRotate(imgId)
+                new AlloyFinger(_self.$refs.cutTools, {
+                    pinch: (evt) => {
+                        let zoom = evt.zoom;
+                        if (zoom > 1) {
+                            zoom = (zoom - 1) / 100 + 1;
+                        }
+                        if (zoom < 1) {
+                            zoom = 1 - zoom / 100;
+                        }
+                        let ele = _self.$refs.cutTools;
+                        let avatarArea = this.$refs.avatarArea;
+                        if (zoom * ele.clientWidth + ele.clientLeft > avatarArea.clientWidth) {
+                            _self.$refs.cutArea.style.width = avatarArea.clientWidth + 'px';
+                            _self.$refs.cutArea.style.height = avatarArea.clientHeight + 'px';
+                        }
+                        else if (zoom * ele.clientHeight + ele.clientTop > avatarArea.clientHeight) {
+                            _self.$refs.cutArea.style.width = avatarArea.clientWidth + 'px';
+                            _self.$refs.cutArea.style.height = avatarArea.clientHeight+ 'px';
+                        }
+                        else {
+                            _self.$refs.cutArea.style.width = zoom * _self.$refs.cutArea.clientWidth + 'px';
+                            _self.$refs.cutArea.style.height = zoom * _self.$refs.cutArea.clientHeight + 'px';
+                        }
+                    }
+                });
+            },
             cutStart ($evt) {
                 let pageX = $evt.touches[0].pageX;
                 let pageY = $evt.touches[0].pageY;
@@ -145,6 +240,59 @@
                     cutArea.style.top = h + 'px';
                 }
             },
+            reRotate (uploadType) {
+                let _self = this;
+                let file = document.getElementById(uploadType).files[0];
+                let Orientation = null;
+                EXIF.getData(file, function () {
+                    Orientation = EXIF.getTag(this, 'Orientation');
+                });
+                let image = new Image();
+                let freader = new FileReader();
+                let base64, cc, can = null;
+                freader.onloadend = (e) => {
+                    let image = new Image();
+                    image.src = e.target.result;
+                    image.onload = function () {
+                        let _this = this;
+                        let expectWidth = _this.naturalWidth;
+                        let expectHeight = _this.naturalHeight;
+
+                        if (_this.naturalWidth > _this.naturalHeight && _this.naturalWidth > 414) {
+                            expectWidth = 414;
+                            expectHeight = expectWidth * _this.naturalHeight / _this.naturalWidth;
+                        } else if (_this.naturalHeight > _this.naturalWidth && _this.naturalHeight > 414) {
+                            expectHeight = 414;
+                            expectWidth = expectHeight * _this.naturalWidth / _this.naturalHeight;
+                        }
+                        let canvas = document.createElement("canvas");
+                        let ctx = canvas.getContext("2d");
+                        canvas.width = expectWidth;
+                        canvas.height = expectHeight;
+                        ctx.drawImage(_this, 0, 0, expectWidth, expectHeight);
+                        can = canvas;
+                        cc = canvas.toDataURL("image/jpeg", 1);
+
+                        if (Orientation !== "" && Orientation !== 1) {
+                            switch (Orientation) {
+                                case 6: //顺时针（向左）90度旋转
+                                    rotateImg(_this, 'left', canvas);
+                                    break;
+                                case 8: //逆时针（向右）90度旋转
+                                    rotateImg(_this, 'right', canvas);
+                                    break;
+                                case 3: //180度旋转
+                                    rotateImg(_this, 'right', canvas);//转两次
+                                    rotateImg(_this, 'right', canvas);
+                                    break;
+                            }
+                        }
+                        base64 = can.toDataURL("image/jpeg", 1);
+                        _self.image = base64;
+                    }
+                }
+                freader.readAsDataURL(file);
+            }
         }
     }
 </script>
@@ -157,6 +305,9 @@
         height: 1rem;
         position: relative;
         setBackgroundImage('../../assets/avatar.png');
+        background-size: 1rem auto;
+        background-repeat: no-repeat;
+        background-position: center top;
     }
     .{$prefix}-avatar-mask {
         position: absolute;
@@ -190,8 +341,8 @@
             left: 0;
             z-index: 10;
             setBackgroundImage('../../assets/avatar.png');
-            background-position: 0 0;
-            background-size: 1rem 1rem;
+            background-size: 1rem auto;
+            background-position: top left;
         }
     }
     .{$prefix}-cut-tools {
