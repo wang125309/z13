@@ -52,7 +52,7 @@
         <div v-if="commentToolsVisible" @click="hiddenComment" class="comment-mask"/>
         <div v-if="commentToolsVisible" class="comment-tools">
             <form action="#" onsubmit="return false;">
-                <Input @keypress="sendComment" v-model="commentMessage" @input="sendComment" @focus="focus" type="done" class="comment-input" circle placeholder="添加评论"/>
+                <Input @keypress="sendComment" v-model="commentMessage" @input="sendComment" @focus="focus" type="" class="comment-input" circle placeholder="添加评论"/>
             </form>
         </div>
         <div class="sign-bar-placeholder"/>

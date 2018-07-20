@@ -14,7 +14,7 @@
                 <Cell @click="changeName" flex class-name="cell" padding full>
                     <span class="left">昵称</span>
                     <span class="right">
-                        <span class="right-span">{{user.account}}</span>
+                        <span class="right-span">{{user.nick_name}}</span>
                         <Icon type="arrow-right" size="0.05rem"/>
                     </span>
                 </Cell>

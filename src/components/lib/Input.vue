@@ -1,7 +1,7 @@
 <template>
     <div :class="inputWrapCls">
         <Icon v-if="icon" position="left" class="iconCls" size="0.07rem" :type="icon"/>
-        <input @input="inputChange" @keypress="keypress" :style="inputStyles" v-bind:value="value" :type="inputType" :class="inputCls" :placeholder="placeholder"/>
+        <input :defaultValue="defaultValue" @input="inputChange" @keypress="keypress" :style="inputStyles" v-bind:value="value" :type="inputType" :class="inputCls" :placeholder="placeholder"/>
         <Icon @click="showEye" position="right" v-if="withEye" v-show="!eyeVisible" size="0.07rem" type="eye"/>
         <Icon @click="showEye" position="right" v-if="withEye" v-show="eyeVisible" size="0.07rem" type="eye-close"/>
         <Button :className="sendCodeCls" v-if="sendCode" type="send-code">发送验证码</Button>
@@ -35,7 +35,8 @@
             sendCode: [Boolean],
             withClear: [Boolean],
             value: [String],
-            circle: [Boolean]
+            circle: [Boolean],
+            defaultValue: [String]
         },
         components: {
             Icon,

@@ -2,8 +2,8 @@
     <LayoutBase>
         <Navbar arrowLeft>昵称</Navbar>
         <CellGroup full class="cell-group">
-            <Cell full>
-                <Input type="text" v-model="name" withClear placeholder="请输入昵称"/>
+            <Cell full without-border>
+                <Input type="text" v-model="name" :default-value="defaultValue" withClear placeholder="请输入昵称"/>
             </Cell>
         </CellGroup>
         <Button class="next-step" circle type="primary" @onClick="save" full width="92%">保存</Button>
@@ -35,19 +35,32 @@
                 requests(API.get_user_info, {
                     type: 'PUT',
                     data: {
-                        nick_name: this.name,
-                        busiType: 1 //1修改昵称2修改头像3修改公司4修改工位6修改手机号
+                        nick_name: _this.name,
+                        busiType: 1 //1 修改昵称2 修改头像3 修改公司4 修改工位6修改手机号
                     }
                 }, (data) => {
                     _this.$root.$children[0].toggleToast('success', data.message);
                 }, (data) => {
                     _this.$root.$children[0].toggleToast('fail', data.message);
                 })
+            },
+
+        },
+        updated () {
+            if (!this.updated) {
+                this.name = this.$store.state.user.nick_name;
+                this.updated = true;
+            }
+        },
+        computed: {
+            defaultValue () {
+                return this.$store.state.user.nick_name
             }
         },
         data () {
             return {
-                name: ''
+                name: '',
+                updated: false
             }
         }
     }
