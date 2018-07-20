@@ -38,7 +38,7 @@
                     <div v-else>
                         <div v-for="i in comments" v-bind:key="'comment_' + i.id" class="activity-comment-item">
                             <div class="user-area">
-                                <Avatar position="left" :src="i.userImage"/>
+                                <Avatar size="0.12rem" :src="i.userImage"/>
                             </div>
                             <div class="activity-comment-item-content">
                                 <div>{{i.userName}}</div>
@@ -218,18 +218,20 @@
         padding: 0 $padding-base;
     }
     .activity-comment-area {
-        padding: $padding-small;
         background-color: $background-default;
         .activity-comment-item {
             display: flex;
+            padding: $padding-small;
+            position: relative;
+            hairline('bottom');
             .user-area {
-                background-color: #00b170;
-                width: $avatar-size-small;
-                padding: $padding-base;
             }
             .activity-comment-item-content {
+                padding: 0 0 0 $padding-small;
                 flex: 1;
-                padding: $padding-base;
+            }
+            &:last-child {
+                hairline-remove('bottom');
             }
         }
     }
