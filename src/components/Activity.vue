@@ -34,14 +34,25 @@
             </ActivityCardItem>
             <ActivityCardItem title="评论" noBorder>
                 <div class="activity-comment-area">
-                    快来发表评论吧
+                    <div v-if="comments.length === 0">快来发表评论吧</div>
+                    <div v-else>
+                        <div v-for="i in comments" v-bind:key="'comment_' + i.id" class="activity-comment-item">
+                            <div class="user-area">
+                                <Avatar position="left" :src="i.userImage"/>
+                            </div>
+                            <div class="activity-comment-item-content">
+                                <div>{{i.userName}}</div>
+                                <div>{{i.content}}</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </ActivityCardItem>
         </Panel>
         <div v-if="commentToolsVisible" @click="hiddenComment" class="comment-mask"/>
         <div v-if="commentToolsVisible" class="comment-tools">
             <form action="#" onsubmit="return false;">
-                <Input type="text" class="comment-input" circle placeholder="添加评论"/>
+                <Input @keypress="sendComment" v-model="commentMessage" @input="sendComment" @focus="focus" type="done" class="comment-input" circle placeholder="添加评论"/>
             </form>
         </div>
         <div class="sign-bar-placeholder"/>
@@ -69,9 +80,12 @@
     import requests from "../service/service"
     import API from "../service/api"
     import Input from "./lib/Input";
+    import pageResult from "../service/pageResult";
+    import Avatar from "./lib/Avatar";
     export default {
         name: 'Activity',
         components: {
+            Avatar,
             Input,
             Icon,
             Panel,
@@ -94,24 +108,58 @@
                     begin_time: ' ',
                     end_time: ' '
                 },
-                commentToolsVisible: false
+                commentToolsVisible: false,
+                commentMessage: '',
+                comments: []
             }
         },
         created () {
-            requests(`${API.get_activitys}/${this.$route.params.id}/`, {
-                type: 'GET'
-            }, (data) => {
-                this.data = data.data;
-            }, (data) => {
-                this.$root.$children[0].toggleToast('fail', data.message);
-            })
+            this.refresh();
+            this.refresh_comments();
         },
         methods: {
+            refresh () {
+                requests(`${API.get_activitys}/${this.$route.params.id}/`, {
+                    type: 'GET'
+                }, (data) => {
+                    this.data = data.data;
+                }, (data) => {
+                    this.$root.$children[0].toggleToast('fail', data.message);
+                })
+            },
+            refresh_comments () {
+                requests(`${API.get_activitys}/${this.$route.params.id}/comments/`, {
+                    type: 'GET'
+                }, (data) => {
+                    this.comments = pageResult(data.data, 1);
+                }, (data) => {
+                    this.$root.$children[0].toggleToast('fail', data.message);
+                })
+            },
             doComment () {
                 this.commentToolsVisible = true;
             },
             hiddenComment () {
                 this.commentToolsVisible = false;
+            },
+            focus () {
+                window.scrollTo(0, 1000000);
+            },
+            sendComment ($evt) {
+                console.log($evt)
+                if ($evt.charCode === 13 && this.commentMessage.length) {
+                    requests(`${API.get_activitys}/${this.$route.params.id}/comments`, {
+                        type: 'POST',
+                        data: {
+                            content: this.commentMessage
+                        }
+                    }, (data) => {
+                        this.hiddenComment();
+                        this.commentMessage = '';
+                    }, (data) => {
+                        this.$root.$children[0].toggleToast('fail', data.message);
+                    })
+                }
             }
         }
     }
@@ -172,5 +220,17 @@
     .activity-comment-area {
         padding: $padding-small;
         background-color: $background-default;
+        .activity-comment-item {
+            display: flex;
+            .user-area {
+                background-color: #00b170;
+                width: $avatar-size-small;
+                padding: $padding-base;
+            }
+            .activity-comment-item-content {
+                flex: 1;
+                padding: $padding-base;
+            }
+        }
     }
 </style>

@@ -76,7 +76,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
             css: path.resolve(__dirname, '../src/styles/sprite.css')
         },
         apiOptions: {
-            cssImageRef: "../assets/sprite.png"
+            cssImageRef: "/static/sprite.png"
         },
         spritesmithOptions: {
             algorithm: 'top-down'
