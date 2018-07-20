@@ -3,7 +3,7 @@
         <Navbar arrowLeft>更换手机号</Navbar>
         <CellGroup full class="cell-group">
             <Cell full>
-                <Input type="text" v-model="mobile" withClear placeholder="请输入手机号"/>
+                <Input type="number" v-model="mobile" :default-value="defaultValue" withClear placeholder="请输入手机号"/>
             </Cell>
         </CellGroup>
         <Button class="next-step" circle type="primary" @onClick="save" full width="92%">更换手机号</Button>
@@ -17,7 +17,8 @@
     import CellGroup from './lib/CellGroup'
     import Input from './lib/Input'
     import Button from './lib/Button'
-
+    import API from '../service/api'
+    import requests from '../service/service'
     export default {
         name: 'ChangeMobile',
         components: {
@@ -36,9 +37,38 @@
                 })
             }
         },
+        updated () {
+            if (!this.updated) {
+                this.mobile = this.$store.state.user.mobile;
+                this.updated = true;
+            }
+        },
+        methods: {
+            save () {
+                let _this = this;
+                requests(API.get_user_info, {
+                    type: 'PUT',
+                    data: {
+                        mobile: _this.mobile,
+                        busiType: 6 //1 修改昵称2 修改头像3 修改公司4 修改工位6修改手机号
+                    }
+                }, (data) => {
+                    _this.$root.$children[0].toggleToast('success', data.message);
+                }, (data) => {
+                    _this.$root.$children[0].toggleToast('fail', data.message);
+                })
+            },
+
+        },
+        computed: {
+            defaultValue () {
+                return this.$store.state.user.mobile
+            }
+        },
         data () {
             return {
-                name: ''
+                mobile: '',
+                updated: false
             }
         }
     }
