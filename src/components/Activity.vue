@@ -33,14 +33,22 @@
                 {{data.site_desc}}
             </ActivityCardItem>
             <ActivityCardItem title="评论" noBorder>
-                快来发表评论吧
+                <div class="activity-comment-area">
+                    快来发表评论吧
+                </div>
             </ActivityCardItem>
         </Panel>
+        <div v-if="commentToolsVisible" @click="hiddenComment" class="comment-mask"/>
+        <div v-if="commentToolsVisible" class="comment-tools">
+            <form action="#" onsubmit="return false;">
+                <Input type="text" class="comment-input" circle placeholder="添加评论"/>
+            </form>
+        </div>
         <div class="sign-bar-placeholder"/>
         <div class="sign-bar">
             <div class="sign-item-wrap">
-                <Icon position="left" size="0.05rem" class="comment" type="comment"/>
-                <Button size="small-padding" width="0.2rem" circle className="sign-up-button">报名</Button>
+                <Icon @click="doComment" position="left" size="0.08rem" class="comment" type="comment"/>
+                <Button size="small-padding" width="0.2rem" circle className="sign-up-button">我要报名</Button>
             </div>
         </div>
     </LayoutBase>
@@ -60,9 +68,11 @@
     import Toast from "./lib/Toast";
     import requests from "../service/service"
     import API from "../service/api"
+    import Input from "./lib/Input";
     export default {
         name: 'Activity',
         components: {
+            Input,
             Icon,
             Panel,
             ActivityCardItem,
@@ -78,7 +88,13 @@
         data () {
             return {
                 active: 0,
-                data: {}
+                data: {
+                    signup_begin_time: ' ',
+                    signup_end_time: ' ',
+                    begin_time: ' ',
+                    end_time: ' '
+                },
+                commentToolsVisible: false
             }
         },
         created () {
@@ -89,6 +105,14 @@
             }, (data) => {
                 this.$root.$children[0].toggleToast('fail', data.message);
             })
+        },
+        methods: {
+            doComment () {
+                this.commentToolsVisible = true;
+            },
+            hiddenComment () {
+                this.commentToolsVisible = false;
+            }
         }
     }
 </script>
@@ -121,10 +145,32 @@
     .comment {
         left: $margin-base !important;
     }
+    .comment-mask {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 101;
+    }
+    .comment-tools {
+        background-color: $background-body;
+        position: fixed;
+        bottom: 0;
+        z-index: 102;
+        hairline('top');
+        width: 100%;
+    }
+    .comment-input {
+        padding: $padding-base;
+    }
     .sign-bar-placeholder {
         height: $padding-base * 5;
     }
     .sign-item-wrap {
         padding: 0 $padding-base;
+    }
+    .activity-comment-area {
+        padding: $padding-small;
+        background-color: $background-default;
     }
 </style>

@@ -34,7 +34,8 @@
             withEye: [Boolean],
             sendCode: [Boolean],
             withClear: [Boolean],
-            value: [String]
+            value: [String],
+            circle: [Boolean]
         },
         components: {
             Icon,
@@ -54,7 +55,8 @@
             inputCls() {
                 return [
                     `${prefix}-input`, {
-                        [`${prefix}-input-${this.size}`]: this.size
+                        [`${prefix}-input-${this.size}`]: this.size,
+                        [`${prefix}-input-circle`]: this.circle,
                     }
                 ]
             },
@@ -110,7 +112,13 @@
             background: $white;
             width: 100%;
             padding: $padding-base 0;
-
+            &-circle {
+                border-radius: $padding-base * 4;
+                background-color: $background-default;
+                width: auto;
+                padding: $padding-small;
+                flex: 1;
+            }
             &-clear {
                 margin-right: $padding-base;
             }

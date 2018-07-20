@@ -56,7 +56,7 @@
     .{$prefix}-active-card-item {
         padding: $padding-base 0 0 0;
         position: relative;
-        hairline('bottom');
+
         &-full {
             background-color: $white;
         }
@@ -70,13 +70,14 @@
             }
         }
         &-message {
+            hairline('bottom');
             &-cut {
                 hairline('top')
                 margin: 0;
                 padding: $padding-base;
             }
             position: relative;
-            margin: 0 $margin-base;
+            margin: 0 0 0 $margin-base;
             padding: $padding-base 0 $padding-base 0;
             //border-bottom: 1px solid $border-color;
         }
