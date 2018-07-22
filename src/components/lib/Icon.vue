@@ -30,7 +30,9 @@
                 let style = {};
                 // style['background-image'] = 'url("/static/icon/' + this.type + '.png")';
 
-                style['transform'] = `scale(${this.scale})`;
+                style['transform'] = `scale(${this.scale}) translateY(-50%)`;
+                style['position'] = 'absolute';
+                style['top'] = '50%';
                 return style;
             },
             iconWrapStyle () {
@@ -45,6 +47,9 @@
                 }
                 if (this.position) {
                     style['position'] = 'absolute';
+                }
+                else {
+                    style['position'] = 'relative';
                 }
                 if (this.top) {
                     style['top'] = this.top;
@@ -83,7 +88,6 @@
                     let bigger = widthNumber > heightNumber ? widthNumber : heightNumber;
                     let x = parseFloat(this.size.substring(0, this.size.length - 3)) * $('body')[0].clientWidth;
                     let scale = x/bigger;
-                    console.log(scale)
                     this.scale = scale;
                 }
             }

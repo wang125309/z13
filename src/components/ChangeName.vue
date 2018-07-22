@@ -46,6 +46,9 @@
             },
 
         },
+        mounted () {
+            this.name = this.$store.state.user.nick_name;
+        },
         updated () {
             if (!this.updated) {
                 this.name = this.$store.state.user.nick_name;

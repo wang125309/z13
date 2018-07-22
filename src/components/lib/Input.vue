@@ -98,7 +98,7 @@
     }
 </script>
 
-<style lang="stylus">
+<style scoped lang="stylus">
     @import '../../styles/var.styl'
     input:-webkit-autofill {
         -webkit-box-shadow: 0 0 0 1000px white inset !important;

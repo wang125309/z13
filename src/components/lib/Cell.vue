@@ -3,7 +3,7 @@
         <div :class="cellCls" @click="go">
             <slot></slot>
             <Icon top="0.024rem" v-if="isLink" size="0.06rem" type="arrow-right" position="right"/>
-            <Icon :className="problemIconCls" size="0.06rem" top="0.036rem" v-if="problem" type="down" position="right"/>
+            <Icon :class="problemIconCls" size="0.06rem" top="0.036rem" v-if="problem" type="down" position="right"/>
         </div>
         <div v-if="problem" v-show="panelVisible" :class="cellPanelCls">
             <div :class="cellPanelInfoCls">

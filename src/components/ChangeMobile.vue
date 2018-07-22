@@ -29,14 +29,7 @@
             Input,
             LayoutBase
         },
-        methods: {
-            save () {
-                console.log(this.mobile)
-                this.$router.push({
-                    path: '/valid-old-mobile'
-                })
-            }
-        },
+
         updated () {
             if (!this.updated) {
                 this.mobile = this.$store.state.user.mobile;
@@ -46,17 +39,20 @@
         methods: {
             save () {
                 let _this = this;
-                requests(API.get_user_info, {
-                    type: 'PUT',
-                    data: {
-                        mobile: _this.mobile,
-                        busiType: 6 //1 修改昵称2 修改头像3 修改公司4 修改工位6修改手机号
-                    }
-                }, (data) => {
-                    _this.$root.$children[0].toggleToast('success', data.message);
-                }, (data) => {
-                    _this.$root.$children[0].toggleToast('fail', data.message);
+                this.$router.push({
+                    path: '/valid-old-mobile'
                 })
+                // requests(API.get_user_info, {
+                //     type: 'PUT',
+                //     data: {
+                //         mobile: _this.mobile,
+                //         busiType: 6 //1 修改昵称2 修改头像3 修改公司4 修改工位6修改手机号
+                //     }
+                // }, (data) => {
+                //     _this.$root.$children[0].toggleToast('success', data.message);
+                // }, (data) => {
+                //     _this.$root.$children[0].toggleToast('fail', data.message);
+                // })
             },
 
         },

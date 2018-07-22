@@ -34,7 +34,7 @@
             </ActivityCardItem>
             <ActivityCardItem title="评论" noBorder>
                 <div class="activity-comment-area">
-                    <div v-if="comments.length === 0">快来发表评论吧</div>
+                    <div class="activity-empty-comment" v-if="comments.length === 0">快来发表评论吧</div>
                     <div v-else>
                         <div v-for="i in comments" v-bind:key="'comment_' + i.id" class="activity-comment-item">
                             <div class="user-area">
@@ -156,6 +156,7 @@
                     }, (data) => {
                         this.hiddenComment();
                         this.commentMessage = '';
+                        this.refresh_comments();
                     }, (data) => {
                         this.$root.$children[0].toggleToast('fail', data.message);
                     })
@@ -216,6 +217,9 @@
     }
     .sign-item-wrap {
         padding: 0 $padding-base;
+    }
+    .activity-empty-comment {
+        padding: $padding-small;
     }
     .activity-comment-area {
         background-color: $background-default;

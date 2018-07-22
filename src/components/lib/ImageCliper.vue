@@ -1,5 +1,5 @@
 <template>
-    <div ref="avatarArea" :class="avatarAreaCls">
+    <div ref="avatarArea"  :class="avatarAreaCls">
         <div :class="avatarCls" :style="getImage">
             <div v-show="cutVisible" :class="avatarMaskCls"></div>
             <div v-show="cutVisible" ref="cutArea" :class="cutAreaCls">
@@ -105,6 +105,7 @@
                 ]
             },
             getImage () {
+
                 return {
                     'background-image': 'url(' + this.image + ')'
                 }
@@ -118,7 +119,12 @@
                 top: 0,
                 flag: false,
                 image: '',
-                cutVisible: true
+                cutVisible: true,
+                baseX: 0,
+                baseY: 0,
+                imageWidth: 0,
+                imageHeight: 0,
+                scale: 1
             }
         },
         watch: {
@@ -139,19 +145,23 @@
                     let _this = this;
                     let naturalWidth = _this.naturalWidth;
                     let naturalHeight = _this.naturalHeight;
+
                     let canvas = document.createElement("canvas");
                     let ctx = canvas.getContext("2d");
                     canvas.width = naturalWidth;
                     canvas.height = naturalHeight;
-
-                    console.log(_self.$refs.cutArea);
-                    console.log(_self.$refs.cutArea.style.left,_self.$refs.cutArea.style.top, _self.$refs.cutArea.clientWidth, _self.$refs.cutArea.clientHeight);
                     let cutLeft, cutTop, cutWidth, cutHeight;
-                    cutLeft = parseFloat(_self.$refs.cutArea.style.left) / _self.$refs.avatarArea.clientWidth * naturalWidth;
-                    cutTop = parseFloat(_self.$refs.cutArea.style.top) / _self.$refs.avatarArea.clientWidth * naturalWidth;
                     cutWidth = _self.$refs.cutArea.clientWidth / _self.$refs.avatarArea.clientWidth * naturalWidth;
                     cutHeight = _self.$refs.cutArea.clientHeight /  _self.$refs.avatarArea.clientWidth * naturalWidth;
-                    ctx.drawImage(_this, cutLeft, cutTop, cutWidth, cutHeight, 0, 0, _this.naturalWidth, _this.naturalWidth);
+                    // cutTop = _self.baseY;
+                    // cutLeft = _self.baseX;
+
+                    let w =  _self.$refs.cutArea.clientHeight / _self.imageHeight * _self.imageWidth;
+                    let h =  _self.$refs.cutArea.clientWidth / _self.imageWidth * _self.imageHeight;
+                    cutTop = _self.baseY * _self.imageHeight / h;
+                    cutLeft = _self.baseX * _self.imageWidth / w;
+                    // console.log(cutTop, cutLeft, cutWidth, cutHeight)
+                    ctx.drawImage(_this, -cutLeft, -cutTop, cutWidth, cutHeight, 0, 0, _this.naturalWidth, _this.naturalWidth);
                     can = canvas;
                     cc = canvas.toDataURL("image/jpeg", 1);
                     base64 = can.toDataURL("image/jpeg", 1);
@@ -191,46 +201,87 @@
                 });
             },
             cutStart ($evt) {
+                if (this.left === 0 && this.top === 0) {
+                    this.flag = true;
+                    this.baseX = 0;
+                    this.baseY = 0;
+                }
+                else {
+                    let cutAreaAvatar = this.$refs.cutAreaAvatar;
+                    this.baseX = parseFloat(cutAreaAvatar.style.backgroundPositionX);
+                    this.baseY = parseFloat(cutAreaAvatar.style.backgroundPositionY);
+                }
                 let pageX = $evt.touches[0].pageX;
                 let pageY = $evt.touches[0].pageY;
-                if (this.left === 0 && this.top === 0) {
-                    this.left = pageX;
-                    this.top = pageY;
-                    this.flag = true;
-                    console.log(this.left, this.top)
-                }
+                this.left = pageX;
+                this.top = pageY;
             },
             cutEnd ($evt) {
+                console.log($evt)
+
             },
             cut ($evt) {
                 $evt.preventDefault();
                 if (this.flag) {
-                    let avatarArea = this.$refs.avatarArea;
+                    let cutAreaAvatar = this.$refs.cutAreaAvatar;
                     let cutTools = this.$refs.cutTools;
+                    let cutArea = this.$refs.cutArea;
                     let pageX = $evt.touches[0].pageX;
                     let pageY = $evt.touches[0].pageY;
-                    let w = (pageX - this.left);
-                    let h = (pageY - this.top);
-                    if (w + cutTools.clientWidth > avatarArea.clientWidth) {
-                        w = avatarArea.clientWidth - cutTools.clientWidth;
+                    let w = this.baseX - pageX + this.left;
+                    let h = this.baseY - pageY + this.top;
+                    console.log(this.imageHeight)
+                    if (this.imageHeight > this.imageWidth) {
+                        if (w < 0)
+                            w = 0;
+                        if (w > this.scale * this.imageWidth - this.imageWidth)
+                            w = this.scale * this.imageWidth - this.imageWidth;
+                        if (h > 0)
+                            h = 0;
+                        if (h < - this.scale * this.imageHeight * (cutTools.clientWidth / this.imageWidth) + parseFloat(cutTools.clientHeight))
+                            h = - this.scale * this.imageHeight * (cutTools.clientWidth / this.imageWidth) + parseFloat(cutTools.clientHeight);
+                        cutAreaAvatar.style.backgroundPositionX = w + 'px';
+                        cutAreaAvatar.style.backgroundPositionY = h + 'px';
                     }
-                    if (h + cutTools.clientHeight > avatarArea.clientHeight) {
-                        h = avatarArea.clientHeight - cutTools.clientHeight;
+                    else if (this.imageHeight < this.imageWidth) {
+                        if (h < 0)
+                            h = 0;
+                        if (h > this.scale * this.imageHeight - this.imageHeight)
+                            h = this.scale * this.imageHeight - this.imageHeight;
+                        if (w > 0)
+                            w = 0;
+                        if (w < - this.scale * this.imageWidth * (cutTools.clientHeight / this.imageHeight) + parseFloat(cutTools.clientWidth))
+                            w = - this.scale * this.imageWidth * (cutTools.clientHeight / this.imageHeight) + parseFloat(cutTools.clientWidth);
+                        cutAreaAvatar.style.backgroundPositionX = w + 'px';
+                        cutAreaAvatar.style.backgroundPositionY = h + 'px';
                     }
-                    if (w < 0) {
-                        w = 0;
+                    else if (this.imageHeight < this.imageWidth){
+                        cutAreaAvatar.style.backgroundPositionX = w + 'px';
+                        cutAreaAvatar.style.backgroundPositionY = h + 'px';
                     }
-                    if (h < 0) {
-                        h = 0;
-                    }
-                    cutTools.style.left = 0;
-                    cutTools.style.top = 0;
-                    let cutAreaAvatar = this.$refs.cutAreaAvatar;
-                    cutAreaAvatar.style.backgroundPositionX = '-' + w + 'px';
-                    cutAreaAvatar.style.backgroundPositionY = '-' + h + 'px';
-                    let cutArea = this.$refs.cutArea;
-                    cutArea.style.left = w + 'px';
-                    cutArea.style.top = h + 'px';
+                    this.baseX = parseFloat(cutAreaAvatar.style.backgroundPositionX);
+                    this.baseY = parseFloat(cutAreaAvatar.style.backgroundPositionY);
+                    // let w = (pageX - this.left);
+                    // let h = (pageY - this.top);
+                    // if (w + cutTools.clientWidth > avatarArea.clientWidth) {
+                    //     w = avatarArea.clientWidth - cutTools.clientWidth;
+                    // }
+                    // if (h + cutTools.clientHeight > avatarArea.clientHeight) {
+                    //     h = avatarArea.clientHeight - cutTools.clientHeight;
+                    // }
+                    // if (w < 0) {
+                    //     w = 0;
+                    // }
+                    // if (h < 0) {
+                    //     h = 0;
+                    // }
+                    // cutTools.style.left = 0;
+                    // cutTools.style.top = 0;
+                    // cutAreaAvatar.style.backgroundPositionX = '-' + w + 'px';
+                    // cutAreaAvatar.style.backgroundPositionY = '-' + h + 'px';
+                    // let cutArea = this.$refs.cutArea;
+                    // cutArea.style.left = w + 'px';
+                    // cutArea.style.top = h + 'px';
                 }
             },
             reRotate (uploadType) {
@@ -251,13 +302,8 @@
                         let expectWidth = _this.naturalWidth;
                         let expectHeight = _this.naturalHeight;
 
-                        if (_this.naturalWidth > _this.naturalHeight && _this.naturalWidth > 414) {
-                            expectWidth = 414;
-                            expectHeight = expectWidth * _this.naturalHeight / _this.naturalWidth;
-                        } else if (_this.naturalHeight > _this.naturalWidth && _this.naturalHeight > 414) {
-                            expectHeight = 414;
-                            expectWidth = expectHeight * _this.naturalWidth / _this.naturalHeight;
-                        }
+                        _self.imageWidth = expectWidth;
+                        _self.imageHeight = expectHeight;
                         let canvas = document.createElement("canvas");
                         let ctx = canvas.getContext("2d");
                         canvas.width = expectWidth;
@@ -297,10 +343,10 @@
         width: 100%;
         height: 1rem;
         position: relative;
-        setBackgroundImage('../../assets/avatar.png');
-        background-size: 1rem auto;
+        /*background-size: 1rem auto;*/
+        background-size: cover;
         background-repeat: no-repeat;
-        background-position: center top;
+        background-position: left top;
     }
     .{$prefix}-avatar-mask {
         position: absolute;
@@ -323,8 +369,8 @@
         position: absolute;
         top: 0;
         left: 0;
-        width: 0.5rem;
-        height: 0.5rem;
+        width: 1rem;
+        height: 1rem;
 
         &-avatar {
             position: absolute;
@@ -334,8 +380,9 @@
             left: 0;
             z-index: 10;
             setBackgroundImage('../../assets/avatar.png');
-            background-size: 1rem auto;
-            background-position: top left;
+            /*background-size: 1rem auto;*/
+            background-size: cover;
+            background-position: left top;
         }
     }
     .{$prefix}-cut-tools {
