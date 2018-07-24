@@ -1,13 +1,19 @@
 <template>
-    <div v-show="visible" id="app">
-        <router-view/>
-        <Toast id="toast" ref="toast" type="warning"/>
+    <div>
+        <div v-show="visible" id="app">
+            <router-view/>
+            <Toast id="toast" ref="toast" type="warning"/>
+        </div>
+        <div v-show="!visible">
+            <img class="spin" :src="spin"/>
+        </div>
     </div>
 </template>
 
 <script>
     import Toast from "./components/lib/Toast";
-    import sprite from "./assets/sprite.png"
+    import sprite from "./assets/sprite.png";
+    import spin from "./assets/spin.svg";
     export default {
         name: 'App',
         components: {
@@ -15,7 +21,8 @@
         },
         data () {
             return {
-                visible: false
+                visible: false,
+                spin: spin
             }
         },
         mounted () {
@@ -37,4 +44,14 @@
     }
 </script>
 
-<style lang="stylus">@import 'styles/base.styl';</style>
+<style lang="stylus">
+    @import 'styles/base.styl';
+    .spin {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%);
+        width: 0.1rem;
+    }
+
+</style>
