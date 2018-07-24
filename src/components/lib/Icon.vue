@@ -104,6 +104,7 @@
     .{$prefix}-icon {
         display:block;
         transform-origin: left top;
+        background-image: url("../../assets/sprite.png")
     }
 
 </style>
