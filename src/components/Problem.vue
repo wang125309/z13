@@ -2,16 +2,10 @@
     <LayoutBase>
         <Navbar arrow-left>常见问题</Navbar>
         <CellGroup full>
-            <Cell full padding problem>
-                常见问题1
+            <Cell  v-bind:key="i.id" v-for="i in data" full padding problem>
+                {{i.problem}}
                 <template slot="answer">
-                    这个问题没有答案
-                </template>
-            </Cell>
-            <Cell full padding problem withoutBorder>
-                常见问题2
-                <template slot="answer">
-                    这个问题也没有答案
+                   {{i.solution}}
                 </template>
             </Cell>
         </CellGroup>
@@ -24,6 +18,7 @@
     import Navbar from "./lib/Navbar";
     import requests from '../service/service'
     import API from '../service/api'
+    import pageResult from "../service/pageResult";
 
     export default {
         components: {
@@ -37,15 +32,21 @@
                 data: {}
             }
         },
+        methods:{
+            refresh (page) {
+                requests(API.get_problem, {
+                    type: 'GET'
+                }, (data) => {
+                    if (page === 1) this.data = [];
+                    Object.assign(this.data, pageResult(data.data, page));
+                }, (data) => {
+                    console.log(data)
+                    this.$root.$children[0].toggleToast('warning', data)
+                })
+            }
+        },
         created () {
-            requests(API.get_problem, {
-                type: 'GET'
-            }, (data) => {
-                this.data = data.data
-            }, (data) => {
-                console.log(data)
-                this.$root.$children[0].toggleToast('warning', data)
-            })
+            this.refresh(1)
         }
     }
 </script>
