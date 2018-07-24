@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-show="visible" id="app" :class="visible? 'app-visible': ''">
+        <div id="app" :class="visible? 'app-visible': ''">
             <router-view/>
             <Toast id="toast" ref="toast" type="warning"/>
         </div>
@@ -52,7 +52,6 @@
         top: 50%;
         transform: translate(-50%);
         width: 0.1rem;
-        opacity: 1;
         &.spin-hidden {
             transition: opacity $transition-time ease-in-out;
             opacity: 0;
@@ -60,10 +59,12 @@
     }
     #app {
         opacity: 0;
-        transition: opacity $transition-time ease-in-out;
+        transition: opacity $transition-time ease-in-out, visibility $transition-time ease-in-out;
+        visibility: hidden;
         &.app-visible {
             opacity: 1;
-            transition: opacity $transition-time ease-in-out;
+            visibility: visible;
+            transition: opacity $transition-time ease-in-out, visibility $transition-time ease-in-out;
         }
     }
 
