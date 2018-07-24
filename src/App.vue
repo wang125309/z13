@@ -1,5 +1,5 @@
 <template>
-    <div id="app">
+    <div v-show="visible" id="app">
         <router-view/>
         <Toast id="toast" ref="toast" type="warning"/>
     </div>
@@ -7,11 +7,24 @@
 
 <script>
     import Toast from "./components/lib/Toast";
-
+    import sprite from "./assets/sprite.png"
     export default {
         name: 'App',
         components: {
             Toast
+        },
+        data () {
+            return {
+                visible: false
+            }
+        },
+        mounted () {
+            // lazy load sprite
+            let image = new Image();
+            image.src = sprite;
+            image.onload = () => {
+                this.visible = true;
+            }
         },
         methods: {
             toggleToast(type, text) {
