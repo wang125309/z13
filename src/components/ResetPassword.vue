@@ -33,6 +33,10 @@
         },
         data () {
             return {
+                user: {
+                    account: '',
+                    phoneCode: ''
+                }
             }
         }
     }

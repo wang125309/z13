@@ -1,6 +1,8 @@
 const API = {
     get_image_code: '/common/imageCode',
-    valid_image_code: '/common/verifyImageCode',
+    valid_image_code: '/common/imageCode/verify',
+    verify_phone_code: '/common/phoneCode/verify',
+    send_phone_Code: '/common/phoneCode',
     do_login: '/front/login',
     do_logout: '/front/logout',
     get_homepage: '/front/homepage',

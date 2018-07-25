@@ -11,7 +11,7 @@
                 <img @click="refreshCode" class="image-code" :src="imageCode"/>
             </Cell>
             <Cell>
-                <Input v-model="user.code" type="text" icon="verification" sendCode placeholder="验证码"/>
+                <Input v-model="user.phoneCode" :account="user.account" :codeType="3" type="text" icon="verification" sendCode placeholder="验证码"/>
             </Cell>
             <Cell>
                 <Input v-model="user.password" type="password" icon="lock" placeholder="设置密码"/>
@@ -52,7 +52,7 @@
                 user: {
                     account: '',
                     password: '',
-                    code: '',
+                    phoneCode: '',
                     image: ''
                 },
                 imageCode: API.get_image_code
@@ -70,21 +70,35 @@
                     this.imageCode = API.get_image_code;
                 }, 0);
             },
+            doRegister () {
+                requests(API.do_register, {
+                    type: 'POST',
+                    data: this.user
+                }, (data) => {
+                    this.$root.$children[0].toggleToast('success', data.message);
+                    setTimeout(() => {
+                        this.$router.push({
+                            path: '/login'
+                        })
+                    })
+                }, (data) => {
+                    console.log(data)
+                    this.$root.$children[0].toggleToast('fail', data);
+                });
+            },
             register () {
                 if (!registerFlag) {
-                    requests(API.do_register, {
+                    requests(API.valid_image_code, {
                         type: 'POST',
-                        data: this.user
+                        data: {
+                            imageCode: this.user.image
+                        }
                     }, (data) => {
-                        this.$root.$children[0].toggleToast('success', data.message);
-                        setTimeout(() => {
-                            this.$router.push({
-                                path: '/login'
-                            })
-                        })
+                        this.doRegister();
                     }, (data) => {
                         this.$root.$children[0].toggleToast('fail', data.message);
-                    });
+                    })
+
                 }
             }
         }

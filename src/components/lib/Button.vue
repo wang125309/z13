@@ -14,10 +14,11 @@
             type: [String],
             width: [String],
             full: [Boolean],
-            className: [String],
+            className: [String, Array],
             color: [String],
             size: [String],
-            bottomWhite: [Boolean]
+            bottomWhite: [Boolean],
+            disabled: [Boolean]
         },
         computed: {
             buttonWrapCls() {
@@ -34,7 +35,8 @@
                         [`${prefix}-button-${this.type}`]: this.type,
                         [`${this.className}`]: this.className,
                         [`${prefix}-button-${this.size}`]: this.size,
-                        [`${prefix}-button-bottom-white`]: this.bottomWhite
+                        [`${prefix}-button-bottom-white`]: this.bottomWhite,
+                        [`${prefix}-button-disabled`]: this.disabled
                     }
                 ]
             },
@@ -74,6 +76,10 @@
             border: none;
             text-align: center;
             white-space: nowrap;
+            &-disabled {
+                color: $white;
+                background: $font-second !important;
+            }
             &:active {
                 background-color: $brand-color * 0.95;
             }
