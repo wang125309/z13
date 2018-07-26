@@ -20,17 +20,17 @@
                 </a>
             </Cell>
         </CellGroup>
-        <div :class="roomPanelCls" v-for="i in data" v-bind:key="i.id">
+        <div :class="roomPanelCls" v-if="i.companys.length" v-for="i in data" v-bind:key="i.id">
             <div :class="roomPanelItemCls" v-for="j in i.companys" v-bind:key="'company'+ i.id">
                 <div :class="cellImgCls"></div>
                 <div :class="itemDetailsCls">
                     <div :class="itemDetailsHead">
-                        <span>
+                        <div>
                             {{j.name}}
-                        </span>
-                        <span>
+                        </div>
+                        <div>
                             {{j.room}}
-                        </span>
+                        </div>
                     </div>
                     <div :class="itemDetailsBody">
                         {{j.contract}}
@@ -210,9 +210,10 @@
         width: 0.1rem;
         height: 0.1rem;
         background-color: cornsilk;
-
     }
     .{$prefix}-item-details {
+        flex: 1;
+        padding: 0 $padding-small;
         &-head {
             display: flex;
             justify-content: space-between;
