@@ -29,27 +29,36 @@ const requests = (url, options, success, error) => {
         }
     };
     if (type === 'GET') {
-        console.log(options.data)
         axios.get(`${url}`, {
             params: options.data
         }).then((response) => {
             callback(response);
         }).catch((err) => {
-            callback(err);
+            if (err.response.status === 401) {
+                callback(err.response)
+            }
+            else {
+                callback(err.response.data);
+            }
+
         });
     }
     else if (type === 'POST') {
-        axios.post(`${url}`, options.data).then((response) => {
+        axios.post(`${url}`,
+            options.data
+        ).then((response) => {
             callback(response);
         }).catch((err) => {
-            callback(err);
+            callback(err.response);
         });
     }
     else if (type === 'PUT') {
-        axios.put(`${url}`, options.data).then((response) => {
+        axios.put(`${url}`,
+            options.data
+        ).then((response) => {
             callback(response);
         }).catch((err) => {
-            callback(err);
+            callback(err.response);
         });
     }
 }

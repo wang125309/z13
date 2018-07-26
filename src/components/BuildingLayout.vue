@@ -6,23 +6,26 @@
             <div :class="cellCls">
                 <Icon size="0.2rem" :class="iconCls" type="rent-img" position="left"/>
                 <div :class="wrapCls">
-                    <div :class="titleCls">洗车店名字</div>
-                    <div :class="timeCls">08:00 - 22:00</div>
+                    <div :class="titleCls">CBD Z13大厦</div>
                 </div>
             </div>
             <Cell without-border :class-name="cellBottomCls">
                 <div :class="itemCls">
-                    <div>地点：A座1层1002房间</div>
-                    <div>电话：010-2321424</div>
+                    <div>公司地址：朝阳区国贸二期366号</div>
+                    <div>服务电话：010-66336633</div>
                 </div>
-                <a href="tel: 010-2321424">
+                <a href="tel: 010-66336633">
                     <Icon :class="callCls" size="0.11rem" position="right" type="call"/>
                 </a>
             </Cell>
         </CellGroup>
-        <div :class="roomPanelCls" v-if="i.companys.length" v-for="i in data" v-bind:key="i.id">
-            <div :class="roomPanelItemCls" v-for="j in i.companys" v-bind:key="'company'+ i.id">
-                <div :class="cellImgCls"></div>
+        <div :class="roomPanelCls" v-if="i.companys.length" v-for="(i, index) in data" v-bind:key="index">
+            <div @click="hidden(i.tid)" :class="floorCls">
+                <div>{{i.floor}}</div>
+                <Icon :class="floorIcon" position="right" type="up-arrow" size="0.04rem"/>
+            </div>
+            <div v-show="i.active" :class="roomPanelItemCls" v-for="(j, $index) in i.companys" v-bind:key="'company'+ $index">
+                <div :class="cellImgCls" :style="'background-image:url(' + i.logo + ')'"></div>
                 <div :class="itemDetailsCls">
                     <div :class="itemDetailsHead">
                         <div>
@@ -33,7 +36,7 @@
                         </div>
                     </div>
                     <div :class="itemDetailsBody">
-                        {{j.contract}}
+                        {{j.locations}}
                     </div>
                 </div>
             </div>
@@ -63,6 +66,11 @@
             LayoutBase
         },
         computed: {
+            floorIcon () {
+                return [
+                    `${prefix}-floor-icon`
+                ]
+            },
             cellGroupCls () {
                 return [
                     `${prefix}-cell-group`
@@ -137,11 +145,17 @@
                 return [
                     `${prefix}-room-panel-item`
                 ]
+            },
+            floorCls () {
+                return [
+                    `${prefix}-floor`
+                ]
             }
         },
         data () {
             return {
-                data: []
+                data: [],
+                floorVisible: []
             }
         },
         methods: {
@@ -150,9 +164,24 @@
                     type: 'GET'
                 }, (data) => {
                     this.data = data.data;
+                    let cnt = 0;
+                    for (let i of data.data) {
+                        cnt ++ ;
+                        Object.assign(i, {tid: cnt, active: true})
+                    }
                 }, (data) => {
-                    _this.$root.$children[0].toggleToast('fail', data.message);
+                    this.$root.$children[0].toggleToast('fail', data.message);
                 });
+            },
+            hidden (tid) {
+                for (let i in this.data) {
+                    if (this.data[i].tid === tid) {
+                        console.log(this.data[i].active);
+                        this.data[i].active = !this.data[i].active;
+                        this.data.splice(this.data.length)
+                        break;
+                    }
+                }
             }
         },
         mounted () {
@@ -164,6 +193,17 @@
 <style scoped lang="stylus">
     @import '../styles/var.styl';
     @import '../styles/hairline.styl';
+    .{$prefix}-floor {
+        position: relative;
+        padding: $padding-base;
+        background-color: $white;
+        hairline('bottom');
+        display: flex;
+        justify-content: space-between;
+    }
+    .{$prefix}-floor-icon {
+        padding-right: $padding-base;
+    }
     .{$prefix}-cell-group {
     }
     .{$prefix}-icon {
@@ -186,7 +226,6 @@
         padding: $padding-base;
         margin-right: 0 !important;
         height: 0.2rem;
-
         &-bottom {
             padding: $padding-base 0;
             .{$prefix}-cell {
@@ -210,10 +249,12 @@
         width: 0.1rem;
         height: 0.1rem;
         background-color: cornsilk;
+        setBackgroundImage('', center)
+        background-size: cover;
     }
     .{$prefix}-item-details {
         flex: 1;
-        padding: 0 $padding-small;
+        padding: 0 0 0 $padding-base;
         &-head {
             display: flex;
             justify-content: space-between;
@@ -234,7 +275,8 @@
             display: flex;
             justify-content: space-between;
             hairline('bottom');
-            padding: $padding-small;
+            padding: $padding-base $padding-base $padding-base 0;
+            margin-left: $padding-base;
             &:last-child {
                 hairline-remove('bottom')
             }
