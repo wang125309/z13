@@ -3,13 +3,13 @@
         <Navbar arrowLeft>忘记密码</Navbar>
         <CellGroup full class="cell-group">
             <Cell full>
-                <Input type="password" placeholder="请设置新密码"/>
+                <Input type="password" v-model="user.newPassword" placeholder="请设置新密码"/>
             </Cell>
             <Cell withoutBorder>
-                <Input type="password" placeholder="请确认新密码"/>
+                <Input type="password" v-model="user.newPassword2" placeholder="请确认新密码"/>
             </Cell>
         </CellGroup>
-        <Button className="next-step" circle full width="92%">确定</Button>
+        <Button class="next-step" @onClick="save" circle full width="92%">确定</Button>
     </LayoutBase>
 </template>
 
@@ -20,6 +20,8 @@
     import CellGroup from './lib/CellGroup'
     import Input from './lib/Input'
     import Button from './lib/Button'
+    import API from '../service/api'
+    import requests from '../service/service'
 
     export default {
         name: 'ForgetPassword',
@@ -31,11 +33,33 @@
             Input,
             LayoutBase
         },
+        computed: {
+
+        },
+        methods: {
+            save () {
+                requests(API.password, {
+                    type: 'PUT',
+                    data: {
+                        account: this.$store.state.forget_password_account,
+                        phoneCode: this.$store.state.forget_password_code,
+                        newPassword: this.user.newPassword,
+                        newPassword2: this.user.newPassword2
+                    }
+                }, (data) => {
+                    this.$router.push({
+                        path: '/reset-password-success'
+                    })
+                }, (data) => {
+                    this.$root.$children[0].toggleToast('fail', data.message);
+                });
+            }
+        },
         data () {
             return {
                 user: {
-                    account: '',
-                    phoneCode: ''
+                    newPassword: '',
+                    newPassword2: ''
                 }
             }
         }

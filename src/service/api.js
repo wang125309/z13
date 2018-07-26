@@ -8,6 +8,7 @@ const API = {
     get_homepage: '/front/homepage',
     do_register: '/front/register',
     get_user_info: '/front/user/info',
+    password: '/front/user/password',
     get_problem: '/front/operation/problems',
     get_activitys: '/front/operation/activitys'
 };

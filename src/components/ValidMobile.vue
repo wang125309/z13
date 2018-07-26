@@ -76,6 +76,7 @@
                             busiType: this.codeType
                         }
                     }, (data) => {
+                        this.$store.commit('SET_FORGET_PASSWORD_USER', this.user.account, this.user.phoneCode)
                         this.$router.push({
                             path: '/reset-password'
                         })
