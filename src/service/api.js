@@ -10,7 +10,8 @@ const API = {
     get_user_info: '/front/user/info',
     password: '/front/user/password',
     get_problem: '/front/operation/problems',
-    get_activitys: '/front/operation/activitys'
+    get_activitys: '/front/operation/activitys',
+    building: '/front/buildings'
 };
 
 export default API;

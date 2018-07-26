@@ -7,7 +7,7 @@
     const prefix = 'z13';
     export default {
         props: {
-            className: [String],
+            className: [String, Array],
             full: [Boolean],
             noMargin: [Boolean]
         },
