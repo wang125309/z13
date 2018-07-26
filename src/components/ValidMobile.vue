@@ -72,7 +72,7 @@
                         type: 'POST',
                         data: {
                             account: this.user.account,
-                            code: this.user.phoneCode,
+                            phoneCode: this.user.phoneCode,
                             busiType: this.codeType
                         }
                     }, (data) => {
