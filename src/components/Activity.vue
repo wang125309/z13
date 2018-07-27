@@ -41,7 +41,10 @@
                                 <Avatar size="0.12rem" :src="i.userImage"/>
                             </div>
                             <div class="activity-comment-item-content">
-                                <div>{{i.userName}}</div>
+                                <div class="activity-comment-item-content-body">
+                                    <div class="activity-comment-item-content-user">{{i.userName}}</div>
+                                    <div class="activity-comment-item-content-time">{{i.create_time}}</div>
+                                </div>
                                 <div>{{i.content}}</div>
                             </div>
                         </div>
@@ -233,6 +236,18 @@
             .activity-comment-item-content {
                 padding: 0 0 0 $padding-small;
                 flex: 1;
+                font-size: $font-size-base;
+                &-body {
+                    display: flex;
+                    padding-bottom: $padding-small;
+                }
+                &-user {
+
+                }
+                &-time {
+                    margin-left: $margin-base;
+                    color: $font-second;
+                }
             }
             &:last-child {
                 hairline-remove('bottom');
