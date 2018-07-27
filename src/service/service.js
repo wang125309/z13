@@ -3,7 +3,7 @@ import cookie from '../Session/cookie'
 
 const requests = (url, options, success, error) => {
     axios.defaults.headers.common['Authorization'] = cookie.getCookie() ? cookie.getCookie() : '';
-    // url = 'https://cbd-proxy.limijiaoyin.io' + url;
+    url = 'https://cbd-proxy.limijiaoyin.io' + url;
     let type = 'GET';
     if (options.type === 'POST') {
         type = 'POST';
