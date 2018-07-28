@@ -11,7 +11,8 @@ const API = {
     password: '/front/user/password',
     get_problem: '/front/operation/problems',
     get_activitys: '/front/operation/activitys',
-    building: '/front/buildings'
+    building: '/front/buildings',
+    comment: '/front/operation/comments'
 };
 
 export default API;

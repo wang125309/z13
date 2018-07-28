@@ -36,18 +36,27 @@
                 <div class="activity-comment-area">
                     <div class="activity-empty-comment" v-if="comments.length === 0">快来发表评论吧</div>
                     <div v-else>
-                        <div v-for="i in comments" v-bind:key="'comment_' + i.id" class="activity-comment-item">
+                        <div v-if="!showAllComments && index < 3 || showAllComments" v-for="(i, index) in comments" v-bind:key="'comment_' + i.id" class="activity-comment-item">
                             <div class="user-area">
                                 <Avatar size="0.12rem" :src="i.userImage"/>
                             </div>
                             <div class="activity-comment-item-content">
                                 <div class="activity-comment-item-content-body">
-                                    <div class="activity-comment-item-content-user">{{i.userName}}</div>
-                                    <div class="activity-comment-item-content-time">{{i.create_time}}</div>
+                                    <div class="flexable">
+                                        <div class="activity-comment-item-content-user">{{i.userName}}</div>
+                                        <div class="activity-comment-item-content-time">{{i.create_time}}</div>
+                                    </div>
+                                    <div class="flexable">
+                                        <Icon @click="like(i.id)" v-if="!i.isPraise" size="0.055rem" class="like" type="unlike"/>
+                                        <Icon @click="unlike(i.id)" v-if="i.isPraise" size="0.055rem" class="like" type="like"/>
+                                        <div class="like-num">{{i.praise}}</div>
+                                        <Icon @click="commentTo(i.id)" size="0.06rem" class="comment-icon" type="comment-icon"/>
+                                    </div>
                                 </div>
                                 <div>{{i.content}}</div>
                             </div>
                         </div>
+                        <div v-if="!showAllComments && comments.length > 3" @click="more_comment" class="more-comment">查看更多评论</div>
                     </div>
                 </div>
             </ActivityCardItem>
@@ -55,14 +64,14 @@
         <div v-if="commentToolsVisible" @click="hiddenComment" class="comment-mask"/>
         <div v-if="commentToolsVisible" class="comment-tools">
             <form action="#" onsubmit="return false;">
-                <Input @keypress="sendComment" v-model="commentMessage" @input="sendComment" @focus="focus" type="" class="comment-input" circle placeholder="添加评论"/>
+                <Input @keypress="sendComment" v-model="commentMessage" @input="sendComment" @focus="focus"  class="comment-input" circle placeholder="添加评论"/>
             </form>
         </div>
         <div class="sign-bar-placeholder"/>
         <div class="sign-bar">
             <div class="sign-item-wrap">
                 <Icon @click="doComment" position="left" size="0.08rem" class="comment" type="comment"/>
-                <Button size="small-padding" width="0.2rem" circle className="sign-up-button">我要报名</Button>
+                <Button :color="color" size="small-padding" width="0.2rem" circle className="sign-up-button">{{buttonText}}</Button>
             </div>
         </div>
     </LayoutBase>
@@ -113,7 +122,12 @@
                 },
                 commentToolsVisible: false,
                 commentMessage: '',
-                comments: []
+                comments: [],
+                commentToId: null,
+                liked: false,
+                buttonText: '我要报名',
+                color: '',
+                showAllComments: false
             }
         },
         created () {
@@ -121,11 +135,66 @@
             this.refresh_comments();
         },
         methods: {
+            like (id) {
+                if (!this.liked) {
+                    this.liked = true;
+                    requests(`${API.comment}/${id}/praises`, {
+                        type: 'PUT',
+                        data: {
+                            busiType: 1
+                        }
+                    }, (data) => {
+                        this.refresh_comments();
+                    }, (data) => {
+                        this.$root.$children[0].toggleToast('fail', data.message);
+                    })
+                }
+
+            },
+            unlike (id) {
+                if (!this.liked) {
+                    this.liked = true;
+                    requests(`${API.comment}/${id}/praises`, {
+                        type: 'PUT',
+                        data: {
+                            busiType: 0
+                        }
+                    }, (data) => {
+                        this.refresh_comments()
+                    }, (data) => {
+                        this.$root.$children[0].toggleToast('fail', data.message);
+                    })
+                }
+            },
+            commentTo (id) {
+                this.commentToId = id;
+                console.log(this)
+            },
             refresh () {
                 requests(`${API.get_activitys}/${this.$route.params.id}/`, {
                     type: 'GET'
                 }, (data) => {
                     this.data = data.data;
+                    if (this.data.activityStatus === 0 &&
+                        (this.data.people_limit === -1 ||
+                            (this.data.people_limit !== -1 &&
+                                this.data.signupCount < this.data.people_limit
+                            )
+                        )
+                    ) {
+                        this.buttonText = '我要报名';
+                    }
+                    else if (this.data.activityStatus === 1) {
+                        this.buttonText = this.data.begin_time;
+                    }
+                    else if (this.data.activityStatus === 2) {
+                        this.buttonText = '报名已结束';
+                        this.color = '#DCDCDC';
+                    }
+                    else  if (this.data.activityStatus === 3) {
+                        this.buttonText = '已报名';
+                        this.color = '#ECC722';
+                    }
                 }, (data) => {
                     this.$root.$children[0].toggleToast('fail', data.message);
                 })
@@ -135,6 +204,7 @@
                     type: 'GET'
                 }, (data) => {
                     this.comments = pageResult(data.data, 1);
+                    this.liked = false;
                 }, (data) => {
                     this.$root.$children[0].toggleToast('fail', data.message);
                 })
@@ -146,7 +216,9 @@
                 this.commentToolsVisible = false;
             },
             focus () {
-                window.scrollTo(0, 1000000);
+                setTimeout(() => {
+                    window.scrollTo(0, 1000000);
+                }, 10)
             },
             sendComment ($evt) {
                 console.log($evt)
@@ -164,6 +236,9 @@
                         this.$root.$children[0].toggleToast('fail', data.message);
                     })
                 }
+            },
+            more_comment ($evt) {
+                this.showAllComments = true;
             }
         }
     }
@@ -240,9 +315,13 @@
                 &-body {
                     display: flex;
                     padding-bottom: $padding-small;
+                    justify-content: space-between;
                 }
                 &-user {
-
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    max-width: 0.17rem;
                 }
                 &-time {
                     margin-left: $margin-base;
@@ -253,5 +332,21 @@
                 hairline-remove('bottom');
             }
         }
+    }
+    .flexable {
+        display: flex;
+        justify-content: space-between;
+    }
+    .like {
+        margin-right: $margin-small;
+    }
+    .comment-icon {
+        margin-left: $margin-small;
+    }
+    .more-comment {
+        padding: $padding-small;
+        text-align: center;
+        font-size: $font-size-base;
+        color: $font-second;
     }
 </style>

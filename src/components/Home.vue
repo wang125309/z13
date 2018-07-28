@@ -2,7 +2,13 @@
     <LayoutBase>
         <Scrollable>
             <Navbar>中国人寿金融中心 CBD Z13</Navbar>
-            <Banner class="main-banner"/>
+            <Banner class="main-banner">
+                <swiper :options="swiperBannerOption">
+                    <swiper-slide class="banner-slide" v-bind:key="'banner' + i.id" v-for="i in data.banners">
+                        <div class="banner" :style="'background-image:url(' + i.image + ')'"/>
+                    </swiper-slide>
+                </swiper>
+            </Banner>
             <Card overflow className="news-card">
                 <div class="news-list">
                     <Tag class-name="tag" backgroundColor="red" color="#fff" borderColor="#fff">可租单元</Tag>
@@ -145,7 +151,14 @@
                     slidesPerView: 'auto',
                     spaceBetween: 10,
                 },
-                pageData: {}
+                swiperBannerOption: {
+                    slidesPerView: 'auto',
+                    autoplay: true,
+                    pagination: {
+                        el: '.swiper-pagination',
+                    },
+                },
+                data: {}
             }
         },
         methods: {
@@ -175,7 +188,7 @@
             requests(API.get_homepage, {
                 type: 'GET'
             }, (data) => {
-                this.pageData = data.data
+                this.data = data.data
             }, (data) => {
                 console.log(data)
                 this.$root.$children[0].toggleToast('fail', data.message)
@@ -190,6 +203,9 @@
     .swiper-slide {
         width: 80%;
     }
+    .banner-slide {
+        width: 100%;
+    }
     .activity-item {
         setBackgroundImage('../assets/activity-item.png', center);
         width: 100%;
@@ -201,8 +217,16 @@
         width: 100%;
         left: 0;
     }
+    .banner {
+        setBackgroundImage('', center);
+        width: 100%;
+        height: 0.5rem;
+        background-size: cover;
+    }
     .news-card {
         margin-top: $banner-height - $padding-base;
+        z-index: 100;
+        position: relative;
     }
     .service-panel {
         margin-bottom: $margin-base;

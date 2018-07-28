@@ -1,6 +1,6 @@
 <template>
     <div :class="bannerCls">
-
+        <slot></slot>
     </div>
 </template>
 
@@ -27,7 +27,7 @@
 <style lang="stylus">
     @import '../../styles/var.styl';
     .{$prefix}-banner {
-        setBackgroundImage('../../assets/banner.png', bottom);
+        setBackgroundImage('', bottom);
         background-size: cover;
         height: $banner-height;
     }

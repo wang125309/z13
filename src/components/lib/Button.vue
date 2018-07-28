@@ -45,6 +45,9 @@
                 if (this.width) {
                     style['width'] = this.width;
                 }
+                if (this.color) {
+                    style['background-color'] = this.color;
+                }
                 return style;
             },
 
