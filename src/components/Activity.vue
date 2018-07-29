@@ -50,7 +50,7 @@
                                         <Icon @click="like(i.id)" v-if="!i.isPraise" size="0.055rem" class="like" type="unlike"/>
                                         <Icon @click="unlike(i.id)" v-if="i.isPraise" size="0.055rem" class="like" type="like"/>
                                         <div class="like-num">{{i.praise}}</div>
-                                        <Icon @click="commentTo(i.id)" size="0.06rem" class="comment-icon" type="comment-icon"/>
+                                        <Icon @click="commentTo(i.id, i.userName)" size="0.06rem" class="comment-icon" type="comment-icon"/>
                                     </div>
                                 </div>
                                 <div>{{i.content}}</div>
@@ -61,17 +61,17 @@
                 </div>
             </ActivityCardItem>
         </Panel>
-        <div v-if="commentToolsVisible" @click="hiddenComment" class="comment-mask"/>
-        <div v-if="commentToolsVisible" class="comment-tools">
+        <div v-show="commentToolsVisible" @click="hiddenComment" class="comment-mask"/>
+        <div v-show="commentToolsVisible" class="comment-tools">
             <form action="#" onsubmit="return false;">
-                <Input @keypress="sendComment" v-model="commentMessage" @input="sendComment" @focus="focus"  class="comment-input" circle placeholder="添加评论"/>
+                <Input ref="commentInput" @keypress="sendComment" v-model="commentMessage" @input="sendComment" @focus="focus"  class="comment-input" circle :placeholder="placeholder"/>
             </form>
         </div>
         <div class="sign-bar-placeholder"/>
         <div class="sign-bar">
             <div class="sign-item-wrap">
                 <Icon @click="doComment" position="left" size="0.08rem" class="comment" type="comment"/>
-                <Button :color="color" size="small-padding" width="0.2rem" circle className="sign-up-button">{{buttonText}}</Button>
+                <Button @onClick="sign_up" :color="color" size="small-padding" width="0.2rem" circle className="sign-up-button">{{buttonText}}</Button>
             </div>
         </div>
     </LayoutBase>
@@ -127,7 +127,8 @@
                 liked: false,
                 buttonText: '我要报名',
                 color: '',
-                showAllComments: false
+                showAllComments: false,
+                placeholder: '添加评论'
             }
         },
         created () {
@@ -166,9 +167,13 @@
                     })
                 }
             },
-            commentTo (id) {
+            commentTo (id, userName) {
                 this.commentToId = id;
-                console.log(this)
+                this.placeholder = `回复${userName}`;
+                this.doComment();
+                setTimeout(() => {
+                    this.$refs.commentInput.$el.children[0].focus();
+                }, 100)
             },
             refresh () {
                 requests(`${API.get_activitys}/${this.$route.params.id}/`, {
@@ -214,18 +219,23 @@
             },
             hiddenComment () {
                 this.commentToolsVisible = false;
+                this.placeholder = '添加回复';
+                this.commentToId = null;
             },
             focus () {
                 setTimeout(() => {
                     window.scrollTo(0, 1000000);
-                }, 10)
+                }, 100)
             },
             sendComment ($evt) {
                 console.log($evt)
                 if ($evt.charCode === 13 && this.commentMessage.length) {
                     requests(`${API.get_activitys}/${this.$route.params.id}/comments`, {
                         type: 'POST',
-                        data: {
+                        data: this.commentToId ? {
+                            content: this.commentMessage,
+                            parentId: this.commentToId
+                        } : {
                             content: this.commentMessage
                         }
                     }, (data) => {
@@ -239,6 +249,23 @@
             },
             more_comment ($evt) {
                 this.showAllComments = true;
+            },
+            sign_up () {
+                if (this.data.activityStatus === 0 &&
+                    (this.data.people_limit === -1 ||
+                        (this.data.people_limit !== -1 &&
+                            this.data.signupCount < this.data.people_limit
+                        )
+                    )
+                ) {
+                    requests(`${API.get_activitys}/${this.$route.params.id}/signups`, {
+                        type: 'POST'
+                    }, (data) => {
+                        this.refresh();
+                    }, (data) => {
+                        this.$root.$children[0].toggleToast('fail', data.message);
+                    })
+                }
             }
         }
     }
@@ -340,6 +367,9 @@
     .like {
         margin-right: $margin-small;
     }
+    .like-num {
+        color: $font-second;
+    }
     .comment-icon {
         margin-left: $margin-small;
     }
@@ -348,5 +378,13 @@
         text-align: center;
         font-size: $font-size-base;
         color: $font-second;
+    }
+    .comment-mask {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        z-index: 100;
     }
 </style>

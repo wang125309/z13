@@ -1,7 +1,7 @@
 <template>
-    <div :class="inputWrapCls">
+    <div tabindex="1" :class="inputWrapCls">
         <Icon v-if="icon" position="left" class="iconCls" size="0.07rem" :type="icon"/>
-        <input :defaultValue="defaultValue" @input="inputChange" @keypress="keypress" :style="inputStyles" v-bind:value="value" :type="inputType" :class="inputCls" :placeholder="placeholder"/>
+        <input @focus="focus" :defaultValue="defaultValue" @input="inputChange" @keypress="keypress" :style="inputStyles" v-bind:value="value" :type="inputType" :class="inputCls" :placeholder="placeholder"/>
         <Icon @click="showEye" position="right" v-if="withEye" v-show="!eyeVisible" size="0.07rem" type="eye"/>
         <Icon @click="showEye" position="right" v-if="withEye" v-show="eyeVisible" size="0.07rem" type="eye-close"/>
         <Button :disabled="codeSend" @onClick="handelSendCode" :className="sendCodeCls" v-if="sendCode" type="send-code">{{sendMessage}}</Button>
@@ -93,6 +93,9 @@
             showEye() {
                 this.eyeVisible = !this.eyeVisible;
                 this.eyeVisible? this.inputType = 'text' : this.inputType = 'password';
+            },
+            focus () {
+                this.$emit('focus')
             },
             clear () {
                 this.value = ''
