@@ -50,6 +50,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        font-size: 0.05rem;
     }
     .navbar-avatar {
         position: absolute;
