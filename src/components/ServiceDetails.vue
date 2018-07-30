@@ -8,8 +8,8 @@
                 <span :class="authorTimeCls">{{data.create_time}}</span>
             </div>
         </div>
-        <div :class="mainCls">
-            时间的疯狂拉升放假了，是飞洒的阿萨德法师经历看
+        <div :class="mainCls" v-html="data.content">
+
         </div>
     </LayoutWhite>
 </template>
