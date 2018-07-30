@@ -66,6 +66,7 @@
         position: relative;
         height: 0.4rem;
         padding: $padding-base;
+        background-color: #f7f7f7;
         &-date {
             padding: $padding-base 0;
             color: $font-second;

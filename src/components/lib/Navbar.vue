@@ -2,21 +2,27 @@
     <div :class="navbarCls">
         <Icon class="arrow-left" position="left" size="0.05rem" @click="previous" v-if="arrowLeft" type="arrow-left"/>
         <slot></slot>
+        <Avatar v-if="user" size="0.09rem" class="navbar-avatar" @click="go" :src="user.image"/>
     </div>
 </template>
 
 <script>
     import Icon from './Icon'
+    import Avatar from "./Avatar";
 
     const prefix = 'z13';
     export default {
         components: {
+            Avatar,
             Icon
         },
         props: {
             arrowLeft: [Boolean]
         },
         computed: {
+            user () {
+                return this.$store.state.user;
+            },
             navbarCls() {
                 return [`${prefix}-navbar`]
             }
@@ -44,5 +50,9 @@
         display: flex;
         justify-content: center;
         align-items: center;
+    }
+    .navbar-avatar {
+        position: absolute;
+        right: $margin-small;
     }
 </style>
