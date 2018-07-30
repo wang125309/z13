@@ -28,8 +28,13 @@
             }
         },
         methods: {
-            previous() {
+            previous () {
                 this.$router.go(-1);
+            },
+            go () {
+                this.$router.push({
+                    path: '/personal-info'
+                })
             }
         },
         created () {

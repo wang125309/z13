@@ -1,58 +1,45 @@
 <template>
     <LayoutBase>
-        <Navbar arrow-left>餐饮服务</Navbar>
+        <Navbar arrow-left>保洁服务</Navbar>
+        <SearchInput></SearchInput>
         <Panel no-padding>
-            <div :class="deliveryItemCls">
+            <div v-for="i in data" v-bind:key="'delivery' + i.id" @click="itemClick(i.id)" :class="deliveryItemCls">
                 <div :class="deliveryItemIconCls"
-                     :style="'background-image:url('+ data.image +')'"/>
+                     :style="'background-image:url('+ i.image +')'"/>
                 <div :class="deliveryPanelCls">
                     <Icon :class="callCls" type="call" position="right" size="0.12rem"/>
                     <div :class="deliveryTitleCls">
-                        {{data.name}}
+                        {{i.name}}
                         <span :class="viewNumCls">
                             <Icon type="view-num" size="0.06rem"/>
-                            <span :class="viewStringCls">{{data.uv}}</span>
+                            <span :class="viewStringCls">{{i.uv}}</span>
                         </span>
                     </div>
-                    <div :class="starPanelCls">
-                        <FontIcon :className="starCls" type="Star"/>
-                        <FontIcon :className="starCls" type="Star"/>
-                        <FontIcon :className="starCls" type="Star"/>
-                        <FontIcon :className="unstarCls" type="Star"/>
-                        <FontIcon :className="unstarCls" type="Star"/>
-                    </div>
-                    <div :class="tagPanelCls">
-                        <Tag :className="greenCls">早餐</Tag>
-                        <Tag :className="yellowCls">午餐</Tag>
-                        <Tag :className="blueCls">晚餐</Tag>
-                    </div>
+                    <!--<div :class="starPanelCls">-->
+                    <!--<FontIcon :className="starCls" type="Star"/>-->
+                    <!--<FontIcon :className="starCls" type="Star"/>-->
+                    <!--<FontIcon :className="starCls" type="Star"/>-->
+                    <!--<FontIcon :className="unstarCls" type="Star"/>-->
+                    <!--<FontIcon :className="unstarCls" type="Star"/>-->
+                    <!--</div>-->
                     <div :class="infoPanelCls">
                         <div :class="infoCls">
                             <span :class="labelCls">地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点:</span>
-                            <span :class="textCls">{{data.location}}</span>
+                            <span :class="textCls">{{i.location}}</span>
                         </div>
                         <div :class="infoCls">
                             <span :class="labelCls">电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话:</span>
-                            <span :class="textCls">{{data.phone}}</span>
+                            <span :class="textCls">{{i.phone}}</span>
                         </div>
                         <div :class="infoCls">
                             <span :class="labelCls">营业时间:</span>
-                            <span :class="textCls">{{data.business_time}}</span>
+                            <span :class="textCls">{{i.business_time}}</span>
                         </div>
                     </div>
                 </div>
             </div>
+
         </Panel>
-        <ActivityCardItem cut full title="服务说明">
-            <div>afasdfsdf</div>
-            <div>afasdfsdf</div>
-            <div>afasdfsdf</div>
-        </ActivityCardItem>
-        <ActivityCardItem cut full title="洗车服务">
-            <div>sdfafs</div>
-            <div>sdfafs</div>
-            <div>sdfafs</div>
-        </ActivityCardItem>
     </LayoutBase>
 </template>
 <script>
@@ -65,9 +52,9 @@
     import Cell from "./lib/Cell";
     import FontIcon from "./lib/FontIcon";
     import Tag from "./lib/Tag";
-    import ActivityCardItem from "./lib/ActivityCardItem";
     import API from "../service/api"
     import request from "../service/service"
+    import pageResult from "../service/pageResult";
 
     const prefix = 'z13';
 
@@ -81,27 +68,32 @@
             SearchInput,
             Navbar,
             LayoutBase,
-            ActivityCardItem,
             Tag
         },
-        data () {
-            return {
-                data: {}
-            }
-        },
-        mounted () {
-            this.refresh()
-        },
         methods: {
-            refresh () {
-                request(`${API.foodshops}/${this.$route.params.id}/`, {
+            itemClick (id) {
+                this.$router.push({
+                    path: '/clean/' + id
+                })
+            },
+            refresh (page) {
+                request(API.cleanings, {
                     type: 'GET'
                 }, (data) => {
-                    this.data = data.data;
+                    if (page === 1) this.data = [];
+                    Object.assign(this.data, pageResult(data.data, page));
                 }, (data) => {
                     this.$root.$children[0].toggleToast('warning', data.message)
                 })
             }
+        },
+        data () {
+            return {
+                data: []
+            }
+        },
+        mounted () {
+            this.refresh(1)
         },
         computed: {
             deliveryItemCls () {
@@ -263,6 +255,7 @@
         color: $font-second;
     }
     .{$prefix}-panel {
+        margin-top: $margin-base;
         background-color: $white;
     }
     .{$prefix}-tag-blue {
@@ -291,4 +284,5 @@
         transform: translateY(-50%);
         margin-right: $padding-base;
     }
+
 </style>

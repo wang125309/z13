@@ -17,7 +17,7 @@ const mutations = {
             requests(API.get_user_info, {}, (data) => {
                 state.user = data.data
             }, (data) => {
-                if (_this.$route.name !== 'Home' && _this.$route.name !== 'ActivityList' && _this.$route.name !== 'Login' && _this.$route.name !== 'Register' && _this.$router.name !== 'ResetPassword') {
+                if (_this.$route.name !== 'Activity' && _this.$route.name !== 'Home' && _this.$route.name !== 'ActivityList' && _this.$route.name !== 'Login' && _this.$route.name !== 'Register' && _this.$router.name !== 'ResetPassword') {
                     _this.$router.push({
                         path: '/login'
                     })

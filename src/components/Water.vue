@@ -1,6 +1,6 @@
 <template>
     <LayoutBase>
-        <Navbar arrow-left>餐饮服务</Navbar>
+        <Navbar arrow-left>送水服务</Navbar>
         <Panel no-padding>
             <div :class="deliveryItemCls">
                 <div :class="deliveryItemIconCls"
@@ -14,18 +14,13 @@
                             <span :class="viewStringCls">{{data.uv}}</span>
                         </span>
                     </div>
-                    <div :class="starPanelCls">
-                        <FontIcon :className="starCls" type="Star"/>
-                        <FontIcon :className="starCls" type="Star"/>
-                        <FontIcon :className="starCls" type="Star"/>
-                        <FontIcon :className="unstarCls" type="Star"/>
-                        <FontIcon :className="unstarCls" type="Star"/>
-                    </div>
-                    <div :class="tagPanelCls">
-                        <Tag :className="greenCls">早餐</Tag>
-                        <Tag :className="yellowCls">午餐</Tag>
-                        <Tag :className="blueCls">晚餐</Tag>
-                    </div>
+                    <!--<div :class="starPanelCls">-->
+                        <!--<FontIcon :className="starCls" type="Star"/>-->
+                        <!--<FontIcon :className="starCls" type="Star"/>-->
+                        <!--<FontIcon :className="starCls" type="Star"/>-->
+                        <!--<FontIcon :className="unstarCls" type="Star"/>-->
+                        <!--<FontIcon :className="unstarCls" type="Star"/>-->
+                    <!--</div>-->
                     <div :class="infoPanelCls">
                         <div :class="infoCls">
                             <span :class="labelCls">地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点:</span>
@@ -44,14 +39,16 @@
             </div>
         </Panel>
         <ActivityCardItem cut full title="服务说明">
-            <div>afasdfsdf</div>
-            <div>afasdfsdf</div>
-            <div>afasdfsdf</div>
+            <div class="description">{{data.description}}</div>
         </ActivityCardItem>
-        <ActivityCardItem cut full title="洗车服务">
-            <div>sdfafs</div>
-            <div>sdfafs</div>
-            <div>sdfafs</div>
+        <ActivityCardItem no-padding  cut full title="商品规格">
+            <Good v-for="i in data.waterInfos"
+                  :title="i.name"
+                  :logo="i.image"
+                  :price="i.price"
+                  :norm="i.norm"
+                  :description="i.description"
+            />
         </ActivityCardItem>
     </LayoutBase>
 </template>
@@ -68,11 +65,13 @@
     import ActivityCardItem from "./lib/ActivityCardItem";
     import API from "../service/api"
     import request from "../service/service"
+    import Good from "./lib/Good";
 
     const prefix = 'z13';
 
     export default {
         components: {
+            Good,
             FontIcon,
             Cell,
             Icon,
@@ -94,7 +93,7 @@
         },
         methods: {
             refresh () {
-                request(`${API.foodshops}/${this.$route.params.id}/`, {
+                request(`${API.watersupplys}/${this.$route.params.id}/`, {
                     type: 'GET'
                 }, (data) => {
                     this.data = data.data;
@@ -212,6 +211,9 @@
     @import '../styles/var.styl';
     @import '../styles/iconfont.css';
     @import '../styles/hairline.styl';
+    .description {
+        color: $font-second;
+    }
     .{$prefix}-delivery-item {
         position: relative;
         padding: $padding-base;

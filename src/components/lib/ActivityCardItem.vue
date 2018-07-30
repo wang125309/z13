@@ -14,7 +14,8 @@
             title: [String],
             noBorder: [Boolean],
             full: [Boolean],
-            cut: [Boolean]
+            cut: [Boolean],
+            noPadding: [Boolean]
         },
         computed: {
             activeCardItemCls() {
@@ -35,7 +36,8 @@
             activeCardItemMessage() {
                 return [
                     `${prefix}-active-card-item-message`, {
-                        [`${prefix}-active-card-item-message-cut`]: this.cut
+                        [`${prefix}-active-card-item-message-cut`]: this.cut,
+                        [`${prefix}-active-card-item-message-no-padding`]: this.noPadding
                     }
                 ]
             },
@@ -56,7 +58,6 @@
     .{$prefix}-active-card-item {
         padding: $padding-base 0 0 0;
         position: relative;
-
         &-full {
             background-color: $white;
         }
@@ -65,9 +66,11 @@
             border-left: 3px solid $brand-color;
             padding: 0 $padding-base;
             position: relative;
+
             &-cut {
                 margin-bottom: $padding-base;
             }
+
         }
         &-message {
             hairline('bottom');
@@ -75,6 +78,9 @@
                 hairline('top')
                 margin: 0;
                 padding: $padding-base;
+            }
+            &-no-padding {
+                padding: 0;
             }
             position: relative;
             margin: 0 0 0 $margin-base;
@@ -86,5 +92,6 @@
             padding: $padding-base 0 0 0;
             margin-top: $margin-base;
         }
+
     }
 </style>

@@ -13,7 +13,10 @@ const API = {
     get_activitys: '/front/operation/activitys',
     building: '/front/buildings',
     comment: '/front/operation/comments',
-    foodshops: '/front/foodshops'
+    foodshops: '/front/foodshops',
+    washcars: '/front/washcars',
+    cleanings: '/front/cleanings',
+    watersupplys: '/front/watersupplys'
 };
 
 export default API;

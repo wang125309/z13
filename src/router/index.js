@@ -28,6 +28,12 @@ const DeliveryDetails = r => require.ensure([], ()=>r(require('@/components/Deli
 const BuildingService = r => require.ensure([], ()=>r(require('@/components/BuildingService.vue')))
 const ServiceDetails = r => require.ensure([], ()=>r(require('@/components/ServiceDetails.vue')))
 const Service = r => require.ensure([], ()=>r(require('@/components/Service.vue')))
+const Water = r => require.ensure([], ()=>r(require('@/components/Water.vue')))
+const WaterList = r => require.ensure([], ()=>r(require('@/components/WaterList.vue')))
+const WashCar = r => require.ensure([], ()=>r(require('@/components/WashCar.vue')))
+const WashCarList = r => require.ensure([], ()=>r(require('@/components/WashCarList.vue')))
+const Clean = r => require.ensure([], ()=>r(require('@/components/Clean.vue')))
+const CleanList = r => require.ensure([], ()=>r(require('@/components/CleanList.vue')))
 const UserInfo = r => require.ensure([], ()=>r(require('@/components/UserInfo.vue')))
 const ChangeAvatar = r => require.ensure([], ()=>r(require('@/components/ChangeAvatar.vue')))
 const ChangeName = r => require.ensure([], ()=>r(require('@/components/ChangeName.vue')))
@@ -152,6 +158,36 @@ export default new Router({
             path: '/delivery-details/:id',
             name: 'DeliveryDetails',
             component: DeliveryDetails
+        },
+        {
+            path: '/wash-car-list',
+            name: 'WashCarList',
+            component: WashCarList
+        },
+        {
+            path: '/wash-car/:id',
+            name: 'WashCar',
+            component: WashCar
+        },
+        {
+            path: '/water-list',
+            name: 'WaterList',
+            component: WaterList
+        },
+        {
+            path: '/water/:id',
+            name: 'Water',
+            component: Water
+        },
+        {
+            path: '/clean/:id',
+            name: 'Clean',
+            component: Clean
+        },
+        {
+            path: '/clean-list',
+            name: 'CleanList',
+            component: CleanList
         },
         {
             path: '/delivery-list',

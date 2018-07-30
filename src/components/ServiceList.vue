@@ -80,13 +80,13 @@
                     url = '/building-layout'
                 }
                 else if ( n === 7 ) {
-                    url = '/service'
+                    url = '/water-list'
                 }
                 else if ( n === 8 ) {
-                    url = '/service'
+                    url = '/clean-list'
                 }
                 else if ( n === 9 ) {
-                    url = 'service'
+                    url = '/wash-car-list'
                 }
                 if (n !== 2 && n !== 3 && n !== 4) {
                     this.$router.push({

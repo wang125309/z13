@@ -52,6 +52,17 @@
             Navbar,
             LayoutBase
         },
+        methods: {
+            refresh () {
+                request(`${API.foodshops}/${this.$route.params.id}/`, {
+                    type: 'GET'
+                }, (data) => {
+                    this.data = data.data;
+                }, (data) => {
+                    this.$root.$children[0].toggleToast('warning', data.message)
+                })
+            }
+        },
         computed: {
             cellGroupCls () {
                 return [
