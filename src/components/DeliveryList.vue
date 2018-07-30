@@ -3,15 +3,16 @@
         <Navbar arrow-left>餐饮服务</Navbar>
         <SearchInput></SearchInput>
         <Panel no-padding>
-            <div @click="itemClick" :class="deliveryItemCls">
-                <Icon :class="deliveryItemIconCls" type="rent-img" size="0.21rem" position="left"/>
+            <div v-for="i in data" v-bind:key="'delivery' + i.id" @click="itemClick(i.id)" :class="deliveryItemCls">
+                <div :class="deliveryItemIconCls"
+                     :style="'background-image:url('+ i.image +')'"/>
                 <div :class="deliveryPanelCls">
                     <Icon :class="callCls" type="call" position="right" size="0.12rem"/>
                     <div :class="deliveryTitleCls">
-                        西贝莜面村（西单店）
+                        {{i.name}}
                         <span :class="viewNumCls">
                             <Icon type="view-num" size="0.06rem"/>
-                            <span :class="viewStringCls">1324</span>
+                            <span :class="viewStringCls">{{i.uv}}</span>
                         </span>
                     </div>
                     <div :class="starPanelCls">
@@ -28,16 +29,16 @@
                     </div>
                     <div :class="infoPanelCls">
                         <div :class="infoCls">
-                            <span :class="labelCls">地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点:</span>
-                            <span :class="textCls">A座1层1002房间</span>
+                            <span :class="labelCls">地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点:</span>
+                            <span :class="textCls">{{i.location}}</span>
                         </div>
                         <div :class="infoCls">
                             <span :class="labelCls">电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话:</span>
-                            <span :class="textCls">010-649921219</span>
+                            <span :class="textCls">{{i.phone}}</span>
                         </div>
                         <div :class="infoCls">
                             <span :class="labelCls">营业时间:</span>
-                            <span :class="textCls">08:00-22:00</span>
+                            <span :class="textCls">{{i.business_time}}</span>
                         </div>
                     </div>
                 </div>
@@ -56,6 +57,9 @@
     import Cell from "./lib/Cell";
     import FontIcon from "./lib/FontIcon";
     import Tag from "./lib/Tag";
+    import API from "../service/api"
+    import request from "../service/service"
+    import pageResult from "../service/pageResult";
 
     const prefix = 'z13';
 
@@ -72,11 +76,29 @@
             Tag
         },
         methods: {
-            itemClick () {
+            itemClick (id) {
                 this.$router.push({
-                    path: '/delivery-details'
+                    path: '/delivery-details/' + id
+                })
+            },
+            refresh (page) {
+                request(API.foodshops, {
+                    type: 'GET'
+                }, (data) => {
+                    if (page === 1) this.data = [];
+                    Object.assign(this.data, pageResult(data.data, page));
+                }, (data) => {
+                    this.$root.$children[0].toggleToast('warning', data.message)
                 })
             }
+        },
+        data () {
+            return {
+                data: []
+            }
+        },
+        mounted () {
+            this.refresh(1)
         },
         computed: {
             deliveryItemCls () {
@@ -192,7 +214,12 @@
         padding: $padding-base;
         hairline('top');
         &-icon {
+            position: absolute;
+            width: 0.21rem;
+            height: 0.21rem;
+            background-color: #dcdcdc;
             background-size: cover;
+            background-repeat: no-repeat;
             left: initial !important;
         }
         &:last-child {

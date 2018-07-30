@@ -149,7 +149,7 @@ export default new Router({
             component: ServiceList
         },
         {
-            path: '/delivery-details',
+            path: '/delivery-details/:id',
             name: 'DeliveryDetails',
             component: DeliveryDetails
         },

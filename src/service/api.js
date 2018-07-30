@@ -12,7 +12,8 @@ const API = {
     get_problem: '/front/operation/problems',
     get_activitys: '/front/operation/activitys',
     building: '/front/buildings',
-    comment: '/front/operation/comments'
+    comment: '/front/operation/comments',
+    foodshops: '/front/foodshops'
 };
 
 export default API;
