@@ -1,7 +1,7 @@
 <template>
     <div @click="handleClick" :class="serviceCellCls">
-        <Icon v-show="active" :type="getTypeActive" size="0.09rem"/>
-        <Icon v-show="!active" :type="getType" size="0.09rem"/>
+        <Icon v-show="!noActivable && active" :type="getTypeActive" size="0.09rem"/>
+        <Icon v-show="(!noActivable && !active) || noActivable" :type="getType" size="0.09rem"/>
         <div :class="serviceCellTextCls">{{ text }}</div>
     </div>
 </template>
@@ -14,7 +14,8 @@
             text: [String],
             noBorder: [Boolean],
             className: [String, Array],
-            full: [Boolean]
+            full: [Boolean],
+            noActivable: [Boolean]
         },
         components: {
             Icon

@@ -3,29 +3,29 @@
         <Navbar arrowLeft>贴心服务</Navbar>
         <div class="operation-tabs">
             <div class="operation-tab">
-                <Icon size="0.15rem" type="operation-open"></Icon>
+                <Icon size="0.15rem" type="blands-icon"></Icon>
                 <div class="operation-text">百叶帘</div>
             </div>
             <div class="operation-tab">
-                <Icon size="0.15rem" type="operation-close"></Icon>
+                <Icon size="0.15rem" type="operation"></Icon>
                 <div class="operation-text">物业报修</div>
             </div>
         </div>
         <Panel noPadding className="panel">
             <ServiceCellGroup>
-                <ServiceCell full @click="go(1)" type="blands-icon" text="就餐服务"/>
-                <ServiceCell full @click="go(2)" type="tools-icon" text="快递"/>
-                <ServiceCell full @click="go(3)" type="delivery-icon" text="访客管理"/>
+                <ServiceCell noActivable full @click="go(1)" type="service-delivery" text="就餐服务"/>
+                <ServiceCell noActivable full @click="go(2)" type="service-express" text="快递"/>
+                <ServiceCell noActivable full @click="go(3)" type="service-visitor" text="访客管理"/>
             </ServiceCellGroup>
             <ServiceCellGroup>
-                <ServiceCell full @click="go(4)" type="express-icon" text="停车"/>
-                <ServiceCell full @click="go(5)" type="visitor-icon" text="可租单元"/>
-                <ServiceCell full @click="go(6)" type="park-icon" text="大楼布局"/>
+                <ServiceCell noActivable full @click="go(4)" type="service-park" text="停车"/>
+                <ServiceCell noActivable full @click="go(5)" type="service-visitor" text="可租单元"/>
+                <ServiceCell noActivable full @click="go(6)" type="service-layout" text="大楼布局"/>
             </ServiceCellGroup>
             <ServiceCellGroup>
-                <ServiceCell full @click="go(7)" type="rent-icon" text="送水"/>
-                <ServiceCell full @click="go(8)" type="building-icon" text="保洁"/>
-                <ServiceCell full @click="go(9)" type="building-icon" text="洗车"/>
+                <ServiceCell noActivable full @click="go(7)" type="service-water" text="送水"/>
+                <ServiceCell noActivable full @click="go(8)" type="service-clean" text="保洁"/>
+                <ServiceCell noActivable full @click="go(9)" type="service-wash-car" text="洗车"/>
             </ServiceCellGroup>
         </Panel>
         <TabBar :active="1"/>
@@ -117,6 +117,9 @@
             text-align: center;
             &:last-child {
                 border: none;
+            }
+            &:active {
+                background-color: $white * 0.95;
             }
         }
         .operation-text {
