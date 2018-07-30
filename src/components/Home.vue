@@ -10,19 +10,14 @@
                 </swiper>
             </Banner>
             <Card overflow className="news-card">
-                <div class="news-list">
-                    <Tag class-name="tag" backgroundColor="red" color="#fff" borderColor="#fff">可租单元</Tag>
-                    <div class="news-details">大楼22楼进行出租，面积大约100公里</div>
-                    <div class="news-date">10.25</div>
+                <div :key="'service' + i.id" class="news-list" v-for="i in data.newsAndRunableUnit.news">
+                    <Tag class-name="tag" backgroundColor="red" color="#fff" borderColor="#fff">大厦服务</Tag>
+                    <div class="news-details">{{i.title}}</div>
+                    <div class="news-date">{{i.create_time.split(' ')[0].split('-')[1] + '.' + i.create_time.split(' ')[0].split('-')[2]}}</div>
                 </div>
-                <div class="news-list">
+                <div class="news-list" :key="'rent' + i.id" v-for="i in data.newsAndRunableUnit.rentablrUnits">
                     <Tag class-name="tag" backgroundColor="#F39900" color="#fff" borderColor="#fff">可租单元</Tag>
-                    <div class="news-details">大楼22楼进行出租，面积大约100公里</div>
-                    <div class="news-date">10.25</div>
-                </div>
-                <div class="news-list no-padding">
-                    <Tag class-name="tag" backgroundColor="#F39900" color="#fff" borderColor="#fff">可租单元</Tag>
-                    <div class="news-details">大楼22楼进行出租，面积大约100公里</div>
+                    <div class="news-details">{{i.title}}</div>
                     <div class="news-date">10.25</div>
                 </div>
             </Card>
@@ -240,6 +235,7 @@
             line-height: 1;
         }
         .news-details {
+            flex: 1;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
