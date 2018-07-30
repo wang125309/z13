@@ -16,7 +16,8 @@ const API = {
     foodshops: '/front/foodshops',
     washcars: '/front/washcars',
     cleanings: '/front/cleanings',
-    watersupplys: '/front/watersupplys'
+    watersupplys: '/front/watersupplys',
+    news: '/front/news'
 };
 
 export default API;

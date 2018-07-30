@@ -200,7 +200,7 @@ export default new Router({
             component: BuildingService
         },
         {
-            path: '/service-details',
+            path: '/service-details/:id',
             name: 'ServiceDetails',
             component: ServiceDetails
         },

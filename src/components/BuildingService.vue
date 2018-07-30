@@ -3,15 +3,15 @@
         <Navbar arrow-left>大厦服务</Navbar>
         <SearchInput></SearchInput>
         <div :class="panelCls">
-            <div :class="serviceItemCls" @click="go">
+            <div v-for="i in data" :class="serviceItemCls" @click="go(i.id)">
                 <div :class="messageCls">
                     <div :class="itemTitleCls">
-                        大厦6月份杀虫计划的温馨提示
+                        {{i.title}}
                     </div>
                 </div>
                 <div :class="subItemCls">
-                    物业部
-                    <span :class="timeCls">2分钟前</span>
+                    {{i.author}}
+                    <span :class="timeCls">{{i.create_time}}</span>
                 </div>
                 <Icon :class="iconCls" type="rent-img" size="0.25rem" position="right"/>
             </div>
@@ -25,6 +25,9 @@
     import SearchInput from "./lib/SearchInput";
     import Panel from "./lib/Panel";
     import Icon from "./lib/Icon";
+    import request from "../service/service";
+    import API from "../service/api";
+    import pageResult from "../service/pageResult";
 
     const prefix = 'z13';
     export default {
@@ -35,12 +38,31 @@
             Navbar,
             LayoutBase
         },
+        data () {
+            return {
+                data: []
+            }
+        },
         methods: {
-            go () {
+            go (id) {
                 this.$router.push({
-                    'path': '/service-details'
+                    'path': '/service-details/' + id
+                })
+            },
+            refresh (page) {
+                request(API.news, {
+                    type: 'GET'
+                }, (data) => {
+                    if (page === 1) this.data = [];
+                    Object.assign(this.data, pageResult(data.data, page));
+                }, (data) => {
+                    this.$root.$children[0].toggleToast('warning', data.message)
                 })
             }
+        },
+
+        mounted () {
+            this.refresh(1)
         },
         computed: {
             panelCls () {

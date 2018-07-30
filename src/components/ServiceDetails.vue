@@ -1,11 +1,11 @@
 <template>
     <LayoutWhite>
         <Navbar arrow-left>大厦服务详情</Navbar>
-        <div :class="titleCls">杀虫项目</div>
+        <div :class="titleCls">{{data.title}}</div>
         <div :class="authorAreaCls">
             <div :class="authorCls">
-                物业部
-                <span :class="authorTimeCls">10分钟前</span>
+                {{data.author}}
+                <span :class="authorTimeCls">{{data.create_time}}</span>
             </div>
         </div>
         <div :class="mainCls">
@@ -16,10 +16,31 @@
 <script>
     import Navbar from "./lib/Navbar";
     import LayoutWhite from "./lib/LayoutWhite";
+    import request from "../service/service";
+    import API from "../service/api";
 
     const prefix = 'z13';
     export default {
         components: {LayoutWhite, Navbar},
+        methods: {
+            refresh () {
+                request(`${API.news}/${this.$route.params.id}`, {
+                    type: 'GET'
+                }, (data) => {
+                    this.data = data.data;
+                }, (data) => {
+                    this.$root.$children[0].toggleToast('warning', data.message)
+                })
+            }
+        },
+        mounted () {
+            this.refresh();
+        },
+        data () {
+            return {
+                data: {}
+            }
+        },
         computed: {
             titleCls () {
                 return [
