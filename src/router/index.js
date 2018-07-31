@@ -22,6 +22,7 @@ const ActivityList = r => require.ensure([], ()=>r(require('@/components/Activit
 const PageNotFound = r => require.ensure([], ()=>r(require('@/components/PageNotFound.vue')))
 const Problem = r => require.ensure([], ()=>r(require('@/components/Problem.vue')))
 const RentBuilding = r => require.ensure([], ()=>r(require('@/components/RentBuilding.vue')))
+const RentBuildingDetails = r => require.ensure([], ()=>r(require('@/components/RentBuildingDetails.vue')))
 const ServiceList = r => require.ensure([], ()=>r(require('@/components/ServiceList.vue')))
 const DeliveryList = r => require.ensure([], ()=>r(require('@/components/DeliveryList.vue')))
 const DeliveryDetails = r => require.ensure([], ()=>r(require('@/components/DeliveryDetails.vue')))
@@ -148,6 +149,11 @@ export default new Router({
             path: '/rent-building',
             name: 'RentBuilding',
             component: RentBuilding
+        },
+        {
+            path: '/rent-building-details',
+            name: 'RentBuildingDetails',
+            component: RentBuildingDetails
         },
         {
             path: '/service-list',

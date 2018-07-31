@@ -88,7 +88,7 @@
                 data: {}
             }
         },
-        mounted () {
+        created () {
             this.refresh()
         },
         methods: {

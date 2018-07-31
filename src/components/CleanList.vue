@@ -92,7 +92,7 @@
                 data: []
             }
         },
-        mounted () {
+        created () {
             this.refresh(1)
         },
         computed: {
