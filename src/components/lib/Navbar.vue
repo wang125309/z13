@@ -2,7 +2,7 @@
     <div :class="navbarCls">
         <Icon class="arrow-left" position="left" size="0.05rem" @click="previous" v-if="arrowLeft" type="arrow-left"/>
         <slot></slot>
-        <Avatar v-if="user" size="0.09rem" class="navbar-avatar" @click="go" :src="user.image"/>
+        <Avatar v-if="user" size="0.08rem" class="navbar-avatar" @click="go" :src="user.image"/>
     </div>
 </template>
 
@@ -21,7 +21,12 @@
         },
         computed: {
             user () {
-                return this.$store.state.user;
+                if ('user' in this.$store.state) {
+                    return this.$store.state.user;
+                }
+                else {
+                    return {}
+                }
             },
             navbarCls() {
                 return [`${prefix}-navbar`]
@@ -59,6 +64,7 @@
     }
     .navbar-avatar {
         position: absolute;
+        top: $margin-small;
         right: $margin-small;
     }
 </style>
