@@ -24,19 +24,19 @@
             <div class="env-card">
                 <div class="temperature-area">
                     <div class="now-temperature">
-                        <span class="number">6</span>
+                        <span class="number">{{data.weather.wd}}</span>
                         <span class="addon">℃</span>
                     </div>
                     <div class="whole-temperature">
-                        <div class="whole-temperature-line">22℃ / -6℃</div>
-                        <div class="whole-temperature-line">雨夹雪</div>
+                        <div class="whole-temperature-line">{{data.weather.wdLow}} / {{data.weather.wdHigh}}</div>
+                        <div class="whole-temperature-line">{{data.weather.wdType}}</div>
                     </div>
                 </div>
                 <div class="PM25-area">
                     <div class="inner-pm25">
                         <div class="title">室内PM2.5</div>
                         <div class="pm25">
-                            <span class="pm25-number pm25-good">20</span>
+                            <span class="pm25-number pm25-good">{{data.weather.innerPm25}}</span>
                             <span class="pm25-icon">
                                 <Icon class-name="pm2-icon" type="env-good" size="0.04rem"/>
                                 <Icon class-name="pm2-icon" type="env-good" size="0.04rem"/>
@@ -47,11 +47,11 @@
                     <div class="outside-pm25">
                         <div class="title">室外PM2.5</div>
                         <div class="pm25">
-                            <span class="pm25-number pm25-danger">161</span>
+                            <span class="pm25-number pm25-danger">{{parseInt(data.weather.outerPm25)}}</span>
                             <span class="pm25-icon">
                                 <Icon class-name="pm2-icon" type="env-bad" size="0.04rem"/>
                                 <Icon class-name="pm2-icon" type="env-bad" size="0.04rem"/>
-                                <span class="pm25-danger pm25-text">重度污染</span>
+                                <span class="pm25-danger pm25-text">{{data.weather.pm25Type}}</span>
                             </span>
                         </div>
                     </div>
@@ -76,13 +76,13 @@
                 <div class="rent-wrap">
                     <Icon class-name="rent-img" type="rent-img" size="0.35rem"/>
                     <div class="rent-details">
-                        <div class="rent-title">13楼大面积精装修</div>
+                        <div class="rent-title">{{data.rentableUnits.pageResult[0].title}}</div>
                         <div class="rent-area">
-                            <p>300平米|13层</p>
-                            <p>100-200工位</p>
-                            <p>精装修</p>
+                            <p>{{data.rentableUnits.pageResult[0].area}}平米|{{data.rentableUnits.pageResult[0].location}}层</p>
+                            <p>{{data.rentableUnits.pageResult[0].capacity}}</p>
+                            <p>{{data.rentableUnits.pageResult[0].deck}}</p>
                             <p>
-                                <span class="price">10元</span>
+                                <span class="price">{{data.rentableUnits.pageResult[0].price}}元</span>
                                 <span>/平米</span>
                             </p>
                         </div>
@@ -153,7 +153,16 @@
                         el: '.swiper-pagination',
                     },
                 },
-                data: {}
+                data: {
+                    newsAndRunableUnit: {
+                        news: [],
+                        rentablrUnits: []
+                    },
+                    weather: {},
+                    rentableUnits: {
+                        pageResult:[{}]
+                    }
+                }
             }
         },
         methods: {

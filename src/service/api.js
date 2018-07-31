@@ -18,7 +18,8 @@ const API = {
     cleanings: '/front/cleanings',
     watersupplys: '/front/watersupplys',
     news: '/front/news',
-    rentableunits: '/fornt/rentableunits'
+    rentableunits: '/front/rentableunits',
+    uploadImage: '/common/file/base64/upload'
 };
 
 export default API;

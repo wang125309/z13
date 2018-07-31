@@ -165,6 +165,7 @@
                     can = canvas;
                     cc = canvas.toDataURL("image/jpeg", 1);
                     base64 = can.toDataURL("image/jpeg", 1);
+                    _self.$emit('uploaded', base64)
                     _self.image = base64;
                     _self.cutVisible = false;
                 }

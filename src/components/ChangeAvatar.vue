@@ -1,8 +1,8 @@
 <template>
     <LayoutBase>
         <Navbar arrowLeft>头像</Navbar>
-        <div class="avatar-area">
-            <ImageCliper ref="imageCliper" v-show="imageCliperVisible"/>
+        <div class="avatar-area" :style="'background-image:url('+ image +')'">
+            <ImageCliper @uploaded="uploaded"  ref="imageCliper" v-show="imageCliperVisible"/>
         </div>
         <Button v-if="changeButtonVisible" bottom-white className="change-avatar" @onClick="selectVisible" circle full width="92%">更换头像</Button>
         <div v-if="!changeButtonVisible" :class="actionToolsCls">
@@ -24,8 +24,11 @@
     import CellGroup from './lib/CellGroup'
     import Input from './lib/Input'
     import Button from './lib/Button'
-    import ActionSheet from "./lib/ActionSheet";
-    import ImageCliper from "./lib/ImageCliper";
+    import ActionSheet from "./lib/ActionSheet"
+    import ImageCliper from "./lib/ImageCliper"
+    import request from "../service/service"
+    import API from "../service/api"
+
     const prefix = 'z13';
 
     export default {
@@ -45,10 +48,13 @@
                 visibleAction: false,
                 uploadType: 'file',
                 imageCliperVisible: false,
-                changeButtonVisible: true
+                changeButtonVisible: true,
             }
         },
         computed: {
+            image () {
+                return this.$store.state.user.image;
+            },
             fileSelectorCls () {
                 return [
                     `${prefix}-file-selector`
@@ -94,6 +100,35 @@
             completeCliper () {
                 this.changeButtonVisible = true;
                 this.$refs.imageCliper.completeCliper(this.uploadType);
+            },
+            uploaded (image) {
+                this.image = image;
+                this.uploadImage();
+            },
+            changeAvatar (image) {
+                request(API.get_user_info, {
+                    type: 'PUT',
+                    data: {
+                        image: image,
+                        busiType: 2 //1 修改昵称2 修改头像3 修改公司4 修改工位6修改手机号
+                    }
+                }, (data) => {
+                    this.$root.$children[0].toggleToast('success', data.message);
+                }, (data) => {
+                    this.$root.$children[0].toggleToast('fail', data.message);
+                })
+            },
+            uploadImage () {
+                request(API.uploadImage, {
+                    type: 'POST',
+                    data: {
+                        fileBase64: this.image
+                    }
+                }, (data) => {
+                    this.changeAvatar(data.data)
+                }, (data) => {
+                    this.$root.$children[0].toggleToast('fail', data.message)
+                })
             }
         }
     }
@@ -136,6 +171,8 @@
         height: 0;
     }
     .avatar-area {
-
+        setBackgroundImage('')
+        background-position: top;
+        height: 1rem;
     }
 </style>
