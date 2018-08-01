@@ -1,7 +1,9 @@
 <template>
     <div :class="searchInputWrapCls">
-        <Icon  size="0.04rem"  :class-name="searchInputIconCls" position="left" type="search"/>
-        <input :class="searchInputCls" type="text"/>
+        <form :class="searchFormCls" type="search">
+            <Icon size="0.04rem" :class-name="searchInputIconCls" position="left" type="search"/>
+            <input @input="inputChange" @keypress="enter" v-bind:value="value" :class="searchInputCls" type="text"/>
+        </form>
     </div>
 </template>
 
@@ -9,7 +11,24 @@
     import Icon from "./Icon";
     const prefix = 'z13';
     export default {
-        components: {Icon},
+        components: {
+            Icon
+        },
+        watch: {
+            model () {
+
+            }
+        },
+        methods: {
+            enter ($evt) {
+                if ($evt.charCode === 13) {
+                    this.$emit('search')
+                }
+            },
+            inputChange ($evt) {
+                this.$emit('input', $evt.target.value)
+            }
+        },
         computed: {
             searchInputWrapCls() {
                 return [
@@ -25,6 +44,19 @@
                 return [
                     `${prefix}-search-input-icon`
                 ]
+            },
+            searchFormCls () {
+                return [
+                    `${prefix}-search-form`
+                ]
+            }
+        },
+        props: {
+            value: [String]
+        },
+        data() {
+            return {
+
             }
         }
     }
@@ -39,6 +71,7 @@
         position: relative;
         display: flex;
         .{$prefix}-search-input {
+            flex: 1;
             border-radius: $padding-base * 2;
             padding: $padding-small $padding-base*2 + $padding-small;
             display: block;
@@ -49,5 +82,9 @@
                 margin: $padding-small $padding-small+$margin-base;
             }
         }
+    }
+    .{$prefix}-search-form {
+        display: flex;
+        flex: 1;
     }
 </style>

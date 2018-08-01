@@ -38,7 +38,6 @@
                     </div>
                 </div>
             </div>
-
         </Panel>
     </LayoutBase>
 </template>
@@ -271,7 +270,7 @@
         background-color: #DFF3EC !important;
     }
     .{$prefix}-info-panel {
-        margin-top: $margin-base;
+        margin-top: 0.02rem;
     }
     .{$prefix}-info {
 

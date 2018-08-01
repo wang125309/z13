@@ -1,7 +1,7 @@
 <template>
     <LayoutBase>
         <Navbar arrow-left>社区活动</Navbar>
-        <SearchInput/>
+        <SearchInput v-model="searchWord" @search="search"/>
         <Tabs>
             <TabsCell @onClick="setActive(0)" :active="getActive(0)">全部</TabsCell>
             <TabsCell @onClick="setActive(1)" :active="getActive(1)">进行中</TabsCell>
@@ -10,9 +10,11 @@
         <div v-if="!data.length" class="empty">
             <Icon type="no-activity" size="0.25rem"/>
         </div>
-        <Card v-if="data.length" v-for="i in data" v-bind:key="'card'+i.id" @click="goActive(i.id)" full className="activity-card">
-            <ActivityImages v-bind:key="'images' + i.id" :src="i.image" :title="i.name" :status="i.status === 0 ? '全部' : i.status === 1 ? '进行中' : '已结束'" :date="i.begin_time.split(' ')[0]" :location="i.address" :tag="'已有' + i.signupCount + '人参与'"/>
-        </Card>
+        <div v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
+            <Card v-if="data.length" v-for="i in data" v-bind:key="'card'+i.id" @click="goActive(i.id)" full className="activity-card">
+                <ActivityImages v-bind:key="'images' + i.id" :src="i.image" :title="i.name" :status="i.status === 0 ? '全部' : i.status === 1 ? '进行中' : '已结束'" :date="i.begin_time.split(' ')[0]" :location="i.address" :tag="'已有' + i.signupCount + '人参与'"/>
+            </Card>
+        </div>
         <TabBar :active="2"/>
     </LayoutBase>
 </template>
@@ -48,22 +50,44 @@
             return {
                 active: localStorage['activity-busiType'] ? parseInt(localStorage['activity-busiType']) : 0,
                 data: [],
+                page: 1,
+                busy: false,
+                searchWord: ''
             }
         },
         created () {
-            this.refresh(1);
+            this.refresh(this.page)
         },
         methods: {
-            refresh (page) {
+            loadMore () {
+                this.page ++
+                this.refresh(this.page)
+            },
+            search () {
+                this.page = 1
+                console.log(this.searchWord)
+                this.refresh(this.page, this.searchWord)
+            },
+            refresh (page, name) {
+                this.busy = true
                 request(API.get_activitys, {
                     type: 'GET',
-                    data: {
+                    data: name ? {
                         busiType: this.getBusiType(),
-                        pageNumber: page
+                        pageNumber: page,
+                        name: name
+                    } : {
+                        busiType: this.getBusiType(),
+                        pageNumber: page,
                     }
                 }, (data) => {
-                    if (page === 1) this.data = [];
-                    Object.assign(this.data, pageResult(data.data, page));
+                    if (page === 1) {
+                        this.data = [];
+                    }
+                    if (data.data.totalPage >= page) {
+                        this.data = this.data.concat(pageResult(data.data))
+                        this.busy = false
+                    }
                 }, (data) => {
                     this.$root.$children[0].toggleToast('fail', data.message);
                 })
@@ -77,7 +101,8 @@
             setActive (n) {
                 localStorage['activity-busiType'] = n;
                 this.active = n;
-                this.refresh(1);
+                this.page = 1
+                this.refresh(1, this.searchWord);
             },
             goActive (id) {
                 this.$router.push({
