@@ -1,6 +1,8 @@
 <template>
     <div :class="activeCardItemCls">
-        <div :class="activeCardItemTitleCls">{{ title }}</div>
+        <div :class="activeCardItemTitleCls">
+            <div :class="activeCardItemTitleSpan">{{ title }}</div>
+        </div>
         <div :class="activeCardItemMessage" :style="messageStyle">
             <slot/>
         </div>
@@ -24,6 +26,11 @@
                         [`${prefix}-active-card-item-full`]: this.full,
                         [`${prefix}-active-card-item-cut`]: this.cut
                     }
+                ]
+            },
+            activeCardItemTitleSpan () {
+                return [
+                    `${prefix}-active-item-title-span`
                 ]
             },
             activeCardItemTitleCls() {
@@ -56,19 +63,18 @@
     @import '../../styles/var.styl';
     @import '../../styles/hairline.styl';
     .{$prefix}-active-card-item {
-        padding: $padding-base 0 0 0;
+        padding: $padding-base 0;
         position: relative;
         &-full {
             background-color: $white;
+
         }
         &-title {
             font-size: $font-size-head;
-            border-left: 3px solid $brand-color;
-            padding: 0 $padding-base;
+            padding: $padding-base 0;
             position: relative;
-
             &-cut {
-                margin-bottom: $padding-base;
+
             }
 
         }
@@ -89,9 +95,13 @@
         }
         &-cut {
             margin: 0;
-            padding: $padding-base 0 0 0;
+            padding: 0;
             margin-top: $margin-base;
         }
 
+    }
+    .{$prefix}-active-item-title-span {
+        border-left: 3px solid $brand-color;
+        padding: 0 $padding-base;
     }
 </style>

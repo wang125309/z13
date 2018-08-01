@@ -3,10 +3,11 @@
         <Navbar arrow-left>送水服务</Navbar>
         <Panel no-padding>
             <div :class="deliveryItemCls">
-                <div :class="deliveryItemIconCls"
-                     :style="'background-image:url('+ data.image +')'"/>
+                <div :class="deliveryItemIconCls" :style="'background-image:url('+ data.image +')'"></div>
                 <div :class="deliveryPanelCls">
-                    <Icon :class="callCls" type="call" position="right" size="0.12rem"/>
+                    <a v-on:click.stop="'return false'" :href="'tel:' + data.phone">
+                        <Icon :class="callCls" type="call" position="right" size="0.12rem"/>
+                    </a>
                     <div :class="deliveryTitleCls">
                         {{data.name}}
                         <span :class="viewNumCls">
@@ -280,10 +281,13 @@
         background-color: #DFF3EC !important;
     }
     .{$prefix}-info-panel {
-        margin-top: $margin-base;
+        margin-top: 0.02rem;
+        padding-right: 0.14rem;
     }
     .{$prefix}-info {
-
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
     }
     .{$prefix}-label {
         color: $font-second;

@@ -24,13 +24,13 @@
         </Card>
         <Panel noPadding>
             <ActivityCardItem title="活动介绍">
-                {{data.description}}
+                <div v-html="data.description"/>
             </ActivityCardItem>
             <ActivityCardItem title="规则">
-                {{data.rule_desc}}
+                <div v-html="data.rule_desc"/>
             </ActivityCardItem>
             <ActivityCardItem title="场地">
-                {{data.site_desc}}
+                <div v-html="data.descrsite_desciption"/>
             </ActivityCardItem>
             <ActivityCardItem title="评论" noBorder>
                 <div class="activity-comment-area">

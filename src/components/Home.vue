@@ -73,7 +73,7 @@
             </Panel>
 
             <Card class-name="rent-card" details="" full title="可租单元">
-                <div class="rent-wrap">
+                <div class="rent-wrap" @click="goRent(data.rentableUnits.pageResult[0].id)">
                     <Icon class-name="rent-img" type="rent-img" size="0.35rem"/>
                     <div class="rent-details">
                         <div class="rent-title">{{data.rentableUnits.pageResult[0].title}}</div>
@@ -91,14 +91,11 @@
             </Card>
             <Card full title="社区活动">
                 <swiper :options="swiperOption">
-                    <swiper-slide>
-                        <div class="activity-item"></div>
-                    </swiper-slide>
-                    <swiper-slide>
-                        <div class="activity-item"></div>
-                    </swiper-slide>
-                    <swiper-slide>
-                        <div class="activity-item"></div>
+                    <swiper-slide :key="'activity' + i.id" v-for="i in data.activitys.pageResult">
+                        <div @click="goActivity(i.id)" class="activity-item" :style="'background-image:url(' + i.image +')'">
+                            <div class="activity-item-title">{{i.name}}</div>
+                            <div class="activity-item-date">{{i.begin_time.split(' ')[0]}}</div>
+                        </div>
                     </swiper-slide>
                 </swiper>
             </Card>
@@ -161,6 +158,11 @@
                     weather: {},
                     rentableUnits: {
                         pageResult:[{}]
+                    },
+                    activitys: {
+                        pageResult:[{
+                            begin_time: ' '
+                        }]
                     }
                 }
             }
@@ -185,6 +187,16 @@
                 }
                 this.$router.push({
                     path: url
+                })
+            },
+            goRent (id) {
+                this.$router.push({
+                    path: '/rent-building/' + id
+                })
+            },
+            goActivity (id) {
+                this.$router.push({
+                    path: '/activity/' + id
                 })
             }
         },
@@ -352,6 +364,12 @@
             }
         }
     }
-
+    .activity-item-title {
+        font-size: $font-size-head;
+        padding: $padding-base;
+    }
+    .activity-item-date {
+        padding: 0 $padding-base;
+    }
 </style>
 

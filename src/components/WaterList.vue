@@ -7,7 +7,9 @@
                 <div :class="deliveryItemIconCls"
                      :style="'background-image:url('+ i.image +')'"/>
                 <div :class="deliveryPanelCls">
-                    <Icon :class="callCls" type="call" position="right" size="0.12rem"/>
+                    <a v-on:click.stop="'return false'" :href="'tel:' + i.phone">
+                        <Icon :class="callCls" type="call" position="right" size="0.12rem"/>
+                    </a>
                     <div :class="deliveryTitleCls">
                         {{i.name}}
                         <span :class="viewNumCls">
@@ -271,10 +273,13 @@
         background-color: #DFF3EC !important;
     }
     .{$prefix}-info-panel {
-        margin-top: $margin-base;
+        margin-top: 0.02rem;
+        padding-right: 0.14rem;
     }
     .{$prefix}-info {
-
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
     }
     .{$prefix}-label {
         color: $font-second;
@@ -284,5 +289,7 @@
         transform: translateY(-50%);
         margin-right: $padding-base;
     }
+    .{$prefix}-text {
 
+    }
 </style>

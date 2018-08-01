@@ -6,7 +6,9 @@
                 <div :class="deliveryItemIconCls"
                      :style="'background-image:url('+ data.image +')'"/>
                 <div :class="deliveryPanelCls">
-                    <Icon :class="callCls" type="call" position="right" size="0.12rem"/>
+                    <a v-on:click.stop="'return false'" :href="'tel:' + data.phone">
+                        <Icon :class="callCls" type="call" position="right" size="0.12rem"/>
+                    </a>
                     <div :class="deliveryTitleCls">
                         {{data.name}}
                         <span :class="viewNumCls">
@@ -14,13 +16,13 @@
                             <span :class="viewStringCls">{{data.uv}}</span>
                         </span>
                     </div>
-                    <div :class="starPanelCls">
-                        <FontIcon :className="starCls" type="Star"/>
-                        <FontIcon :className="starCls" type="Star"/>
-                        <FontIcon :className="starCls" type="Star"/>
-                        <FontIcon :className="unstarCls" type="Star"/>
-                        <FontIcon :className="unstarCls" type="Star"/>
-                    </div>
+                    <!--<div :class="starPanelCls">-->
+                        <!--<FontIcon :className="starCls" type="Star"/>-->
+                        <!--<FontIcon :className="starCls" type="Star"/>-->
+                        <!--<FontIcon :className="starCls" type="Star"/>-->
+                        <!--<FontIcon :className="unstarCls" type="Star"/>-->
+                        <!--<FontIcon :className="unstarCls" type="Star"/>-->
+                    <!--</div>-->
                     <div :class="tagPanelCls">
                         <Tag :className="greenCls">早餐</Tag>
                         <Tag :className="yellowCls">午餐</Tag>
@@ -283,12 +285,14 @@
     .{$prefix}-info {
 
     }
+    .{$prefix}-tag-panel {
+        padding-top: $padding-base;
+    }
     .{$prefix}-label {
         color: $font-second;
     }
     .{$prefix}-call {
-        top: 50%;
-        transform: translateY(-50%);
+        top: $padding-base * 2;
         margin-right: $padding-base;
     }
 </style>

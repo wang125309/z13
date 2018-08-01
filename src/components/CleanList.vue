@@ -4,10 +4,11 @@
         <SearchInput></SearchInput>
         <Panel no-padding>
             <div v-for="i in data" v-bind:key="'delivery' + i.id" @click="itemClick(i.id)" :class="deliveryItemCls">
-                <div :class="deliveryItemIconCls"
-                     :style="'background-image:url('+ i.image +')'"/>
+                <div :class="deliveryItemIconCls" :style="'background-image:url('+ i.image +')'"/>
                 <div :class="deliveryPanelCls">
-                    <Icon :class="callCls" type="call" position="right" size="0.12rem"/>
+                    <a v-on:click.stop="'return false'" :href="'tel:' + i.phone">
+                        <Icon :class="callCls" type="call" position="right" size="0.12rem"/>
+                    </a>
                     <div :class="deliveryTitleCls">
                         {{i.name}}
                         <span :class="viewNumCls">
@@ -203,6 +204,9 @@
     @import '../styles/var.styl';
     @import '../styles/iconfont.css';
     @import '../styles/hairline.styl';
+    .description {
+        color: $font-second;
+    }
     .{$prefix}-delivery-item {
         position: relative;
         padding: $padding-base;
@@ -254,7 +258,6 @@
         color: $font-second;
     }
     .{$prefix}-panel {
-        margin-top: $margin-base;
         background-color: $white;
     }
     .{$prefix}-tag-blue {
@@ -271,9 +274,12 @@
     }
     .{$prefix}-info-panel {
         margin-top: 0.02rem;
+        padding-right: 0.14rem;
     }
     .{$prefix}-info {
-
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
     }
     .{$prefix}-label {
         color: $font-second;
@@ -283,5 +289,4 @@
         transform: translateY(-50%);
         margin-right: $padding-base;
     }
-
 </style>
