@@ -27,14 +27,9 @@
                     </div>
                     <div :class="priceCls">
                         <div :class="mainPriceCls">{{i.price}}元/m²·天</div>
-                        <div :class="subPriceCls">约{{i.price}}万元月</div>
+                        <div :class="subPriceCls">约{{i.price*30}}元月</div>
                     </div>
                 </div>
-            </div>
-
-            <div :class="viewMoreCls">
-                查看更多
-                <Icon :class-name="viewMoreIconCls" size="0.04rem" type="view-more"/>
             </div>
         </div>
     </LayoutBase>
@@ -48,6 +43,7 @@
     import Icon from "./lib/Icon";
     import request from "../service/service";
     import API from "../service/api";
+    import pageResult from "../service/pageResult";
     const prefix = 'z13';
 
     export default {
@@ -142,7 +138,7 @@
                 })
             },
             go (id) {
-                this.$route.push({
+                this.$router.push({
                     path: '/rent-building-details/' + id
                 })
             }

@@ -7,129 +7,29 @@
             <DropdownTab>楼层</DropdownTab>
         </Tabs>
         <div :class="rentBuildingAreaCls">
-            <div :class="rentBuildingItemCls">
-                <Icon :class-name="rentImgCls" type="rent-img" position="left" size="0.25rem"/>
+            <div v-for="i in data" :key="'rent' + i.id" @click="go(i.id)" :class="rentBuildingItemCls">
+                <Icon :class="rentImgCls" type="rent-img" position="left" size="0.25rem"/>
                 <div :class="rentBuildingItemInfoCls">
-                    <div :class="titleCls">300平米 | 13层</div>
+                    <div :class="titleCls">{{i.area}} | {{i.location}}</div>
                     <div :class="descAreaCls">
                         <div :class="descCls">
                             <span :class="subTitleCls">容纳人数：</span>
-                            <span :class="detailsCls">100-200工位</span>
+                            <span :class="detailsCls">{{i.capacity}}</span>
                         </div>
                         <div :class="descCls">
                             <span :class="subTitleCls">采光朝向：</span>
-                            <span :class="detailsCls">东南</span>
+                            <span :class="detailsCls">{{i.face}}</span>
                         </div>
                         <div :class="descCls">
                             <span :class="subTitleCls">装修情况：</span>
-                            <span :class="detailsCls">精装修</span>
+                            <span :class="detailsCls">{{i.deck}}</span>
                         </div>
                     </div>
                     <div :class="priceCls">
-                        <div :class="mainPriceCls">10.88元/m²·天</div>
-                        <div :class="subPriceCls">约3.15万元/月</div>
+                        <div :class="mainPriceCls">{{i.price}}元/m²·天</div>
+                        <div :class="subPriceCls">约{{i.price*30}}元月</div>
                     </div>
                 </div>
-            </div>
-            <div :class="rentBuildingItemCls">
-                <Icon :class-name="rentImgCls" type="rent-img" position="left" size="0.25rem"/>
-                <div :class="rentBuildingItemInfoCls">
-                    <div :class="titleCls">300平米 | 13层</div>
-                    <div :class="descAreaCls">
-                        <div :class="descCls">
-                            <span :class="subTitleCls">容纳人数：</span>
-                            <span :class="detailsCls">100-200工位</span>
-                        </div>
-                        <div :class="descCls">
-                            <span :class="subTitleCls">采光朝向：</span>
-                            <span :class="detailsCls">东南</span>
-                        </div>
-                        <div :class="descCls">
-                            <span :class="subTitleCls">装修情况：</span>
-                            <span :class="detailsCls">精装修</span>
-                        </div>
-                    </div>
-                    <div :class="priceCls">
-                        <div :class="mainPriceCls">10.88元/m²·天</div>
-                        <div :class="subPriceCls">约3.15万元/月</div>
-                    </div>
-                </div>
-            </div>
-            <div :class="rentBuildingItemCls">
-                <Icon :class-name="rentImgCls" type="rent-img" position="left" size="0.25rem"/>
-                <div :class="rentBuildingItemInfoCls">
-                    <div :class="titleCls">300平米 | 13层</div>
-                    <div :class="descAreaCls">
-                        <div :class="descCls">
-                            <span :class="subTitleCls">容纳人数：</span>
-                            <span :class="detailsCls">100-200工位</span>
-                        </div>
-                        <div :class="descCls">
-                            <span :class="subTitleCls">采光朝向：</span>
-                            <span :class="detailsCls">东南</span>
-                        </div>
-                        <div :class="descCls">
-                            <span :class="subTitleCls">装修情况：</span>
-                            <span :class="detailsCls">精装修</span>
-                        </div>
-                    </div>
-                    <div :class="priceCls">
-                        <div :class="mainPriceCls">10.88元/m²·天</div>
-                        <div :class="subPriceCls">约3.15万元/月</div>
-                    </div>
-                </div>
-            </div>
-            <div :class="rentBuildingItemCls">
-                <Icon :class-name="rentImgCls" type="rent-img" position="left" size="0.25rem"/>
-                <div :class="rentBuildingItemInfoCls">
-                    <div :class="titleCls">300平米 | 13层</div>
-                    <div :class="descAreaCls">
-                        <div :class="descCls">
-                            <span :class="subTitleCls">容纳人数：</span>
-                            <span :class="detailsCls">100-200工位</span>
-                        </div>
-                        <div :class="descCls">
-                            <span :class="subTitleCls">采光朝向：</span>
-                            <span :class="detailsCls">东南</span>
-                        </div>
-                        <div :class="descCls">
-                            <span :class="subTitleCls">装修情况：</span>
-                            <span :class="detailsCls">精装修</span>
-                        </div>
-                    </div>
-                    <div :class="priceCls">
-                        <div :class="mainPriceCls">10.88元/m²·天</div>
-                        <div :class="subPriceCls">约3.15万元/月</div>
-                    </div>
-                </div>
-            </div>
-            <div :class="rentBuildingItemCls">
-                <Icon :class-name="rentImgCls" type="rent-img" position="left" size="0.25rem"/>
-                <div :class="rentBuildingItemInfoCls">
-                    <div :class="titleCls">300平米 | 13层</div>
-                    <div :class="descAreaCls">
-                        <div :class="descCls">
-                            <span :class="subTitleCls">容纳人数：</span>
-                            <span :class="detailsCls">100-200工位</span>
-                        </div>
-                        <div :class="descCls">
-                            <span :class="subTitleCls">采光朝向：</span>
-                            <span :class="detailsCls">东南</span>
-                        </div>
-                        <div :class="descCls">
-                            <span :class="subTitleCls">装修情况：</span>
-                            <span :class="detailsCls">精装修</span>
-                        </div>
-                    </div>
-                    <div :class="priceCls">
-                        <div :class="mainPriceCls">10.88元/m²·天</div>
-                        <div :class="subPriceCls">约3.15万元/月</div>
-                    </div>
-                </div>
-            </div>
-            <div :class="viewMoreCls">
-                查看更多
-                <Icon :class-name="viewMoreIconCls" size="0.04rem" type="view-more"/>
             </div>
         </div>
     </LayoutBase>
@@ -141,7 +41,9 @@
     import Tabs from "./lib/Tabs";
     import DropdownTab from "./lib/DropdownTab";
     import Icon from "./lib/Icon";
-
+    import request from "../service/service";
+    import API from "../service/api";
+    import pageResult from "../service/pageResult";
     const prefix = 'z13';
 
     export default {
@@ -223,6 +125,31 @@
                     `${prefix}-view-more-icon`
                 ]
             }
+        },
+        methods: {
+            refresh (page) {
+                request(API.rentableunits, {
+                    type: 'GET'
+                }, (data) => {
+                    if (page === 1) this.data = [];
+                    Object.assign(this.data, pageResult(data.data, page));
+                }, (data) => {
+                    this.$root.$children[0].toggleToast('warning', data.message)
+                })
+            },
+            go (id) {
+                this.$router.push({
+                    path: '/rent-building-details/' + id
+                })
+            }
+        },
+        data () {
+            return {
+                data: []
+            }
+        },
+        created () {
+            this.refresh(1);
         }
     }
 </script>
