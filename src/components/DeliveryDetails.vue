@@ -3,8 +3,7 @@
         <Navbar arrow-left>餐饮服务</Navbar>
         <Panel no-padding>
             <div :class="deliveryItemCls">
-                <div :class="deliveryItemIconCls"
-                     :style="'background-image:url('+ data.image +')'"/>
+                <div :class="deliveryItemIconCls" :style="'background-image:url('+ data.image +')'"/>
                 <div :class="deliveryPanelCls">
                     <a v-on:click.stop="'return false'" :href="'tel:' + data.phone">
                         <Icon :class="callCls" type="call" position="right" size="0.12rem"/>

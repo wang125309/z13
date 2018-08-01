@@ -151,7 +151,7 @@ export default new Router({
             component: RentBuilding
         },
         {
-            path: '/rent-building-details',
+            path: '/rent-building-details/:id',
             name: 'RentBuildingDetails',
             component: RentBuildingDetails
         },
