@@ -1,18 +1,13 @@
 <template>
     <div :class="dropdownTabCls" @click="setActive">
         <span :class="dropdownTextCls">
-            <slot></slot>
+            {{title}}
         </span>
         <FontIcon :class-name="pullDownCls" size="10px" type="pull-down"/>
         <div @click="menuClick" v-show="active" :class="dropdownCls">
             <FontIcon :class-name="arrowCls" size="16px" type="pull-down"/>
             <FontIcon :class-name="arrowWrapCls" size="16px" type="pull-down"/>
-            <div tabindex="0" :class="dropdownItemCls">90m²以下</div>
-            <div tabindex="0" :class="dropdownItemCls">90m²-150m²</div>
-            <div tabindex="0" :class="dropdownItemCls">150m²-220m²</div>
-            <div tabindex="0" :class="dropdownItemCls">220m²-500m²</div>
-            <div tabindex="0" :class="dropdownItemCls">500m²-1000m²</div>
-            <div tabindex="0" :class="dropdownItemCls">1000m²以上</div>
+            <slot></slot>
         </div>
     </div>
 </template>
@@ -27,6 +22,11 @@
             active: {
                 type: Boolean,
                 default: false
+            },
+            title: {
+                type: String,
+                default: '',
+                require: true
             }
         },
         computed: {
@@ -56,17 +56,8 @@
                 return [
                     `${prefix}-dropdown`
                 ]
-            },
-            dropdownItemCls () {
-                return [
-                    `${prefix}-dropdown-item`
-                ]
-            },
-            dropdownTextCls() {
-                return [
-                    `${prefix}-dropdown-text`
-                ]
             }
+
         },
         methods: {
             setActive () {

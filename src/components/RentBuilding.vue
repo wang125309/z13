@@ -2,9 +2,13 @@
     <LayoutBase>
         <Navbar arrow-left>可租单元</Navbar>
         <Tabs>
-            <DropdownTab>面积范围</DropdownTab>
-            <DropdownTab>容纳工位</DropdownTab>
-            <DropdownTab>楼层</DropdownTab>
+            <DropdownTab title="面积范围">
+                <div tabindex="0" :class="dropdownItemCls">100m²以下</div>
+                <div tabindex="0" :class="dropdownItemCls">100m²以上</div>
+                <div tabindex="0" :class="dropdownItemCls">100m²-200m²</div>
+            </DropdownTab>
+            <DropdownTab title="容纳工位"></DropdownTab>
+            <DropdownTab title="楼层"></DropdownTab>
         </Tabs>
         <div :class="rentBuildingAreaCls">
             <div v-for="i in data" :key="'rent' + i.id" @click="go(i.id)" :class="rentBuildingItemCls">
@@ -124,6 +128,16 @@
                 return [
                     `${prefix}-view-more-icon`
                 ]
+            },
+            dropdownItemCls () {
+                return [
+                    `${prefix}-dropdown-item`
+                ]
+            },
+            dropdownTextCls() {
+                return [
+                    `${prefix}-dropdown-text`
+                ]
             }
         },
         methods: {
@@ -220,6 +234,18 @@
                 }
             }
         }
-
+        .{$prefix}-dropdown {
+            &-item {
+                position: relative;
+                hairline('bottom');
+                padding: $padding-small;
+                &:active {
+                    background-color: $white * 0.95;
+                }
+                &:last-child {
+                    hairline-remove('bottom');
+                }
+            }
+        }
     }
 </style>
