@@ -41,6 +41,7 @@ const ChangeName = r => require.ensure([], ()=>r(require('@/components/ChangeNam
 const ChangeCompany = r => require.ensure([], ()=>r(require('@/components/ChangeCompany.vue')))
 const ChangeCompanyPosition = r => require.ensure([], ()=>r(require('@/components/ChangeCompanyPosition.vue')))
 const ChangeMobile = r => require.ensure([], ()=>r(require('@/components/ChangeMobile.vue')))
+const SignUpList = r => require.ensure([], ()=>r(require('@/components/SignUpList.vue')))
 
 export default new Router({
     scrollBehavior: () => ({y: 0}),
@@ -244,6 +245,11 @@ export default new Router({
             path: '/change-avatar-position',
             name: 'ChangeCompanyPosition',
             component: ChangeCompanyPosition
+        },
+        {
+            path: '/sign-up-list/:id',
+            name: 'SignUpList',
+            component: SignUpList
         }
     ]
 })

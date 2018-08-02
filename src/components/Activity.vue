@@ -18,7 +18,13 @@
                 </Cell>
                 <Cell padding withoutBorder>
                     <div class="activity-card-title">活动参与：</div>
-                    <div class="activity-card-message">{{data.signupCount}} 人参与</div>
+                    <div class="activity-card-message">
+                        <div class="activity-card-message-text">{{data.signupCount}} 人参与</div>
+                        <div class="activity-card-message-avatars">
+                            <Avatar v-for="i in data.signups" :key="'avatar' + i.id" size="0.05rem"/>
+                            <Icon @click="signUpMenu" type="arrow-right" size="0.05rem"/>
+                        </div>
+                    </div>
                 </Cell>
             </CellGroup>
         </Card>
@@ -136,6 +142,11 @@
             this.refresh_comments();
         },
         methods: {
+            signUpMenu () {
+                this.$router.push({
+                    path: '/sign-up-list/' + this.$route.params.id
+                })
+            },
             like (id) {
                 if (!this.liked) {
                     this.liked = true;
@@ -386,5 +397,12 @@
         left: 0;
         top: 0;
         z-index: 100;
+    }
+    .activity-card-message {
+        display: flex;
+        justify-content: space-between;
+    }
+    .activity-card-message-avatars {
+
     }
 </style>

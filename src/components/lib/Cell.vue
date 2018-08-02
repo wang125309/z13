@@ -115,7 +115,7 @@
             }
         }
         &-padding {
-            padding: $padding-base $padding-base $padding-base 0;
+            padding: $padding-base 0;
         }
         &-problem {
 
