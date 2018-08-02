@@ -1,7 +1,6 @@
 {<template>
     <LayoutBase>
         <Navbar arrow-left>大厦布局</Navbar>
-        <SearchInput/>
         <CellGroup :class-name="cellGroupCls" full no-margin>
             <div :class="cellCls">
                 <Icon size="0.2rem" :class="iconCls" type="rent-img" position="left"/>
