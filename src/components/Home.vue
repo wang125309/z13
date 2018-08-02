@@ -72,7 +72,7 @@
                 </ServiceCellGroup>
             </Panel>
 
-            <Card class-name="rent-card" details="" full title="可租单元">
+            <Card class-name="rent-card" details="" full title="可租单元" viewDetails="/rent-building">
                 <div class="rent-wrap" @click="goRent(data.rentableUnits.pageResult[0].id)">
                     <Icon class-name="rent-img" type="rent-img" size="0.35rem"/>
                     <div class="rent-details">
@@ -89,7 +89,7 @@
                     </div>
                 </div>
             </Card>
-            <Card full title="社区活动">
+            <Card full title="社区活动" viewDetails="/activity-list">
                 <swiper :options="swiperOption">
                     <swiper-slide :key="'activity' + i.id" v-for="i in data.activitys.pageResult">
                         <div @click="goActivity(i.id)" class="activity-item" :style="'background-image:url(' + i.image +')'">

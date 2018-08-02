@@ -45,6 +45,7 @@
         </ActivityCardItem>
         <ActivityCardItem no-padding  cut full title="保洁服务">
             <Good v-for="i in data.cleaningServices"
+                  :key="'good' + i.id"
                   :title="i.name"
                   :logo="i.image"
                   :price="i.price"

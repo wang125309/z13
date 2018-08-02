@@ -44,6 +44,7 @@
         </ActivityCardItem>
         <ActivityCardItem no-padding  cut full title="商品规格">
             <Good v-for="i in data.waterInfos"
+                  :key="'good' + i.id"
                   :title="i.name"
                   :logo="i.image"
                   :price="i.price"

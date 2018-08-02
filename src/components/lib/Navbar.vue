@@ -34,7 +34,14 @@
         },
         methods: {
             previous () {
-                this.$router.go(-1);
+                if (this.$route.name === 'Login') {
+                    this.$router.push({
+                        path: '/'
+                    })
+                } else {
+                    this.$router.go(-1);
+                }
+
             },
             go () {
                 this.$router.push({

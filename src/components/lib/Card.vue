@@ -1,6 +1,9 @@
 <template>
     <div @click="handleClick" :class="cardWrapCls">
-        <div v-if="title" :class="cardTitleCls">{{title}}</div>
+        <div v-if="title" :class="cardTitleCls">
+            {{title}}
+            <Icon v-if="viewDetails" type="detail" size="0.04rem" position="right" :class="detailsCls" @click="view"/>
+        </div>
         <div :class="cardCls" :style="cardStyle">
             <slot></slot>
             <div v-if="overflow" :class="cardOverflowCls"/>
@@ -10,15 +13,18 @@
 </template>
 
 <script>
+    import Icon from './Icon'
     const prefix = 'z13';
     export default {
+        components: {Icon},
         props: {
             overflow: [Boolean],
             height: [String],
             className: [String],
             full: [Boolean],
             title: [String],
-            noPadding: [Boolean]
+            noPadding: [Boolean],
+            viewDetails: [String]
         },
         computed: {
             cardWrapCls() {
@@ -52,11 +58,21 @@
                 return [
                     `${prefix}-card-overflow`
                 ]
+            },
+            detailsCls () {
+                return [
+                    `${prefix}-icon-details`
+                ]
             }
         },
         methods: {
             handleClick() {
                 this.$emit('click')
+            },
+            view () {
+                this.$router.push({
+                    path: this.viewDetails
+                })
             }
         }
     }
@@ -76,6 +92,8 @@
             padding: $padding-base;
             color: $font-second;
             background-color: $white;
+            display: flex;
+            justify-content: space-between;
         }
         .{$prefix}-card {
             position: relative;
@@ -99,6 +117,9 @@
                 hairline('bottom');
                 //border-bottom: 1px solid $border-color;
             }
+        }
+        .{$prefix}-icon-details {
+            margin-right: $padding-base;
         }
     }
 

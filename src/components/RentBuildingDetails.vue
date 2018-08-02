@@ -2,6 +2,9 @@
     <LayoutBase>
         <Navbar arrow-left>可租单元</Navbar>
         <Banner :style="'background-image:url(' + data.image + ')'"/>
+        <div>
+
+        </div>
         <!--<div :class="rentBuildingAreaCls">-->
             <!--<div v-for="i in data" :key="'rent' + i.id" @click="go(i.id)" :class="rentBuildingItemCls">-->
                 <!--<Icon :class="rentImgCls" type="rent-img" position="left" size="0.25rem"/>-->
