@@ -1,8 +1,8 @@
 <template>
     <LayoutBase>
         <Navbar arrow-left>洗车服务</Navbar>
-        <SearchInput></SearchInput>
-        <Panel no-padding>
+        <SearchInput v-model="searchWord" @search="search"/>
+        <Panel no-padding v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
             <div v-for="i in data" v-bind:key="'delivery' + i.id" @click="itemClick(i.id)" :class="deliveryItemCls">
                 <div :class="deliveryItemIconCls"
                      :style="'background-image:url('+ i.image +')'"/>
@@ -73,17 +73,40 @@
             Tag
         },
         methods: {
+            loadMore () {
+                this.page ++
+                this.refresh(this.page)
+            },
             itemClick (id) {
                 this.$router.push({
                     path: '/wash-car/' + id
                 })
             },
+            search () {
+                this.page = 1
+                this.refresh(this.page, this.searchWord)
+            },
             refresh (page) {
-                request(API.washcars, {
-                    type: 'GET'
+                this.busy = true;
+                request(API.washcars, this.searchWord ? {
+                    type: 'GET',
+                    data: {
+                        pageNumber: page,
+                        name: this.searchWord
+                    }
+                }: {
+                    type: 'GET',
+                    data: {
+                        pageNumber: page
+                    }
                 }, (data) => {
-                    if (page === 1) this.data = [];
-                    Object.assign(this.data, pageResult(data.data, page));
+                    if (page === 1) {
+                        this.data = [];
+                    }
+                    if (data.data.totalPage >= page) {
+                        this.data = this.data.concat(pageResult(data.data))
+                        this.busy = false
+                    }
                 }, (data) => {
                     this.$root.$children[0].toggleToast('warning', data.message)
                 })
@@ -91,7 +114,10 @@
         },
         data () {
             return {
-                data: []
+                data: [],
+                busy: false,
+                searchWord: '',
+                page: 1
             }
         },
         created () {

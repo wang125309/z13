@@ -65,7 +65,6 @@
             },
             search () {
                 this.page = 1
-                console.log(this.searchWord)
                 this.refresh(this.page, this.searchWord)
             },
             refresh (page, name) {

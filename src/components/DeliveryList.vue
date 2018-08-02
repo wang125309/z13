@@ -1,8 +1,8 @@
 <template>
     <LayoutBase>
         <Navbar arrow-left>餐饮服务</Navbar>
-        <SearchInput></SearchInput>
-        <Panel no-padding>
+        <SearchInput v-model="searchWord" @search="search"/>
+        <Panel no-padding v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
             <div v-for="i in data" v-bind:key="'delivery' + i.id" @click="itemClick(i.id)" :class="deliveryItemCls">
                 <div :class="deliveryItemIconCls"
                      :style="'background-image:url('+ i.image +')'"/>
@@ -83,12 +83,35 @@
                     path: '/delivery-details/' + id
                 })
             },
+            loadMore () {
+                this.page ++
+                this.refresh(this.page)
+            },
+            search () {
+                this.page = 1
+                this.refresh(this.page, this.searchWord)
+            },
             refresh (page) {
-                request(API.foodshops, {
-                    type: 'GET'
+                this.busy = true;
+                request(API.foodshops, this.searchWord ? {
+                    type: 'GET',
+                    data: {
+                        pageNumber: page,
+                        name: this.searchWord
+                    }
+                }: {
+                    type: 'GET',
+                    data: {
+                        pageNumber: page
+                    }
                 }, (data) => {
-                    if (page === 1) this.data = [];
-                    Object.assign(this.data, pageResult(data.data, page));
+                    if (page === 1) {
+                        this.data = [];
+                    }
+                    if (data.data.totalPage >= page) {
+                        this.data = this.data.concat(pageResult(data.data))
+                        this.busy = false
+                    }
                 }, (data) => {
                     this.$root.$children[0].toggleToast('warning', data.message)
                 })
@@ -96,7 +119,10 @@
         },
         data () {
             return {
-                data: []
+                data: [],
+                searchWord: '',
+                page: 1,
+                busy: false
             }
         },
         created () {
