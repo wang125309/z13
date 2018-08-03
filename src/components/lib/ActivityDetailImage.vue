@@ -60,6 +60,9 @@
         position: relative;
         width: 100%;
         height: 0.4rem;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
         &-title {
             padding: $padding-base;
         }
