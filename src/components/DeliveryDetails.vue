@@ -23,9 +23,9 @@
                         <!--<FontIcon :className="unstarCls" type="Star"/>-->
                     <!--</div>-->
                     <div :class="tagPanelCls">
-                        <Tag :className="greenCls">早餐</Tag>
-                        <Tag :className="yellowCls">午餐</Tag>
-                        <Tag :className="blueCls">晚餐</Tag>
+                        <Tag v-if="get_business_type(data.business_type, '1')" :className="greenCls">早餐</Tag>
+                        <Tag v-if="get_business_type(data.business_type, '2')" :className="yellowCls">午餐</Tag>
+                        <Tag v-if="get_business_type(data.business_type, '3')" :className="blueCls">晚餐</Tag>
                     </div>
                     <div :class="infoPanelCls">
                         <div :class="infoCls">
@@ -110,13 +110,24 @@
         },
         data () {
             return {
-                data: {}
+                data: {
+                    business_type: ''
+                }
             }
         },
         mounted () {
             this.refresh()
         },
         methods: {
+            get_business_type (business_type, type) {
+                let business_type_array = business_type.split('-');
+                for (let i of business_type_array) {
+                    if (i === type) {
+                        return true;
+                    }
+                }
+                return false;
+            },
             refresh () {
                 request(`${API.foodshops}/${this.$route.params.id}/`, {
                     type: 'GET'

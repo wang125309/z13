@@ -25,9 +25,9 @@
                         <!--<FontIcon :className="unstarCls" type="Star"/>-->
                     <!--</div>-->
                     <div :class="tagPanelCls">
-                        <Tag :className="greenCls">早餐</Tag>
-                        <Tag :className="yellowCls">午餐</Tag>
-                        <Tag :className="blueCls">晚餐</Tag>
+                        <Tag v-if="get_business_type(i.business_type, '1')" :className="greenCls">早餐</Tag>
+                        <Tag v-if="get_business_type(i.business_type, '2')" :className="yellowCls">午餐</Tag>
+                        <Tag v-if="get_business_type(i.business_type, '3')" :className="blueCls">晚餐</Tag>
                     </div>
                     <div :class="infoPanelCls">
                         <div :class="infoCls">
@@ -78,6 +78,15 @@
             Tag
         },
         methods: {
+            get_business_type (business_type, type) {
+                let business_type_array = business_type.split('-');
+                for (let i of business_type_array) {
+                    if (i === type) {
+                        return true;
+                    }
+                }
+                return false;
+            },
             itemClick (id) {
                 this.$router.push({
                     path: '/delivery-details/' + id
