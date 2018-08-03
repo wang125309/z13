@@ -44,16 +44,39 @@
                 </div>
             </div>
         </Panel>
-        <ActivityCardItem cut full title="服务说明">
-            <div>afasdfsdf</div>
-            <div>afasdfsdf</div>
-            <div>afasdfsdf</div>
-        </ActivityCardItem>
-        <ActivityCardItem cut full title="洗车服务">
-            <div>sdfafs</div>
-            <div>sdfafs</div>
-            <div>sdfafs</div>
-        </ActivityCardItem>
+        <div :class="specialFoodsPanelCls" v-for="i in data.foodTypes" :key="'foodType' + i.id">
+            <div :class="specialFoodsPanelTitle">
+                <div :class="specialFoodsPanelTitleInnerCls">{{i.name}}菜品</div>
+                <Icon :class="specialFoodsPanelTitleArrowRightCls" position="right" type="up-arrow" size="0.04rem"/>
+            </div>
+            <div :class="specialFoodCls" v-for="j in i.foodInfos" :key="'food'+i.id+'_'+j.id">
+                <div :class="specialFoodImgCls" :style="'background-image:url(' + j.image + ')'">
+                </div>
+                <div :class="specialFoodInnerCls">
+                    <div :class="specialFoodTitleCls">
+                        <div :class="specialFoodTextCls">{{j.name}}</div>
+                        <div :class="specialFoodTitleCheckCls">
+                            <div :class="specialFoodTitleCheckUpCls">
+                                <Icon v-if="!i.isPraise" size="0.04rem" type="food-like"/>
+                                <Icon v-else size="0.04rem" type="food-liked"/>
+                                <div :class="specialFoodTitleCheckUpTextCls">{{j.praise}}</div>
+                            </div>
+                            <div :class="specialFoodTitleCheckDownCls">
+                                <Icon v-if="!i.isPraise" size="0.04rem" type="food-dislike"/>
+                                <Icon v-else size="0.04rem" type="food-disliked"/>
+                                <div :class="specialFoodTitleCheckDownTextCls">{{j.praise}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div :class="specialFoodTextPriceCls">
+                        <div :class="specialFoodTextPriceIconCls">￥</div>
+                        <div :class="specialFoodTextPricePriceCls">{{j.price}}</div>
+                        <div :class="specialFoodTextPriceTailCls">元</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </LayoutBase>
 </template>
 <script>
@@ -99,12 +122,115 @@
                     type: 'GET'
                 }, (data) => {
                     this.data = data.data;
+                    this.data.foodTypes = this.data.foodTypes.filter((data) => {
+                        if (data.foodInfos.length) {
+                            return data
+                        }
+                    })
                 }, (data) => {
                     this.$root.$children[0].toggleToast('warning', data.message)
                 })
             }
         },
         computed: {
+            specialFoodsPanelCls () {
+                return [
+                    `${prefix}-special-foods-panel`
+                ]
+            },
+            specialFoodsPanelTitle () {
+                return [
+                    `${prefix}-special-foods-panel__title`
+                ]
+
+            },
+            specialFoodsPanelTitleInnerCls () {
+                return [
+                    `${prefix}-special-foods-panel__title__inner`
+                ]
+
+            },
+            specialFoodsPanelTitleArrowRightCls () {
+                return [
+                    `${prefix}-special-foods-panel__title__inner__arrow_right`
+                ]
+
+            },
+            specialFoodCls () {
+                return [
+                    `${prefix}-special-food`
+                ]
+            },
+            specialFoodImgCls () {
+                return [
+                    `${prefix}-special-food__img`
+                ]
+            },
+            specialFoodInnerCls () {
+                return [
+                    `${prefix}-special-food__inner`
+                ]
+            },
+            specialFoodTitleCls () {
+
+                return [
+                    `${prefix}-special-food__title`
+                ]
+            },
+            specialFoodTextCls () {
+
+                return [
+                    `${prefix}-special-food__text`
+                ]
+            },
+            specialFoodTitleCheckCls () {
+
+                return [
+                    `${prefix}-special-food__title_check`
+                ]
+            },
+            specialFoodTitleCheckUpCls () {
+                return [
+                    `${prefix}-special-food__title_check__up`
+                ]
+
+            },
+            specialFoodTitleCheckDownCls () {
+                return [
+                    `${prefix}-special-food__title_check__down`
+                ]
+            },
+            specialFoodTextPriceCls () {
+                return [
+                    `${prefix}-special-food__text__price`
+                ]
+            },
+            specialFoodTextPriceIconCls () {
+
+                return [
+                    `${prefix}-special-food__text__price__icon`
+                ]
+            },
+            specialFoodTextPricePriceCls () {
+                return [
+                    `${prefix}-special-food__text__price__price`
+                ]
+            },
+            specialFoodTextPriceTailCls () {
+                return [
+                    `${prefix}-special-food__text__price__tail`
+                ]
+            },
+            specialFoodTitleCheckUpTextCls () {
+                return [
+                    `${prefix}-special-food__title_check__up__text`
+                ]
+            },
+            specialFoodTitleCheckDownTextCls () {
+                return [
+                    `${prefix}-special-food__title_check__down__text`
+                ]
+            },
             deliveryItemCls () {
                 return [
                     `${prefix}-delivery-item`
@@ -293,5 +419,82 @@
     .{$prefix}-call {
         top: $padding-base * 2;
         margin-right: $padding-base;
+    }
+    .{$prefix}-special-foods-panel {
+        margin-top: $margin-base;
+        background-color: $white;
+        &__title {
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            padding: $margin-base 0;
+            hairline('bottom');
+            &__inner {
+                padding: 0 $padding-base;
+                border-left: 3px solid $brand-color;
+                &__arrow_right {
+                    padding-right: $padding-base;
+                }
+            }
+        }
+    }
+    .{$prefix}-special-food {
+        padding: $padding-base;
+        display: flex;
+        &__img {
+            width: 0.24rem;
+            height: 0.24rem;
+            background-color: #ccc;
+            background-size: cover;
+            background-repeat: no-repeat;
+            bakkground-position: center;
+        }
+        &__inner {
+            flex: auto;
+            padding-left: $padding-base;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        &__title {
+            display: flex;
+            justify-content: space-between;
+        }
+        &__text {
+            &__price {
+                display: flex;
+                align-items: baseline;
+                &__icon {
+                    color: $font-second;
+                }
+                &__price {
+                    font-size: $font-size-head;
+                    color: $brand-color-yellow;
+                }
+                &__tail {
+                    color: $brand-color-yellow;
+                }
+            }
+        }
+        &__title_check {
+            display: flex;
+            justify-items: center;
+            &__up {
+                display: flex;
+                justify-items: center;
+                &__text {
+                    padding-left: $padding-small;
+                }
+            }
+            &__down {
+                display: flex;
+                justify-items: center;
+                padding-left: $padding-small;
+                &__text {
+                    padding-left: $padding-small;
+                }
+            }
+        }
+
     }
 </style>

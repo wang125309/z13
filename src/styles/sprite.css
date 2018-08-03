@@ -64,16 +64,16 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
   width: 28px;
   height: 23px;
 }
-.icon-Rectangle 2 {
-  background-image: url(/static/sprite.png);
-  background-position: 0px -145px;
-  width: 7px;
-  height: 24px;
-}
 .icon-comment-icon {
   background-image: url(/static/sprite.png);
-  background-position: 0px -169px;
+  background-position: 0px -145px;
   width: 28px;
+  height: 24px;
+}
+.icon-Rectangle 2 {
+  background-image: url(/static/sprite.png);
+  background-position: 0px -169px;
+  width: 7px;
   height: 24px;
 }
 .icon-view-num {
@@ -112,417 +112,447 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
   width: 17px;
   height: 30px;
 }
-.icon-env-good {
-  background-image: url(/static/sprite.png);
-  background-position: 0px -358px;
-  width: 26px;
-  height: 30px;
-}
 .icon-eye {
   background-image: url(/static/sprite.png);
-  background-position: 0px -388px;
+  background-position: 0px -358px;
   width: 48px;
   height: 30px;
 }
-.icon-service-layout {
+.icon-env-good {
+  background-image: url(/static/sprite.png);
+  background-position: 0px -388px;
+  width: 26px;
+  height: 30px;
+}
+.icon-food-liked {
   background-image: url(/static/sprite.png);
   background-position: 0px -418px;
+  width: 30px;
+  height: 32px;
+}
+.icon-food-disliked {
+  background-image: url(/static/sprite.png);
+  background-position: 0px -450px;
+  width: 30px;
+  height: 32px;
+}
+.icon-food-dislike {
+  background-image: url(/static/sprite.png);
+  background-position: 0px -482px;
+  width: 30px;
+  height: 32px;
+}
+.icon-food-unlike {
+  background-image: url(/static/sprite.png);
+  background-position: 0px -514px;
+  width: 30px;
+  height: 32px;
+}
+.icon-food-like {
+  background-image: url(/static/sprite.png);
+  background-position: 0px -546px;
+  width: 30px;
+  height: 32px;
+}
+.icon-service-layout {
+  background-image: url(/static/sprite.png);
+  background-position: 0px -578px;
   width: 47px;
   height: 34px;
 }
-.icon-verification {
+.icon-up-arrow {
   background-image: url(/static/sprite.png);
-  background-position: 0px -452px;
-  width: 53px;
+  background-position: 0px -612px;
+  width: 34px;
   height: 34px;
 }
 .icon-building-icon-active {
   background-image: url(/static/sprite.png);
-  background-position: 0px -486px;
+  background-position: 0px -646px;
   width: 50px;
   height: 34px;
 }
 .icon-img {
   background-image: url(/static/sprite.png);
-  background-position: 0px -520px;
+  background-position: 0px -680px;
   width: 48px;
   height: 34px;
 }
-.icon-up-arrow {
+.icon-verification {
   background-image: url(/static/sprite.png);
-  background-position: 0px -554px;
-  width: 34px;
+  background-position: 0px -714px;
+  width: 53px;
   height: 34px;
 }
 .icon-my {
   background-image: url(/static/sprite.png);
-  background-position: 0px -588px;
+  background-position: 0px -748px;
   width: 32px;
   height: 35px;
 }
 .icon-my-active {
   background-image: url(/static/sprite.png);
-  background-position: 0px -623px;
+  background-position: 0px -783px;
   width: 32px;
   height: 35px;
 }
+.icon-operation-off {
+  background-image: url(/static/sprite.png);
+  background-position: 0px -818px;
+  width: 62px;
+  height: 36px;
+}
+.icon-arrow-left {
+  background-image: url(/static/sprite.png);
+  background-position: 0px -854px;
+  width: 20px;
+  height: 36px;
+}
 .icon-service {
   background-image: url(/static/sprite.png);
-  background-position: 0px -658px;
+  background-position: 0px -890px;
   width: 41px;
   height: 36px;
 }
 .icon-building-icon {
   background-image: url(/static/sprite.png);
-  background-position: 0px -694px;
+  background-position: 0px -926px;
   width: 50px;
-  height: 36px;
-}
-.icon-operation-off {
-  background-image: url(/static/sprite.png);
-  background-position: 0px -730px;
-  width: 62px;
   height: 36px;
 }
 .icon-service-active {
   background-image: url(/static/sprite.png);
-  background-position: 0px -766px;
+  background-position: 0px -962px;
   width: 41px;
   height: 36px;
 }
-.icon-arrow-left {
+.icon-home-active {
   background-image: url(/static/sprite.png);
-  background-position: 0px -802px;
-  width: 20px;
-  height: 36px;
+  background-position: 0px -998px;
+  width: 39px;
+  height: 39px;
 }
 .icon-comment {
   background-image: url(/static/sprite.png);
-  background-position: 0px -838px;
+  background-position: 0px -1037px;
   width: 45px;
-  height: 39px;
-}
-.icon-home-active {
-  background-image: url(/static/sprite.png);
-  background-position: 0px -877px;
-  width: 39px;
   height: 39px;
 }
 .icon-home {
   background-image: url(/static/sprite.png);
-  background-position: 0px -916px;
+  background-position: 0px -1076px;
   width: 39px;
   height: 39px;
 }
-.icon-activity-active {
+.icon-activity {
   background-image: url(/static/sprite.png);
-  background-position: 0px -955px;
+  background-position: 0px -1115px;
   width: 35px;
   height: 40px;
 }
-.icon-activity {
+.icon-activity-active {
   background-image: url(/static/sprite.png);
-  background-position: 0px -995px;
+  background-position: 0px -1155px;
   width: 35px;
   height: 40px;
 }
 .icon-lock {
   background-image: url(/static/sprite.png);
-  background-position: 0px -1035px;
+  background-position: 0px -1195px;
   width: 36px;
   height: 42px;
 }
-.icon-service-delivery {
-  background-image: url(/static/sprite.png);
-  background-position: 0px -1077px;
-  width: 52px;
-  height: 45px;
-}
-.icon-service-delivery-active {
-  background-image: url(/static/sprite.png);
-  background-position: 0px -1122px;
-  width: 52px;
-  height: 45px;
-}
 .icon-delivery-icon-active {
   background-image: url(/static/sprite.png);
-  background-position: 0px -1167px;
+  background-position: 0px -1237px;
   width: 52px;
   height: 45px;
 }
 .icon-delivery-icon {
   background-image: url(/static/sprite.png);
-  background-position: 0px -1212px;
+  background-position: 0px -1282px;
   width: 52px;
   height: 45px;
 }
-.icon-rent-icon-active {
+.icon-service-delivery {
   background-image: url(/static/sprite.png);
-  background-position: 0px -1257px;
-  width: 48px;
-  height: 46px;
+  background-position: 0px -1327px;
+  width: 52px;
+  height: 45px;
+}
+.icon-service-delivery-active {
+  background-image: url(/static/sprite.png);
+  background-position: 0px -1372px;
+  width: 52px;
+  height: 45px;
 }
 .icon-phone {
   background-image: url(/static/sprite.png);
-  background-position: 0px -1303px;
+  background-position: 0px -1417px;
   width: 32px;
-  height: 46px;
-}
-.icon-rent-icon {
-  background-image: url(/static/sprite.png);
-  background-position: 0px -1349px;
-  width: 48px;
   height: 46px;
 }
 .icon-service-rent {
   background-image: url(/static/sprite.png);
-  background-position: 0px -1395px;
+  background-position: 0px -1463px;
   width: 48px;
   height: 46px;
 }
-.icon-express-icon {
+.icon-rent-icon {
   background-image: url(/static/sprite.png);
-  background-position: 0px -1441px;
-  width: 51px;
-  height: 47px;
+  background-position: 0px -1509px;
+  width: 48px;
+  height: 46px;
+}
+.icon-rent-icon-active {
+  background-image: url(/static/sprite.png);
+  background-position: 0px -1555px;
+  width: 48px;
+  height: 46px;
 }
 .icon-service-express {
   background-image: url(/static/sprite.png);
-  background-position: 0px -1488px;
+  background-position: 0px -1601px;
+  width: 51px;
+  height: 47px;
+}
+.icon-express-icon {
+  background-image: url(/static/sprite.png);
+  background-position: 0px -1648px;
   width: 51px;
   height: 47px;
 }
 .icon-service-express-active {
   background-image: url(/static/sprite.png);
-  background-position: 0px -1535px;
+  background-position: 0px -1695px;
   width: 51px;
   height: 47px;
 }
-.icon-operation-tool-up {
-  background-image: url(/static/sprite.png);
-  background-position: 0px -1582px;
-  width: 48px;
-  height: 48px;
-}
 .icon-operation-pause {
   background-image: url(/static/sprite.png);
-  background-position: 0px -1630px;
+  background-position: 0px -1742px;
   width: 27px;
+  height: 48px;
+}
+.icon-operation-tool-up {
+  background-image: url(/static/sprite.png);
+  background-position: 0px -1790px;
+  width: 48px;
   height: 48px;
 }
 .icon-express-icon-active {
   background-image: url(/static/sprite.png);
-  background-position: 0px -1678px;
+  background-position: 0px -1838px;
   width: 52px;
   height: 48px;
 }
-.icon-bland-icon {
-  background-image: url(/static/sprite.png);
-  background-position: 0px -1726px;
-  width: 46px;
-  height: 52px;
-}
 .icon-blands-icon-active {
   background-image: url(/static/sprite.png);
-  background-position: 0px -1778px;
+  background-position: 0px -1886px;
   width: 46px;
   height: 52px;
 }
 .icon-blands-icon {
   background-image: url(/static/sprite.png);
-  background-position: 0px -1830px;
+  background-position: 0px -1938px;
+  width: 46px;
+  height: 52px;
+}
+.icon-bland-icon {
+  background-image: url(/static/sprite.png);
+  background-position: 0px -1990px;
   width: 46px;
   height: 52px;
 }
 .icon-bland-icon-active {
   background-image: url(/static/sprite.png);
-  background-position: 0px -1882px;
+  background-position: 0px -2042px;
   width: 46px;
   height: 52px;
 }
-.icon-visitor-icon {
+.icon-visitor-icon-active {
   background-image: url(/static/sprite.png);
-  background-position: 0px -1934px;
+  background-position: 0px -2094px;
   width: 69px;
-  height: 53px;
-}
-.icon-service-wash-car {
-  background-image: url(/static/sprite.png);
-  background-position: 0px -1987px;
-  width: 44px;
   height: 53px;
 }
 .icon-service-visitor {
   background-image: url(/static/sprite.png);
-  background-position: 0px -2040px;
-  width: 69px;
-  height: 53px;
-}
-.icon-visitor-icon-active {
-  background-image: url(/static/sprite.png);
-  background-position: 0px -2093px;
+  background-position: 0px -2147px;
   width: 69px;
   height: 53px;
 }
 .icon-service-clean {
   background-image: url(/static/sprite.png);
-  background-position: 0px -2146px;
+  background-position: 0px -2200px;
   width: 50px;
+  height: 53px;
+}
+.icon-visitor-icon {
+  background-image: url(/static/sprite.png);
+  background-position: 0px -2253px;
+  width: 69px;
+  height: 53px;
+}
+.icon-service-wash-car {
+  background-image: url(/static/sprite.png);
+  background-position: 0px -2306px;
+  width: 44px;
   height: 53px;
 }
 .icon-service-park {
   background-image: url(/static/sprite.png);
-  background-position: 0px -2199px;
-  width: 54px;
-  height: 54px;
-}
-.icon-park-icon {
-  background-image: url(/static/sprite.png);
-  background-position: 0px -2253px;
+  background-position: 0px -2359px;
   width: 54px;
   height: 54px;
 }
 .icon-park-icon-active {
   background-image: url(/static/sprite.png);
-  background-position: 0px -2307px;
+  background-position: 0px -2413px;
+  width: 54px;
+  height: 54px;
+}
+.icon-park-icon {
+  background-image: url(/static/sprite.png);
+  background-position: 0px -2467px;
   width: 54px;
   height: 54px;
 }
 .icon-service-water {
   background-image: url(/static/sprite.png);
-  background-position: 0px -2361px;
+  background-position: 0px -2521px;
   width: 40px;
   height: 56px;
 }
-.icon-operation {
+.icon-operation-active {
   background-image: url(/static/sprite.png);
-  background-position: 0px -2417px;
+  background-position: 0px -2577px;
   width: 56px;
   height: 57px;
 }
-.icon-operation-active {
+.icon-operation {
   background-image: url(/static/sprite.png);
-  background-position: 0px -2474px;
+  background-position: 0px -2634px;
   width: 56px;
   height: 57px;
 }
 .icon-tools-icon-active {
   background-image: url(/static/sprite.png);
-  background-position: 0px -2531px;
+  background-position: 0px -2691px;
   width: 56px;
   height: 57px;
 }
 .icon-tools-icon {
   background-image: url(/static/sprite.png);
-  background-position: 0px -2588px;
+  background-position: 0px -2748px;
   width: 56px;
   height: 57px;
 }
+.icon-delete {
+  background-image: url(/static/sprite.png);
+  background-position: 0px -2805px;
+  width: 60px;
+  height: 60px;
+}
 .icon-success {
   background-image: url(/static/sprite.png);
-  background-position: 0px -2645px;
+  background-position: 0px -2865px;
   width: 58px;
   height: 60px;
 }
 .icon-toast-fail {
   background-image: url(/static/sprite.png);
-  background-position: 0px -2705px;
-  width: 60px;
-  height: 60px;
-}
-.icon-toast-success {
-  background-image: url(/static/sprite.png);
-  background-position: 0px -2765px;
-  width: 58px;
-  height: 60px;
-}
-.icon-toast-warning {
-  background-image: url(/static/sprite.png);
-  background-position: 0px -2825px;
+  background-position: 0px -2925px;
   width: 60px;
   height: 60px;
 }
 .icon-error {
   background-image: url(/static/sprite.png);
-  background-position: 0px -2885px;
+  background-position: 0px -2985px;
   width: 60px;
   height: 60px;
 }
-.icon-delete {
+.icon-toast-warning {
   background-image: url(/static/sprite.png);
-  background-position: 0px -2945px;
+  background-position: 0px -3045px;
   width: 60px;
+  height: 60px;
+}
+.icon-toast-success {
+  background-image: url(/static/sprite.png);
+  background-position: 0px -3105px;
+  width: 58px;
   height: 60px;
 }
 .icon-warning {
   background-image: url(/static/sprite.png);
-  background-position: 0px -3005px;
+  background-position: 0px -3165px;
   width: 60px;
   height: 60px;
 }
 .icon-operation-close {
   background-image: url(/static/sprite.png);
-  background-position: 0px -3065px;
+  background-position: 0px -3225px;
   width: 54px;
   height: 62px;
 }
 .icon-operation-open {
   background-image: url(/static/sprite.png);
-  background-position: 0px -3127px;
+  background-position: 0px -3287px;
   width: 63px;
   height: 67px;
 }
 .icon-call {
   background-image: url(/static/sprite.png);
-  background-position: 0px -3194px;
+  background-position: 0px -3354px;
   width: 70px;
   height: 70px;
 }
 .icon-operation-pause-on {
   background-image: url(/static/sprite.png);
-  background-position: 0px -3264px;
+  background-position: 0px -3424px;
   width: 64px;
   height: 82px;
 }
 .icon-operation-center {
   background-image: url(/static/sprite.png);
-  background-position: 0px -3346px;
+  background-position: 0px -3506px;
   width: 100px;
   height: 100px;
 }
 .icon-no-activity {
   background-image: url(/static/sprite.png);
-  background-position: 0px -3446px;
+  background-position: 0px -3606px;
   width: 185px;
   height: 172px;
 }
 .icon-rent-img {
   background-image: url(/static/sprite.png);
-  background-position: 0px -3618px;
+  background-position: 0px -3778px;
   width: 240px;
   height: 240px;
 }
 .icon-z13-logo {
   background-image: url(/static/sprite.png);
-  background-position: 0px -3858px;
+  background-position: 0px -4018px;
   width: 1280px;
   height: 256px;
 }
 .icon-404 {
   background-image: url(/static/sprite.png);
-  background-position: 0px -4114px;
+  background-position: 0px -4274px;
   width: 305px;
   height: 279px;
 }
 .icon-operation-tool {
   background-image: url(/static/sprite.png);
-  background-position: 0px -4393px;
+  background-position: 0px -4553px;
   width: 396px;
   height: 396px;
 }
 .icon-operation-tool-open {
   background-image: url(/static/sprite.png);
-  background-position: 0px -4789px;
+  background-position: 0px -4949px;
   width: 396px;
   height: 396px;
 }
