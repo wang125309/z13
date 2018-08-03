@@ -6,7 +6,7 @@
         </div>
         <div :class="cardCls" :style="cardStyle">
             <slot></slot>
-            <div v-if="overflow" :class="cardOverflowCls"/>
+            <div v-if="overflow" :class="cardOverflowCls"></div>
         </div>
     </div>
 
@@ -120,6 +120,7 @@
         }
         .{$prefix}-icon-details {
             margin-right: $padding-base;
+            top: $padding-base;
         }
     }
 
