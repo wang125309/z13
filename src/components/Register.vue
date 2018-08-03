@@ -55,7 +55,7 @@
                     phoneCode: '',
                     image: ''
                 },
-                imageCode: API.get_image_code
+                imageCode: 'https://cbd-proxy.limijiaoyin.io' + API.get_image_code
             }
         },
         created () {
@@ -67,7 +67,7 @@
             refreshCode () {
                 this.imageCode = '';
                 setTimeout(() => {
-                    this.imageCode = API.get_image_code;
+                    this.imageCode = 'https://cbd-proxy.limijiaoyin.io' + API.get_image_code;
                 }, 0);
             },
             doRegister () {

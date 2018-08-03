@@ -67,6 +67,9 @@
         height: 0.4rem;
         padding: $padding-base;
         background-color: #f7f7f7;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
         &-date {
             padding: $padding-base 0;
             color: $font-second;
