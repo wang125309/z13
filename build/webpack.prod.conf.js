@@ -33,6 +33,7 @@ const webpackConfig = merge(baseWebpackConfig, {
         new webpack.DefinePlugin({
             'process.env': env
         }),
+
         new UglifyJsPlugin({
             sourceMap: config.build.productionSourceMap,
             uglifyOptions: {
@@ -117,23 +118,7 @@ const webpackConfig = merge(baseWebpackConfig, {
                 to: config.build.assetsSubDirectory,
                 ignore: ['.*']
             }
-        ]),
-        new SpritesmithPlugin({
-            src: {
-                cwd: path.resolve(__dirname, '../src/assets/icon'),
-                glob: '*.png'
-            },
-            target: {
-                image: path.resolve(__dirname, '../src/assets/sprite.png'),
-                css: path.resolve(__dirname, '../src/styles/sprite.css')
-            },
-            apiOptions: {
-                cssImageRef: "/static/sprite.png"
-            },
-            spritesmithOptions: {
-                algorithm: 'top-down'
-            }
-        })
+        ])
     ]
 })
 
