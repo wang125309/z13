@@ -53,7 +53,7 @@
         width: $avatar-size-base;
         height: $avatar-size-base;
         background-size: cover;
-        background-position: top;
+        background-position: top left;
         background-repeat: no-repeat;
         background-color: #ccc;
     }

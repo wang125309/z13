@@ -35,10 +35,10 @@ const requests = (url, options, success, error) => {
             callback(response);
         }).catch((err) => {
             if (err.response.status === 401) {
-                callback(err.response)
+                callback(err)
             }
             else {
-                callback(err.response);
+                callback(err);
             }
 
         });
@@ -49,7 +49,12 @@ const requests = (url, options, success, error) => {
         ).then((response) => {
             callback(response);
         }).catch((err) => {
-            callback(err.response);
+            if (err.response.status === 401) {
+                callback(err)
+            }
+            else {
+                callback(err);
+            }
         });
     }
     else if (type === 'PUT') {
@@ -58,7 +63,12 @@ const requests = (url, options, success, error) => {
         ).then((response) => {
             callback(response);
         }).catch((err) => {
-            callback(err.response);
+            if (err.response.status === 401) {
+                callback(err)
+            }
+            else {
+                callback(err);
+            }
         });
     }
 }

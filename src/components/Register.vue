@@ -33,7 +33,6 @@
     import Button from './lib/Button'
     import API from '../service/api'
     import requests from '../service/service'
-
     let registerFlag = false;
 
     export default {
@@ -53,21 +52,32 @@
                     account: '',
                     password: '',
                     phoneCode: '',
-                    image: ''
+                    image: '',
                 },
-                imageCode: 'https://cbd-proxy.limijiaoyin.io' + API.get_image_code
+                uuid: '',
+                imageCode: ''
             }
         },
         created () {
+            requests(API.get_image_code + '/id', {
+                type: 'GET'
+            }, (data) => {
+                this.uuid = data.data;
+                this.refreshCode()
+            }, (data) => {
+                this.$root.$children[0].toggleToast('fail', data);
+            })
         },
         watch: {
-            imageCode () {}
+            imageCode () {
+
+            }
         },
         methods: {
             refreshCode () {
                 this.imageCode = '';
                 setTimeout(() => {
-                    this.imageCode = 'https://cbd-proxy.limijiaoyin.io' + API.get_image_code;
+                    this.imageCode = 'https://cbd-proxy.limijiaoyin.io' + API.get_image_code + '/' + this.uuid + '/'
                 }, 0);
             },
             doRegister () {
@@ -75,7 +85,36 @@
                     type: 'POST',
                     data: this.user
                 }, (data) => {
-                    this.$root.$children[0].toggleToast('success', data.message);
+                    requests(API.do_login, {
+                        type: 'POST',
+                        data: this.user
+                    }, (data) => {
+                        this.$store.dispatch('SET_TOKEN', data.data);
+                        cookies.setCookie(data.data);
+                        this.$root.$children[0].toggleToast('success', data.message);
+                        requests(API.wx_authorize, {
+                            type: 'GET'
+                        }, (d) => {
+                            setTimeout(() => {
+                                this.$router.push({
+                                    path: '/'
+                                })
+                            }, 500);
+                        }, (err) => {
+                            if (err.message === '用户信息已完善') {
+                                setTimeout(() => {
+                                    this.$router.push({
+                                        path: '/register-success'
+                                    })
+                                }, 500);
+                            }
+                            else {
+                                this.$root.$children[0].toggleToast('fail', err.message);
+                            }
+                        })
+                    }, (data) => {
+                        this.$root.$children[0].toggleToast('fail', data.message);
+                    });
                     setTimeout(() => {
                         this.$router.push({
                             path: '/login'
@@ -91,14 +130,14 @@
                     requests(API.valid_image_code, {
                         type: 'POST',
                         data: {
-                            imageCode: this.user.image
+                            imageCode: this.user.image,
+                            imageCodeId: this.uuid
                         }
                     }, (data) => {
                         this.doRegister();
                     }, (data) => {
                         this.$root.$children[0].toggleToast('fail', data.message);
                     })
-
                 }
             }
         }

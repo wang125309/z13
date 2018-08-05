@@ -3,17 +3,8 @@
         <Navbar>企业选择</Navbar>
         <Panel class-name="panel" no-padding>
             <CellGroup full no-margin>
-                <Cell @click="go" padding full>
-                    企业1
-                </Cell>
-                <Cell @click="go"  padding full>
-                    企业2
-                </Cell>
-                <Cell @click="go"  padding full>
-                    企业3
-                </Cell>
-                <Cell @click="go"  padding full withoutBorder>
-                    企业4
+                <Cell @click="go" padding full v-for="i in data" :key="'company' + i.id">
+                    {{i.name}}
                 </Cell>
             </CellGroup>
         </Panel>
@@ -28,6 +19,9 @@
     import Input from './lib/Input'
     import Button from './lib/Button'
     import Panel from "./lib/Panel";
+    import request from "../service/service";
+    import API from '../service/api'
+    import pageResult from '../service/pageResult'
 
     export default {
         name: 'Login',
@@ -42,12 +36,25 @@
         },
         data () {
             return {
+                data: []
             }
+        },
+        created () {
+            this.refresh();
         },
         methods: {
             go() {
                 this.$router.push({
                     path: '/company-identification'
+                })
+            },
+            refresh () {
+                request(API.company, {
+                    type: 'GET'
+                }, (data) => {
+                    this.data = pageResult(data.data)
+                }, (data) => {
+                    _this.$root.$children[0].toggleToast('fail', data.message);
                 })
             }
         }

@@ -7,7 +7,7 @@
                 <Cell @click="changeAvatar" flex class-name="cell" padding full>
                     <span class="left">头像</span>
                     <span class="right">
-                        <Icon type="rent-img" class="avatar" size="0.07rem"/>
+                        <div :style="'background-image:url(' + user.image + ')'" class="avatar"/>
                         <Icon type="arrow-right" size="0.05rem"/>
                     </span>
                 </Cell>
@@ -21,7 +21,7 @@
                 <Cell @click="changeMobile" flex class-name="cell" padding full>
                     <span class="left">手机号</span>
                     <span class="right">
-                        <span class="right-span">{{user.mobile}}</span>
+                        <span class="right-span">{{user.account}}</span>
                         <Icon type="arrow-right" size="0.05rem"/>
                     </span>
                 </Cell>
@@ -63,6 +63,8 @@
     import requests from '../service/service';
     import API from '../service/api';
     import cookies from '../Session/cookie';
+    const prefix = 'z13';
+
     export default {
         components: {
             ActionSheet,
@@ -102,6 +104,11 @@
         computed: {
             user () {
                 return this.$store.state.user;
+            },
+            avatarCls () {
+                return [
+                    `${prefix}-avatar`
+                ]
             }
         },
         methods: {
@@ -137,7 +144,13 @@
 <style scoped lang="stylus">
     @import '../styles/var.styl';
     .avatar {
+        background-color: #ccc;
         margin-right: $padding-small;
+        width: 0.07rem;
+        height: 0.07rem;
+        background-size: cover;
+        background-position: top left;
+        background-repeat: no-repeat;
     }
     .title {
         color: $font-second;
@@ -157,4 +170,5 @@
             background: $white * 0.95;
         }
     }
+
 </style>

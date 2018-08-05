@@ -1,4 +1,5 @@
 const API = {
+    wx_authorize: '/common/wx/authorize',
     get_image_code: '/common/imageCode',
     valid_image_code: '/common/imageCode/verify',
     verify_phone_code: '/common/phoneCode/verify',
@@ -12,6 +13,7 @@ const API = {
     get_problem: '/front/operation/problems',
     get_activitys: '/front/operation/activitys',
     building: '/front/buildings',
+    company: '/front/companys',
     comment: '/front/operation/comments',
     foodshops: '/front/foodshops',
     washcars: '/front/washcars',

@@ -6,11 +6,10 @@
             <p>注册成功</p>
             <p>通过单位认证，解锁更多大厦服务</p>
         </div>
-        <Button type="circle" full width="92%">去认证</Button>
+        <Button @onClick="companySelect" type="circle" full width="92%">去认证</Button>
         <div class="jump-link-wrap">
-            <a class="jump-link" href="javascript:;">跳过</a>
+            <a class="jump-link" @click="jump" href="javascript:;">跳过</a>
         </div>
-
     </LayoutBase>
 </template>
 
@@ -29,6 +28,18 @@
             Icon,
             SituationLogo,
             LayoutBase
+        },
+        methods: {
+            jump () {
+                this.$router.push({
+                    path: '/'
+                })
+            },
+            companySelect () {
+                this.$router.push({
+                    path: '/company-list'
+                })
+            }
         },
         data () {
             return {

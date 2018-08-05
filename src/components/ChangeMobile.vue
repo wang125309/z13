@@ -3,7 +3,7 @@
         <Navbar arrowLeft>更换手机号</Navbar>
         <CellGroup full class="cell-group">
             <Cell full>
-                <Input type="number" v-model="mobile" :default-value="defaultValue" withClear placeholder="请输入手机号"/>
+                <Input type="number" disabled v-model="mobile" :default-value="defaultValue" withClear placeholder="请输入手机号"/>
             </Cell>
         </CellGroup>
         <Button class="next-step" circle type="primary" @onClick="save" full width="92%">更换手机号</Button>
@@ -29,12 +29,14 @@
             Input,
             LayoutBase
         },
-
         updated () {
             if (!this.updated) {
-                this.mobile = this.$store.state.user.mobile;
+                this.mobile = this.$store.state.user.account;
                 this.updated = true;
             }
+        },
+        mounted () {
+            this.mobile = this.$store.state.user.account;
         },
         methods: {
             save () {

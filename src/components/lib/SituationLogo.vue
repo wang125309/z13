@@ -27,7 +27,7 @@
                 if (this.size) {
                     style['width']=  this.size;
                 }
-                style['background-image'] = 'url("/assets/logo/' + this.type + '.png")';
+                style['background-image'] = 'url("/static/logo/' + this.type + '.png")';
                 return style;
             }
         }
@@ -37,7 +37,6 @@
 <style lang="stylus">
     @import '../../styles/var.styl'
     .{$prefix}-situation-logo-wrap {
-
         .{$prefix}-situation-logo {
             width: $situation-logo-size;
             height: $situation-logo-size;

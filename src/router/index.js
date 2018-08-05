@@ -72,6 +72,16 @@ export default new Router({
             component: ValidMobile
         },
         {
+            path: '/valid-old-mobile',
+            name: 'ValidOldMobile',
+            component: ValidMobile
+        },
+        {
+            path: '/valid-new-mobile',
+            name: 'ValidOldMobile',
+            component: ValidMobile
+        },
+        {
             path: '/forget-password',
             name: 'ValidMobile',
             component: ValidMobile

@@ -49,9 +49,11 @@
             }
             else if (path === '/valid-old-mobile') {
                 this.title = '验证旧手机号';
+                this.codeType = 5;
             }
             else if (path === '/valid-new-mobile') {
                 this.title = '添加新手机号';
+                this.codeType = 5;
             }
         },
         data () {
@@ -67,6 +69,7 @@
         methods: {
             next () {
                 let path = this.$route.path;
+                console.log(path)
                 if (path === '/forget-password') {
                     request(API.verify_phone_code, {
                         type: 'POST',
@@ -84,7 +87,41 @@
                         this.$root.$children[0].toggleToast('success', data.message);
                     })
                 }
-
+                else if (path === '/valid-old-mobile') {
+                    request(API.verify_phone_code, {
+                        type: 'POST',
+                        data: {
+                            account: this.user.account,
+                            phoneCode: this.user.phoneCode,
+                            busiType: this.codeType
+                        }
+                    }, (data) => {
+                        this.$router.push({
+                            path: '/valid-new-mobile'
+                        })
+                    }, (data) => {
+                        this.$root.$children[0].toggleToast('success', data.message);
+                    })
+                }
+                else if (path === '/valid-new-mobile') {
+                    request(API.get_user_info, {
+                        type: 'POST',
+                        data: {
+                            mobile: this.user.account,
+                            phoneCode: this.user.phoneCode,
+                            busiType: 6
+                        }
+                    }, (data) => {
+                        this.$root.$children[0].toggleToast('success', data.message);
+                        setTimeout(() => {
+                            this.$router.push({
+                                path: '/user-info'
+                            })
+                        }, 500)
+                    }, (data) => {
+                        this.$root.$children[0].toggleToast('success', data.message);
+                    })
+                }
             }
         }
     }

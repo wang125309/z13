@@ -49,12 +49,10 @@
                 uploadType: 'file',
                 imageCliperVisible: false,
                 changeButtonVisible: true,
+                image: ''
             }
         },
         computed: {
-            image () {
-                return this.$store.state.user.image;
-            },
             fileSelectorCls () {
                 return [
                     `${prefix}-file-selector`
@@ -75,6 +73,9 @@
                     `${prefix}-action-tools-sure`
                 ]
             }
+        },
+        mounted () {
+            this.image = this.$store.state.user.image;
         },
         methods: {
             captureActive () {
@@ -172,7 +173,8 @@
     }
     .avatar-area {
         setBackgroundImage('')
-        background-position: top;
+        background-position: top left;
+        background-size: auto 100%;
         height: 1rem;
     }
 </style>

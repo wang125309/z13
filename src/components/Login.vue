@@ -75,11 +75,26 @@
                             this.$store.dispatch('SET_TOKEN', data.data);
                             cookies.setCookie(data.data);
                             this.$root.$children[0].toggleToast('success', data.message);
-                            setTimeout(() => {
-                                this.$router.push({
-                                    path: '/'
-                                })
-                            }, 500);
+                            requests(API.wx_authorize, {
+                                type: 'GET'
+                            }, (d) => {
+                                setTimeout(() => {
+                                    this.$router.push({
+                                        path: '/'
+                                    })
+                                }, 500);
+                            }, (err) => {
+                                if (err.message === '用户信息已完善') {
+                                    setTimeout(() => {
+                                        this.$router.push({
+                                            path: '/'
+                                        })
+                                    }, 500);
+                                }
+                                else {
+                                    this.$root.$children[0].toggleToast('fail', err.message);
+                                }
+                            })
                         }, (data) => {
                             this.$root.$children[0].toggleToast('fail', data.message);
                         });
