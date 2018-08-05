@@ -1,11 +1,11 @@
 <template>
     <LayoutBase>
-        <Navbar>企业认证</Navbar>
+        <Navbar arrow-left>企业认证</Navbar>
         <Panel class-name="panel" no-padding>
             <CellGroup no-margin class="cell-group">
                 <Cell>
                     <Input type="text" placeholder="请输入邮箱"/>
-                    <div class="company-label">company.com</div>
+                    <div class="company-label">{{email}}</div>
                 </Cell>
                 <Cell>
                     <Input type="text" send-code placeholder="请输入验证码"/>
@@ -43,7 +43,12 @@
         },
         data () {
             return {
+                email: ''
             }
+        },
+        mounted () {
+            console.log(this.$store.state.identification_company)
+            this.email = this.$store.state.identification_company.email;
         },
         methods: {
         }

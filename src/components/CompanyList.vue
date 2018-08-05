@@ -1,9 +1,9 @@
 <template>
     <LayoutBase>
-        <Navbar>企业选择</Navbar>
+        <Navbar arrow-left>企业选择</Navbar>
         <Panel class-name="panel" no-padding>
             <CellGroup full no-margin>
-                <Cell @click="go" padding full v-for="i in data" :key="'company' + i.id">
+                <Cell @click="go(i)" padding full v-for="i in data" :key="'company' + i.id">
                     {{i.name}}
                 </Cell>
             </CellGroup>
@@ -43,9 +43,11 @@
             this.refresh();
         },
         methods: {
-            go() {
+            go (i) {
+                console.log(i)
+                this.$store.dispatch('SET_INDENTIFICATION_COMPANY', i);
                 this.$router.push({
-                    path: '/company-identification'
+                    path: '/company-identification/'
                 })
             },
             refresh () {

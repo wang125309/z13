@@ -5,7 +5,8 @@ import API from '../service/api'
 const state = {
     token: '',
     user: '',
-    forget_password_account: ''
+    forget_password_account: '',
+    identification_company: {}
 }
 
 const mutations = {
@@ -31,6 +32,9 @@ const mutations = {
     SET_FORGET_PASSWORD_USER (state, account, code) {
         state.forget_password_account = account;
         state.forget_password_code = code;
+    },
+    SET_INDENTIFICATION_COMPANY (state, data) {
+        state.identification_company = data;
     }
 }
 
@@ -46,6 +50,9 @@ const actions = {
     },
     SET_FORGET_PASSWORD_USER ({commit}, account, code) {
         commit('SET_FORGET_PASSWORD_USER', account);
+    },
+    SET_INDENTIFICATION_COMPANY ({commit}, data) {
+        commit('SET_INDENTIFICATION_COMPANY', data)
     }
 }
 
