@@ -33,6 +33,7 @@
     import Button from './lib/Button'
     import API from '../service/api'
     import requests from '../service/service'
+    import cookies from '../Session/cookie'
     let registerFlag = false;
 
     export default {
@@ -89,6 +90,7 @@
                         type: 'POST',
                         data: this.user
                     }, (data) => {
+                        console.log(data.data)
                         this.$store.dispatch('SET_TOKEN', data.data);
                         cookies.setCookie(data.data);
                         this.$root.$children[0].toggleToast('success', data.message);
@@ -97,7 +99,7 @@
                         }, (d) => {
                             setTimeout(() => {
                                 this.$router.push({
-                                    path: '/'
+                                    path: '/register-success'
                                 })
                             }, 500);
                         }, (err) => {
@@ -115,11 +117,6 @@
                     }, (data) => {
                         this.$root.$children[0].toggleToast('fail', data.message);
                     });
-                    setTimeout(() => {
-                        this.$router.push({
-                            path: '/login'
-                        })
-                    })
                 }, (data) => {
                     console.log(data)
                     this.$root.$children[0].toggleToast('fail', data);

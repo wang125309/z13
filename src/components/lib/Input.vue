@@ -5,6 +5,7 @@
         <Icon @click="showEye" position="right" v-if="withEye" v-show="!eyeVisible" size="0.07rem" type="eye"/>
         <Icon @click="showEye" position="right" v-if="withEye" v-show="eyeVisible" size="0.07rem" type="eye-close"/>
         <Button :disabled="codeSend" @onClick="handelSendCode" :className="sendCodeCls" v-if="sendCode" type="send-code">{{sendMessage}}</Button>
+        <Button :disabled="codeSend" @onClick="handelSendEmailCode" :className="sendCodeCls" v-if="sendCodeEmail" type="send-code">{{sendMessage}}</Button>
         <Icon @click="clear" v-if="withClear" :class="clearCls" size="0.04rem" top="0.04rem" type="delete" position="right"/>
         <slot wx-if="this.$slots"/>
     </div>
@@ -44,7 +45,9 @@
             defaultValue: [String],
             account: [String],
             codeType: [Number],
-            disabled: [Boolean]
+            disabled: [Boolean],
+            sendCodeEmail: [Boolean],
+            email: [String]
         },
         components: {
             Icon,
@@ -133,7 +136,34 @@
                     }, (data) => {
                         this.$root.$children[0].toggleToast('warning', data.message)
                     })
+                }
+            },
+            handelSendEmailCode ($evt) {
+                if (!this.codeSend) {
+                    request(API.send_email_code, {
+                        type: 'POST',
+                        data: {
+                            email: this.email,
+                            busiType: this.codeType
+                        }
+                    }, (data) => {
+                        let _self = this;
+                        this.codeSend = true;
+                        let interval = setInterval(() => {
+                            _self.sendMessage = `已发送(${_self.time}s)`;
+                            if (_self.time) {
+                                _self.time -- ;
+                            }
+                            else {
+                                clearInterval(interval);
+                                _self.codeSend = false;
+                                _self.sendMessage = '再次发送';
+                            }
 
+                        }, 1000);
+                    }, (data) => {
+                        this.$root.$children[0].toggleToast('warning', data.message)
+                    })
                 }
             }
         }

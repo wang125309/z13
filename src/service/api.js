@@ -4,6 +4,8 @@ const API = {
     valid_image_code: '/common/imageCode/verify',
     verify_phone_code: '/common/phoneCode/verify',
     send_phone_Code: '/common/phoneCode',
+    send_email_code: '/common/emailCode',
+    verify_email_code: '/common/emailCode/verify',
     do_login: '/front/login',
     do_logout: '/front/logout',
     get_homepage: '/front/homepage',
