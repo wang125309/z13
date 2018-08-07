@@ -59,7 +59,7 @@
         methods: {
             confirm () {
                 request(API.verify_email_code, {
-                    type: 'GET',
+                    type: 'POST',
                     data: {
                         busiType: 1,
                         email: this.user.email + this.email,
@@ -67,7 +67,7 @@
                     }
                 }, (data) => {
                     this.$router.push({
-                        path: '/company-indentification-success'
+                        path: '/company-identification-success'
                     })
                 }, (data) => {
                     this.$root.$children[0].toggleToast('warning', data.message)

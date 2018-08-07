@@ -2,25 +2,17 @@
     <LayoutBase>
         <Navbar arrow-left>报名情况</Navbar>
         <div class="cell-group">
-            <div class="cell-list">
-                <Avatar class="cell-list-avatar" size="0.12rem"/>
-                <div>报名人昵称</div>
-            </div>
-            <div class="cell-list">
-                <Avatar class="cell-list-avatar" size="0.12rem"/>
-                <div>报名人昵称</div>
-            </div>
-            <div class="cell-list">
-                <Avatar class="cell-list-avatar" size="0.12rem"/>
-                <div>报名人昵称</div>
+            <div v-for="i in data" class="cell-list">
+                <Avatar class="cell-list-avatar" :src="i.image" size="0.12rem"/>
+                <div>{{i.nick_name}}</div>
             </div>
         </div>
-        <Button type="circle" full width="92%">取消报名</Button>
+        <Button @onClick="cancel" type="circle" full width="92%">取消报名</Button>
     </LayoutBase>
 </template>
 <script>
 import API from '../service/api'
-import requset from '../service/service'
+import request from '../service/service'
 import LayoutBase from "./lib/LayoutBase";
 import Navbar from "./lib/Navbar";
 import CellGroup from "./lib/CellGroup";
@@ -41,17 +33,26 @@ export default {
     },
     methods: {
         refresh () {
-            requset(`${API.get_activitys}/${this.$route.params.id}`, {
+            request(`${API.get_activitys}/${this.$route.params.id}`, {
                 type: 'GET'
             }, (data) => {
                 this.data = data.data.signups;
             }, (data) => {
                 this.$root.$children[0].toggleToast('fail', data.message);
             })
+        },
+        cancel () {
+            request(`${API.get_activitys}/${this.$route.params.id}/signups/cancel`, {
+                type: 'DELETE'
+            }, (data) => {
+                this.refresh();
+            }, (data) => {
+                this.$root.$children[0].toggleToast('fail', data.message);
+            })
         }
     },
     created () {
-
+        this.refresh();
     }
 }
 </script>
@@ -63,7 +64,8 @@ export default {
         background-color: #fff;
     }
     .cell-list-avatar {
-        margin-right: $margin-base;
+        margin: 0 !important;
+        margin-right: $margin-base !important;
     }
     .cell-list {
         position: relative;

@@ -11,6 +11,9 @@ const requests = (url, options, success, error) => {
     else if (options.type === 'PUT') {
         type = 'PUT';
     }
+    else if (options.type === 'DELETE') {
+        type = 'DELETE';
+    }
     const callback = (response) => {
         if (response.status === 200) {
             if (response.data.success === true) {
@@ -59,6 +62,20 @@ const requests = (url, options, success, error) => {
     }
     else if (type === 'PUT') {
         axios.put(`${url}`,
+            options.data
+        ).then((response) => {
+            callback(response);
+        }).catch((err) => {
+            if (err.response.status === 401) {
+                callback(err)
+            }
+            else {
+                callback(err);
+            }
+        });
+    }
+    else if (type === 'DELETE') {
+        axios.delete(`${url}`,
             options.data
         ).then((response) => {
             callback(response);

@@ -20,9 +20,9 @@
                     <div class="activity-card-title">活动参与：</div>
                     <div class="activity-card-message">
                         <div class="activity-card-message-text">{{data.signupCount}} 人参与</div>
-                        <div class="activity-card-message-avatars">
-                            <Avatar v-for="i in data.signups" :key="'avatar' + i.id" size="0.05rem"/>
-                            <Icon @click="signUpMenu" type="arrow-right" size="0.05rem"/>
+                        <div @click="goSignUps" class="activity-card-message-avatars">
+                            <Avatar v-for="i in data.signups" :src="i.image" :key="'avatar' + i.id" size="0.09rem"/>
+                            <Icon class="activity-card-arrow-right" @click="signUpMenu" type="arrow-right" size="0.05rem"/>
                         </div>
                     </div>
                 </Cell>
@@ -277,6 +277,11 @@
                         this.$root.$children[0].toggleToast('fail', data.message);
                     })
                 }
+            },
+            goSignUps () {
+                this.$router.push({
+                    path: '/sign-up-list/' + this.$route.params.id
+                })
             }
         }
     }
@@ -401,8 +406,14 @@
     .activity-card-message {
         display: flex;
         justify-content: space-between;
+        align-items: center;
     }
     .activity-card-message-avatars {
-
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+    .activity-card-arrow-right {
+        margin-left: $padding-base;
     }
 </style>

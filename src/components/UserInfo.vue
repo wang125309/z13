@@ -125,7 +125,7 @@
                 this.$router.push('/change-mobile')
             },
             changeCompany () {
-                this.$router.push('/change-company')
+                this.$router.push('/company-list')
             },
             changeComponyPosition () {
                 this.$router.push('/change-company-position')
