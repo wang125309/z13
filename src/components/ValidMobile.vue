@@ -69,7 +69,6 @@
         methods: {
             next () {
                 let path = this.$route.path;
-                console.log(path)
                 if (path === '/forget-password') {
                     request(API.verify_phone_code, {
                         type: 'POST',
@@ -79,7 +78,7 @@
                             busiType: this.codeType
                         }
                     }, (data) => {
-                        this.$store.commit('SET_FORGET_PASSWORD_USER', this.user.account, this.user.phoneCode)
+                        this.$store.commit('SET_FORGET_PASSWORD_USER', this.user)
                         this.$router.push({
                             path: '/reset-password'
                         })

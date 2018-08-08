@@ -18,7 +18,15 @@ const mutations = {
             requests(API.get_user_info, {}, (data) => {
                 state.user = data.data
             }, (data) => {
-                if (_this.$route.name !== 'Activity' && _this.$route.name !== 'Home' && _this.$route.name !== 'ActivityList' && _this.$route.name !== 'Login' && _this.$route.name !== 'Register' && _this.$router.name !== 'ResetPassword') {
+                if (_this.$route.name !== 'Activity'
+                    && _this.$route.name !== 'Home'
+                    && _this.$route.name !== 'ActivityList'
+                    && _this.$route.name !== 'Login'
+                    && _this.$route.name !== 'Register'
+                    && _this.$route.name !== 'ResetPassword'
+                    && _this.$route.name !== 'ValidMobile'
+                    && _this.$route.name !== 'ResetPasswordSuccess'
+                ) {
                     _this.$router.push({
                         path: '/login'
                     })
@@ -29,9 +37,9 @@ const mutations = {
             console.log(state.user)
         }
     },
-    SET_FORGET_PASSWORD_USER (state, account, code) {
-        state.forget_password_account = account;
-        state.forget_password_code = code;
+    SET_FORGET_PASSWORD_USER (state, user) {
+        state.forget_password_account = user.account;
+        state.forget_password_code = user.phoneCode;
     },
     SET_INDENTIFICATION_COMPANY (state, data) {
         state.identification_company = data;

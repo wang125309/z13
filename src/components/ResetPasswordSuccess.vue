@@ -5,7 +5,7 @@
         <div class="text-area">
             <p>您的密码已经修改成功</p>
         </div>
-        <Button type="circle" full width="92%">完成</Button>
+        <Button @onClick="complete" type="circle" full width="92%">完成</Button>
     </LayoutBase>
 </template>
 
@@ -24,6 +24,13 @@
             Icon,
             SituationLogo,
             LayoutBase
+        },
+        methods: {
+            complete () {
+                this.$router.push({
+                    path: '/login'
+                })
+            }
         },
         data () {
             return {

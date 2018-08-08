@@ -44,7 +44,6 @@
         },
         methods: {
             go (i) {
-                console.log(i)
                 this.$store.dispatch('SET_INDENTIFICATION_COMPANY', i);
                 this.$router.push({
                     path: '/company-identification/'

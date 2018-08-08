@@ -10,7 +10,7 @@
                 <Cell>
                     <Input type="text" v-model="text" :email="user.email + email" send-code-email placeholder="请输入验证码"/>
                 </Cell>
-                <Cell without-border>
+                <Cell v-if="invitation_code === '1'" without-border>
                     <Input type="text" v-model="inviteCode" placeholder="请输入公司邀请码"/>
                 </Cell>
             </CellGroup>
@@ -47,13 +47,14 @@
                 email: '',
                 text: '',
                 inviteCode: '',
+                invitation_code: '0',
                 user: {
                     email: ''
                 }
             }
         },
         mounted () {
-            console.log(this.$store.state.identification_company)
+            this.invitation_code = this.$store.state.identification_company.invitation_code;
             this.email = this.$store.state.identification_company.email;
         },
         methods: {
@@ -63,7 +64,8 @@
                     data: {
                         busiType: 1,
                         email: this.user.email + this.email,
-                        emailCode: this.text
+                        emailCode: this.text,
+                        inviteCode: this.inviteCode
                     }
                 }, (data) => {
                     this.$router.push({
