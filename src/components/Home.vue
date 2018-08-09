@@ -5,17 +5,17 @@
             <Banner class="main-banner">
                 <swiper :options="swiperBannerOption">
                     <swiper-slide class="banner-slide" v-bind:key="'banner' + i.id" v-for="i in data.banners">
-                        <div class="banner" :style="'background-image:url(' + i.image + ')'"/>
+                        <div class="banner" @click.stop="go_banner(i.link_url)" :style="'background-image:url(' + i.image + ')'"></div>
                     </swiper-slide>
                 </swiper>
             </Banner>
-            <Card overflow className="news-card">
-                <div :key="'service' + i.id" class="news-list" v-for="i in data.newsAndRunableUnit.news">
+            <Card className="news-card">
+                <div :key="'service' + i.id" class="news-list" @click="goNews(i.id)" v-for="i in data.newsAndRunableUnit.news">
                     <Tag class-name="tag" backgroundColor="red" color="#fff" borderColor="#fff">大厦服务</Tag>
                     <div class="news-details">{{i.title}}</div>
                     <div class="news-date">{{i.create_time.split(' ')[0].split('-')[1] + '.' + i.create_time.split(' ')[0].split('-')[2]}}</div>
                 </div>
-                <div class="news-list" :key="'rent' + i.id" v-for="i in data.newsAndRunableUnit.rentablrUnits">
+                <div class="news-list" :key="'rent' + i.id" @click="goRent(i.id)" v-for="i in data.newsAndRunableUnit.rentablrUnits">
                     <Tag class-name="tag" backgroundColor="#F39900" color="#fff" borderColor="#fff">可租单元</Tag>
                     <div class="news-details">{{i.title}}</div>
                     <div class="news-date">10.25</div>
@@ -191,13 +191,21 @@
             },
             goRent (id) {
                 this.$router.push({
-                    path: '/rent-building/' + id
+                    path: '/rent-building-details/' + id
                 })
             },
             goActivity (id) {
                 this.$router.push({
                     path: '/activity/' + id
                 })
+            },
+            goNews (id) {
+                this.$router.push({
+                    path: '/service-details/' + id
+                })
+            },
+            go_banner (url) {
+                if (url) location.href = url;
             }
         },
         created () {
@@ -241,16 +249,19 @@
     }
     .news-card {
         margin-top: $banner-height - $padding-base;
-        z-index: 100;
+        z-index: 100000;
         position: relative;
     }
     .service-panel {
         margin-bottom: $margin-base;
     }
     .news-list {
-        padding: 0 0 $padding-small 0;
+        padding: $padding-small 0 0 0;
         display: flex;
         align-items: center;
+        &:first-child {
+            padding: 0;
+        }
         .tag {
             white-space: nowrap;
             line-height: 1;
