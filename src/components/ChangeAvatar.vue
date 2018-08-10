@@ -114,7 +114,13 @@
                         busiType: 2 //1 修改昵称2 修改头像3 修改公司4 修改工位6修改手机号
                     }
                 }, (data) => {
+                    this.$store.dispatch('SET_USER_INFO', this)
                     this.$root.$children[0].toggleToast('success', data.message);
+                    setTimeout(() => {
+                        this.$router.push({
+                            path: '/user-info'
+                        })
+                    }, 500)
                 }, (data) => {
                     this.$root.$children[0].toggleToast('fail', data.message);
                 })

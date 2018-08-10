@@ -111,7 +111,8 @@
                             busiType: 6
                         }
                     }, (data) => {
-                        this.$root.$children[0].toggleToast('success', data.message);
+                        this.$root.$children[0].toggleToast('success', data.message, true);
+                        this.$store.dispatch('SET_USER_INFO', this)
                         setTimeout(() => {
                             this.$router.push({
                                 path: '/user-info'

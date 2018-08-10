@@ -130,13 +130,6 @@
             changeComponyPosition () {
                 this.$router.push('/change-company-position')
             }
-        },
-        mounted () {
-            requests(API.get_user_info, {}, (data) => {
-                console.log(data);
-            }, (data) => {
-
-            });
         }
     }
 </script>
