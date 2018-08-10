@@ -25,11 +25,6 @@
 
     export default {
         name: 'ValidMobile',
-        watch: {
-            title () {
-
-            }
-        },
         components: {
             Button,
             Navbar,
@@ -54,6 +49,30 @@
             else if (path === '/valid-new-mobile') {
                 this.title = '添加新手机号';
                 this.codeType = 5;
+            }
+        },
+        watch: {
+            $route : {
+                handler () {
+                    console.log("i do")
+                    let path = this.$route.path;
+                    if (path === '/forget-password') {
+                        this.title = '忘记密码';
+                        this.codeType = 4;
+                    }
+                    else if (path === '/valid-mobile') {
+                        this.title = '验证手机号';
+                    }
+                    else if (path === '/valid-old-mobile') {
+                        this.title = '验证旧手机号';
+                        this.codeType = 5;
+                    }
+                    else if (path === '/valid-new-mobile') {
+                        this.title = '添加新手机号';
+                        this.codeType = 5;
+                    }
+                }
+
             }
         },
         data () {
