@@ -57,15 +57,15 @@
                         <div :class="specialFoodTextCls">{{j.name}}</div>
                         <div :class="specialFoodTitleCheckCls">
                             <div :class="specialFoodTitleCheckUpCls">
-                                <Icon v-if="!i.isPraise" size="0.04rem" type="food-like"/>
+                                <Icon @click="praise" v-if="!i.isPraise" size="0.04rem" type="food-like"/>
                                 <Icon v-else size="0.04rem" type="food-liked"/>
                                 <div :class="specialFoodTitleCheckUpTextCls">{{j.praise}}</div>
                             </div>
-                            <div :class="specialFoodTitleCheckDownCls">
-                                <Icon v-if="!i.isPraise" size="0.04rem" type="food-dislike"/>
-                                <Icon v-else size="0.04rem" type="food-disliked"/>
-                                <div :class="specialFoodTitleCheckDownTextCls">{{j.praise}}</div>
-                            </div>
+                            <!--<div :class="specialFoodTitleCheckDownCls">-->
+                                <!--<Icon v-if="!i.isPraise" size="0.04rem" type="food-dislike"/>-->
+                                <!--<Icon v-else size="0.04rem" type="food-disliked"/>-->
+                                <!--<div :class="specialFoodTitleCheckDownTextCls">{{j.praise}}</div>-->
+                            <!--</div>-->
                         </div>
                     </div>
                     <div :class="specialFoodTextPriceCls">
@@ -138,6 +138,15 @@
                             return data
                         }
                     })
+                }, (data) => {
+                    this.$root.$children[0].toggleToast('warning', data.message)
+                })
+            },
+            praise () {
+                request(`${API.foodshops}/food/${this.$route.params.id}/praise`, {
+                    type: 'PUT'
+                }, (data) => {
+                    this.refresh();
                 }, (data) => {
                     this.$root.$children[0].toggleToast('warning', data.message)
                 })
