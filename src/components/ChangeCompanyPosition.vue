@@ -1,15 +1,12 @@
 <template>
     <LayoutBase>
-        <Navbar arrowLeft>忘记密码</Navbar>
+        <Navbar arrowLeft>修改办公位置</Navbar>
         <CellGroup full class="cell-group">
-            <Cell full>
-                <Input type="number" placeholder="手机号"/>
-            </Cell>
-            <Cell withoutBorder>
-                <Input type="text" sendCode placeholder="请输入验证码"/>
+            <Cell full without-border>
+                <Input type="text" v-model="office_location" :default-value="defaultValue" withClear placeholder="请输入办公位置"/>
             </Cell>
         </CellGroup>
-        <Button className="next-step" circle type="default" full width="92%">下一步</Button>
+        <Button class="next-step" circle type="primary" @onClick="save" full width="92%">保存</Button>
     </LayoutBase>
 </template>
 
@@ -20,9 +17,10 @@
     import CellGroup from './lib/CellGroup'
     import Input from './lib/Input'
     import Button from './lib/Button'
-
+    import API from '../service/api'
+    import requests from '../service/service'
     export default {
-        name: 'ChangeCompanyPosition',
+        name: 'ChangeName',
         components: {
             Button,
             Navbar,
@@ -31,8 +29,47 @@
             Input,
             LayoutBase
         },
+        methods: {
+            save () {
+                let _this = this;
+                requests(API.get_user_info, {
+                    type: 'PUT',
+                    data: {
+                        office_location: _this.office_location,
+                        busiType: 4 //1 修改昵称2 修改头像3 修改公司4 修改工位6修改手机号
+                    }
+                }, (data) => {
+                    this.$store.dispatch('SET_USER_INFO', this)
+                    _this.$root.$children[0].toggleToast('success', data.message);
+                    setTimeout(() => {
+                        this.$router.push({
+                            path: '/user-info'
+                        })
+                    }, 500)
+                }, (data) => {
+                    _this.$root.$children[0].toggleToast('fail', data.message);
+                })
+            },
+
+        },
+        mounted () {
+            this.name = this.$store.state.user.office_location;
+        },
+        updated () {
+            if (!this.updated) {
+                this.name = this.$store.state.user.office_location;
+                this.updated = true;
+            }
+        },
+        computed: {
+            defaultValue () {
+                return this.$store.state.user.office_location
+            }
+        },
         data () {
             return {
+                office_location: '',
+                updated: false
             }
         }
     }
@@ -40,10 +77,12 @@
 
 <style scoped lang="stylus">
     @import '../styles/var.styl';
+    @import '../styles/hairline.styl';
     .cell-group {
-        margin-top: $margin-large;
-        border-top: 1px solid $border-color;
-        border-bottom: 1px solid $border-color;
+        margin-top: $margin-large !important;
+        position: relative;
+        hairline('top');
+        hairline('bottom');
     }
     .next-step {
         margin-top: $margin-large;

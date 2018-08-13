@@ -47,11 +47,21 @@
                     <div class="outside-pm25">
                         <div class="title">室外PM2.5</div>
                         <div class="pm25">
-                            <span class="pm25-number pm25-danger">{{parseInt(data.weather.outerPm25)}}</span>
+                            <span :class="(parseInt(data.weather.outerPm25) >= 115 ? 'pm25-danger': 'pm25-good') + ' pm25-text'">{{parseInt(data.weather.outerPm25)}}</span>
                             <span class="pm25-icon">
-                                <Icon class-name="pm2-icon" type="env-bad" size="0.04rem"/>
-                                <Icon class-name="pm2-icon" type="env-bad" size="0.04rem"/>
-                                <span class="pm25-danger pm25-text">{{data.weather.pm25Type}}</span>
+                                <Icon v-if="parseInt(data.weather.outerPm25) < 35" class-name="pm2-icon" type="env-good" size="0.04rem"/>
+                                <Icon v-if="parseInt(data.weather.outerPm25) < 35" class-name="pm2-icon" type="env-good" size="0.04rem"/>
+                                <Icon v-if="parseInt(data.weather.outerPm25) < 35" class-name="pm2-icon" type="env-good" size="0.04rem"/>
+                                <Icon v-if="parseInt(data.weather.outerPm25) < 75 && parseInt(data.weather.outerPm25) >= 35" class-name="pm2-icon" type="env-good" size="0.04rem"/>
+                                <Icon v-if="parseInt(data.weather.outerPm25) < 75 && parseInt(data.weather.outerPm25) >= 35" class-name="pm2-icon" type="env-good" size="0.04rem"/>
+                                <Icon v-if="parseInt(data.weather.outerPm25) < 115 && parseInt(data.weather.outerPm25) >= 75" class-name="pm2-icon" type="env-good" size="0.04rem"/>
+                                <Icon v-if="parseInt(data.weather.outerPm25) >= 115 && parseInt(data.weather.outerPm25) < 150"  class-name="pm2-icon" type="env-bad" size="0.04rem"/>
+                                <Icon v-if="parseInt(data.weather.outerPm25) >= 150 && parseInt(data.weather.outerPm25) < 250"  class-name="pm2-icon" type="env-bad" size="0.04rem"/>
+                                <Icon v-if="parseInt(data.weather.outerPm25) >= 150 && parseInt(data.weather.outerPm25) < 250"  class-name="pm2-icon" type="env-bad" size="0.04rem"/>
+                                <Icon v-if="parseInt(data.weather.outerPm25) >= 250"  class-name="pm2-icon" type="env-bad" size="0.04rem"/>
+                                <Icon v-if="parseInt(data.weather.outerPm25) >= 250"  class-name="pm2-icon" type="env-bad" size="0.04rem"/>
+                                <Icon v-if="parseInt(data.weather.outerPm25) >= 250"  class-name="pm2-icon" type="env-bad" size="0.04rem"/>
+                                <span :class="(parseInt(data.weather.outerPm25) >= 115 ? 'pm25-danger': 'pm25-good') + ' pm25-text'">{{data.weather.pm25Type}}</span>
                             </span>
                         </div>
                     </div>

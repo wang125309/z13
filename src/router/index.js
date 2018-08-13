@@ -252,7 +252,7 @@ export default new Router({
             component: ChangeCompany
         },
         {
-            path: '/change-avatar-position',
+            path: '/change-company-position',
             name: 'ChangeCompanyPosition',
             component: ChangeCompanyPosition
         },

@@ -75,28 +75,7 @@
                             this.$store.dispatch('SET_TOKEN', data.data);
                             cookies.setCookie(data.data);
                             this.$root.$children[0].toggleToast('success', data.message);
-
-                            location.href = 'https://cbd-proxy.limijiaoyin.io' + API.wx_authorize;
-                            // requests(API.wx_authorize, {
-                            //     type: 'GET'
-                            // }, (d) => {
-                            //     setTimeout(() => {
-                            //         this.$router.push({
-                            //             path: '/'
-                            //         })
-                            //     }, 500);
-                            // }, (err) => {
-                            //     if (err.message === '用户信息已完善') {
-                            //         setTimeout(() => {
-                            //             this.$router.push({
-                            //                 path: '/'
-                            //             })
-                            //         }, 500);
-                            //     }
-                            //     else {
-                            //         this.$root.$children[0].toggleToast('fail', err.message);
-                            //     }
-                            // })
+                            location.href = 'https://cbd-proxy.limijiaoyin.io' + API.wx_authorize + '?ukey=' + data.data;
                         }, (data) => {
                             this.$root.$children[0].toggleToast('fail', data.message);
                         });

@@ -25,11 +25,6 @@
 
     export default {
         name: 'ValidMobile',
-        watch: {
-            title () {
-
-            }
-        },
         components: {
             Button,
             Navbar,
@@ -53,7 +48,43 @@
             }
             else if (path === '/valid-new-mobile') {
                 this.title = '添加新手机号';
-                this.codeType = 5;
+                this.codeType = 7;
+                this.user = {
+                    account: '',
+                    phoneCode: ''
+                }
+            }
+        },
+        watch: {
+            $route : {
+                handler () {
+                    console.log("i do")
+                    let path = this.$route.path;
+                    if (path === '/forget-password') {
+                        this.title = '忘记密码';
+                        this.codeType = 4;
+                    }
+                    else if (path === '/valid-mobile') {
+                        this.title = '验证手机号';
+                    }
+                    else if (path === '/valid-old-mobile') {
+                        this.title = '验证旧手机号';
+                        this.codeType = 5;
+                        this.user = {
+                            account: '',
+                            phoneCode: ''
+                        }
+                    }
+                    else if (path === '/valid-new-mobile') {
+                        this.title = '添加新手机号';
+                        this.codeType = 7;
+                        this.user = {
+                            account: '',
+                            phoneCode: ''
+                        }
+                    }
+                }
+
             }
         },
         data () {
@@ -103,12 +134,12 @@
                     })
                 }
                 else if (path === '/valid-new-mobile') {
-                    request(API.get_user_info, {
+                    request(API.verify_phone_code, {
                         type: 'POST',
                         data: {
-                            mobile: this.user.account,
+                            account: this.user.account,
                             phoneCode: this.user.phoneCode,
-                            busiType: 6
+                            busiType: this.codeType
                         }
                     }, (data) => {
                         this.$root.$children[0].toggleToast('success', data.message);
@@ -116,7 +147,7 @@
                             this.$router.push({
                                 path: '/user-info'
                             })
-                        }, 500)
+                        }, 500);
                     }, (data) => {
                         this.$root.$children[0].toggleToast('success', data.message);
                     })

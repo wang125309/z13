@@ -5,7 +5,7 @@
         <div class="text-area">
             <p>企业认证已通过</p>
         </div>
-        <Button type="circle" full width="92%">完成</Button>
+        <Button @onClick="success" type="circle" full width="92%">完成</Button>
     </LayoutBase>
 </template>
 
@@ -27,6 +27,13 @@
         },
         data () {
             return {
+            }
+        },
+        methods: {
+            success () {
+                this.$router.push({
+                    path: '/user-info'
+                })
             }
         }
     }

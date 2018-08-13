@@ -6,6 +6,9 @@
             <TabsCell @onClick="setActive(1)" :active="getActive(1)">进行中</TabsCell>
             <TabsCell @onClick="setActive(2)" :active="getActive(2)">已结束</TabsCell>
         </Tabs>
+        <div v-if="!data.length" class="empty">
+            <Icon type="no-activity" size="0.25rem"/>
+        </div>
         <Card v-if="data.length" v-for="i in data" v-bind:key="'card'+i.id" @click="goActive(i.id)" full className="activity-card">
             <ActivityImages v-bind:key="'images' + i.id" :src="i.image" :title="i.name" :status="i.status === 0 ? '全部' : i.status === 1 ? '进行中' : '已结束'" :date="i.begin_time.split(' ')[0]" :location="i.address" :tag="'已有' + i.signupCount + '人参与'"/>
         </Card>
@@ -25,10 +28,12 @@
     import Button from "./lib/Button";
     import request from "../service/service"
     import pageResult from "../service/pageResult";
+    import Icon from './lib/Icon'
 
     export default {
         name: 'MyActivity',
         components: {
+            Icon,
             Button,
             Card,
             ActivityImages,
@@ -100,5 +105,8 @@
         bottom: $padding-base !important;
         color: $brand-color !important;
         border: none !important;
+    }
+    .empty {
+        margin-top: $margin-large * 3;
     }
 </style>
