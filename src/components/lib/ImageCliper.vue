@@ -160,11 +160,11 @@
                     let h =  _self.$refs.cutArea.clientWidth / _self.imageWidth * _self.imageHeight;
                     cutTop = _self.baseY * _self.imageHeight / h;
                     cutLeft = _self.baseX * _self.imageWidth / w;
-                    // console.log(cutTop, cutLeft, cutWidth, cutHeight)
-                    ctx.drawImage(_this, -cutLeft, -cutTop, cutWidth, cutHeight, 0, 0, _this.naturalWidth, _this.naturalWidth);
+                    console.log(cutTop, cutLeft, cutWidth, cutHeight)
+                    ctx.drawImage(_this, -cutLeft, -cutTop, cutWidth, cutWidth, 0, 0, _this.naturalWidth, _this.naturalWidth);
                     can = canvas;
-                    cc = canvas.toDataURL("image/jpeg", 1);
-                    base64 = can.toDataURL("image/jpeg", 1);
+                    cc = canvas.toDataURL("image/jpeg", 0.5);
+                    base64 = can.toDataURL("image/jpeg", 0.5);
                     _self.$emit('uploaded', base64)
                     _self.image = base64;
                     _self.cutVisible = false;
