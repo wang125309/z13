@@ -180,7 +180,7 @@
     .avatar-area {
         setBackgroundImage('')
         background-position: top left;
-        background-size: auto 100%;
+        background-size: cover;
         height: 1rem;
     }
 </style>
