@@ -186,19 +186,26 @@
                 floorVisible: [],
                 filter: {
                     companys: '',
-                    floor: '-1',
+                    floor: '',
                     name: ''
                 }
             }
         },
         methods: {
             refresh () {
+                let filter = {};
+                if (this.filter.name) {
+                    filter.name = this.filter.name;
+                }
+                if (this.filter.floor) {
+                    filter.floor = this.filter.floor;
+                }
+                if (this.filter.companys) {
+                    filter.companys = this.filter.companys;
+                }
                 request(API.building, {
                     type: 'GET',
-                    data: this.filter.name ? this.filter : {
-                        companys: this.filter.companys,
-                        floor: this.filter.floor
-                    }
+                    data: filter
                 }, (data) => {
                     this.data = data.data;
                     let cnt = 0;
