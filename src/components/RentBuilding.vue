@@ -3,12 +3,22 @@
         <Navbar arrow-left>可租单元</Navbar>
         <Tabs>
             <DropdownTab title="面积范围">
-                <div tabindex="0" :class="dropdownItemCls">100m²以下</div>
-                <div tabindex="0" :class="dropdownItemCls">100m²以上</div>
-                <div tabindex="0" :class="dropdownItemCls">100m²-200m²</div>
+                <div @click="filterArea('100under')" tabindex="0" :class="dropdownItemCls">100m²以下</div>
+                <div @click="filterArea('100upper')" tabindex="0" :class="dropdownItemCls">100m²以上</div>
+                <div @click="filterArea('100-200')" tabindex="0" :class="dropdownItemCls">100m²-200m²</div>
             </DropdownTab>
-            <DropdownTab title="容纳工位"></DropdownTab>
-            <DropdownTab title="楼层"></DropdownTab>
+            <DropdownTab title="容纳工位">
+                <div @click="filterCapacity('100under')" tabindex="0" :class="dropdownItemCls">100以下</div>
+                <div @click="filterCapacity('100upper')" tabindex="0" :class="dropdownItemCls">100以上</div>
+                <div @click="filterCapacity('100-200')" tabindex="0" :class="dropdownItemCls">100-200</div>
+            </DropdownTab>
+            <DropdownTab title="楼层">
+                <div @click="filterFloor('1-10')" tabindex="0" :class="dropdownItemCls">1~10</div>
+                <div @click="filterFloor('11-20')" tabindex="0" :class="dropdownItemCls">11~20</div>
+                <div @click="filterFloor('21-30')" tabindex="0" :class="dropdownItemCls">21~30</div>
+                <div @click="filterFloor('31-40')" tabindex="0" :class="dropdownItemCls">31~40</div>
+                <div @click="filterFloor('41-46')" tabindex="0" :class="dropdownItemCls">41~46</div>
+            </DropdownTab>
         </Tabs>
         <div :class="rentBuildingAreaCls">
             <div v-for="i in data" :key="'rent' + i.id" @click="go(i.id)" :class="rentBuildingItemCls">
@@ -143,13 +153,29 @@
         methods: {
             refresh (page) {
                 request(API.rentableunits, {
-                    type: 'GET'
+                    type: 'GET',
+                    data: this.filter
                 }, (data) => {
                     if (page === 1) this.data = [];
                     Object.assign(this.data, pageResult(data.data, page));
                 }, (data) => {
                     this.$root.$children[0].toggleToast('warning', data.message)
                 })
+            },
+            filterArea (area) {
+                this.filter.area = area;
+                this.page = 1
+                this.refresh(1)
+            },
+            filterCapacity (capacity) {
+                this.filter.capacity = capacity;
+                this.page = 1
+                this.refresh(1)
+            },
+            filterFloor (floor) {
+                this.filter.floor = floor;
+                this.page = 1
+                this.refresh(1)
             },
             go (id) {
                 this.$router.push({
@@ -159,7 +185,13 @@
         },
         data () {
             return {
-                data: []
+                data: [],
+                page: 1,
+                filter: {
+                    area: '',
+                    capacity: '',
+                    floor: ''
+                }
             }
         },
         created () {

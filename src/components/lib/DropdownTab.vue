@@ -37,6 +37,11 @@
                     }
                 ]
             },
+            dropdownTextCls () {
+                return [
+                    `${prefix}-dropdown-text`
+                ]
+            },
             arrowCls() {
                 return [
                     `${prefix}-dropdown-arrow`
@@ -130,6 +135,7 @@
             position: relative;
             hairline('bottom');
             padding: $padding-small;
+            white-space: nowrap;
             &:active {
                 background-color: $white * 0.95;
             }

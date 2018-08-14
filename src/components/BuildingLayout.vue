@@ -18,6 +18,28 @@
                 </a>
             </Cell>
         </CellGroup>
+        <div class="building-layout-search-area">
+            <SearchInput @search="refresh" v-model="filter.name"/>
+            <div class="building-layout-filter">
+                <div class="building-layout-title">大厦导航</div>
+                <DropdownTab title="单元">
+                    <div @click="filterUnit('1')" tabindex="0" :class="dropdownItemCls">一单元</div>
+                    <div @click="filterUnit('2')" tabindex="0" :class="dropdownItemCls">二单元</div>
+                    <div @click="filterUnit('3')" tabindex="0" :class="dropdownItemCls">三单元</div>
+                    <div @click="filterUnit('4')" tabindex="0" :class="dropdownItemCls">四单元</div>
+                    <div @click="filterUnit('5')" tabindex="0" :class="dropdownItemCls">五单元</div>
+                    <div @click="filterUnit('6')" tabindex="0" :class="dropdownItemCls">六单元</div>
+                    <div @click="filterUnit('7')" tabindex="0" :class="dropdownItemCls">七单元</div>
+                </DropdownTab>
+                <DropdownTab title="楼层">
+                    <div @click="filterFloor('1-10')" tabindex="0" :class="dropdownItemCls">1~10</div>
+                    <div @click="filterFloor('11-20')" tabindex="0" :class="dropdownItemCls">11~20</div>
+                    <div @click="filterFloor('21-30')" tabindex="0" :class="dropdownItemCls">21~30</div>
+                    <div @click="filterFloor('31-40')" tabindex="0" :class="dropdownItemCls">31~40</div>
+                    <div @click="filterFloor('41-46')" tabindex="0" :class="dropdownItemCls">41~46</div>
+                </DropdownTab>
+            </div>
+        </div>
         <div :class="roomPanelCls" v-if="i.companys.length" v-for="(i, index) in data" v-bind:key="index">
             <div @click="hidden(i.tid)" :class="floorCls">
                 <div>{{i.floor}}</div>
@@ -52,11 +74,13 @@
     import CellGroup from "./lib/CellGroup";
     import API from "../service/api";
     import request from "../service/service";
+    import DropdownTab from "./lib/DropdownTab";
     const prefix = 'z13';
 
     export default {
         name: 'Login',
         components: {
+            DropdownTab,
             CellGroup,
             Cell,
             Icon,
@@ -65,6 +89,11 @@
             LayoutBase
         },
         computed: {
+            dropdownItemCls () {
+                return [
+                    `${prefix}-dropdown-item`
+                ]
+            },
             floorIcon () {
                 return [
                     `${prefix}-floor-icon`
@@ -154,13 +183,22 @@
         data () {
             return {
                 data: [],
-                floorVisible: []
+                floorVisible: [],
+                filter: {
+                    companys: '',
+                    floor: '-1',
+                    name: ''
+                }
             }
         },
         methods: {
             refresh () {
                 request(API.building, {
-                    type: 'GET'
+                    type: 'GET',
+                    data: this.filter.name ? this.filter : {
+                        companys: this.filter.companys,
+                        floor: this.filter.floor
+                    }
                 }, (data) => {
                     this.data = data.data;
                     let cnt = 0;
@@ -171,6 +209,14 @@
                 }, (data) => {
                     this.$root.$children[0].toggleToast('fail', data.message);
                 });
+            },
+            filterFloor (floor) {
+                this.filter.floor = floor
+                this.refresh()
+            },
+            filterUnit (unit) {
+                this.filter.companys = unit
+                this.refresh()
             },
             hidden (tid) {
                 for (let i in this.data) {
@@ -192,6 +238,22 @@
 <style scoped lang="stylus">
     @import '../styles/var.styl';
     @import '../styles/hairline.styl';
+    .building-layout-search-area {
+        margin: $margin-base 0;
+        padding: $padding-base 0;
+        position: relative;
+        .building-layout-filter {
+            background: #fff;
+            display: flex;
+            position: relative;
+            hairline('bottom');
+            hairline('top');
+            .building-layout-title {
+                padding: $padding-base;
+                flex: 1;
+            }
+        }
+    }
     .{$prefix}-floor {
         position: relative;
         padding: $padding-base;
