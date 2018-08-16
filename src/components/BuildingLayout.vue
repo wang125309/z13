@@ -23,15 +23,16 @@
             <div class="building-layout-filter">
                 <div class="building-layout-title">大厦导航</div>
                 <DropdownTab title="单元">
-                    <div @click="filterUnit('1')" tabindex="0" :class="dropdownItemCls">一单元</div>
-                    <div @click="filterUnit('2')" tabindex="0" :class="dropdownItemCls">二单元</div>
-                    <div @click="filterUnit('3')" tabindex="0" :class="dropdownItemCls">三单元</div>
-                    <div @click="filterUnit('4')" tabindex="0" :class="dropdownItemCls">四单元</div>
-                    <div @click="filterUnit('5')" tabindex="0" :class="dropdownItemCls">五单元</div>
-                    <div @click="filterUnit('6')" tabindex="0" :class="dropdownItemCls">六单元</div>
-                    <div @click="filterUnit('7')" tabindex="0" :class="dropdownItemCls">七单元</div>
+                    <div @click="filterUnit(1)" tabindex="0" :class="dropdownItemCls">一单元</div>
+                    <div @click="filterUnit(2)" tabindex="0" :class="dropdownItemCls">二单元</div>
+                    <div @click="filterUnit(3)" tabindex="0" :class="dropdownItemCls">三单元</div>
+                    <div @click="filterUnit(4)" tabindex="0" :class="dropdownItemCls">四单元</div>
+                    <div @click="filterUnit(5)" tabindex="0" :class="dropdownItemCls">五单元</div>
+                    <div @click="filterUnit(6)" tabindex="0" :class="dropdownItemCls">六单元</div>
+                    <div @click="filterUnit(7)" tabindex="0" :class="dropdownItemCls">七单元</div>
                 </DropdownTab>
                 <DropdownTab title="楼层">
+                    <div @click="filterFloor('all')" tabindex="0" :class="dropdownItemCls">全部</div>
                     <div @click="filterFloor('1-10')" tabindex="0" :class="dropdownItemCls">1~10</div>
                     <div @click="filterFloor('11-20')" tabindex="0" :class="dropdownItemCls">11~20</div>
                     <div @click="filterFloor('21-30')" tabindex="0" :class="dropdownItemCls">21~30</div>
@@ -185,7 +186,7 @@
                 data: [],
                 floorVisible: [],
                 filter: {
-                    companys: '',
+                    unit: null,
                     floor: '',
                     name: ''
                 }
@@ -197,11 +198,14 @@
                 if (this.filter.name) {
                     filter.name = this.filter.name;
                 }
-                if (this.filter.floor) {
+                if (this.filter.floor !== '-1' && this.filter.floor !== '' && this.filter.floor !== undefined) {
                     filter.floor = this.filter.floor;
+                } else {
+                    delete this.filter.floor
+                    delete filter.floor
                 }
-                if (this.filter.companys) {
-                    filter.companys = this.filter.companys;
+                if (this.filter.unit) {
+                    filter.unit = this.filter.unit;
                 }
                 request(API.building, {
                     type: 'GET',
@@ -218,11 +222,15 @@
                 });
             },
             filterFloor (floor) {
-                this.filter.floor = floor
+                if (floor === 'all') {
+                    this.filter.floor = '-1'
+                } else {
+                    this.filter.floor = floor
+                }
                 this.refresh()
             },
             filterUnit (unit) {
-                this.filter.companys = unit
+                this.filter.unit = unit
                 this.refresh()
             },
             hidden (tid) {

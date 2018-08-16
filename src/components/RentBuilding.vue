@@ -12,6 +12,15 @@
                 <div @click="filterCapacity('100upper')" tabindex="0" :class="dropdownItemCls">100以上</div>
                 <div @click="filterCapacity('100-200')" tabindex="0" :class="dropdownItemCls">100-200</div>
             </DropdownTab>
+            <DropdownTab title="单元">
+                <div @click="filterUnit(1)" tabindex="0" :class="dropdownItemCls">一单元</div>
+                <div @click="filterUnit(2)" tabindex="0" :class="dropdownItemCls">二单元</div>
+                <div @click="filterUnit(3)" tabindex="0" :class="dropdownItemCls">三单元</div>
+                <div @click="filterUnit(4)" tabindex="0" :class="dropdownItemCls">四单元</div>
+                <div @click="filterUnit(5)" tabindex="0" :class="dropdownItemCls">五单元</div>
+                <div @click="filterUnit(6)" tabindex="0" :class="dropdownItemCls">六单元</div>
+                <div @click="filterUnit(7)" tabindex="0" :class="dropdownItemCls">七单元</div>
+            </DropdownTab>
             <DropdownTab title="楼层">
                 <div @click="filterFloor('1-10')" tabindex="0" :class="dropdownItemCls">1~10</div>
                 <div @click="filterFloor('11-20')" tabindex="0" :class="dropdownItemCls">11~20</div>
@@ -161,6 +170,11 @@
                 }, (data) => {
                     this.$root.$children[0].toggleToast('warning', data.message)
                 })
+            },
+            filterUnit (unit) {
+                this.filter.unit = unit
+                this.page = 1
+                this.refresh(1)
             },
             filterArea (area) {
                 this.filter.area = area;
