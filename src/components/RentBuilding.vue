@@ -2,36 +2,41 @@
     <LayoutBase>
         <Navbar arrow-left>可租单元</Navbar>
         <Tabs>
-            <DropdownTab title="面积范围">
-                <div @click="filterArea('100under')" tabindex="0" :class="dropdownItemCls">100m²以下</div>
-                <div @click="filterArea('100upper')" tabindex="0" :class="dropdownItemCls">100m²以上</div>
-                <div @click="filterArea('100-200')" tabindex="0" :class="dropdownItemCls">100m²-200m²</div>
+            <DropdownTab :title="areaTitle">
+                <div @click="filterArea('0', '全部')" tabindex="0" :class="dropdownItemCls">全部</div>
+                <div @click="filterArea('100under', '100m²以下')" tabindex="0" :class="dropdownItemCls">100m²以下</div>
+                <div @click="filterArea('100upper', '100m²以上')" tabindex="0" :class="dropdownItemCls">100m²以上</div>
+                <div @click="filterArea('100-200', '100m²-200m²')" tabindex="0" :class="dropdownItemCls">100m²-200m²</div>
             </DropdownTab>
-            <DropdownTab title="容纳工位">
-                <div @click="filterCapacity('100under')" tabindex="0" :class="dropdownItemCls">100以下</div>
-                <div @click="filterCapacity('100upper')" tabindex="0" :class="dropdownItemCls">100以上</div>
-                <div @click="filterCapacity('100-200')" tabindex="0" :class="dropdownItemCls">100-200</div>
+            <DropdownTab :title="capacityTitle">
+                <div @click="filterCapacity('0', '全部')" tabindex="0" :class="dropdownItemCls">全部</div>
+                <div @click="filterCapacity('100under', '100以下')" tabindex="0" :class="dropdownItemCls">100以下</div>
+                <div @click="filterCapacity('100upper', '100以上')" tabindex="0" :class="dropdownItemCls">100以上</div>
+                <div @click="filterCapacity('100-200', '100-200')" tabindex="0" :class="dropdownItemCls">100-200</div>
             </DropdownTab>
-            <DropdownTab title="单元">
-                <div @click="filterUnit(1)" tabindex="0" :class="dropdownItemCls">一单元</div>
-                <div @click="filterUnit(2)" tabindex="0" :class="dropdownItemCls">二单元</div>
-                <div @click="filterUnit(3)" tabindex="0" :class="dropdownItemCls">三单元</div>
-                <div @click="filterUnit(4)" tabindex="0" :class="dropdownItemCls">四单元</div>
-                <div @click="filterUnit(5)" tabindex="0" :class="dropdownItemCls">五单元</div>
-                <div @click="filterUnit(6)" tabindex="0" :class="dropdownItemCls">六单元</div>
-                <div @click="filterUnit(7)" tabindex="0" :class="dropdownItemCls">七单元</div>
+            <DropdownTab :title="unitTitle">
+                <div @click="filterUnit(0, '全部')" tabindex="0" :class="dropdownItemCls">全部</div>
+                <div @click="filterUnit(1, '一单元')" tabindex="0" :class="dropdownItemCls">一单元</div>
+                <div @click="filterUnit(2, '二单元')" tabindex="0" :class="dropdownItemCls">二单元</div>
+                <div @click="filterUnit(3, '三单元')" tabindex="0" :class="dropdownItemCls">三单元</div>
+                <div @click="filterUnit(4, '四单元')" tabindex="0" :class="dropdownItemCls">四单元</div>
+                <div @click="filterUnit(5, '五单元')" tabindex="0" :class="dropdownItemCls">五单元</div>
+                <div @click="filterUnit(6, '六单元')" tabindex="0" :class="dropdownItemCls">六单元</div>
+                <div @click="filterUnit(7, '七单元')" tabindex="0" :class="dropdownItemCls">七单元</div>
             </DropdownTab>
-            <DropdownTab title="楼层">
-                <div @click="filterFloor('1-10')" tabindex="0" :class="dropdownItemCls">1~10</div>
-                <div @click="filterFloor('11-20')" tabindex="0" :class="dropdownItemCls">11~20</div>
-                <div @click="filterFloor('21-30')" tabindex="0" :class="dropdownItemCls">21~30</div>
-                <div @click="filterFloor('31-40')" tabindex="0" :class="dropdownItemCls">31~40</div>
-                <div @click="filterFloor('41-46')" tabindex="0" :class="dropdownItemCls">41~46</div>
+            <DropdownTab :title="floorTitle">
+                <div @click="filterFloor('all', '全部')" tabindex="0" :class="dropdownItemCls">全部</div>
+                <div @click="filterFloor('1-10', '1~10')" tabindex="0" :class="dropdownItemCls">1~10</div>
+                <div @click="filterFloor('11-20', '11~20')" tabindex="0" :class="dropdownItemCls">11~20</div>
+                <div @click="filterFloor('21-30', '21~30')" tabindex="0" :class="dropdownItemCls">21~30</div>
+                <div @click="filterFloor('31-40', '31~40')" tabindex="0" :class="dropdownItemCls">31~40</div>
+                <div @click="filterFloor('41-46', '41~46')" tabindex="0" :class="dropdownItemCls">41~46</div>
             </DropdownTab>
         </Tabs>
         <div :class="rentBuildingAreaCls">
             <div v-for="i in data" :key="'rent' + i.id" @click="go(i.id)" :class="rentBuildingItemCls">
-                <Icon :class="rentImgCls" type="rent-img" position="left" size="0.25rem"/>
+                <!--<Icon :class="rentImgCls" type="rent-img" position="left" size="0.25rem"/>-->
+                <div :class="rentImgCls" :style="'background-image:url(' + i.image + ')'"></div>
                 <div :class="rentBuildingItemInfoCls">
                     <div :class="titleCls">{{i.area}} | {{i.location}}</div>
                     <div :class="descAreaCls">
@@ -67,6 +72,7 @@
     import request from "../service/service";
     import API from "../service/api";
     import pageResult from "../service/pageResult";
+
     const prefix = 'z13';
 
     export default {
@@ -77,6 +83,7 @@
             Navbar,
             LayoutBase
         },
+
         computed: {
             rentBuildingAreaCls () {
                 return [
@@ -161,9 +168,34 @@
         },
         methods: {
             refresh (page) {
+                let filter = {};
+                if (this.filter.area !== '0' && this.filter.area !== '' && this.filter.area !== undefined) {
+                    filter.area = this.filter.area;
+                } else {
+                    delete this.filter.area
+                    delete filter.area
+                }
+                if (this.filter.capacity !== '0' && this.filter.capacity !== '' && this.filter.capacity !== undefined) {
+                    filter.capacity = this.filter.capacity;
+                } else {
+                    delete this.filter.area
+                    delete filter.area
+                }
+                if (this.filter.floor !== '-1' && this.filter.floor !== '' && this.filter.floor !== undefined) {
+                    filter.floor = this.filter.floor;
+                } else {
+                    delete this.filter.floor
+                    delete filter.floor
+                }
+                if (this.filter.unit !== 0 && this.filter.floor !== '' && this.filter.floor !== undefined) {
+                    filter.unit = this.filter.unit;
+                } else {
+                    delete this.filter.unit
+                    delete filter.unit
+                }
                 request(API.rentableunits, {
                     type: 'GET',
-                    data: this.filter
+                    data: filter
                 }, (data) => {
                     if (page === 1) this.data = [];
                     Object.assign(this.data, pageResult(data.data, page));
@@ -171,23 +203,31 @@
                     this.$root.$children[0].toggleToast('warning', data.message)
                 })
             },
-            filterUnit (unit) {
+            filterUnit (unit, title) {
                 this.filter.unit = unit
                 this.page = 1
+                this.unitTitle = title
                 this.refresh(1)
             },
-            filterArea (area) {
+            filterArea (area, title) {
                 this.filter.area = area;
                 this.page = 1
+                this.areaTitle = title
                 this.refresh(1)
             },
-            filterCapacity (capacity) {
+            filterCapacity (capacity, title) {
                 this.filter.capacity = capacity;
                 this.page = 1
+                this.capacityTitle = title
                 this.refresh(1)
             },
-            filterFloor (floor) {
-                this.filter.floor = floor;
+            filterFloor (floor, title) {
+                if (floor === 'all') {
+                    this.filter.floor = '-1'
+                } else {
+                    this.filter.floor = floor
+                }
+                this.floorTitle = title
                 this.page = 1
                 this.refresh(1)
             },
@@ -204,8 +244,13 @@
                 filter: {
                     area: '',
                     capacity: '',
-                    floor: ''
-                }
+                    floor: '',
+                    unit: null
+                },
+                areaTitle: '面积范围',
+                capacityTitle: '容纳工位',
+                unitTitle: '单元',
+                floorTitle: '楼层'
             }
         },
         created () {
@@ -236,17 +281,22 @@
             position: relative;
             padding: $padding-small;
             background-color: $white;
-
+            display: flex;
+            justify-content: left;
             hairline('bottom');
             &:last-child {
                 hairline-remove('bottom');
             }
 
             .{$prefix}-rent-img {
-                left: $padding-small !important;
+                height: 0.25rem;
+                width: 0.25rem;
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-position: center;
             }
             &-info {
-                margin-left: 0.25rem;
+                flex: 1;
                 min-height: 0.25rem;
                 padding-left: $padding-small;
                 .{$prefix}-title {

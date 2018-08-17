@@ -47,7 +47,7 @@
                     <div class="outside-pm25">
                         <div class="title">室外PM2.5</div>
                         <div class="pm25">
-                            <span :class="(parseInt(data.weather.outerPm25) >= 115 ? 'pm25-danger': 'pm25-good') + ' pm25-text'">{{parseInt(data.weather.outerPm25)}}</span>
+                            <span :class="(parseInt(data.weather.outerPm25) >= 115 ? 'pm25-danger': 'pm25-good') + ' pm25-number'">{{parseInt(data.weather.outerPm25)}}</span>
                             <span class="pm25-icon">
                                 <Icon v-if="parseInt(data.weather.outerPm25) < 35" class-name="pm2-icon" type="env-good" size="0.04rem"/>
                                 <Icon v-if="parseInt(data.weather.outerPm25) < 35" class-name="pm2-icon" type="env-good" size="0.04rem"/>
@@ -341,6 +341,7 @@
                 align-items: baseline;
                 .pm25-number {
                     font-size: $font-size-head-large;
+                    margin-right: $padding-small;
                 }
                 .pm25-icon {
                     display: flex;

@@ -22,22 +22,23 @@
             <SearchInput @search="refresh" v-model="filter.name"/>
             <div class="building-layout-filter">
                 <div class="building-layout-title">大厦导航</div>
-                <DropdownTab title="单元">
-                    <div @click="filterUnit(1)" tabindex="0" :class="dropdownItemCls">一单元</div>
-                    <div @click="filterUnit(2)" tabindex="0" :class="dropdownItemCls">二单元</div>
-                    <div @click="filterUnit(3)" tabindex="0" :class="dropdownItemCls">三单元</div>
-                    <div @click="filterUnit(4)" tabindex="0" :class="dropdownItemCls">四单元</div>
-                    <div @click="filterUnit(5)" tabindex="0" :class="dropdownItemCls">五单元</div>
-                    <div @click="filterUnit(6)" tabindex="0" :class="dropdownItemCls">六单元</div>
-                    <div @click="filterUnit(7)" tabindex="0" :class="dropdownItemCls">七单元</div>
+                <DropdownTab :title="unitTitle">
+                    <div @click="filterUnit(0, '全部')" tabindex="0" :class="dropdownItemCls">全部</div>
+                    <div @click="filterUnit(1, '一单元')" tabindex="0" :class="dropdownItemCls">一单元</div>
+                    <div @click="filterUnit(2, '二单元')" tabindex="0" :class="dropdownItemCls">二单元</div>
+                    <div @click="filterUnit(3, '三单元')" tabindex="0" :class="dropdownItemCls">三单元</div>
+                    <div @click="filterUnit(4, '四单元')" tabindex="0" :class="dropdownItemCls">四单元</div>
+                    <div @click="filterUnit(5, '五单元')" tabindex="0" :class="dropdownItemCls">五单元</div>
+                    <div @click="filterUnit(6, '六单元')" tabindex="0" :class="dropdownItemCls">六单元</div>
+                    <div @click="filterUnit(7, '七单元')" tabindex="0" :class="dropdownItemCls">七单元</div>
                 </DropdownTab>
-                <DropdownTab title="楼层">
-                    <div @click="filterFloor('all')" tabindex="0" :class="dropdownItemCls">全部</div>
-                    <div @click="filterFloor('1-10')" tabindex="0" :class="dropdownItemCls">1~10</div>
-                    <div @click="filterFloor('11-20')" tabindex="0" :class="dropdownItemCls">11~20</div>
-                    <div @click="filterFloor('21-30')" tabindex="0" :class="dropdownItemCls">21~30</div>
-                    <div @click="filterFloor('31-40')" tabindex="0" :class="dropdownItemCls">31~40</div>
-                    <div @click="filterFloor('41-46')" tabindex="0" :class="dropdownItemCls">41~46</div>
+                <DropdownTab :title="floorTitle">
+                    <div @click="filterFloor('all', '全部')" tabindex="0" :class="dropdownItemCls">全部</div>
+                    <div @click="filterFloor('1-10', '1~10')" tabindex="0" :class="dropdownItemCls">1~10</div>
+                    <div @click="filterFloor('11-20', '11~20')" tabindex="0" :class="dropdownItemCls">11~20</div>
+                    <div @click="filterFloor('21-30', '21~30')" tabindex="0" :class="dropdownItemCls">21~30</div>
+                    <div @click="filterFloor('31-40', '31~40')" tabindex="0" :class="dropdownItemCls">31~40</div>
+                    <div @click="filterFloor('41-46', '41~46')" tabindex="0" :class="dropdownItemCls">41~46</div>
                 </DropdownTab>
             </div>
         </div>
@@ -189,7 +190,9 @@
                     unit: null,
                     floor: '',
                     name: ''
-                }
+                },
+                unitTitle: '单元',
+                floorTitle: '楼层'
             }
         },
         methods: {
@@ -221,7 +224,8 @@
                     this.$root.$children[0].toggleToast('fail', data.message);
                 });
             },
-            filterFloor (floor) {
+            filterFloor (floor, title) {
+                this.floorTitle = title;
                 if (floor === 'all') {
                     this.filter.floor = '-1'
                 } else {
@@ -229,7 +233,8 @@
                 }
                 this.refresh()
             },
-            filterUnit (unit) {
+            filterUnit (unit, title) {
+                this.unitTitle = title;
                 this.filter.unit = unit
                 this.refresh()
             },
