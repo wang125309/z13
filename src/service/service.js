@@ -37,11 +37,13 @@ const requests = (url, options, success, error) => {
         }).then((response) => {
             callback(response);
         }).catch((err) => {
+
             if (err.response.status === 401) {
-                callback(err)
+                err.response.data.message = '您已退出登录，请重新登录'
+                callback(err.response.data)
             }
             else {
-                callback(err);
+                callback(err.response.data);
             }
 
         });

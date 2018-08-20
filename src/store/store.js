@@ -17,6 +17,7 @@ const mutations = {
         requests(API.get_user_info, {}, (data) => {
             state.user = data.data
         }, (data) => {
+            console.log(data)
             if (_this.$route.name !== 'Activity'
                 && _this.$route.name !== 'Home'
                 && _this.$route.name !== 'ActivityList'
