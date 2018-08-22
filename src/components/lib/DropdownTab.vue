@@ -1,5 +1,5 @@
 <template>
-    <div :class="dropdownTabCls" @click="setActive">
+    <div v-on-click-outside="handleClickOutside" :class="dropdownTabCls" @click="setActive">
         <span :class="dropdownTextCls">
             {{title}}
         </span>
@@ -13,11 +13,15 @@
 </template>
 <script>
     import FontIcon from "./FontIcon";
+    import { mixin as onClickOutside } from 'vue-on-click-outside';
+
     const prefix = 'z13';
     export default {
         components: {
             FontIcon
         },
+        mixins: [onClickOutside],
+
         props: {
             active: {
                 type: Boolean,
@@ -73,6 +77,9 @@
                 });
                 this.active = !this.active;
             },
+            handleClickOutside () {
+                this.active = false;
+            },
             menuClick (e) {
                 e.stopPropagation()
             }
@@ -98,6 +105,7 @@
         &-active {
             .{$prefix}-dropdown-text {
                 color: $brand-color;
+                white-space: nowrap;
             }
             .{$prefix}-pull-down-icon {
                 color: $brand-color;
