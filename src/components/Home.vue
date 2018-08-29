@@ -82,7 +82,7 @@
                 </ServiceCellGroup>
             </Panel>
 
-            <Card class-name="rent-card" details="" full title="可租单元" viewDetails="/rent-building">
+            <Card v-if="data.rentableUnits.pageResult && data.rentableUnits.pageResult.length" class-name="rent-card" details="" full title="可租单元" viewDetails="/rent-building">
                 <div class="rent-wrap" @click="goRent(data.rentableUnits.pageResult[0].id)">
                     <Icon class-name="rent-img" type="rent-img" size="0.35rem"/>
                     <div class="rent-details">
