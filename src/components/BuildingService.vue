@@ -13,7 +13,8 @@
                     {{i.author}}
                     <span :class="timeCls">{{i.create_time}}</span>
                 </div>
-                <Icon :class="iconCls" type="rent-img" size="0.25rem" position="right"/>
+                <div :class="iconCls" :style="'backgroundImage:url(' + i.image + ')'"></div>
+                <!--<Icon :class="iconCls" type="rent-img" size="0.25rem" position="right"/>-->
             </div>
 
         </div>
@@ -134,6 +135,13 @@
         .{$prefix}-icon {
             top: $padding-base;
             margin-right: $padding-base;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            width: 0.25rem;
+            height: 0.25rem;
+            position: absolute;
+            right: 0;
         }
     }
 </style>
