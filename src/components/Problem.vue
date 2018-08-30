@@ -1,6 +1,5 @@
 <template>
     <LayoutBase>
-        <Navbar arrow-left>常见问题</Navbar>
         <CellGroup full>
             <Cell  v-bind:key="i.id" v-for="i in data" full padding problem>
                 {{i.problem}}

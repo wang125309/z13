@@ -1,6 +1,5 @@
 <template>
     <LayoutBase>
-        <Navbar arrow-left>可租单元</Navbar>
         <Banner :style="'background-image:url(' + data.image + ')'"/>
         <div :class="rentPanelCls">
             <div :class="rentPanelCellCls">

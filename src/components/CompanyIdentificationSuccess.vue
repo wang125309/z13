@@ -1,6 +1,5 @@
 <template>
     <LayoutBase>
-        <Navbar arrowLeft>注册</Navbar>
         <SituationLogo size="0.2rem" type="success"/>
         <div class="text-area">
             <p>企业认证已通过</p>

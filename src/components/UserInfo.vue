@@ -1,6 +1,5 @@
 <template>
     <LayoutBase>
-        <Navbar arrow-left>个人信息</Navbar>
         <div class="title">基本信息</div>
         <Panel class-name="panel" no-padding>
             <CellGroup full no-margin>

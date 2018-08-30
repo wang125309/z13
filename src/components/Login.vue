@@ -4,7 +4,7 @@
         <Z13Icon/>
         <CellGroup class="cell-group">
             <Cell>
-                <Input v-model="user.account" type="text" icon="phone" placeholder="手机号/注册邮箱"/>
+                <Input v-model="user.account" type="text" icon="phone" placeholder="手机号"/>
             </Cell>
             <Cell>
                 <Input v-model="user.password" withEye type="password" icon="lock" placeholder="登录密码"/>

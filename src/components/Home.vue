@@ -155,7 +155,7 @@
                 },
                 swiperBannerOption: {
                     slidesPerView: 'auto',
-                    autoplay: true,
+                    loop: true,
                     pagination: {
                         el: '.swiper-pagination',
                     },

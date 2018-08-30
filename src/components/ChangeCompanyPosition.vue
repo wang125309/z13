@@ -1,6 +1,5 @@
 <template>
     <LayoutBase>
-        <Navbar arrowLeft>修改办公位置</Navbar>
         <CellGroup full class="cell-group">
             <Cell full without-border>
                 <Input type="text" v-model="office_location" :default-value="defaultValue" withClear placeholder="请输入办公位置"/>

@@ -1,6 +1,5 @@
 <template>
     <LayoutWhite>
-        <Navbar arrow-left>大厦服务详情</Navbar>
         <div :class="titleCls">{{data.title}}</div>
         <div :class="authorAreaCls">
             <div :class="authorCls">

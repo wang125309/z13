@@ -1,6 +1,5 @@
 <template>
     <LayoutBase>
-        <Navbar arrow-left>可租单元</Navbar>
         <Tabs>
             <DropdownTab :title="areaTitle">
                 <div @click="filterArea('0', '全部')" tabindex="0" :class="dropdownItemCls">全部</div>

@@ -1,6 +1,5 @@
 <template>
     <LayoutBase>
-        <Navbar arrow-left>大厦服务</Navbar>
         <SearchInput></SearchInput>
         <div :class="panelCls">
             <div v-for="i in data" :class="serviceItemCls" @click="go(i.id)">

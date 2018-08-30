@@ -1,6 +1,5 @@
 <template>
     <LayoutBase>
-        <Navbar arrowLeft>头像</Navbar>
         <div class="avatar-area" :style="'background-image:url('+ image +')'">
             <ImageCliper @uploaded="uploaded"  ref="imageCliper" v-show="imageCliperVisible"/>
         </div>

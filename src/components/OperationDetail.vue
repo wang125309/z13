@@ -1,6 +1,5 @@
 <template>
     <LayoutBase>
-        <Navbar arrowLeft>百叶帘控制</Navbar>
         <div class="operation-tab">
             <Icon size="0.5rem" type="operation-close"></Icon>
         </div>

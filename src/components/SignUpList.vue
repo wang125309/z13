@@ -1,6 +1,5 @@
 <template>
     <LayoutBase>
-        <Navbar arrow-left>报名情况</Navbar>
         <div class="cell-group">
             <div v-for="i in data" class="cell-list">
                 <Avatar class="cell-list-avatar" :src="i.image" size="0.12rem"/>

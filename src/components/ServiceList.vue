@@ -1,6 +1,5 @@
 <template>
     <LayoutBase>
-        <Navbar arrowLeft>贴心服务</Navbar>
         <div class="operation-tabs">
             <div class="operation-tab">
                 <Icon size="0.15rem" type="blands-icon"></Icon>

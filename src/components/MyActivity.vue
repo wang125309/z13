@@ -1,6 +1,5 @@
 <template>
     <LayoutBase>
-        <Navbar arrow-left>我的活动</Navbar>
         <Tabs>
             <TabsCell @onClick="setActive(0)" :active="getActive(0)">全部</TabsCell>
             <TabsCell @onClick="setActive(1)" :active="getActive(1)">进行中</TabsCell>

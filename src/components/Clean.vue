@@ -1,6 +1,5 @@
 <template>
     <LayoutBase>
-        <Navbar arrow-left>保洁服务</Navbar>
         <Panel no-padding>
             <div :class="deliveryItemCls">
                 <div :class="deliveryItemIconCls"

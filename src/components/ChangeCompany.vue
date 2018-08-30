@@ -1,6 +1,5 @@
 <template>
     <LayoutBase>
-        <Navbar arrowLeft>忘记密码</Navbar>
         <CellGroup full class="cell-group">
             <Cell full>
                 <Input type="number" placeholder="手机号"/>

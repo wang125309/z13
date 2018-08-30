@@ -1,6 +1,5 @@
 <template>
     <LayoutBase>
-        <Navbar arrowLeft>更换手机号</Navbar>
         <CellGroup full class="cell-group">
             <Cell full>
                 <Input type="number" disabled v-model="mobile" :default-value="defaultValue" withClear placeholder="请输入手机号"/>

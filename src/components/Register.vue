@@ -1,6 +1,5 @@
 <template>
     <LayoutWhite>
-        <Navbar>注册</Navbar>
         <Z13Icon/>
         <CellGroup class="cell-group">
             <Cell>

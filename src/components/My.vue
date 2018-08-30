@@ -1,8 +1,7 @@
 <template>
     <LayoutBase>
-        <Navbar>我的</Navbar>
         <Panel>
-            <Avatar @click="go" :src="user.image"/>
+            <Avatar @click="go" size="0.2rem" :src="user.image"/>
             <div class="user-name">{{user.nick_name}}</div>
             <div class="sub-name">{{user.account}}</div>
         </Panel>
