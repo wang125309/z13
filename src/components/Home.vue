@@ -101,7 +101,7 @@
                         <div class="rent-title">{{data.rentableUnits.pageResult[0].title}}</div>
                         <div class="rent-area">
                             <p>{{data.rentableUnits.pageResult[0].area}}平米|{{data.rentableUnits.pageResult[0].location}}层</p>
-                            <p>{{data.rentableUnits.pageResult[0].capacity}}</p>
+                            <p>{{data.rentableUnits.pageResult[0].capacity}}工位</p>
                             <p>{{data.rentableUnits.pageResult[0].deck}}</p>
                             <p>
                                 <span class="price">{{data.rentableUnits.pageResult[0].price}}元</span>
