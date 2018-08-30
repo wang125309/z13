@@ -43,7 +43,7 @@
         </div>
         <div :class="roomPanelCls" v-if="i.companys.length" v-for="(i, index) in data" v-bind:key="index">
             <div @click="hidden(i.tid)" :class="floorCls">
-                <div>{{i.floor}}</div>
+                <div>{{i.floor}}F</div>
                 <Icon :class="floorIcon" position="right" type="up-arrow" size="0.04rem"/>
             </div>
             <div v-show="i.active" :class="roomPanelItemCls" v-for="(j, $index) in i.companys" v-bind:key="'company'+ $index">
