@@ -100,10 +100,10 @@
                     <div class="rent-details">
                         <div class="rent-title">{{data.rentableUnits.pageResult[0].title}}</div>
                         <div class="rent-area">
-                            <p>{{data.rentableUnits.pageResult[0].area}}平米|{{data.rentableUnits.pageResult[0].location}}层</p>
-                            <p>{{data.rentableUnits.pageResult[0].capacity}}工位</p>
-                            <p>{{data.rentableUnits.pageResult[0].deck}}</p>
-                            <p>
+                            <p class="rent-area-p">{{data.rentableUnits.pageResult[0].area}}平米|{{data.rentableUnits.pageResult[0].location}}层</p>
+                            <p class="rent-area-p">{{data.rentableUnits.pageResult[0].capacity}}工位</p>
+                            <p class="rent-area-p">{{data.rentableUnits.pageResult[0].deck}}</p>
+                            <p class="rent-area-p">
                                 <span class="price">{{data.rentableUnits.pageResult[0].price}}元</span>
                                 <span>/平米</span>
                             </p>
@@ -384,13 +384,16 @@
         .rent-details {
             flex: 3;
             padding-left: $padding-small;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
             .rent-title {
                 font-size: $font-size-head;
             }
             .rent-area {
                 color: $font-second;
-                p {
-                    margin: $margin-small 0 0 0;
+                .rent-area-p {
+                    margin: 6px 0 0 0;
                 }
                 .price {
                     color: red;
@@ -398,6 +401,7 @@
             }
         }
     }
+
     .activity-item-title {
         font-size: $font-size-head;
         padding: $padding-base;
