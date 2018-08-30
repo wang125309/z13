@@ -9,7 +9,13 @@
                     </swiper-slide>
                 </swiper>
             </Banner>
-            <Card className="news-card">
+            <Card v-if="(data.newsAndRunableUnit.news &&
+                    data.newsAndRunableUnit.news.length) ||
+                    (data.newsAndRunableUnit.rentablrUnits &&
+                    data.newsAndRunableUnit.rentablrUnits.length)"
+                  className="news-card"
+                  scroll
+            >
                 <div :key="'service' + i.id" class="news-list" @click="goNews(i.id)" v-for="i in data.newsAndRunableUnit.news">
                     <Tag class-name="tag" backgroundColor="red" color="#fff" borderColor="#fff">大厦服务</Tag>
                     <div class="news-details">{{i.title}}</div>
@@ -82,7 +88,13 @@
                 </ServiceCellGroup>
             </Panel>
 
-            <Card v-if="data.rentableUnits.pageResult && data.rentableUnits.pageResult.length" class-name="rent-card" details="" full title="可租单元" viewDetails="/rent-building">
+            <Card v-if="data.rentableUnits.pageResult &&
+                    data.rentableUnits.pageResult.length"
+                  class-name="rent-card"
+                  details=""
+                  full
+                  :title="`可租单元(${data.rentableUnits.totalItem > 99 ? '99+' : data.rentableUnits.totalItem})`"
+                  viewDetails="/rent-building">
                 <div class="rent-wrap" @click="goRent(data.rentableUnits.pageResult[0].id)">
                     <Icon class-name="rent-img" type="rent-img" size="0.35rem"/>
                     <div class="rent-details">
@@ -99,7 +111,7 @@
                     </div>
                 </div>
             </Card>
-            <Card full title="社区活动" viewDetails="/activity-list">
+            <Card v-if="data.activitys.pageResult && data.activitys.pageResult.length" full title="社区活动" viewDetails="/activity-list">
                 <swiper :options="swiperOption">
                     <swiper-slide :key="'activity' + i.id" v-for="i in data.activitys.pageResult">
                         <div @click="goActivity(i.id)" class="activity-item" :style="'background-image:url(' + i.image +')'">

@@ -24,13 +24,15 @@
             full: [Boolean],
             title: [String],
             noPadding: [Boolean],
-            viewDetails: [String]
+            viewDetails: [String],
+            scroll: [Boolean]
         },
         computed: {
             cardWrapCls() {
                 return [
                     `${prefix}-card-wrap`, {
-                        [`${this.className}`]: this.className
+                        [`${this.className}`]: this.className,
+                        [`${prefix}-card-wrap-scroll`]: this.scroll
                     }
                 ]
             },
@@ -82,6 +84,9 @@
     @import '../../styles/var.styl';
     @import '../../styles/hairline.styl'
     .{$prefix}-card-wrap {
+        &-scroll {
+            
+        }
         .{$prefix}-card-title {
             position: relative;
             border-left: 3px solid $brand-color;
