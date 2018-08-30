@@ -5,11 +5,13 @@
             <Icon v-if="viewDetails" type="detail" size="0.04rem" position="right" :class="detailsCls" @click="view"/>
         </div>
         <div :class="cardCls" :style="cardStyle">
-            <slot></slot>
+            <div v-if="scroll" :class="cardBodyCls">
+                <slot></slot>
+            </div>
+            <slot v-if="!scroll"></slot>
             <div v-if="overflow" :class="cardOverflowCls"></div>
         </div>
     </div>
-
 </template>
 
 <script>
@@ -65,6 +67,11 @@
                 return [
                     `${prefix}-icon-details`
                 ]
+            },
+            cardBodyCls () {
+                return [
+                    `${prefix}-card-body`
+                ]
             }
         },
         methods: {
@@ -83,9 +90,28 @@
 <style lang="stylus">
     @import '../../styles/var.styl';
     @import '../../styles/hairline.styl'
+    @keyframes scroll {
+        0% {
+            transform: translateY(100%)
+        }
+        100% {
+            transform: translateY(-100%)
+        }
+    }
     .{$prefix}-card-wrap {
         &-scroll {
-            
+            height: 0.28rem;
+            overflow: hidden;
+            position: relative;
+            .{$prefix}-card {
+                overflow: hidden;
+                background: #fff;
+                position: relative;
+                margin-top: -100%;
+                &-body {
+                    animation: scroll 5s linear infinite;
+                }
+            }
         }
         .{$prefix}-card-title {
             position: relative;

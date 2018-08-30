@@ -14,7 +14,7 @@
                     (data.newsAndRunableUnit.rentablrUnits &&
                     data.newsAndRunableUnit.rentablrUnits.length)"
                   className="news-card"
-                  scroll
+                  :scroll="data.newsAndRunableUnit.news.length + data.newsAndRunableUnit.rentablrUnits.length > 3"
             >
                 <div :key="'service' + i.id" class="news-list" @click="goNews(i.id)" v-for="i in data.newsAndRunableUnit.news">
                     <Tag class-name="tag" backgroundColor="red" color="#fff" borderColor="#fff">大厦服务</Tag>

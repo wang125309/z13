@@ -123,6 +123,9 @@
         transform: translateX(-50%);
         hairline('all', $border-color, 3px);
         box-shadow: 1px 1px 2px #ececed;
+        &-text {
+            white-space: nowrap;
+        }
         &-arrow {
             position: absolute;
             left: 50%;
