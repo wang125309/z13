@@ -1,5 +1,6 @@
 <template>
     <LayoutBase>
+        <Navbar v-show="false" arrowLeft>活动详情</Navbar>
         <Panel no-padding>
             <div :class="deliveryItemCls">
                 <div :class="deliveryItemIconCls" :style="'background-image:url('+ data.image +')'"></div>

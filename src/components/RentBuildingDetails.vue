@@ -1,5 +1,6 @@
 <template>
     <LayoutBase>
+        <Navbar v-show="false" arrowLeft>活动详情</Navbar>
         <Banner :style="'background-image:url(' + data.image + ')'"/>
         <div :class="rentPanelCls">
             <div :class="rentPanelCellCls">

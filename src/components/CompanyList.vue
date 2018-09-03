@@ -1,5 +1,6 @@
 <template>
     <LayoutBase>
+        <Navbar v-show="false" arrow-left>企业选择</Navbar>
         <Panel class-name="panel" no-padding>
             <CellGroup full no-margin>
                 <Cell @click="go(i)" padding full v-for="i in data" :key="'company' + i.id">

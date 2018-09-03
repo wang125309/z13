@@ -1,5 +1,6 @@
 <template>
     <LayoutBase>
+        <Navbar v-show="false" arrowLeft>活动详情</Navbar>
         <SearchInput v-model="searchWord" @search="search"/>
         <Tabs>
             <TabsCell @onClick="setActive(0)" :active="getActive(0)">全部</TabsCell>

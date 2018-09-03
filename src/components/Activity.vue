@@ -1,5 +1,6 @@
 <template>
     <LayoutBase>
+        <Navbar v-show="false" arrowLeft>活动详情</Navbar>
         <ActivityDetailImage :src="data.image" :title="data.name" :status="data.status === 0 ? '全部' : data.status === 1 ? '进行中' : '已结束'"  date="2017-06-03" location="平顶山"/>
         <Card noPadding>
             <CellGroup noMargin>

@@ -1,5 +1,6 @@
 <template>
     <LayoutBase>
+        <Navbar arrowLeft>忘记密码</Navbar>
         <SituationLogo size="0.2rem" type="success"/>
         <div class="text-area">
             <p>您的密码已经修改成功</p>

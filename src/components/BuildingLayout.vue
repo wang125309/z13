@@ -1,5 +1,6 @@
-{<template>
+<template>
     <LayoutBase>
+        <Navbar v-show="false" arrow-left>大厦布局</Navbar>
         <CellGroup :class-name="cellGroupCls" full no-margin>
             <div :class="cellCls">
                 <Icon size="0.2rem" :class="iconCls" type="rent-img" position="left"/>
@@ -43,7 +44,7 @@
         </div>
         <div :class="roomPanelCls" v-if="i.companys.length" v-for="(i, index) in data" v-bind:key="index">
             <div @click="hidden(i.tid)" :class="floorCls">
-                <div>{{i.floor}}F</div>
+                <div>{{i.floor}}</div>
                 <Icon :class="floorIcon" position="right" type="up-arrow" size="0.04rem"/>
             </div>
             <div v-show="i.active" :class="roomPanelItemCls" v-for="(j, $index) in i.companys" v-bind:key="'company'+ $index">

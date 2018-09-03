@@ -1,19 +1,40 @@
 <template>
-    <div @click="handleClick" :class="avatarCls" :style="avatarStyle"></div>
+    <div @click="handleClick" :class="avatarCls" :style="avatarStyle">
+        <div v-if="withSetting" :class="avatarSettingCls">
+            <Icon :class="avatarSettingIconCls" size="0.06rem" type="setting"/>
+        </div>
+    </div>
 </template>
 
 <script>
+    import Icon from "./Icon";
     const prefix = 'z13';
     export default {
+        components: { Icon },
         props: {
             src: [String],
             size: [String],
-            position: [String]
+            position: [String],
+            withSetting: [Boolean]
         },
         computed: {
             avatarCls() {
                 return [
-                    `${prefix}-avatar`
+                    `${prefix}-avatar`, {
+                        [`${prefix}-avatar-with-setting`]: this.withSetting
+                    }
+                ]
+            },
+            avatarSettingCls () {
+                return [
+                    {
+                        [`${prefix}-avatar-setting`]: this.withSetting
+                    }
+                ]
+            },
+            avatarSettingIconCls () {
+                return [
+                    `${prefix}-avatar-setting-icon`
                 ]
             },
             avatarStyle() {
@@ -56,5 +77,13 @@
         background-position: top left;
         background-repeat: no-repeat;
         background-color: #ccc;
+        &-setting {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+        }
+        &-with-setting {
+            position: relative;
+        }
     }
 </style>

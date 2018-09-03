@@ -1,5 +1,6 @@
 <template>
     <LayoutBase>
+        <Navbar v-show="false" arrowLeft>活动详情</Navbar>
         <SituationLogo size="0.2rem" type="success"/>
         <div class="text-area">
             <p>企业认证已通过</p>

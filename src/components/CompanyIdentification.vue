@@ -1,5 +1,6 @@
 <template>
     <LayoutBase>
+        <Navbar v-show="false" arrow-left>企业认证</Navbar>
         <Panel class-name="panel" no-padding>
             <CellGroup no-margin class="cell-group">
                 <Cell>

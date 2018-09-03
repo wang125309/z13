@@ -1,5 +1,6 @@
 <template>
     <LayoutBase>
+        <Navbar v-show="false" arrowLeft>活动详情</Navbar>
         <CellGroup full class="cell-group">
             <Cell full>
                 <Input v-model="user.account" type="number" placeholder="手机号"/>

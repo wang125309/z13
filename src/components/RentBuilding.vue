@@ -1,5 +1,6 @@
 <template>
     <LayoutBase>
+        <Navbar v-show="false" arrow-left>可租单元</Navbar>
         <Tabs>
             <DropdownTab :title="areaTitle">
                 <div @click="filterArea('0', '全部')" tabindex="0" :class="dropdownItemCls">全部</div>
@@ -37,7 +38,7 @@
                 <!--<Icon :class="rentImgCls" type="rent-img" position="left" size="0.25rem"/>-->
                 <div :class="rentImgCls" :style="'background-image:url(' + i.image + ')'"></div>
                 <div :class="rentBuildingItemInfoCls">
-                    <div :class="titleCls">{{i.area}}平米 | {{i.location}}层</div>
+                    <div :class="titleCls">{{i.area}} | {{i.location}}</div>
                     <div :class="descAreaCls">
                         <div :class="descCls">
                             <span :class="subTitleCls">容纳人数：</span>
@@ -54,7 +55,7 @@
                     </div>
                     <div :class="priceCls">
                         <div :class="mainPriceCls">{{i.price}}元/m²·天</div>
-                        <div :class="subPriceCls">约{{i.price*30*i.area}}元月</div>
+                        <div :class="subPriceCls">约{{i.price*30}}元月</div>
                     </div>
                 </div>
             </div>
@@ -281,7 +282,6 @@
             padding: $padding-small;
             background-color: $white;
             display: flex;
-
             justify-content: left;
             hairline('bottom');
             &:last-child {
@@ -296,16 +296,11 @@
                 background-position: center;
             }
             &-info {
-                position: relative;
                 flex: 1;
                 min-height: 0.25rem;
                 padding-left: $padding-small;
                 .{$prefix}-title {
                     font-size: $font-size-head;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    width: 60%;
-                    white-space: nowrap;
                 }
                 .{$prefix}-desc-area {
                     position: absolute;
@@ -320,8 +315,8 @@
                 }
                 .{$prefix}-price {
                     position: absolute;
-                    right: 0;
-                    top: 0;
+                    right: $padding-small;
+                    top: $padding-small;
                     .{$prefix}-main-price {
                         color: #E8450D;
                         font-size: $font-size-head;
@@ -349,5 +344,4 @@
             }
         }
     }
-
 </style>

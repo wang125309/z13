@@ -1,5 +1,6 @@
 <template>
     <LayoutBase>
+        <Navbar v-show="false" arrowLeft>活动详情</Navbar>
         <div class="operation-tab">
             <Icon size="0.5rem" type="operation-close"></Icon>
         </div>

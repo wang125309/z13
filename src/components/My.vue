@@ -1,7 +1,8 @@
 <template>
     <LayoutBase>
+        <Navbar v-show="false"/>
         <Panel>
-            <Avatar @click="go" size="0.2rem" :src="user.image"/>
+            <Avatar with-setting @click="go" size="0.2rem" :src="user.image"/>
             <div class="user-name">{{user.nick_name}}</div>
             <div class="sub-name">{{user.account}}</div>
         </Panel>

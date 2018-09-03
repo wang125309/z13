@@ -1,5 +1,6 @@
 <template>
     <LayoutBase>
+        <Navbar v-show="false" arrowLeft>活动详情</Navbar>
         <CellGroup full class="cell-group">
             <Cell full without-border>
                 <Input type="text" v-model="name" :default-value="defaultValue" withClear placeholder="请输入昵称"/>

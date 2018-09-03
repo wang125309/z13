@@ -1,5 +1,6 @@
 <template>
     <LayoutBase>
+        <Navbar v-show="false" arrowLeft>活动详情</Navbar>
         <div class="cell-group">
             <div v-for="i in data" class="cell-list">
                 <Avatar class="cell-list-avatar" :src="i.image" size="0.12rem"/>

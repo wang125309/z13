@@ -1,5 +1,6 @@
 <template>
     <LayoutWhite>
+        <Navbar v-show="false" arrowLeft>活动详情</Navbar>
         <div :class="titleCls">{{data.title}}</div>
         <div :class="authorAreaCls">
             <div :class="authorCls">
