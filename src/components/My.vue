@@ -2,6 +2,8 @@
     <LayoutBase>
         <Navbar v-show="false"/>
         <Panel>
+            <Icon position="right" style="top:0;right:0.04rem;" size="0.16rem" type="auth" v-if="!user.is_firm_prove"/>
+            <Icon position="right" style="top:0;right:0.04rem;" size="0.16rem" type="authed" v-if="user.is_firm_prove"/>
             <Avatar with-setting @click="go" size="0.2rem" :src="user.image"/>
             <div class="user-name">{{user.nick_name}}</div>
             <div class="sub-name">{{user.account}}</div>
@@ -33,10 +35,12 @@
     import CellGroup from "./lib/CellGroup";
     import Cell from "./lib/Cell";
     import avatar from '../assets/avatar.png';
+    import Icon from "./lib/Icon";
 
     export default {
         name: 'My',
         components: {
+            Icon,
             Cell,
             CellGroup,
             Avatar,
