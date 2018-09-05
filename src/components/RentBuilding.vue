@@ -55,7 +55,7 @@
                     </div>
                     <div :class="priceCls">
                         <div :class="mainPriceCls">{{i.price}}元/m²·天</div>
-                        <div :class="subPriceCls">约{{i.price*30}}元月</div>
+                        <!--<div :class="subPriceCls">约{{i.price*30}}元月</div>-->
                     </div>
                 </div>
             </div>

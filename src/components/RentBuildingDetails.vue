@@ -31,7 +31,7 @@
                         所在单元：
                     </div>
                     <div :class="rentSubPanelLineCellRightCls">
-                        {{data.pay_type}}
+                        {{data.unit}}
                     </div>
                 </div>
 
@@ -280,6 +280,7 @@
                     white-space: nowrap;
                     overflow: hidden;
                     text-overflow: ellipsis;
+                    width: 0.3rem;
                 }
             }
         }

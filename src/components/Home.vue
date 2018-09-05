@@ -111,7 +111,7 @@
                     </div>
                 </div>
             </Card>
-            <Card v-if="data.activitys.pageResult && data.activitys.pageResult.length" full title="社区活动" viewDetails="/activity-list">
+            <Card v-if="data.activitys.pageResult && data.activitys.pageResult.length" full :title="`社区活动(${data.activitys.totalItem})`" viewDetails="/activity-list">
                 <swiper :options="swiperOption">
                     <swiper-slide :key="'activity' + i.id" v-for="i in data.activitys.pageResult">
                         <div @click="goActivity(i.id)" class="activity-item" :style="'background-image:url(' + i.image +')'">
