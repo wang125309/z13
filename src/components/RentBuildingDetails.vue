@@ -28,14 +28,23 @@
                 </div>
                 <div :class="rentSubPanelLineCellCls">
                     <div :class="rentSubPanelLineCellLeftCls">
+                        所在单元：
+                    </div>
+                    <div :class="rentSubPanelLineCellRightCls">
+                        {{data.pay_type}}
+                    </div>
+                </div>
+
+            </div>
+            <div :class="rentSubPanelLineCls">
+                <div :class="rentSubPanelLineCellCls">
+                    <div :class="rentSubPanelLineCellLeftCls">
                         付费方式：
                     </div>
                     <div :class="rentSubPanelLineCellRightCls">
                         {{data.pay_type}}
                     </div>
                 </div>
-            </div>
-            <div :class="rentSubPanelLineCls">
                 <div :class="rentSubPanelLineCellCls">
                     <div :class="rentSubPanelLineCellLeftCls">
                         单元朝向：
@@ -44,6 +53,9 @@
                         {{data.face}}
                     </div>
                 </div>
+
+            </div>
+            <div :class="rentSubPanelLineCls">
                 <div :class="rentSubPanelLineCellCls">
                     <div :class="rentSubPanelLineCellLeftCls">
                         看房时间：
@@ -52,8 +64,6 @@
                         {{data.look_time}}
                     </div>
                 </div>
-            </div>
-            <div :class="rentSubPanelLineCls">
                 <div :class="rentSubPanelLineCellCls">
                     <div :class="rentSubPanelLineCellLeftCls">
                         装修情况：
@@ -62,6 +72,9 @@
                         {{data.deck}}
                     </div>
                 </div>
+
+            </div>
+            <div :class="rentSubPanelLineCls">
                 <div :class="rentSubPanelLineCellCls">
                     <div :class="rentSubPanelLineCellLeftCls">
                         可租时间：
@@ -69,6 +82,8 @@
                     <div :class="rentSubPanelLineCellRightCls">
                         {{data.rent_time}}
                     </div>
+                </div>
+                <div :class="rentSubPanelLineCellCls">
                 </div>
             </div>
         </div>
