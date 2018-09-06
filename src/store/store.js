@@ -18,14 +18,9 @@ const mutations = {
             state.user = data.data
         }, (data) => {
             console.log(data)
-            if (_this.$route.name !== 'Activity'
-                && _this.$route.name !== 'Home'
-                && _this.$route.name !== 'ActivityList'
-                && _this.$route.name !== 'Login'
-                && _this.$route.name !== 'Register'
-                && _this.$route.name !== 'ResetPassword'
-                && _this.$route.name !== 'ValidMobile'
-                && _this.$route.name !== 'ResetPasswordSuccess'
+            if (_this.$route.name === 'My' ||
+                _this.$route.name === 'MyActivity' ||
+                _this.$route.name === 'UserInfo'
             ) {
                 _this.$router.push({
                     path: '/login'
