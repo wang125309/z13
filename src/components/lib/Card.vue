@@ -92,7 +92,7 @@
     @import '../../styles/hairline.styl'
     @keyframes scroll {
         0% {
-            transform: translateY(100%)
+            transform: translateY(0%)
         }
         100% {
             transform: translateY(-100%)
@@ -109,7 +109,7 @@
                 position: relative;
                 margin-top: -100%;
                 &-body {
-                    animation: scroll 5s linear infinite;
+                    animation: scroll 10s linear infinite;
                 }
             }
         }

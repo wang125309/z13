@@ -79,6 +79,12 @@
             border: none;
             text-align: center;
             white-space: nowrap;
+            &-primary {
+                background-color: $brand-color;
+                &:active {
+                    background-color: $brand-color * 0.95;
+                }
+            }
             &-disabled {
                 color: $white;
                 background: $font-second !important;

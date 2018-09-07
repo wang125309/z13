@@ -1,15 +1,15 @@
 <template>
     <LayoutBase>
-        <Navbar v-show="false" arrowLeft>活动详情</Navbar>
+        <Navbar arrowLeft>{{title}}</Navbar>
         <CellGroup full class="cell-group">
             <Cell full>
                 <Input v-model="user.account" type="number" placeholder="手机号"/>
             </Cell>
             <Cell withoutBorder>
-                <Input v-model="user.phoneCode" type="text" :account="user.account" :codeType="codeType" sendCode placeholder="请输入验证码"/>
+                <Input @input="check" v-model="user.phoneCode" type="text" :account="user.account" :codeType="codeType" sendCode placeholder="请输入验证码"/>
             </Cell>
         </CellGroup>
-        <Button class="next-step" @onClick="next" circle type="default" full width="92%">下一步</Button>
+        <Button class="next-step" @onClick="next" circle :type="buttonType" full width="92%">下一步</Button>
     </LayoutBase>
 </template>
 
@@ -58,7 +58,6 @@
         watch: {
             $route : {
                 handler () {
-                    console.log("i do")
                     let path = this.$route.path;
                     if (path === '/forget-password') {
                         this.title = '忘记密码';
@@ -94,63 +93,73 @@
                     account: '',
                     phoneCode: ''
                 },
-                codeType: 0
+                codeType: 0,
+                buttonType: 'default'
             }
         },
         methods: {
+            check () {
+                if (this.user.phoneCode.match(/^\d{6}$/)) {
+                    this.buttonType = 'primary'
+                } else {
+                    this.buttonType = 'default'
+                }
+            },
             next () {
-                let path = this.$route.path;
-                if (path === '/forget-password') {
-                    request(API.verify_phone_code, {
-                        type: 'POST',
-                        data: {
-                            account: this.user.account,
-                            phoneCode: this.user.phoneCode,
-                            busiType: this.codeType
-                        }
-                    }, (data) => {
-                        this.$store.commit('SET_FORGET_PASSWORD_USER', this.user)
-                        this.$router.push({
-                            path: '/reset-password'
-                        })
-                    }, (data) => {
-                        this.$root.$children[0].toggleToast('success', data.message);
-                    })
-                }
-                else if (path === '/valid-old-mobile') {
-                    request(API.verify_phone_code, {
-                        type: 'POST',
-                        data: {
-                            account: this.user.account,
-                            phoneCode: this.user.phoneCode,
-                            busiType: this.codeType
-                        }
-                    }, (data) => {
-                        this.$router.push({
-                            path: '/valid-new-mobile'
-                        })
-                    }, (data) => {
-                        this.$root.$children[0].toggleToast('success', data.message);
-                    })
-                }
-                else if (path === '/valid-new-mobile') {
-                    request(API.verify_phone_code, {
-                        type: 'POST',
-                        data: {
-                            account: this.user.account,
-                            phoneCode: this.user.phoneCode,
-                            busiType: this.codeType
-                        }
-                    }, (data) => {
-                        this.$root.$children[0].toggleToast('success', data.message);
-                        setTimeout(() => {
+                if (this.buttonType === 'primary') {
+                    let path = this.$route.path;
+                    if (path === '/forget-password') {
+                        request(API.verify_phone_code, {
+                            type: 'POST',
+                            data: {
+                                account: this.user.account,
+                                phoneCode: this.user.phoneCode,
+                                busiType: this.codeType
+                            }
+                        }, (data) => {
+                            this.$store.commit('SET_FORGET_PASSWORD_USER', this.user)
                             this.$router.push({
-                                path: '/user-info'
+                                path: '/reset-password'
                             })
-                        }, 500);
-                    }, (data) => {
-                        this.$root.$children[0].toggleToast('success', data.message);
-                    })
+                        }, (data) => {
+                            this.$root.$children[0].toggleToast('success', data.message);
+                        })
+                    }
+                    else if (path === '/valid-old-mobile') {
+                        request(API.verify_phone_code, {
+                            type: 'POST',
+                            data: {
+                                account: this.user.account,
+                                phoneCode: this.user.phoneCode,
+                                busiType: this.codeType
+                            }
+                        }, (data) => {
+                            this.$router.push({
+                                path: '/valid-new-mobile'
+                            })
+                        }, (data) => {
+                            this.$root.$children[0].toggleToast('success', data.message);
+                        })
+                    }
+                    else if (path === '/valid-new-mobile') {
+                        request(API.verify_phone_code, {
+                            type: 'POST',
+                            data: {
+                                account: this.user.account,
+                                phoneCode: this.user.phoneCode,
+                                busiType: this.codeType
+                            }
+                        }, (data) => {
+                            this.$root.$children[0].toggleToast('success', data.message);
+                            setTimeout(() => {
+                                this.$router.push({
+                                    path: '/user-info'
+                                })
+                            }, 500);
+                        }, (data) => {
+                            this.$root.$children[0].toggleToast('success', data.message);
+                        })
+                    }
                 }
             }
         }

@@ -82,6 +82,7 @@
             },
             menuClick (e) {
                 e.stopPropagation()
+                this.active = false;
             }
         }
     }

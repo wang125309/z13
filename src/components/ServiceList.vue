@@ -3,11 +3,11 @@
         <Navbar v-show="false" arrowLeft>活动详情</Navbar>
         <div class="operation-tabs">
             <div class="operation-tab">
-                <Icon size="0.15rem" type="blands-icon"></Icon>
+                <Icon size="0.08rem" type="blands-icon"></Icon>
                 <div class="operation-text">百叶帘</div>
             </div>
             <div class="operation-tab">
-                <Icon size="0.15rem" type="operation"></Icon>
+                <Icon size="0.08rem" type="operation"></Icon>
                 <div class="operation-text">物业报修</div>
             </div>
         </div>

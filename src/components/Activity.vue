@@ -280,7 +280,14 @@
                     }, (data) => {
                         this.refresh();
                     }, (data) => {
-                        this.$root.$children[0].toggleToast('fail', data.message);
+                        if (data.response.status === 401) {
+                            this.$router.push({
+                                path: '/login'
+                            })
+                            this.$root.$children[0].toggleToast('fail', '报名活动请先登录');
+                        } else {
+                            this.$root.$children[0].toggleToast('fail', data.message);
+                        }
                     })
                 }
             },
