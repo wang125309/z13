@@ -76,7 +76,22 @@
         <div v-show="commentToolsVisible" @click="hiddenComment" class="comment-mask"/>
         <div v-show="commentToolsVisible" class="comment-tools">
             <form action="#" onsubmit="return false;">
-                <Input ref="commentInput" @keypress="sendComment" v-model="commentMessage" @input="sendComment" @focus="focus"  class="comment-input" circle :placeholder="placeholder"/>
+                <Input
+                    ref="commentInput"
+                    @keypress="sendComment"
+                    v-model="commentMessage"
+                    @input="sendComment"
+                    @focus="focus"
+                    class="comment-input"
+                    circle
+                    :placeholder="placeholder"
+                >
+                    <span
+                        @click="sendComment"
+                        class="comment-input-btn">
+                        发送
+                    </span>
+                </Input>
             </form>
         </div>
         <div class="sign-bar-placeholder"/>
@@ -245,24 +260,24 @@
                 }, 100)
             },
             sendComment ($evt) {
-                console.log($evt)
-                if ($evt.charCode === 13 && this.commentMessage.length) {
-                    requests(`${API.get_activitys}/${this.$route.params.id}/comments`, {
-                        type: 'POST',
-                        data: this.commentToId ? {
-                            content: this.commentMessage,
-                            parentId: this.commentToId
-                        } : {
-                            content: this.commentMessage
-                        }
-                    }, (data) => {
-                        this.hiddenComment();
-                        this.commentMessage = '';
-                        this.refresh_comments();
-                    }, (data) => {
-                        this.$root.$children[0].toggleToast('fail', data.message);
+                requests(`${API.get_activitys}/${this.$route.params.id}/comments`, {
+                    type: 'POST',
+                    data: this.commentToId ? {
+                        content: this.commentMessage,
+                        parentId: this.commentToId
+                    } : {
+                        content: this.commentMessage
+                    }
+                }, (data) => {
+                    this.hiddenComment();
+                    this.commentMessage = '';
+                    this.refresh_comments();
+                }, (data) => {
+                    this.$router.push({
+                        path: '/login'
                     })
-                }
+                    this.$root.$children[0].toggleToast('fail', data.message);
+                })
             },
             more_comment ($evt) {
                 this.showAllComments = true;
@@ -345,6 +360,10 @@
     }
     .comment-input {
         padding: $padding-base;
+    }
+    .comment-input-btn {
+        color: $brand-color;
+        padding-left: $padding-base;
     }
     .sign-bar-placeholder {
         height: $padding-base * 5;
