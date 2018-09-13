@@ -203,9 +203,7 @@
                 this.commentToId = id;
                 this.placeholder = `回复${userName}`;
                 this.doComment();
-                setTimeout(() => {
-                    this.$refs.commentInput.$el.children[0].focus();
-                }, 100)
+
             },
             refresh () {
                 requests(`${API.get_activitys}/${this.$route.params.id}/`, {
@@ -248,7 +246,9 @@
             },
             doComment () {
                 this.commentToolsVisible = true;
-                this.refs.commentInput.focus()
+                setTimeout(() => {
+                    this.$refs.commentInput.$el.children[0].focus();
+                }, 100)
             },
             hiddenComment () {
                 this.commentToolsVisible = false;
