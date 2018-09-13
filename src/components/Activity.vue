@@ -248,6 +248,7 @@
             },
             doComment () {
                 this.commentToolsVisible = true;
+                this.refs.commentInput.focus()
             },
             hiddenComment () {
                 this.commentToolsVisible = false;
