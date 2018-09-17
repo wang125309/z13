@@ -3,7 +3,7 @@ import Cookies from 'js-cookie'
 const cookies = {}
 
 cookies.setCookie = (token) => {
-    Cookies.set('token', token, { expires: 7 });
+    Cookies.set('token', token, { expires: 30 });
 }
 
 cookies.getCookie = () => {

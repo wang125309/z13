@@ -38,7 +38,7 @@ const requests = (url, options, success, error) => {
             callback(response);
         }).catch((err) => {
             if (err.response.status === 401) {
-                err.response.data.message = '您已退出登录，请重新登录'
+                err.response.data.message = '您暂未登录，请登录'
                 callback(err.response.data)
             }
             else {
