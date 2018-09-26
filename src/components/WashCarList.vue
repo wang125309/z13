@@ -1,5 +1,6 @@
 <template>
     <LayoutBase>
+        <title>洗车服务</title>
         <Navbar v-show="false" arrowLeft>活动详情</Navbar>
         <SearchInput v-model="searchWord" @search="search"/>
         <Panel no-padding v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">

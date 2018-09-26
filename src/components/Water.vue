@@ -1,5 +1,6 @@
 <template>
     <LayoutBase>
+        <title>送水服务</title>
         <Navbar v-show="false" arrowLeft>活动详情</Navbar>
         <Panel no-padding>
             <div :class="deliveryItemCls">

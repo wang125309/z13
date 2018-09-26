@@ -1,5 +1,6 @@
 <template>
     <LayoutBase>
+        <title>报名情况</title>
         <Navbar v-show="false" arrowLeft>活动详情</Navbar>
         <div class="cell-group">
             <div v-for="i in data" class="cell-list">

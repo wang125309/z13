@@ -1,5 +1,6 @@
 <template>
     <LayoutBase>
+        <title>{{title}}</title>
         <Navbar arrowLeft>{{title}}</Navbar>
         <CellGroup full class="cell-group">
             <Cell full>

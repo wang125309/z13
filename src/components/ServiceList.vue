@@ -1,5 +1,6 @@
 <template>
     <LayoutBase>
+        <title>服务列表</title>
         <Navbar v-show="false" arrowLeft>活动详情</Navbar>
         <div class="operation-tabs">
             <div class="operation-tab">

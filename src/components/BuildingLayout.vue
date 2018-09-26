@@ -1,5 +1,6 @@
 <template>
     <LayoutBase>
+        <title>大厦布局</title>
         <Navbar v-show="false" arrow-left>大厦布局</Navbar>
         <CellGroup :class-name="cellGroupCls" full no-margin>
             <div :class="cellCls">

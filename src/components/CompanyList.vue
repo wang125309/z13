@@ -1,5 +1,6 @@
 <template>
     <LayoutBase>
+        <title>企业选择</title>
         <Navbar v-show="false" arrow-left>企业选择</Navbar>
         <Panel class-name="panel" no-padding>
             <CellGroup full no-margin>

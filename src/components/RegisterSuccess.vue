@@ -1,5 +1,6 @@
 <template>
     <LayoutBase>
+        <title>注册</title>
         <Navbar arrowLeft>注册</Navbar>
         <SituationLogo size="0.2rem" type="success"/>
         <div class="text-area">

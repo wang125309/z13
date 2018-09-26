@@ -1,5 +1,6 @@
 <template>
     <LayoutBase>
+        <title>可租单元</title>
         <Navbar v-show="false" arrow-left>可租单元</Navbar>
         <Tabs>
             <DropdownTab :title="areaTitle">

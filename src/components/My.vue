@@ -1,5 +1,6 @@
 <template>
     <LayoutBase>
+        <title>我的</title>
         <Navbar v-show="false"/>
         <Panel>
             <Icon position="right" style="top:0;right:0.04rem;" size="0.16rem" type="auth" v-if="!user.is_firm_prove"/>

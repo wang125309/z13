@@ -1,5 +1,6 @@
 <template>
     <LayoutBase>
+        <title>修改昵称</title>
         <Navbar v-show="false" arrowLeft>活动详情</Navbar>
         <CellGroup full class="cell-group">
             <Cell full without-border>

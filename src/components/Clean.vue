@@ -1,5 +1,6 @@
 <template>
     <LayoutBase>
+        <title>保洁</title>
         <Navbar v-show="false" arrowLeft>活动详情</Navbar>
         <Panel no-padding>
             <div :class="deliveryItemCls">

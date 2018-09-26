@@ -1,5 +1,6 @@
 <template>
     <LayoutBase>
+        <title>404</title>
         <div class="main">
             <Icon type="404" size="0.5rem"/>
         </div>

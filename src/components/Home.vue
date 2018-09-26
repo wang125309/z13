@@ -1,6 +1,7 @@
 <template>
     <LayoutBase>
         <Scrollable>
+            <title>CBD Z13</title>
             <Navbar>中国人寿金融中心 CBD Z13</Navbar>
             <Banner class="main-banner">
                 <swiper :options="swiperBannerOption">

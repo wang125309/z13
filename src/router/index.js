@@ -45,6 +45,7 @@ const SignUpList = r => require.ensure([], ()=>r(require('@/components/SignUpLis
 
 export default new Router({
     scrollBehavior: () => ({y: 0}),
+
     routes: [
         {
             path: '/',

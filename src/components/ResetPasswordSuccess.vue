@@ -1,5 +1,6 @@
 <template>
     <LayoutBase>
+        <title>重置密码</title>
         <Navbar arrowLeft>忘记密码</Navbar>
         <SituationLogo size="0.2rem" type="success"/>
         <div class="text-area">

@@ -1,5 +1,6 @@
 <template>
     <LayoutBase>
+        <title>重置密码</title>
         <Navbar arrowLeft>忘记密码</Navbar>
         <CellGroup full class="cell-group">
             <Cell full>

@@ -1,5 +1,6 @@
 <template>
     <LayoutBase>
+        <title>服务</title>
         <Navbar v-show="false" arrowLeft>活动详情</Navbar>
         <CellGroup :class-name="cellGroupCls" full no-margin>
             <div :class="cellCls">

@@ -20,6 +20,15 @@ new Vue({
     components: {
         App,
     },
+    watch: {
+        '$route' (from, to) {
+            if (to.name === 'Login') {
+                this.$router.push({
+                    path: '/'
+                })
+            }
+        }
+    },
     mounted() {
         document.body.addEventListener('touchstart', function () { });
     },

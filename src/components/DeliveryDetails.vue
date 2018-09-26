@@ -1,5 +1,6 @@
 <template>
     <LayoutBase>
+        <title>餐饮服务</title>
         <Navbar v-show="false" arrow-left>餐饮服务</Navbar>
         <Panel no-padding>
             <div :class="deliveryItemCls">

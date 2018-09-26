@@ -1,5 +1,6 @@
 <template>
     <LayoutBase>
+        <title>活动列表</title>
         <Navbar v-show="false" arrowLeft>活动详情</Navbar>
         <SearchInput v-model="searchWord" @search="search"/>
         <Tabs>

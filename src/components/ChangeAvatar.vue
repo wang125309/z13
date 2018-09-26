@@ -1,17 +1,18 @@
 <template>
     <LayoutBase>
+        <title>修改头像</title>
         <Navbar v-show="false" arrowLeft>头像</Navbar>
         <div class="avatar-area" :style="'background-image:url('+ image +')'">
             <ImageCliper @uploaded="uploaded"  ref="imageCliper" v-show="imageCliperVisible"/>
         </div>
-        <Button v-if="changeButtonVisible" bottom-white className="change-avatar" @onClick="selectVisible" circle full width="92%">更换头像</Button>
+        <Button v-if="changeButtonVisible" bottom-white className="change-avatar" @onClick="captureActive" circle full width="92%">更换头像</Button>
         <div v-if="!changeButtonVisible" :class="actionToolsCls">
             <div @click="cancelCliper" :class="actionToolsCancelCls">取消</div>
             <div @click="completeCliper" :class="actionToolsSureCls">完成</div>
         </div>
-        <ActionSheet @onVisibleChange="selectVisible" :visible="visibleAction" capture @captureCamera="captureCamera" @captureActive="captureActive"></ActionSheet>
+        <!--<ActionSheet @onVisibleChange="selectVisible" :visible="visibleAction" capture @captureCamera="captureCamera" @captureActive="captureActive"></ActionSheet>-->
+
         <form id="image-form">
-            <input id="camera-file" @change="cliper" :class="fileSelectorCls" type="file" ref="camera" capture="camera" accept="image/*"/>
             <input id="file" @change="cliper" :class="fileSelectorCls" type="file" ref="active" accept="image/*"/>
         </form>
     </LayoutBase>

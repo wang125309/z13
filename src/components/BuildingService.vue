@@ -1,5 +1,6 @@
 <template>
     <LayoutBase>
+        <title>大厦服务</title>
         <Navbar v-show="false" arrowLeft>活动详情</Navbar>
         <SearchInput></SearchInput>
         <div :class="panelCls">

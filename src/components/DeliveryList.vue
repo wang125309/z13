@@ -1,5 +1,6 @@
 <template>
     <LayoutBase>
+        <title>餐饮服务</title>
         <Navbar v-show="false" arrow-left>餐饮服务</Navbar>
         <SearchInput v-model="searchWord" @search="search"/>
         <Panel no-padding v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">

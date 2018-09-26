@@ -1,5 +1,6 @@
 <template>
     <LayoutBase>
+        <title>活动详情</title>
         <Navbar v-show="false" arrowLeft>活动详情</Navbar>
         <ActivityDetailImage
             :src="data.image"
@@ -222,7 +223,7 @@
                         this.buttonText = this.data.begin_time;
                     }
                     else if (this.data.activityStatus === 2) {
-                        this.buttonText = '报名已结束';
+                        this.buttonText = '活动已结束';
                         this.color = '#DCDCDC';
                     }
                     else  if (this.data.activityStatus === 3) {

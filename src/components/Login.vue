@@ -1,5 +1,6 @@
 <template>
     <LayoutWhite>
+        <title>CBD Z13</title>
         <Navbar arrow-left>登录</Navbar>
         <Z13Icon/>
         <CellGroup class="cell-group">
