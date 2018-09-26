@@ -45,7 +45,7 @@
             }
             else if (path === '/valid-old-mobile') {
                 this.title = '验证旧手机号';
-                this.account = this.$store.state.user.account;
+                this.user.account = this.$store.state.user.account;
                 this.codeType = 5;
             }
             else if (path === '/valid-new-mobile') {

@@ -9,7 +9,7 @@
             </Cell>
             <Cell>
                 <Input v-model="user.image" type="text" icon="img" placeholder="图片验证码"/>
-                <img @click="refreshCode" class="image-code" :src="imageCode"/>
+                <img v-if="imageCode" @click="refreshCode" class="image-code" :src="imageCode"/>
             </Cell>
             <Cell>
                 <Input v-model="user.phoneCode" :account="user.account" :codeType="3" type="text" icon="verification" sendCode placeholder="验证码"/>
