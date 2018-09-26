@@ -25,6 +25,9 @@
             },
             $route: {
                 handler () {
+                    if (window.interval) {
+                        clearInterval(interval)
+                    }
                     this.sendMessage = '发送验证码';
                     this.time = 60;
                     this.codeSend = false;
@@ -129,7 +132,7 @@
                     }, (data) => {
                         let _self = this;
                         this.codeSend = true;
-                        let interval = setInterval(() => {
+                        window.interval = setInterval(() => {
                             _self.sendMessage = `已发送(${_self.time}s)`;
                             if (_self.time) {
                                 _self.time -- ;
