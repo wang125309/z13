@@ -4,7 +4,7 @@
         <Navbar v-show="false" arrowLeft>活动详情</Navbar>
         <CellGroup full class="cell-group">
             <Cell full>
-                <Input type="number" disabled v-model="mobile" :default-value="defaultValue" withClear placeholder="请输入手机号"/>
+                <Input type="number" disabled v-model="mobile" :default-value="defaultValue" placeholder="请输入手机号"/>
             </Cell>
         </CellGroup>
         <Button class="next-step" circle type="primary" @onClick="save" full width="92%">更换手机号</Button>

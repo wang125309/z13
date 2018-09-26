@@ -20,6 +20,9 @@
         </CellGroup>
         <div class="btn-area">
             <Button @onClick="register" className="register-btn" circle full width="75%">注册</Button>
+            <div class="go-login">
+                <a @click="goLogin" href="javascript:;">已有账号？立即登录</a>
+            </div>
         </div>
     </LayoutWhite>
 </template>
@@ -76,6 +79,11 @@
             }
         },
         methods: {
+            goLogin() {
+                this.$router.push({
+                    path: '/login'
+                })
+            },
             refreshCode () {
                 this.imageCode = '';
                 setTimeout(() => {
@@ -139,5 +147,12 @@
         right: 0;
         width: 0.3rem;
         top: 0.02rem;
+    }
+    .go-login {
+        margin-top: $margin-large;
+        text-align: center;
+        a {
+            color: $font-second;
+        }
     }
 </style>

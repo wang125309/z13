@@ -89,9 +89,8 @@
                                 type: 'PUT'
                             }, (data) => {
                                 cookies.quit();
-                                _this.$router.push({
-                                    path: '/login'
-                                })
+                                location.href = '/';
+
                             }, (data) => {
                                 _this.$root.$children[0].toggleToast('fail', data.message);
                             });

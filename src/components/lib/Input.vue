@@ -22,6 +22,13 @@
         watch: {
             model () {
 
+            },
+            $route: {
+                handler () {
+                    this.sendMessage = '发送验证码';
+                    this.time = 60;
+                    this.codeSend = false;
+                }
             }
         },
         data() {
@@ -69,6 +76,7 @@
                     `${prefix}-input`, {
                         [`${prefix}-input-${this.size}`]: this.size,
                         [`${prefix}-input-circle`]: this.circle,
+                        [`${prefix}-input-disabled`]: this.disabled
                     }
                 ]
             },
@@ -197,6 +205,9 @@
             }
             &-clear {
                 margin-right: $padding-base;
+            }
+            &-disabled {
+                color: $font-second;
             }
         }
         .{$prefix}-send-code {

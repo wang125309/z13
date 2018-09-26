@@ -1,13 +1,13 @@
 <template>
     <LayoutBase>
         <title>{{title}}</title>
-        <Navbar arrowLeft>{{title}}</Navbar>
+        <Navbar v-show="false" arrowLeft>{{title}}</Navbar>
         <CellGroup full class="cell-group">
             <Cell full>
-                <Input v-model="user.account" type="number" placeholder="手机号"/>
+                <Input v-model="user.account" type="number" :disabled="codeType === 5" placeholder="手机号"/>
             </Cell>
             <Cell withoutBorder>
-                <Input @input="check" v-model="user.phoneCode" type="text" :account="user.account" :codeType="codeType" sendCode placeholder="请输入验证码"/>
+                <Input @input="check" v-model="user.phoneCode" type="text" :account="user.account" :codeType="codeType" sendCode placeholder="验证码"/>
             </Cell>
         </CellGroup>
         <Button class="next-step" @onClick="next" circle :type="buttonType" full width="92%">下一步</Button>
@@ -45,6 +45,7 @@
             }
             else if (path === '/valid-old-mobile') {
                 this.title = '验证旧手机号';
+                this.account = this.$store.state.user.account;
                 this.codeType = 5;
             }
             else if (path === '/valid-new-mobile') {
