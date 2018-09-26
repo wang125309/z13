@@ -56,9 +56,7 @@
         },
         methods: {
             goRegister() {
-                this.$router.push({
-                    path: '/register'
-                })
+                location.href = '/#/register';
             },
             goForgetPassword() {
                 this.$router.push({
