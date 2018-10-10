@@ -8,10 +8,10 @@
                 <Input v-model="user.account" type="number" icon="phone" placeholder="手机号"/>
             </Cell>
             <Cell>
-                <Input v-model="user.image" type="text" icon="img" placeholder="图片验证码"/>
+                <Input :disabled="verified" @input="verify" v-model="user.image" type="text" icon="img" placeholder="图片验证码"/>
                 <img v-if="imageCode" @click="refreshCode" class="image-code" :src="imageCode"/>
             </Cell>
-            <Cell>
+            <Cell v-if="verified">
                 <Input v-model="user.phoneCode" :account="user.account" :codeType="3" type="text" icon="verification" sendCode placeholder="验证码"/>
             </Cell>
             <Cell>
@@ -60,7 +60,8 @@
                     image: '',
                 },
                 uuid: '',
-                imageCode: ''
+                imageCode: '',
+                verified: false
             }
         },
         created () {
@@ -90,6 +91,19 @@
                     this.imageCode = 'https://cbd-proxy.limijiaoyin.io' + API.get_image_code + '/' + this.uuid + '/'
                 }, 0);
             },
+            verify () {
+                requests(API.valid_image_code, {
+                    type: 'POST',
+                    data: {
+                        imageCode: this.user.image,
+                        imageCodeId: this.uuid
+                    }
+                }, (data) => {
+                    this.verified = true;
+                }, (err) => {
+                    this.verified = false;
+                })
+            },
             doRegister () {
                 requests(API.do_register, {
                     type: 'POST',
@@ -114,17 +128,7 @@
             },
             register () {
                 if (!registerFlag) {
-                    requests(API.valid_image_code, {
-                        type: 'POST',
-                        data: {
-                            imageCode: this.user.image,
-                            imageCodeId: this.uuid
-                        }
-                    }, (data) => {
-                        this.doRegister();
-                    }, (data) => {
-                        this.$root.$children[0].toggleToast('fail', data.message);
-                    })
+                    this.doRegister();
                 }
             }
         }
