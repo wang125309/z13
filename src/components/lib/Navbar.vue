@@ -2,14 +2,14 @@
     <div :class="navbarCls">
         <Icon class="arrow-left" position="left" size="0.05rem" @click="previous" v-if="arrowLeft" type="arrow-left"/>
         <slot></slot>
-        <Avatar v-if="user" size="0.08rem" class="navbar-avatar" @click="go" :src="user.image"/>
+        <Avatar size="0.08rem" class="navbar-avatar" @click="go" :src="user ? user.image : defaultAvatar"/>
     </div>
 </template>
 
 <script>
     import Icon from './Icon'
     import Avatar from "./Avatar";
-
+    import defaultAvatar from "../../assets/default-avatar.png"
     const prefix = 'z13';
     export default {
         components: {
@@ -18,6 +18,11 @@
         },
         props: {
             arrowLeft: [Boolean]
+        },
+        data () {
+            return {
+                defaultAvatar: defaultAvatar
+            }
         },
         computed: {
             user () {
