@@ -5,7 +5,7 @@
         <ActivityDetailImage
             :src="data.image"
             :title="data.name"
-            :date="data.begin_time.split('-')[0]"
+            :date="data.begin_time"
             :location="data.address"
             :status="data.status === 0 ? '全部' : data.status === 1 ? '进行中' : '已结束'"
         />
@@ -13,11 +13,11 @@
             <CellGroup noMargin>
                 <Cell padding>
                     <div class="activity-card-title">报名时间：</div>
-                    <div class="activity-card-message">{{data.signup_begin_time.split(' ')[0]}}  {{data.signup_end_time.split(' ')[0]}}</div>
+                    <div class="activity-card-message">{{data.signup_begin_time}}  {{data.signup_end_time}}</div>
                 </Cell>
                 <Cell padding>
                     <div class="activity-card-title">活动时间：</div>
-                    <div class="activity-card-message">{{data.begin_time.split(' ')[0]}}  {{data.end_time.split(' ')[0]}}</div>
+                    <div class="activity-card-message">{{data.begin_time}}  {{data.end_time}}</div>
                 </Cell>
                 <Cell padding>
                     <div class="activity-card-title">活动地点：</div>

@@ -14,7 +14,7 @@
             </div>
             <div :class="rentPanelCellCls">
                 <div :class="rentPanelCellTitleCls">租金</div>
-                <div :class="rentPanelCellTextPriceCls">{{data.price}}元/m²·天</div>
+                <div :class="rentPanelCellTextPriceCls">{{data.price}}</div>
             </div>
         </div>
         <div :class="rentSubPanelCls">
