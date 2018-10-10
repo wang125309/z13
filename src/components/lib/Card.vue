@@ -1,6 +1,6 @@
 <template>
     <div @click="handleClick" :class="cardWrapCls">
-        <div v-if="title" :class="cardTitleCls">
+        <div v-if="title" @click="view" :class="cardTitleCls">
             {{title}}
             <Icon v-if="viewDetails" type="detail" size="0.04rem" position="right" :class="detailsCls" @click="view"/>
         </div>
