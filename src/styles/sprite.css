@@ -52,13 +52,13 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
   width: 48px;
   height: 22px;
 }
-.icon-unlike {
+.icon-like {
   background-image: url(/static/sprite.png);
   background-position: 0px -99px;
   width: 28px;
   height: 23px;
 }
-.icon-like {
+.icon-unlike {
   background-image: url(/static/sprite.png);
   background-position: 0px -122px;
   width: 28px;
@@ -112,49 +112,49 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
   width: 26px;
   height: 30px;
 }
-.icon-arrow-right {
-  background-image: url(/static/sprite.png);
-  background-position: 0px -358px;
-  width: 17px;
-  height: 30px;
-}
 .icon-eye {
   background-image: url(/static/sprite.png);
-  background-position: 0px -388px;
+  background-position: 0px -358px;
   width: 48px;
   height: 30px;
 }
-.icon-setting {
+.icon-arrow-right {
+  background-image: url(/static/sprite.png);
+  background-position: 0px -388px;
+  width: 17px;
+  height: 30px;
+}
+.icon-food-unlike {
   background-image: url(/static/sprite.png);
   background-position: 0px -418px;
-  width: 32px;
-  height: 32px;
-}
-.icon-food-disliked {
-  background-image: url(/static/sprite.png);
-  background-position: 0px -450px;
   width: 30px;
   height: 32px;
 }
 .icon-food-like {
   background-image: url(/static/sprite.png);
+  background-position: 0px -450px;
+  width: 30px;
+  height: 32px;
+}
+.icon-food-dislike {
+  background-image: url(/static/sprite.png);
   background-position: 0px -482px;
   width: 30px;
   height: 32px;
 }
-.icon-food-liked {
+.icon-food-disliked {
   background-image: url(/static/sprite.png);
   background-position: 0px -514px;
   width: 30px;
   height: 32px;
 }
-.icon-food-unlike {
+.icon-setting {
   background-image: url(/static/sprite.png);
   background-position: 0px -546px;
-  width: 30px;
+  width: 32px;
   height: 32px;
 }
-.icon-food-dislike {
+.icon-food-liked {
   background-image: url(/static/sprite.png);
   background-position: 0px -578px;
   width: 30px;
@@ -166,22 +166,22 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
   width: 50px;
   height: 34px;
 }
-.icon-verification {
-  background-image: url(/static/sprite.png);
-  background-position: 0px -644px;
-  width: 53px;
-  height: 34px;
-}
 .icon-up-arrow {
   background-image: url(/static/sprite.png);
-  background-position: 0px -678px;
+  background-position: 0px -644px;
   width: 34px;
   height: 34px;
 }
 .icon-img {
   background-image: url(/static/sprite.png);
-  background-position: 0px -712px;
+  background-position: 0px -678px;
   width: 48px;
+  height: 34px;
+}
+.icon-verification {
+  background-image: url(/static/sprite.png);
+  background-position: 0px -712px;
+  width: 53px;
   height: 34px;
 }
 .icon-service-layout {
@@ -190,40 +190,40 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
   width: 47px;
   height: 34px;
 }
-.icon-my-active {
+.icon-my {
   background-image: url(/static/sprite.png);
   background-position: 0px -780px;
   width: 32px;
   height: 35px;
 }
-.icon-my {
+.icon-my-active {
   background-image: url(/static/sprite.png);
   background-position: 0px -815px;
   width: 32px;
   height: 35px;
 }
-.icon-building-icon {
+.icon-arrow-left {
   background-image: url(/static/sprite.png);
   background-position: 0px -850px;
+  width: 20px;
+  height: 36px;
+}
+.icon-building-icon {
+  background-image: url(/static/sprite.png);
+  background-position: 0px -886px;
   width: 50px;
   height: 36px;
 }
 .icon-service {
   background-image: url(/static/sprite.png);
-  background-position: 0px -886px;
+  background-position: 0px -922px;
   width: 41px;
   height: 36px;
 }
 .icon-operation-off {
   background-image: url(/static/sprite.png);
-  background-position: 0px -922px;
-  width: 62px;
-  height: 36px;
-}
-.icon-arrow-left {
-  background-image: url(/static/sprite.png);
   background-position: 0px -958px;
-  width: 20px;
+  width: 62px;
   height: 36px;
 }
 .icon-service-active {
@@ -232,22 +232,22 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
   width: 41px;
   height: 36px;
 }
-.icon-home {
+.icon-home-active {
   background-image: url(/static/sprite.png);
   background-position: 0px -1030px;
   width: 39px;
   height: 39px;
 }
-.icon-comment {
+.icon-home {
   background-image: url(/static/sprite.png);
   background-position: 0px -1069px;
-  width: 45px;
+  width: 39px;
   height: 39px;
 }
-.icon-home-active {
+.icon-comment {
   background-image: url(/static/sprite.png);
   background-position: 0px -1108px;
-  width: 39px;
+  width: 45px;
   height: 39px;
 }
 .icon-authed {
@@ -274,52 +274,52 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
   width: 36px;
   height: 42px;
 }
-.icon-delivery-icon-active {
+.icon-service-delivery-active {
   background-image: url(/static/sprite.png);
   background-position: 0px -1309px;
   width: 52px;
   height: 45px;
 }
-.icon-delivery-icon {
+.icon-service-delivery {
   background-image: url(/static/sprite.png);
   background-position: 0px -1354px;
   width: 52px;
   height: 45px;
 }
-.icon-service-delivery {
+.icon-delivery-icon {
   background-image: url(/static/sprite.png);
   background-position: 0px -1399px;
   width: 52px;
   height: 45px;
 }
-.icon-service-delivery-active {
+.icon-delivery-icon-active {
   background-image: url(/static/sprite.png);
   background-position: 0px -1444px;
   width: 52px;
   height: 45px;
 }
-.icon-service-rent {
+.icon-rent-icon {
   background-image: url(/static/sprite.png);
   background-position: 0px -1489px;
   width: 48px;
   height: 46px;
 }
-.icon-rent-icon {
+.icon-service-rent {
   background-image: url(/static/sprite.png);
   background-position: 0px -1535px;
   width: 48px;
   height: 46px;
 }
-.icon-phone {
-  background-image: url(/static/sprite.png);
-  background-position: 0px -1581px;
-  width: 32px;
-  height: 46px;
-}
 .icon-auth {
   background-image: url(/static/sprite.png);
-  background-position: 0px -1627px;
+  background-position: 0px -1581px;
   width: 120px;
+  height: 46px;
+}
+.icon-phone {
+  background-image: url(/static/sprite.png);
+  background-position: 0px -1627px;
+  width: 32px;
   height: 46px;
 }
 .icon-rent-icon-active {
@@ -346,16 +346,16 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
   width: 51px;
   height: 47px;
 }
-.icon-operation-pause {
-  background-image: url(/static/sprite.png);
-  background-position: 0px -1860px;
-  width: 27px;
-  height: 48px;
-}
 .icon-express-icon-active {
   background-image: url(/static/sprite.png);
-  background-position: 0px -1908px;
+  background-position: 0px -1860px;
   width: 52px;
+  height: 48px;
+}
+.icon-operation-pause {
+  background-image: url(/static/sprite.png);
+  background-position: 0px -1908px;
+  width: 27px;
   height: 48px;
 }
 .icon-operation-tool-up {
@@ -376,201 +376,189 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
   width: 46px;
   height: 52px;
 }
-.icon-bland-icon {
-  background-image: url(/static/sprite.png);
-  background-position: 0px -2108px;
-  width: 46px;
-  height: 52px;
-}
-.icon-bland-icon-active {
-  background-image: url(/static/sprite.png);
-  background-position: 0px -2160px;
-  width: 46px;
-  height: 52px;
-}
 .icon-visitor-icon-active {
   background-image: url(/static/sprite.png);
-  background-position: 0px -2212px;
+  background-position: 0px -2108px;
   width: 69px;
-  height: 53px;
-}
-.icon-service-clean {
-  background-image: url(/static/sprite.png);
-  background-position: 0px -2265px;
-  width: 50px;
   height: 53px;
 }
 .icon-visitor-icon {
   background-image: url(/static/sprite.png);
-  background-position: 0px -2318px;
+  background-position: 0px -2161px;
   width: 69px;
   height: 53px;
 }
 .icon-service-wash-car {
   background-image: url(/static/sprite.png);
-  background-position: 0px -2371px;
+  background-position: 0px -2214px;
   width: 44px;
   height: 53px;
 }
 .icon-service-visitor {
   background-image: url(/static/sprite.png);
-  background-position: 0px -2424px;
+  background-position: 0px -2267px;
   width: 69px;
   height: 53px;
 }
+.icon-service-clean {
+  background-image: url(/static/sprite.png);
+  background-position: 0px -2320px;
+  width: 50px;
+  height: 53px;
+}
+.icon-park-icon {
+  background-image: url(/static/sprite.png);
+  background-position: 0px -2373px;
+  width: 54px;
+  height: 54px;
+}
 .icon-service-park {
   background-image: url(/static/sprite.png);
-  background-position: 0px -2477px;
+  background-position: 0px -2427px;
   width: 54px;
   height: 54px;
 }
 .icon-park-icon-active {
   background-image: url(/static/sprite.png);
-  background-position: 0px -2531px;
-  width: 54px;
-  height: 54px;
-}
-.icon-park-icon {
-  background-image: url(/static/sprite.png);
-  background-position: 0px -2585px;
+  background-position: 0px -2481px;
   width: 54px;
   height: 54px;
 }
 .icon-service-water {
   background-image: url(/static/sprite.png);
-  background-position: 0px -2639px;
+  background-position: 0px -2535px;
   width: 40px;
   height: 56px;
 }
 .icon-operation {
   background-image: url(/static/sprite.png);
-  background-position: 0px -2695px;
+  background-position: 0px -2591px;
   width: 56px;
   height: 57px;
 }
 .icon-operation-active {
   background-image: url(/static/sprite.png);
-  background-position: 0px -2752px;
-  width: 56px;
-  height: 57px;
-}
-.icon-tools-icon-active {
-  background-image: url(/static/sprite.png);
-  background-position: 0px -2809px;
+  background-position: 0px -2648px;
   width: 56px;
   height: 57px;
 }
 .icon-tools-icon {
   background-image: url(/static/sprite.png);
-  background-position: 0px -2866px;
+  background-position: 0px -2705px;
   width: 56px;
   height: 57px;
 }
-.icon-toast-success {
+.icon-tools-icon-active {
   background-image: url(/static/sprite.png);
-  background-position: 0px -2923px;
-  width: 58px;
+  background-position: 0px -2762px;
+  width: 56px;
+  height: 57px;
+}
+.icon-warning {
+  background-image: url(/static/sprite.png);
+  background-position: 0px -2819px;
+  width: 60px;
   height: 60px;
 }
 .icon-success {
   background-image: url(/static/sprite.png);
-  background-position: 0px -2983px;
+  background-position: 0px -2879px;
   width: 58px;
   height: 60px;
 }
-.icon-toast-fail {
+.icon-error {
   background-image: url(/static/sprite.png);
-  background-position: 0px -3043px;
+  background-position: 0px -2939px;
+  width: 60px;
+  height: 60px;
+}
+.icon-toast-success {
+  background-image: url(/static/sprite.png);
+  background-position: 0px -2999px;
+  width: 58px;
+  height: 60px;
+}
+.icon-toast-warning {
+  background-image: url(/static/sprite.png);
+  background-position: 0px -3059px;
   width: 60px;
   height: 60px;
 }
 .icon-delete {
   background-image: url(/static/sprite.png);
-  background-position: 0px -3103px;
+  background-position: 0px -3119px;
   width: 60px;
   height: 60px;
 }
-.icon-toast-warning {
+.icon-toast-fail {
   background-image: url(/static/sprite.png);
-  background-position: 0px -3163px;
-  width: 60px;
-  height: 60px;
-}
-.icon-warning {
-  background-image: url(/static/sprite.png);
-  background-position: 0px -3223px;
-  width: 60px;
-  height: 60px;
-}
-.icon-error {
-  background-image: url(/static/sprite.png);
-  background-position: 0px -3283px;
+  background-position: 0px -3179px;
   width: 60px;
   height: 60px;
 }
 .icon-operation-close {
   background-image: url(/static/sprite.png);
-  background-position: 0px -3343px;
+  background-position: 0px -3239px;
   width: 54px;
   height: 62px;
 }
 .icon-operation-open {
   background-image: url(/static/sprite.png);
-  background-position: 0px -3405px;
+  background-position: 0px -3301px;
   width: 63px;
   height: 67px;
 }
 .icon-call {
   background-image: url(/static/sprite.png);
-  background-position: 0px -3472px;
+  background-position: 0px -3368px;
   width: 70px;
   height: 70px;
 }
 .icon-operation-pause-on {
   background-image: url(/static/sprite.png);
-  background-position: 0px -3542px;
+  background-position: 0px -3438px;
   width: 64px;
   height: 82px;
 }
 .icon-operation-center {
   background-image: url(/static/sprite.png);
-  background-position: 0px -3624px;
+  background-position: 0px -3520px;
   width: 100px;
   height: 100px;
 }
 .icon-no-activity {
   background-image: url(/static/sprite.png);
-  background-position: 0px -3724px;
+  background-position: 0px -3620px;
   width: 185px;
   height: 172px;
 }
 .icon-rent-img {
   background-image: url(/static/sprite.png);
-  background-position: 0px -3896px;
+  background-position: 0px -3792px;
   width: 240px;
   height: 240px;
 }
 .icon-z13-logo {
   background-image: url(/static/sprite.png);
-  background-position: 0px -4136px;
+  background-position: 0px -4032px;
   width: 1280px;
   height: 256px;
 }
 .icon-404 {
   background-image: url(/static/sprite.png);
-  background-position: 0px -4392px;
+  background-position: 0px -4288px;
   width: 305px;
   height: 279px;
 }
 .icon-operation-tool {
   background-image: url(/static/sprite.png);
-  background-position: 0px -4671px;
+  background-position: 0px -4567px;
   width: 396px;
   height: 396px;
 }
 .icon-operation-tool-open {
   background-image: url(/static/sprite.png);
-  background-position: 0px -5067px;
+  background-position: 0px -4963px;
   width: 396px;
   height: 396px;
 }
