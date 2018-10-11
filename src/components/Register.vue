@@ -74,9 +74,6 @@
                 this.$root.$children[0].toggleToast('fail', data);
             })
         },
-        updated () {
-            this.verified = false
-        },
         watch: {
             imageCode () {
 
