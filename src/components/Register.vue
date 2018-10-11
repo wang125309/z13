@@ -74,9 +74,17 @@
                 this.$root.$children[0].toggleToast('fail', data);
             })
         },
+        updated () {
+            this.verified = false
+        },
         watch: {
             imageCode () {
 
+            },
+            $route: {
+                name () {
+                    this.verified = false
+                }
             }
         },
         methods: {
@@ -128,7 +136,9 @@
             },
             register () {
                 if (!registerFlag) {
-                    this.doRegister();
+                    if (this.verified) {
+                        this.doRegister();
+                    }
                 }
             }
         }
