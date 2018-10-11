@@ -7,7 +7,7 @@
             <div :class="goodTitleCls">
                 <div :class="goodTitleDetailCls">{{title}}</div>
                 <div :class="goodPriceCls">
-                    <div :class="goodPriceLogoCls">￥</div>
+                    <!--<div :class="goodPriceLogoCls">￥</div>-->
                     <div :class="goodPricePriceCls">{{price}}</div>
                     <div :class="goodPriceNormPriceCls">{{norm}}</div>
                 </div>

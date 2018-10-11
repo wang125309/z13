@@ -47,7 +47,9 @@
             no-padding
             cut
             full
-            title="商品规格">
+            title="商品规格"
+            v-if="data.waterInfos"
+        >
             <Good v-for="i in data.waterInfos"
                   :key="'good' + i.id"
                   :title="i.name"

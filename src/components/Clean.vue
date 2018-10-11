@@ -44,7 +44,7 @@
         <ActivityCardItem cut full title="服务说明">
             <div class="description">{{data.description}}</div>
         </ActivityCardItem>
-        <ActivityCardItem no-padding  cut full title="保洁服务">
+        <ActivityCardItem no-padding  cut full title="保洁服务" v-if="data.cleaningServices">
             <Good v-for="i in data.cleaningServices"
                   :key="'good' + i.id"
                   :title="i.name"

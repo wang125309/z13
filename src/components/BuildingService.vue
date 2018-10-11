@@ -3,7 +3,7 @@
         <title>大厦服务</title>
         <Navbar v-show="false" arrowLeft>活动详情</Navbar>
         <SearchInput></SearchInput>
-        <div :class="panelCls">
+        <div v-if="data" :class="panelCls">
             <div v-for="i in data" :class="serviceItemCls" @click="go(i.id)">
                 <div :class="messageCls">
                     <div :class="itemTitleCls">

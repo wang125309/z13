@@ -1,6 +1,6 @@
 <template>
     <LayoutWhite>
-        <title>服务</title>
+        <title>详情</title>
         <Navbar v-show="false" arrowLeft>活动详情</Navbar>
         <div :class="titleCls">{{data.title}}</div>
         <div :class="authorAreaCls">
@@ -77,6 +77,9 @@
     .{$prefix}-title {
         font-size: $font-size-head;
         padding: $padding-base;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
     .{$prefix}-author-area {
         .{$prefix}-author {
