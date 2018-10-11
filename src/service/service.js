@@ -68,7 +68,7 @@ const requests = (url, options, success, error) => {
             callback(response);
         }).catch((err) => {
             if (err.response.status === 401) {
-                callback(err)
+                callback(err.response)
             }
             else {
                 callback(err);

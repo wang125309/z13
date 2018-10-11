@@ -114,7 +114,7 @@
             </Card>
             <Card v-if="data.activitys.pageResult && data.activitys.pageResult.length" full :title="`社区活动(${data.activitys.totalItem})`" viewDetails="/activity-list">
                 <swiper :options="swiperOption">
-                    <swiper-slide :key="'activity' + i.id" v-for="i in data.activitys.pageResult">
+                    <swiper-slide :class="data.activitys.pageResult.length === 1 ? 'slide-only' : ''" :key="'activity' + i.id" v-for="i in data.activitys.pageResult">
                         <div @click="goActivity(i.id)" class="activity-item" :style="'background-image:url(' + i.image +')'">
                             <div class="activity-item-title">{{i.name}}</div>
                             <div class="activity-item-date">{{i.begin_time.split(' ')[0]}}</div>
@@ -250,6 +250,9 @@
     @import '~swiper/dist/css/swiper.min.css';
     .swiper-slide {
         width: 80%;
+    }
+    .slide-only {
+        width: 100%;
     }
     .banner-slide {
         width: 100%;

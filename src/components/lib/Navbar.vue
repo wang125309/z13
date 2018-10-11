@@ -2,7 +2,7 @@
     <div :class="navbarCls">
         <Icon class="arrow-left" position="left" size="0.05rem" @click="previous" v-if="arrowLeft" type="arrow-left"/>
         <slot></slot>
-        <Avatar size="0.08rem" class="navbar-avatar" @click="go" :src="user ? user.image : defaultAvatar"/>
+        <Avatar v-if="!noAvatar" size="0.08rem" class="navbar-avatar" @click="go" :src="user ? user.image : defaultAvatar"/>
     </div>
 </template>
 
@@ -17,7 +17,8 @@
             Icon
         },
         props: {
-            arrowLeft: [Boolean]
+            arrowLeft: [Boolean],
+            noAvatar: [Boolean]
         },
         data () {
             return {

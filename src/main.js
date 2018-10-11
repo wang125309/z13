@@ -22,7 +22,6 @@ new Vue({
     },
     watch: {
         '$route' (from, to) {
-            console.log(from, to)
             if (to.name === 'Login' && from.name === 'My') {
                 this.$router.push({
                     path: '/'

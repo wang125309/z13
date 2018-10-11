@@ -145,4 +145,9 @@
             right: 0;
         }
     }
+    .{$prefix}-item-title {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
 </style>

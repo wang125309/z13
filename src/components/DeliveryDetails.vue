@@ -47,10 +47,10 @@
         </Panel>
         <div :class="specialFoodsPanelCls" v-for="i in data.foodTypes" :key="'foodType' + i.id">
             <div :class="specialFoodsPanelTitle">
-                <div :class="specialFoodsPanelTitleInnerCls">{{i.name}}菜品</div>
-                <Icon :class="specialFoodsPanelTitleArrowRightCls" position="right" type="up-arrow" size="0.04rem"/>
+                <div :class="specialFoodsPanelTitleInnerCls">{{i.name}}</div>
+                <Icon @onClick="up" :class="specialFoodsPanelTitleArrowRightCls" position="right" type="up-arrow" size="0.04rem"/>
             </div>
-            <div :class="specialFoodCls" v-for="j in i.foodInfos" :key="'food'+i.id+'_'+j.id">
+            <div v-show="showDetails" :class="specialFoodCls" v-for="j in i.foodInfos" :key="'food'+i.id+'_'+j.id">
                 <div :class="specialFoodImgCls" :style="'background-image:url(' + j.image + ')'">
                 </div>
                 <div :class="specialFoodInnerCls">
@@ -69,7 +69,7 @@
                             <!--</div>-->
                         </div>
                     </div>
-                    <div :class="specialFoodTextPriceCls">
+                    <div :class="specialFoodTextPriceCls" v-if="j.price">
                         <div :class="specialFoodTextPriceIconCls">￥</div>
                         <div :class="specialFoodTextPricePriceCls">{{j.price}}</div>
                         <div :class="specialFoodTextPriceTailCls">元</div>
@@ -111,6 +111,7 @@
         },
         data () {
             return {
+                showDetails: true,
                 data: {
                     business_type: ''
                 }
@@ -149,8 +150,15 @@
                 }, (data) => {
                     this.refresh();
                 }, (data) => {
-                    this.$root.$children[0].toggleToast('warning', data.message)
+                    if (data.status === 401) {
+                        this.$root.$children[0].toggleToast('warning', '请登录后操作')
+                    } else {
+                        this.$root.$children[0].toggleToast('warning', data.message)
+                    }
                 })
+            },
+            up () {
+                this.showDetails = !this.showDetails
             }
         },
         computed: {
