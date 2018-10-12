@@ -17,15 +17,19 @@
                   className="news-card"
                   :scroll="data.newsAndRunableUnit.news.length + data.newsAndRunableUnit.rentablrUnits.length > 3"
             >
-                <swiper-slide :key="'service' + i.id" class="news-list" @click="goNews(i.id)" v-for="i in data.newsAndRunableUnit.news">
-                    <Tag class-name="tag" backgroundColor="red" color="#fff" borderColor="#fff">大厦服务</Tag>
-                    <div class="news-details">{{i.title}}</div>
-                    <div class="news-date">{{i.create_time.split(' ')[0].split('-')[1] + '.' + i.create_time.split(' ')[0].split('-')[2]}}</div>
+                <swiper-slide :key="'service' + i.id" v-for="i in data.newsAndRunableUnit.news">
+                    <div class="news-list" @click.stop="goNews(i.id)">
+                        <Tag class-name="tag" backgroundColor="red" color="#fff" borderColor="#fff">大厦服务</Tag>
+                        <div class="news-details">{{i.title}}</div>
+                        <div class="news-date">{{i.create_time.split(' ')[0].split('-')[1] + '.' + i.create_time.split(' ')[0].split('-')[2]}}</div>
+                    </div>
                 </swiper-slide>
-                <swiper-slide class="news-list" :key="'rent' + i.id" @click="goRent(i.id)" v-for="i in data.newsAndRunableUnit.rentablrUnits">
-                    <Tag class-name="tag" backgroundColor="#F39900" color="#fff" borderColor="#fff">可租单元</Tag>
-                    <div class="news-details">{{i.title}}</div>
-                    <div class="news-date">10.25</div>
+                <swiper-slide :key="'rent' + i.id"  v-for="i in data.newsAndRunableUnit.rentablrUnits">
+                    <div class="news-list" @click="goRent(i.id)">
+                        <Tag class-name="tag" backgroundColor="#F39900" color="#fff" borderColor="#fff">可租单元</Tag>
+                        <div class="news-details">{{i.title}}</div>
+                        <div class="news-date">{{i.create_time.split(' ')[0].split('-')[1] + '.' + i.create_time.split(' ')[0].split('-')[2]}}</div>
+                    </div>
                 </swiper-slide>
             </Card>
             <div class="env-card">
@@ -278,12 +282,10 @@
         margin-bottom: $margin-base;
     }
     .news-list {
-        padding: $padding-small 0 0 0;
         display: flex;
         align-items: center;
-        &:first-child {
-            padding: 0;
-        }
+        width: 100%;
+        height: 26px;
         .tag {
             white-space: nowrap;
             line-height: 1;

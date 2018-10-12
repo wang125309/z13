@@ -92,10 +92,11 @@
             return {
                 options: {
                     direction : 'vertical',
-                    height: 20,
                     loop: true,
+                    height: 26,
+                    spaceBetween: 6,
                     autoplay: {
-                        delay: 500,
+                        delay: 1000,
                         stopOnLastSlide: false,
                         disableOnInteraction: true,
                     }
@@ -108,6 +109,7 @@
 <style lang="stylus">
     @import '../../styles/var.styl';
     @import '../../styles/hairline.styl'
+
     .{$prefix}-card-wrap {
         &-scroll {
             height: 0.28rem;
@@ -118,6 +120,10 @@
                 background: #fff;
                 position: relative;
                 margin-top: -100%;
+                padding: 0 $padding-small !important;
+            }
+            .swiper-slide {
+                width: 100%;
             }
         }
         .{$prefix}-card-title {
