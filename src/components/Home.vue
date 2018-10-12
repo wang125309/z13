@@ -4,8 +4,8 @@
             <title>CBD Z13</title>
             <Navbar>中国人寿金融中心 CBD Z13</Navbar>
             <Banner class="main-banner">
-                <swiper id="banner" :options="swiperBannerOption">
-                    <swiper-slide class="banner-slide" v-bind:key="'banner' + i.id" v-for="i in data.banners">
+                <swiper :options="bannerOptions">
+                    <swiper-slide class="banner-slide" v-bind:key="'bannerx' + i.id" v-for="i in data.banners">
                         <div class="banner" @click.stop="go_banner(i.link_url)" :style="'background-image:url(' + i.image + ')'"></div>
                     </swiper-slide>
                 </swiper>
@@ -165,7 +165,7 @@
                     slidesPerView: 'auto',
                     spaceBetween: 10
                 },
-                swiperBannerOption: {
+                bannerOptions: {
                     slidesPerView: 'auto',
                     autoplay: true,
                     loop: true

@@ -25,6 +25,8 @@ const mutations = {
                     path: '/login'
                 })
             }
+        }, (err) => {
+            console.log(err)
         })
     },
     SET_FORGET_PASSWORD_USER (state, user) {
