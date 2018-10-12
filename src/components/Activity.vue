@@ -79,9 +79,7 @@
             <form action="#" onsubmit="return false;">
                 <Input
                     ref="commentInput"
-                    @keypress="sendComment"
                     v-model="commentMessage"
-                    @input="sendComment"
                     @focus="focus"
                     class="comment-input"
                     circle
