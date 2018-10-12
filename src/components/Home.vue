@@ -167,8 +167,7 @@
                 },
                 bannerOptions: {
                     slidesPerView: 'auto',
-                    autoplay: true,
-                    loop: true
+                    autoplay: true
                 },
                 data: {
                     newsAndRunableUnit: {
