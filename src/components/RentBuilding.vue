@@ -302,6 +302,10 @@
                 padding-left: $padding-small;
                 .{$prefix}-title {
                     font-size: $font-size-head;
+                    width: 56%;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
                 }
                 .{$prefix}-desc-area {
                     position: absolute;
