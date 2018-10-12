@@ -5,9 +5,9 @@
             <Icon v-if="viewDetails" type="detail" size="0.04rem" position="right" :class="detailsCls" @click="view"/>
         </div>
         <div :class="cardCls" :style="cardStyle">
-            <div v-if="scroll" :class="cardBodyCls">
+            <swiper :options="options" v-if="scroll" :class="cardBodyCls">
                 <slot></slot>
-            </div>
+            </swiper>
             <slot v-if="!scroll"></slot>
             <div v-if="overflow" :class="cardOverflowCls"></div>
         </div>
@@ -16,9 +16,13 @@
 
 <script>
     import Icon from './Icon'
+    import { swiper, swiperSlide } from 'vue-awesome-swiper'
     const prefix = 'z13';
     export default {
-        components: {Icon},
+        components: {
+            Icon,
+            swiper
+        },
         props: {
             overflow: [Boolean],
             height: [String],
@@ -83,6 +87,20 @@
                     path: this.viewDetails
                 })
             }
+        },
+        data () {
+            return {
+                options: {
+                    direction : 'vertical',
+                    height: 20,
+                    loop: true,
+                    autoplay: {
+                        delay: 500,
+                        stopOnLastSlide: false,
+                        disableOnInteraction: true,
+                    }
+                }
+            }
         }
     }
 </script>
@@ -90,14 +108,6 @@
 <style lang="stylus">
     @import '../../styles/var.styl';
     @import '../../styles/hairline.styl'
-    @keyframes scroll {
-        0% {
-            transform: translateY(50%)
-        }
-        100% {
-            transform: translateY(-50%)
-        }
-    }
     .{$prefix}-card-wrap {
         &-scroll {
             height: 0.28rem;
@@ -108,9 +118,6 @@
                 background: #fff;
                 position: relative;
                 margin-top: -100%;
-                &-body {
-                    animation: scroll 10s linear infinite;
-                }
             }
         }
         .{$prefix}-card-title {
