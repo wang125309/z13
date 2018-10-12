@@ -4,7 +4,7 @@
             <title>CBD Z13</title>
             <Navbar>中国人寿金融中心 CBD Z13</Navbar>
             <Banner class="main-banner">
-                <swiper :options="swiperBannerOption">
+                <swiper id="banner" :options="swiperBannerOption">
                     <swiper-slide class="banner-slide" v-bind:key="'banner' + i.id" v-for="i in data.banners">
                         <div class="banner" @click.stop="go_banner(i.link_url)" :style="'background-image:url(' + i.image + ')'"></div>
                     </swiper-slide>
@@ -139,10 +139,9 @@
     import ServiceCell from "./lib/ServiceCell";
     import Panel from "./lib/Panel";
     import Tag from "./lib/Tag";
-    import { swiper, swiperSlide } from 'vue-awesome-swiper'
     import requests from '../service/service'
     import API from '../service/api'
-
+    import { swiper, swiperSlide } from 'vue-awesome-swiper'
     export default {
         name: 'Home',
         components: {
@@ -164,15 +163,12 @@
             return {
                 swiperOption: {
                     slidesPerView: 'auto',
-                    spaceBetween: 10,
+                    spaceBetween: 10
                 },
                 swiperBannerOption: {
                     slidesPerView: 'auto',
                     autoplay: true,
-                    loop: true,
-                    pagination: {
-                        el: '.swiper-pagination',
-                    },
+                    loop: true
                 },
                 data: {
                     newsAndRunableUnit: {
