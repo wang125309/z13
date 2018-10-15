@@ -163,7 +163,7 @@
         margin-top: $margin-large;
         text-align: center;
         a {
-            color: $font-second;
+            color: #1D56E1;
         }
     }
 </style>
