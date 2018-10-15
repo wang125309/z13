@@ -6,14 +6,14 @@
             <Icon size="0.5rem" type="operation-close"></Icon>
         </div>
         <div class="operation-tool">
-             <Icon className="operation-tools-icon" size="0.6rem" type="operation-tool">
-                 <Icon className="operation-center" size="0.16rem" type="operation-center"/>
-                 <Icon className="operation-on" size="0.1rem" type="operation-on"/>
-                 <Icon className="operation-off" size="0.1rem" type="operation-off"/>
-                 <Icon className="operation-tool-up" size="0.08rem" type="operation-tool-up"/>
-                 <Icon className="operation-down" size="0.08rem" type="operation-down"/>
-                 <Icon className="operation-pause-on" size="0.14rem" type="operation-pause-on"/>
-             </Icon>
+             <icon className="operation-tools-icon" size="0.6rem" type="operation-tool">
+                 <icon absolute class="operation-center" size="0.16rem" type="operation-center"/>
+                 <icon absolute class="operation-on" size="0.1rem" type="operation-on"/>
+                 <icon absolute class="operation-off" size="0.1rem" type="operation-off"/>
+                 <icon absolute class="operation-tool-up" size="0.08rem" type="operation-tool-up"/>
+                 <icon absolute class="operation-down" size="0.08rem" type="operation-down"/>
+                 <icon absolute class="operation-pause-on" size="0.14rem" type="operation-pause-on"/>
+             </icon>
         </div>
     </LayoutBase>
 
@@ -26,8 +26,10 @@
     import CellGroup from "./lib/CellGroup";
     import Cell from "./lib/Cell";
     import Panel from "./lib/Panel";
+    import IconOperation from './lib/IconOperation'
     export default {
         components: {
+            IconOperation,
             Panel,
             Cell,
             CellGroup,
@@ -61,41 +63,41 @@
         }
     }
     .operation-center {
-        position: absolute;
-        width: 0.14rem;
-        height: 0.14rem;
+        position: absolute !important;
+        width: 0.14rem !important;
+        height: 0.14rem !important;
         left: 50%;
         top: 50%;
         transform: translateX(-50%) translateY(-50%);
     }
     .operation-on {
-        position: absolute;
-        top: 50%;
+        position: absolute !important;
+        top: 50% !important;
         left: 0.08rem;
         transform: translateY(-50%);
     }
     .operation-off {
-        position: absolute;
-        top: 50%;
+        position: absolute !important;
+        top: 50% !important;
         right: 0.08rem;
         transform: translateY(-50%);
     }
     .operation-tool-up {
-        position: absolute;
-        top: 0.08rem;
-        left: 50%;
+        position: absolute !important;
+        top: 0.08rem !important;
+        left: 50% !important;
         transform: translateX(-50%);
     }
     .operation-down {
-        position: absolute;
-        bottom: 0.08rem;
-        left: 50%;
+        position: absolute !important;
+        bottom: 0.08rem !important;
+        left: 50% !important;
         transform: translateX(-50%);
     }
     .operation-pause-on {
-        position: absolute;
-        left: 50%;
-        top: 50%;
+        position: absolute !important;
+        left: 50% !important;
+        top: 50% !important;
         transform: translateX(-50%) translateY(-50%);
     }
 </style>

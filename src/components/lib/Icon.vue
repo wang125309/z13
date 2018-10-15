@@ -15,7 +15,11 @@
             size: [String],
             position: [String],
             top: [String],
-            className: [String, Array]
+            className: [String, Array],
+            absolute: {
+                type: Boolean,
+                default: false
+            }
         },
         computed: {
             iconCls() {

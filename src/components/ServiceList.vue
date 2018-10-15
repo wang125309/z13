@@ -1,9 +1,9 @@
 <template>
     <LayoutBase>
-        <title>服务列表</title>
+        <title>贴心服务</title>
         <Navbar v-show="false" arrowLeft>活动详情</Navbar>
         <div class="operation-tabs">
-            <div class="operation-tab">
+            <div @click="go_operation()" class="operation-tab">
                 <Icon size="0.08rem" type="blands-icon-active"></Icon>
                 <div class="operation-text">百叶帘</div>
             </div>
@@ -57,6 +57,11 @@
             TabBar
         },
         methods: {
+            go_operation () {
+                this.$router.push({
+                    path: '/operation'
+                })
+            },
             go (n) {
                 let url = ''
                 if ( n === 1 ) {

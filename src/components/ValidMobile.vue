@@ -153,6 +153,7 @@
                             }
                         }, (data) => {
                             this.$root.$children[0].toggleToast('success', data.message);
+                            this.$store.commit('SET_USER_INFO');
                             setTimeout(() => {
                                 this.$router.push({
                                     path: '/user-info'
