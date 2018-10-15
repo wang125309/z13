@@ -171,7 +171,8 @@
                 },
                 bannerOptions: {
                     slidesPerView: 'auto',
-                    autoplay: true
+                    autoplay: true,
+                    reverseDirection: false
                 },
                 data: {
                     newsAndRunableUnit: {

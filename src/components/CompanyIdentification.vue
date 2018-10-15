@@ -6,7 +6,7 @@
             <CellGroup no-margin class="cell-group">
                 <Cell>
                     <Input v-model="user.email" type="text" placeholder="请输入邮箱"/>
-                    <div class="company-label">{{email}}</div>
+                    <div class="company-label">@{{email.split('@') ? email.split('@')[1] : ''}}</div>
                 </Cell>
                 <Cell>
                     <Input type="text" v-model="text" :email="user.email + email" send-code-email placeholder="请输入验证码"/>
