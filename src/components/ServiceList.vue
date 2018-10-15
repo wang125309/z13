@@ -20,7 +20,7 @@
             </ServiceCellGroup>
             <ServiceCellGroup>
                 <ServiceCell noActivable full @click="go(4)" type="service-park" text="停车"/>
-                <ServiceCell noActivable full @click="go(5)" type="service-visitor" text="可租单元"/>
+                <ServiceCell noActivable full @click="go(5)" type="rent-icon-active" text="可租单元"/>
                 <ServiceCell noActivable full @click="go(6)" type="service-layout" text="大楼布局"/>
             </ServiceCellGroup>
             <ServiceCellGroup>
