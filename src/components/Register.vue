@@ -118,7 +118,6 @@
                         type: 'POST',
                         data: this.user
                     }, (data) => {
-                        console.log(data.data)
                         this.$store.dispatch('SET_TOKEN', data.data);
                         cookies.setCookie(data.data);
                         this.$root.$children[0].toggleToast('success', data.message);
@@ -127,7 +126,6 @@
                         this.$root.$children[0].toggleToast('fail', data.message);
                     });
                 }, (data) => {
-                    console.log(data)
                     this.$root.$children[0].toggleToast('fail', data);
                 });
             },
