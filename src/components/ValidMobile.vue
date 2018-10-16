@@ -78,7 +78,7 @@
                     }
                     else if (path === '/valid-new-mobile') {
                         this.title = '添加新手机号';
-                        this.codeType = 7;
+                        this.codeType = 6;
                         this.user = {
                             account: '',
                             phoneCode: ''

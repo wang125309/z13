@@ -23,7 +23,8 @@ const API = {
     watersupplys: '/front/watersupplys',
     news: '/front/news',
     rentableunits: '/front/rentableunits',
-    uploadImage: '/common/file/base64/upload'
+    uploadImage: '/common/file/base64/upload',
+    banners: '/front/banners'
 };
 
 export default API;

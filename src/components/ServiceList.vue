@@ -29,6 +29,13 @@
                 <ServiceCell noActivable full @click="go(9)" type="service-wash-car" text="洗车"/>
             </ServiceCellGroup>
         </Panel>
+        <Banner class="main-banner">
+            <swiper :options="bannerOptions">
+                <swiper-slide class="banner-slide" v-bind:key="'bannerx' + i.id" v-for="i in banners">
+                    <div class="banner" @click.stop="go_banner(i.link_url)" :style="'background-image:url(' + i.image + ')'"></div>
+                </swiper-slide>
+            </swiper>
+        </Banner>
         <TabBar :active="1"/>
     </LayoutBase>
 
@@ -44,8 +51,13 @@
     import ServiceCellGroup from "./lib/ServiceCellGroup";
     import ServiceCell from "./lib/ServiceCell";
     import TabBar from "./lib/TabBar";
+    import requests from '../service/service'
+    import API from '../service/api'
+    import Banner from './lib/Banner'
+    import { swiper, swiperSlide } from 'vue-awesome-swiper'
     export default {
         components: {
+            Banner,
             Panel,
             Cell,
             CellGroup,
@@ -54,7 +66,31 @@
             Navbar,
             ServiceCellGroup,
             ServiceCell,
-            TabBar
+            TabBar,
+            swiperSlide,
+            swiper
+        },
+        created () {
+            requests(API.banners, {
+                type: 'GET',
+                data: {
+                    location: 1
+                }
+            }, (data) => {
+                this.banners = data.data;
+            }, (err) => {
+
+            })
+        },
+        data () {
+            return {
+                bannerOptions: {
+                    slidesPerView: 'auto',
+                    autoplay: true,
+                    reverseDirection: false
+                },
+                banners: []
+            }
         },
         methods: {
             go_operation () {
@@ -107,6 +143,19 @@
 <style scoped lang="stylus">
     @import '../styles/var.styl';
     @import '../styles/hairline.styl';
+    @import '~swiper/dist/css/swiper.min.css';
+    .main-banner {
+        position: absolute;
+        width: 100%;
+        left: 0;
+        bottom: 0.22rem;
+    }
+    .banner {
+        setBackgroundImage('', center);
+        width: 100%;
+        height: 0.5rem;
+        background-size: cover;
+    }
     .operation-tabs {
         display: flex;
         align-items: center;
