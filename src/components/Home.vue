@@ -4,8 +4,8 @@
             <title>CBD Z13</title>
             <Navbar>中国人寿金融中心 CBD Z13</Navbar>
             <Banner class="main-banner">
-                <swiper :options="bannerOptions">
-                    <swiper-slide class="banner-slide" v-bind:key="'bannerx' + i.id" v-for="i in data.banners">
+                <swiper style="width: 100%" :options="bannerOptions">
+                    <swiper-slide style="width: 100%" class="banner-slide" v-bind:key="'bannerx' + i.id" v-for="i in data.banners">
                         <div class="banner" @click.stop="go_banner(i.link_url)" :style="'background-image:url(' + i.image + ')'"></div>
                     </swiper-slide>
                 </swiper>
@@ -17,14 +17,14 @@
                   className="news-card"
                   :scroll="data.newsAndRunableUnit.news.length + data.newsAndRunableUnit.rentablrUnits.length > 3"
             >
-                <swiper-slide :key="'service' + i.id" v-for="i in data.newsAndRunableUnit.news">
+                <swiper-slide style="width: 100%" :key="'service' + i.id" v-for="i in data.newsAndRunableUnit.news">
                     <div class="news-list" @click.stop="goNews(i.id)">
                         <Tag class-name="tag" backgroundColor="red" color="#fff" borderColor="#fff">大厦服务</Tag>
                         <div class="news-details">{{i.title}}</div>
                         <div class="news-date">{{i.create_time.split(' ')[0].split('-')[1] + '.' + i.create_time.split(' ')[0].split('-')[2]}}</div>
                     </div>
                 </swiper-slide>
-                <swiper-slide :key="'rent' + i.id"  v-for="i in data.newsAndRunableUnit.rentablrUnits">
+                <swiper-slide style="width: 100%" :key="'rent' + i.id"  v-for="i in data.newsAndRunableUnit.rentablrUnits">
                     <div class="news-list" @click="goRent(i.id)">
                         <Tag class-name="tag" backgroundColor="#F39900" color="#fff" borderColor="#fff">可租单元</Tag>
                         <div class="news-details">{{i.title}}</div>
@@ -255,7 +255,7 @@
         width: 100%;
     }
     .banner-slide {
-        width: 100%;
+        width: 100% !important;
     }
     .activity-item {
         setBackgroundImage('../assets/activity-item.png', center);
