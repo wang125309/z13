@@ -131,8 +131,12 @@
             },
             register () {
                 if (!registerFlag) {
-                    if (this.verified) {
+                    if (this.verified && this.phoneCode) {
                         this.doRegister();
+                    } else if (!this.verified) {
+                        this.$root.$children[0].toggleToast('fail', '请填写正确图片验证码');
+                    } else if (!this.phoneCode) {
+                        this.$root.$children[0].toggleToast('fail', '请填写验证码');
                     }
                 }
             }
