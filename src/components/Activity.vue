@@ -43,7 +43,7 @@
                 <div v-html="data.rule_desc"/>
             </ActivityCardItem>
             <ActivityCardItem title="场地">
-                <div v-html="data.descrsite_desciption"/>
+                <div v-html="data.site_desc"/>
             </ActivityCardItem>
             <ActivityCardItem title="评论" noBorder>
                 <div class="activity-comment-area">
