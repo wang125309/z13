@@ -145,10 +145,8 @@
     @import '../styles/hairline.styl';
     @import '~swiper/dist/css/swiper.min.css';
     .main-banner {
-        position: absolute;
         width: 100%;
-        left: 0;
-        bottom: 0.22rem;
+        margin-top: 0.15rem;
     }
     .banner {
         setBackgroundImage('', center);
