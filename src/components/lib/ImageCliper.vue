@@ -174,31 +174,31 @@
                 let _self = this;
                 this.reRotate(imgId)
                 _self.cutVisible = true;
-                // new AlloyFinger(_self.$refs.cutTools, {
-                //     pinch: (evt) => {
-                //         let zoom = evt.zoom;
-                //         if (zoom > 1) {
-                //             zoom = (zoom - 1) / 100 + 1;
-                //         }
-                //         if (zoom < 1) {
-                //             zoom = 1 - zoom / 100;
-                //         }
-                //         let ele = _self.$refs.cutTools;
-                //         let avatarArea = this.$refs.avatarArea;
-                //         if (zoom * ele.clientWidth + ele.clientLeft > avatarArea.clientWidth) {
-                //             _self.$refs.cutArea.style.width = avatarArea.clientWidth + 'px';
-                //             _self.$refs.cutArea.style.height = avatarArea.clientHeight + 'px';
-                //         }
-                //         else if (zoom * ele.clientHeight + ele.clientTop > avatarArea.clientHeight) {
-                //             _self.$refs.cutArea.style.width = avatarArea.clientWidth + 'px';
-                //             _self.$refs.cutArea.style.height = avatarArea.clientHeight+ 'px';
-                //         }
-                //         else {
-                //             _self.$refs.cutArea.style.width = zoom * _self.$refs.cutArea.clientWidth + 'px';
-                //             _self.$refs.cutArea.style.height = zoom * _self.$refs.cutArea.clientHeight + 'px';
-                //         }
-                //     }
-                // });
+                new AlloyFinger(_self.$refs.cutTools, {
+                    pinch: (evt) => {
+                        let zoom = evt.zoom;
+                        if (zoom > 1) {
+                            zoom = (zoom - 1) / 100 + 1;
+                        }
+                        if (zoom < 1) {
+                            zoom = 1 - zoom / 100;
+                        }
+                        let ele = _self.$refs.cutTools;
+                        let avatarArea = this.$refs.avatarArea;
+                        if (zoom * ele.clientWidth + ele.clientLeft > avatarArea.clientWidth) {
+                            _self.$refs.cutArea.style.width = avatarArea.clientWidth + 'px';
+                            _self.$refs.cutArea.style.height = avatarArea.clientHeight + 'px';
+                        }
+                        else if (zoom * ele.clientHeight + ele.clientTop > avatarArea.clientHeight) {
+                            _self.$refs.cutArea.style.width = avatarArea.clientWidth + 'px';
+                            _self.$refs.cutArea.style.height = avatarArea.clientHeight+ 'px';
+                        }
+                        else {
+                            _self.$refs.cutArea.style.width = zoom * _self.$refs.cutArea.clientWidth + 'px';
+                            _self.$refs.cutArea.style.height = zoom * _self.$refs.cutArea.clientHeight + 'px';
+                        }
+                    }
+                });
             },
             cutStart ($evt) {
                 if (this.left === 0 && this.top === 0) {
@@ -231,7 +231,7 @@
                     let w = this.baseX - pageX + this.left;
                     let h = this.baseY - pageY + this.top;
                     console.log(this.imageHeight)
-                    if (this.imageHeight > this.imageWidth) {
+                    if (this.imageHeight >= this.imageWidth) {
                         if (w < 0)
                             w = 0;
                         if (w > this.scale * this.imageWidth - this.imageWidth)
@@ -243,7 +243,7 @@
                         cutAreaAvatar.style.backgroundPositionX = w + 'px';
                         cutAreaAvatar.style.backgroundPositionY = h + 'px';
                     }
-                    else if (this.imageHeight <= this.imageWidth) {
+                    else if (this.imageHeight < this.imageWidth) {
                         if (h < 0)
                             h = 0;
                         if (h > this.scale * this.imageHeight - this.imageHeight)
@@ -255,7 +255,7 @@
                         cutAreaAvatar.style.backgroundPositionX = w + 'px';
                         cutAreaAvatar.style.backgroundPositionY = h + 'px';
                     }
-                    else if (this.imageHeight <= this.imageWidth){
+                    else if (this.imageHeight < this.imageWidth){
                         cutAreaAvatar.style.backgroundPositionX = w + 'px';
                         cutAreaAvatar.style.backgroundPositionY = h + 'px';
                     }
