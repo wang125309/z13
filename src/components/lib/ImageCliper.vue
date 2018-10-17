@@ -231,7 +231,7 @@
                     let w = this.baseX - pageX + this.left;
                     let h = this.baseY - pageY + this.top;
                     console.log(this.imageHeight)
-                    if (this.imageHeight >= this.imageWidth) {
+                    if (this.imageHeight > this.imageWidth) {
                         if (w < 0)
                             w = 0;
                         if (w > this.scale * this.imageWidth - this.imageWidth)
@@ -255,7 +255,7 @@
                         cutAreaAvatar.style.backgroundPositionX = w + 'px';
                         cutAreaAvatar.style.backgroundPositionY = h + 'px';
                     }
-                    else if (this.imageHeight < this.imageWidth){
+                    else if (this.imageHeight === this.imageWidth){
                         cutAreaAvatar.style.backgroundPositionX = w + 'px';
                         cutAreaAvatar.style.backgroundPositionY = h + 'px';
                     }

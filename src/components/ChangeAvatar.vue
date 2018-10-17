@@ -127,7 +127,7 @@
                 })
             },
             uploadImage () {
-                this.$root.$children[0].toggleToast('success', '头像上传中，请耐心等候')
+                this.$root.$children[0].toggleToast('success', '头像上传中')
                 request(API.uploadImage, {
                     type: 'POST',
                     data: {
