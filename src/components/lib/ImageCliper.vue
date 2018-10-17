@@ -105,7 +105,6 @@
                 ]
             },
             getImage () {
-
                 return {
                     'background-image': 'url(' + this.image + ')'
                 }
