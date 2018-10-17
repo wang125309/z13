@@ -244,7 +244,7 @@
                         cutAreaAvatar.style.backgroundPositionX = w + 'px';
                         cutAreaAvatar.style.backgroundPositionY = h + 'px';
                     }
-                    else if (this.imageHeight < this.imageWidth) {
+                    else if (this.imageHeight <= this.imageWidth) {
                         if (h < 0)
                             h = 0;
                         if (h > this.scale * this.imageHeight - this.imageHeight)
@@ -256,7 +256,7 @@
                         cutAreaAvatar.style.backgroundPositionX = w + 'px';
                         cutAreaAvatar.style.backgroundPositionY = h + 'px';
                     }
-                    else if (this.imageHeight < this.imageWidth){
+                    else if (this.imageHeight <= this.imageWidth){
                         cutAreaAvatar.style.backgroundPositionX = w + 'px';
                         cutAreaAvatar.style.backgroundPositionY = h + 'px';
                     }
