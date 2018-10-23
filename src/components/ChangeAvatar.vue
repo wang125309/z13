@@ -98,6 +98,7 @@
             },
             cancelCliper () {
                 this.changeButtonVisible = true;
+                this.image = ''
             },
             completeCliper () {
                 this.changeButtonVisible = true;
