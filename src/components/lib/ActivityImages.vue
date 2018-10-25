@@ -3,7 +3,7 @@
         <div :class="activityImagesTitleCls">{{title}}</div>
         <div :class="activityImagesDateCls">{{date}}</div>
         <Tag backgroundColor="rgba(0, 0, 0, 0.4)" borderColor="rgba(0, 0, 0, 0)" :className="activityImagesStatusTagCls">{{status}}</Tag>
-        <div :class="activityImagesLocationCls">
+        <div v-if="location" :class="activityImagesLocationCls">
             <Icon position="left" size="0.04rem" type="location"/>
             <span>
                 {{location}}

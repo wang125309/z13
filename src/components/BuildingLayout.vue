@@ -45,11 +45,11 @@
         </div>
         <div :class="roomPanelCls" v-if="i.companys.length" v-for="(i, index) in data" v-bind:key="index">
             <div @click="hidden(i.tid)" :class="floorCls">
-                <div>{{i.floor}}</div>
+                <div>{{i.unit}}单元{{i.floor}}层</div>
                 <Icon :class="floorIcon" position="right" type="up-arrow" size="0.04rem"/>
             </div>
             <div v-show="i.active" :class="roomPanelItemCls" v-for="(j, $index) in i.companys" v-bind:key="'company'+ $index">
-                <div :class="cellImgCls" :style="'background-image:url(' + i.logo + ')'"></div>
+                <div :class="cellImgCls" :style="'background-image:url(' + j.logo + ')'"></div>
                 <div :class="itemDetailsCls">
                     <div :class="itemDetailsHead">
                         <div>
@@ -260,7 +260,7 @@
     @import '../styles/var.styl';
     @import '../styles/hairline.styl';
     .building-layout-search-area {
-        margin: $margin-base 0;
+        margin: $margin-small 0;
         padding: $padding-base 0;
         position: relative;
         .building-layout-filter {
@@ -308,6 +308,11 @@
         padding: $padding-base;
         margin-right: 0 !important;
         height: 0.2rem;
+        &-image {
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+        }
         &-bottom {
             padding: $padding-base 0;
             .{$prefix}-cell {
@@ -351,7 +356,7 @@
         position: relative;
         hairline('top');
         hairline('bottom');
-        margin: $margin-base 0;
+        margin: $margin-small 0;
         &-item {
             position: relative;
             display: flex;

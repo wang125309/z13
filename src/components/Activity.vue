@@ -11,19 +11,19 @@
         />
         <Card noPadding>
             <CellGroup noMargin>
-                <Cell padding>
+                <Cell v-if="data.signup_begin_time" padding>
                     <div class="activity-card-title">报名时间：</div>
                     <div class="activity-card-message">{{data.signup_begin_time}}  {{data.signup_end_time}}</div>
                 </Cell>
-                <Cell padding>
+                <Cell v-if="data.begin_time" padding>
                     <div class="activity-card-title">活动时间：</div>
                     <div class="activity-card-message">{{data.begin_time}}  {{data.end_time}}</div>
                 </Cell>
-                <Cell padding>
+                <Cell v-if="data.address" padding>
                     <div class="activity-card-title">活动地点：</div>
                     <div class="activity-card-message">{{data.address}}</div>
                 </Cell>
-                <Cell padding withoutBorder>
+                <Cell v-if="data.signupCount" padding withoutBorder>
                     <div class="activity-card-title">活动参与：</div>
                     <div class="activity-card-message">
                         <div class="activity-card-message-text">{{data.signupCount}} 人参与</div>
@@ -36,13 +36,13 @@
             </CellGroup>
         </Card>
         <Panel noPadding>
-            <ActivityCardItem title="活动介绍">
+            <ActivityCardItem v-if="data.description" title="活动介绍">
                 <div v-html="data.description"/>
             </ActivityCardItem>
-            <ActivityCardItem title="规则">
+            <ActivityCardItem v-if="data.rule_desc" title="规则">
                 <div v-html="data.rule_desc"/>
             </ActivityCardItem>
-            <ActivityCardItem title="场地">
+            <ActivityCardItem v-if="data.site_desc" title="场地">
                 <div v-html="data.site_desc"/>
             </ActivityCardItem>
             <ActivityCardItem title="评论" noBorder>
@@ -373,6 +373,8 @@
     }
     .activity-empty-comment {
         padding: $padding-small;
+        text-align: center;
+        color: $font-second;
     }
     .activity-comment-area {
         background-color: $background-default;

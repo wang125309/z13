@@ -232,13 +232,13 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
   width: 41px;
   height: 36px;
 }
-.icon-home-active {
+.icon-home {
   background-image: url(/static/sprite.png);
   background-position: 0px -1030px;
   width: 39px;
   height: 39px;
 }
-.icon-home {
+.icon-home-active {
   background-image: url(/static/sprite.png);
   background-position: 0px -1069px;
   width: 39px;
@@ -298,7 +298,7 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
   width: 52px;
   height: 45px;
 }
-.icon-rent-icon {
+.icon-rent-icon-active {
   background-image: url(/static/sprite.png);
   background-position: 0px -1489px;
   width: 48px;
@@ -310,31 +310,31 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
   width: 48px;
   height: 46px;
 }
-.icon-auth {
+.icon-rent-icon {
   background-image: url(/static/sprite.png);
   background-position: 0px -1581px;
+  width: 48px;
+  height: 46px;
+}
+.icon-auth {
+  background-image: url(/static/sprite.png);
+  background-position: 0px -1627px;
   width: 120px;
   height: 46px;
 }
 .icon-phone {
   background-image: url(/static/sprite.png);
-  background-position: 0px -1627px;
+  background-position: 0px -1673px;
   width: 32px;
   height: 46px;
 }
-.icon-rent-icon-active {
-  background-image: url(/static/sprite.png);
-  background-position: 0px -1673px;
-  width: 48px;
-  height: 46px;
-}
-.icon-express-icon {
+.icon-service-express {
   background-image: url(/static/sprite.png);
   background-position: 0px -1719px;
   width: 51px;
   height: 47px;
 }
-.icon-service-express {
+.icon-express-icon {
   background-image: url(/static/sprite.png);
   background-position: 0px -1766px;
   width: 51px;
@@ -376,25 +376,25 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
   width: 46px;
   height: 52px;
 }
-.icon-visitor-icon-active {
+.icon-service-visitor {
   background-image: url(/static/sprite.png);
   background-position: 0px -2108px;
   width: 69px;
   height: 53px;
 }
-.icon-visitor-icon {
-  background-image: url(/static/sprite.png);
-  background-position: 0px -2161px;
-  width: 69px;
-  height: 53px;
-}
 .icon-service-wash-car {
   background-image: url(/static/sprite.png);
-  background-position: 0px -2214px;
+  background-position: 0px -2161px;
   width: 44px;
   height: 53px;
 }
-.icon-service-visitor {
+.icon-visitor-icon {
+  background-image: url(/static/sprite.png);
+  background-position: 0px -2214px;
+  width: 69px;
+  height: 53px;
+}
+.icon-visitor-icon-active {
   background-image: url(/static/sprite.png);
   background-position: 0px -2267px;
   width: 69px;
@@ -406,7 +406,7 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
   width: 50px;
   height: 53px;
 }
-.icon-park-icon {
+.icon-park-icon-active {
   background-image: url(/static/sprite.png);
   background-position: 0px -2373px;
   width: 54px;
@@ -418,7 +418,7 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
   width: 54px;
   height: 54px;
 }
-.icon-park-icon-active {
+.icon-park-icon {
   background-image: url(/static/sprite.png);
   background-position: 0px -2481px;
   width: 54px;
@@ -454,7 +454,7 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
   width: 56px;
   height: 57px;
 }
-.icon-warning {
+.icon-error {
   background-image: url(/static/sprite.png);
   background-position: 0px -2819px;
   width: 60px;
@@ -466,7 +466,7 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
   width: 58px;
   height: 60px;
 }
-.icon-error {
+.icon-warning {
   background-image: url(/static/sprite.png);
   background-position: 0px -2939px;
   width: 60px;
@@ -532,33 +532,33 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
   width: 185px;
   height: 172px;
 }
-.icon-rent-img {
-  background-image: url(/static/sprite.png);
-  background-position: 0px -3792px;
-  width: 240px;
-  height: 240px;
-}
 .icon-z13-logo {
   background-image: url(/static/sprite.png);
-  background-position: 0px -4032px;
+  background-position: 0px -3792px;
   width: 1280px;
   height: 256px;
 }
 .icon-404 {
   background-image: url(/static/sprite.png);
-  background-position: 0px -4288px;
+  background-position: 0px -4048px;
   width: 305px;
   height: 279px;
 }
+.icon-rent-img {
+  background-image: url(/static/sprite.png);
+  background-position: 0px -4327px;
+  width: 360px;
+  height: 360px;
+}
 .icon-operation-tool {
   background-image: url(/static/sprite.png);
-  background-position: 0px -4567px;
+  background-position: 0px -4687px;
   width: 396px;
   height: 396px;
 }
 .icon-operation-tool-open {
   background-image: url(/static/sprite.png);
-  background-position: 0px -4963px;
+  background-position: 0px -5083px;
   width: 396px;
   height: 396px;
 }
