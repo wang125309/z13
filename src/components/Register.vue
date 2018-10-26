@@ -126,7 +126,7 @@
                         this.$root.$children[0].toggleToast('fail', data.message);
                     });
                 }, (data) => {
-                    this.$root.$children[0].toggleToast('fail', data);
+                    this.$root.$children[0].toggleToast('fail', data.message);
                 });
             },
             register () {
