@@ -8,7 +8,7 @@
                 <div>{{i.nick_name}}</div>
             </div>
         </div>
-        <Button @onClick="cancel" type="circle" full width="92%">取消报名</Button>
+        <Button v-if="activityStatus === 3" @onClick="cancel" type="circle" full width="92%">取消报名</Button>
     </LayoutBase>
 </template>
 <script>
@@ -26,7 +26,10 @@ export default {
     components: {Cell, Button, Avatar, CellGroup, Navbar, LayoutBase},
     data () {
         return {
-            data: []
+            data: [],
+            activity: {
+                activityStatus: 0
+            }
         }
     },
     computed: {
@@ -37,6 +40,7 @@ export default {
             request(`${API.get_activitys}/${this.$route.params.id}`, {
                 type: 'GET'
             }, (data) => {
+                this.activity = data.data;
                 this.data = data.data.signups;
             }, (data) => {
                 this.$root.$children[0].toggleToast('fail', data.message);

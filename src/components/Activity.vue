@@ -7,7 +7,7 @@
             :title="data.name"
             :date="data.begin_time"
             :location="data.address"
-            :status="data.status === 0 ? '全部' : data.status === 1 ? '进行中' : '已结束'"
+            :status="data.activityStatus === 0 ? '未开始' : data.activityStatus === 1 ? '进行中' : data.activityStatus === 2 ? '已结束' : '已报名'"
         />
         <Card noPadding>
             <CellGroup noMargin>
