@@ -120,6 +120,8 @@
     import Input from "./lib/Input";
     import pageResult from "../service/pageResult";
     import Avatar from "./lib/Avatar";
+    import timeago from 'timeago.js';
+
     export default {
         name: 'Activity',
         components: {
@@ -160,6 +162,7 @@
         created () {
             this.refresh();
             this.refresh_comments();
+
         },
         methods: {
             signUpMenu () {
@@ -238,6 +241,9 @@
                 }, (data) => {
                     this.comments = pageResult(data.data, 1);
                     this.liked = false;
+                    for (let i of this.comments) {
+                        i.create_time = timeago().format(i.create_time, 'zh_CN')
+                    }
                 }, (data) => {
                     this.$root.$children[0].toggleToast('fail', data.message);
                 })
