@@ -197,11 +197,14 @@
                 if (n === 1) {
                     url = '/operation'
                 }
-                else if (n === 2 || n === 4 || n === 5) {
+                else if (n === 2 || n === 5) {
                     this.$root.$children[0].toggleToast('warning', '即将上线，敬请期待')
                 }
                 else if (n === 3) {
                     url = '/delivery-list'
+                }
+                else if (n === 4) {
+                    url = '/express'
                 }
                 else if (n === 6) {
                     url = '/park'

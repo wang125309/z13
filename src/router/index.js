@@ -43,6 +43,7 @@ const ChangeCompanyPosition = r => require.ensure([], ()=>r(require('@/component
 const ChangeMobile = r => require.ensure([], ()=>r(require('@/components/ChangeMobile.vue')))
 const SignUpList = r => require.ensure([], ()=>r(require('@/components/SignUpList.vue')))
 const Park = r => require.ensure([], ()=>r(require('@/components/Park.vue')))
+const Express = r => require.ensure([], ()=>r(require('@/components/Express.vue')))
 
 export default new Router({
     scrollBehavior: () => ({y: 0}),
@@ -267,6 +268,11 @@ export default new Router({
             path: '/park',
             name: 'Park',
             component: Park
+        },
+        {
+            path: '/express',
+            name: 'Express',
+            component: Express
         }
     ]
 })
