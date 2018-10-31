@@ -49,7 +49,7 @@
                 <Icon :class="floorIcon" position="right" type="up-arrow" size="0.04rem"/>
             </div>
             <div v-show="i.active" :class="roomPanelItemCls" v-for="(j, $index) in i.companys" v-bind:key="'company'+ $index">
-                <div :class="cellImgCls" :style="'background-image:url(' + j.logo + ')'"></div>
+                <div v-if="j.logo" :class="cellImgCls" :style="'background-image:url(' + j.logo + ')'"></div>
                 <div :class="itemDetailsCls">
                     <div :class="itemDetailsHead">
                         <div>
