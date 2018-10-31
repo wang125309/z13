@@ -124,6 +124,7 @@
     import pageResult from "../service/pageResult";
     import Avatar from "./lib/Avatar";
     import timeago from 'timeago.js';
+    import moment from 'moment'
 
     export default {
         name: 'Activity',
