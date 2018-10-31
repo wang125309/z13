@@ -273,26 +273,30 @@
                 }, 100)
             },
             sendComment ($evt) {
-                requests(`${API.get_activitys}/${this.$route.params.id}/comments`, {
-                    type: 'POST',
-                    data: this.commentToId ? {
-                        content: this.commentMessage,
-                        parentId: this.commentToId
-                    } : {
-                        content: this.commentMessage
-                    }
-                }, (data) => {
-                    this.hiddenComment();
-                    this.commentMessage = '';
-                    this.refresh_comments();
-                }, (data) => {
-                    setTimeout(() => {
-                        this.$router.push({
-                            path: '/login'
-                        })
-                    }, 1000)
-                    this.$root.$children[0].toggleToast('fail', '请登录后进行评论');
-                })
+                if (this.commentMessage.length) {
+                    requests(`${API.get_activitys}/${this.$route.params.id}/comments`, {
+                        type: 'POST',
+                        data: this.commentToId ? {
+                            content: this.commentMessage,
+                            parentId: this.commentToId
+                        } : {
+                            content: this.commentMessage
+                        }
+                    }, (data) => {
+                        this.hiddenComment();
+                        this.commentMessage = '';
+                        this.refresh_comments();
+                    }, (data) => {
+                        setTimeout(() => {
+                            this.$router.push({
+                                path: '/login'
+                            })
+                        }, 1000)
+                        this.$root.$children[0].toggleToast('fail', '请登录后进行评论');
+                    })
+                } else {
+                    this.$root.$children[0].toggleToast('fail', '评论内容不能为空哦');
+                }
             },
             more_comment ($evt) {
                 this.showAllComments = true;
