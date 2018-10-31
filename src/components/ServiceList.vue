@@ -105,7 +105,6 @@
                 }
                 else if ( n === 2 ) {
                     url = '/express';
-                    this.$root.$children[0].toggleToast('warning', '即将上线，敬请期待')
                 }
                 else if ( n === 3 ) {
                     url = '/visitor'
@@ -113,7 +112,6 @@
                 }
                 else if ( n === 4 ) {
                     url = '/park'
-                    this.$root.$children[0].toggleToast('warning', '即将上线，敬请期待')
                 }
                 else if ( n === 5 ) {
                     url = '/rent-building'
@@ -130,7 +128,7 @@
                 else if ( n === 9 ) {
                     url = '/wash-car-list'
                 }
-                if (n !== 2 && n !== 3 && n !== 4) {
+                if (n !== 3) {
                     this.$router.push({
                         path: url
                     })
