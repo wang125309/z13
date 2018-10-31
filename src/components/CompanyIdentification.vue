@@ -63,7 +63,7 @@
                 request(API.verify_email_code, {
                     type: 'POST',
                     data: {
-                        busiType: 1,
+                        busiType: 3,
                         email: this.user.email + this.email,
                         emailCode: this.text,
                         inviteCode: this.inviteCode

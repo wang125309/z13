@@ -1,131 +1,136 @@
 <template>
     <LayoutBase>
         <Scrollable>
-            <title>CBD Z13</title>
-            <Navbar>中国人寿金融中心 CBD Z13</Navbar>
-            <Banner class="main-banner">
-                <swiper style="width: 100%" :options="bannerOptions">
-                    <swiper-slide style="width: 100%" class="banner-slide" v-bind:key="'bannerx' + i.id" v-for="i in data.banners">
-                        <div class="banner" @click.stop="go_banner(i.link_url)" :style="'background-image:url(' + i.image + ')'"></div>
+            <div v-show="loaded" class="main" style="position: relative;">
+                <title>CBD Z13</title>
+                <Navbar>中国人寿金融中心 CBD Z13</Navbar>
+                <Banner class="main-banner">
+                    <swiper style="width: 100%" :options="bannerOptions">
+                        <swiper-slide style="width: 100%" class="banner-slide" v-bind:key="'bannerx' + i.id" v-for="i in data.banners">
+                            <div class="banner" @click.stop="go_banner(i.link_url)" :style="'background-image:url(' + i.image + ')'"></div>
+                        </swiper-slide>
+                    </swiper>
+                </Banner>
+                <Card v-if="(data.newsAndRunableUnit.news &&
+                        data.newsAndRunableUnit.news.length) ||
+                        (data.newsAndRunableUnit.rentablrUnits &&
+                        data.newsAndRunableUnit.rentablrUnits.length)"
+                      className="news-card"
+                      :scroll="data.newsAndRunableUnit.news.length + data.newsAndRunableUnit.rentablrUnits.length > 3"
+                >
+                    <swiper-slide style="width: 100%" :key="'service' + i.id" v-for="i in data.newsAndRunableUnit.news">
+                        <div class="news-list" @click.stop="goNews(i.id)">
+                            <Tag class-name="tag" backgroundColor="red" color="#fff" borderColor="#fff">大厦服务</Tag>
+                            <div class="news-details">{{i.title}}</div>
+                            <div class="news-date">{{i.create_time.split(' ')[0].split('-')[1] + '.' + i.create_time.split(' ')[0].split('-')[2]}}</div>
+                        </div>
                     </swiper-slide>
-                </swiper>
-            </Banner>
-            <Card v-if="(data.newsAndRunableUnit.news &&
-                    data.newsAndRunableUnit.news.length) ||
-                    (data.newsAndRunableUnit.rentablrUnits &&
-                    data.newsAndRunableUnit.rentablrUnits.length)"
-                  className="news-card"
-                  :scroll="data.newsAndRunableUnit.news.length + data.newsAndRunableUnit.rentablrUnits.length > 3"
-            >
-                <swiper-slide style="width: 100%" :key="'service' + i.id" v-for="i in data.newsAndRunableUnit.news">
-                    <div class="news-list" @click.stop="goNews(i.id)">
-                        <Tag class-name="tag" backgroundColor="red" color="#fff" borderColor="#fff">大厦服务</Tag>
-                        <div class="news-details">{{i.title}}</div>
-                        <div class="news-date">{{i.create_time.split(' ')[0].split('-')[1] + '.' + i.create_time.split(' ')[0].split('-')[2]}}</div>
-                    </div>
-                </swiper-slide>
-                <swiper-slide style="width: 100%" :key="'rent' + i.id"  v-for="i in data.newsAndRunableUnit.rentablrUnits">
-                    <div class="news-list" @click="goRent(i.id)">
-                        <Tag class-name="tag" backgroundColor="#F39900" color="#fff" borderColor="#fff">可租单元</Tag>
-                        <div class="news-details">{{i.title}}</div>
-                        <div class="news-date">{{i.create_time.split(' ')[0].split('-')[1] + '.' + i.create_time.split(' ')[0].split('-')[2]}}</div>
-                    </div>
-                </swiper-slide>
-            </Card>
-            <div class="env-card">
-                <div class="temperature-area">
-                    <div class="now-temperature">
-                        <span class="number">{{data.weather.wd}}</span>
-                        <span class="addon">℃</span>
-                    </div>
-                    <div class="whole-temperature">
-                        <div class="whole-temperature-line">{{data.weather.wdLow}} / {{data.weather.wdHigh}}</div>
-                        <div class="whole-temperature-line">{{data.weather.wdType}}</div>
-                    </div>
-                </div>
-                <div class="PM25-area">
-                    <div class="inner-pm25">
-                        <div class="title">室内PM2.5</div>
-                        <div class="pm25">
-                            <span class="pm25-number pm25-good">{{data.weather.innerPm25}}</span>
-                            <span class="pm25-icon">
-                                <Icon class-name="pm2-icon" type="env-good" size="0.04rem"/>
-                                <Icon class-name="pm2-icon" type="env-good" size="0.04rem"/>
-                                <span class="pm25-good pm25-text">优</span>
-                            </span>
+                    <swiper-slide style="width: 100%" :key="'rent' + i.id"  v-for="i in data.newsAndRunableUnit.rentablrUnits">
+                        <div class="news-list" @click="goRent(i.id)">
+                            <Tag class-name="tag" backgroundColor="#F39900" color="#fff" borderColor="#fff">可租单元</Tag>
+                            <div class="news-details">{{i.title}}</div>
+                            <div class="news-date">{{i.create_time.split(' ')[0].split('-')[1] + '.' + i.create_time.split(' ')[0].split('-')[2]}}</div>
+                        </div>
+                    </swiper-slide>
+                </Card>
+                <div class="env-card">
+                    <div class="temperature-area">
+                        <div class="now-temperature">
+                            <span class="number">{{data.weather.wd}}</span>
+                            <span class="addon">℃</span>
+                        </div>
+                        <div class="whole-temperature">
+                            <div class="whole-temperature-line">{{data.weather.wdLow}} / {{data.weather.wdHigh}}</div>
+                            <div class="whole-temperature-line">{{data.weather.wdType}}</div>
                         </div>
                     </div>
-                    <div class="outside-pm25">
-                        <div class="title">室外PM2.5</div>
-                        <div class="pm25">
-                            <span :class="(parseInt(data.weather.outerPm25) >= 115 ? 'pm25-danger': 'pm25-good') + ' pm25-number'">{{parseInt(data.weather.outerPm25)}}</span>
-                            <span class="pm25-icon">
-                                <Icon v-if="parseInt(data.weather.outerPm25) < 35" class-name="pm2-icon" type="env-good" size="0.04rem"/>
-                                <Icon v-if="parseInt(data.weather.outerPm25) < 35" class-name="pm2-icon" type="env-good" size="0.04rem"/>
-                                <Icon v-if="parseInt(data.weather.outerPm25) < 35" class-name="pm2-icon" type="env-good" size="0.04rem"/>
-                                <Icon v-if="parseInt(data.weather.outerPm25) < 75 && parseInt(data.weather.outerPm25) >= 35" class-name="pm2-icon" type="env-good" size="0.04rem"/>
-                                <Icon v-if="parseInt(data.weather.outerPm25) < 75 && parseInt(data.weather.outerPm25) >= 35" class-name="pm2-icon" type="env-good" size="0.04rem"/>
-                                <Icon v-if="parseInt(data.weather.outerPm25) < 115 && parseInt(data.weather.outerPm25) >= 75" class-name="pm2-icon" type="env-good" size="0.04rem"/>
-                                <Icon v-if="parseInt(data.weather.outerPm25) >= 115 && parseInt(data.weather.outerPm25) < 150"  class-name="pm2-icon" type="env-bad" size="0.04rem"/>
-                                <Icon v-if="parseInt(data.weather.outerPm25) >= 150 && parseInt(data.weather.outerPm25) < 250"  class-name="pm2-icon" type="env-bad" size="0.04rem"/>
-                                <Icon v-if="parseInt(data.weather.outerPm25) >= 150 && parseInt(data.weather.outerPm25) < 250"  class-name="pm2-icon" type="env-bad" size="0.04rem"/>
-                                <Icon v-if="parseInt(data.weather.outerPm25) >= 250"  class-name="pm2-icon" type="env-bad" size="0.04rem"/>
-                                <Icon v-if="parseInt(data.weather.outerPm25) >= 250"  class-name="pm2-icon" type="env-bad" size="0.04rem"/>
-                                <Icon v-if="parseInt(data.weather.outerPm25) >= 250"  class-name="pm2-icon" type="env-bad" size="0.04rem"/>
-                                <span :class="(parseInt(data.weather.outerPm25) >= 115 ? 'pm25-danger': 'pm25-good') + ' pm25-text'">{{data.weather.pm25Type}}</span>
-                            </span>
+                    <div class="PM25-area">
+                        <div class="inner-pm25">
+                            <div class="title">室内PM2.5</div>
+                            <div class="pm25">
+                                <span class="pm25-number pm25-good">{{data.weather.innerPm25}}</span>
+                                <span class="pm25-icon">
+                                    <Icon class-name="pm2-icon" type="env-good" size="0.04rem"/>
+                                    <Icon class-name="pm2-icon" type="env-good" size="0.04rem"/>
+                                    <span class="pm25-good pm25-text">优</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="outside-pm25">
+                            <div class="title">室外PM2.5</div>
+                            <div class="pm25">
+                                <span :class="(parseInt(data.weather.outerPm25) >= 115 ? 'pm25-danger': 'pm25-good') + ' pm25-number'">{{parseInt(data.weather.outerPm25)}}</span>
+                                <span class="pm25-icon">
+                                    <Icon v-if="parseInt(data.weather.outerPm25) < 35" class-name="pm2-icon" type="env-good" size="0.04rem"/>
+                                    <Icon v-if="parseInt(data.weather.outerPm25) < 35" class-name="pm2-icon" type="env-good" size="0.04rem"/>
+                                    <Icon v-if="parseInt(data.weather.outerPm25) < 35" class-name="pm2-icon" type="env-good" size="0.04rem"/>
+                                    <Icon v-if="parseInt(data.weather.outerPm25) < 75 && parseInt(data.weather.outerPm25) >= 35" class-name="pm2-icon" type="env-good" size="0.04rem"/>
+                                    <Icon v-if="parseInt(data.weather.outerPm25) < 75 && parseInt(data.weather.outerPm25) >= 35" class-name="pm2-icon" type="env-good" size="0.04rem"/>
+                                    <Icon v-if="parseInt(data.weather.outerPm25) < 115 && parseInt(data.weather.outerPm25) >= 75" class-name="pm2-icon" type="env-good" size="0.04rem"/>
+                                    <Icon v-if="parseInt(data.weather.outerPm25) >= 115 && parseInt(data.weather.outerPm25) < 150"  class-name="pm2-icon" type="env-bad" size="0.04rem"/>
+                                    <Icon v-if="parseInt(data.weather.outerPm25) >= 150 && parseInt(data.weather.outerPm25) < 250"  class-name="pm2-icon" type="env-bad" size="0.04rem"/>
+                                    <Icon v-if="parseInt(data.weather.outerPm25) >= 150 && parseInt(data.weather.outerPm25) < 250"  class-name="pm2-icon" type="env-bad" size="0.04rem"/>
+                                    <Icon v-if="parseInt(data.weather.outerPm25) >= 250"  class-name="pm2-icon" type="env-bad" size="0.04rem"/>
+                                    <Icon v-if="parseInt(data.weather.outerPm25) >= 250"  class-name="pm2-icon" type="env-bad" size="0.04rem"/>
+                                    <Icon v-if="parseInt(data.weather.outerPm25) >= 250"  class-name="pm2-icon" type="env-bad" size="0.04rem"/>
+                                    <span :class="(parseInt(data.weather.outerPm25) >= 115 ? 'pm25-danger': 'pm25-good') + ' pm25-text'">{{data.weather.pm25Type}}</span>
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <Panel class-name="service-panel" no-board no-padding>
-                <ServiceCellGroup>
-                    <ServiceCell @click="go(1)" type="blands-icon" text="百叶帘"/>
-                    <ServiceCell @click="go(2)" type="tools-icon" text="物业报修"/>
-                    <ServiceCell @click="go(3)" type="delivery-icon" text="就餐服务"/>
-                    <ServiceCell @click="go(4)" type="express-icon" text="快递"/>
-                </ServiceCellGroup>
-                <ServiceCellGroup>
-                    <ServiceCell @click="go(5)" type="visitor-icon" text="访客管理"/>
-                    <ServiceCell @click="go(6)" type="park-icon" text="停车"/>
-                    <ServiceCell @click="go(7)" type="rent-icon" text="可租单元"/>
-                    <ServiceCell @click="go(8)" type="building-icon" text="大厦服务"/>
-                </ServiceCellGroup>
-            </Panel>
+                <Panel class-name="service-panel" no-board no-padding>
+                    <ServiceCellGroup>
+                        <ServiceCell @click="go(1)" type="blands-icon" text="百叶帘"/>
+                        <ServiceCell @click="go(2)" type="tools-icon" text="物业报修"/>
+                        <ServiceCell @click="go(3)" type="delivery-icon" text="就餐服务"/>
+                        <ServiceCell @click="go(4)" type="express-icon" text="快递"/>
+                    </ServiceCellGroup>
+                    <ServiceCellGroup>
+                        <ServiceCell @click="go(5)" type="visitor-icon" text="访客管理"/>
+                        <ServiceCell @click="go(6)" type="park-icon" text="停车"/>
+                        <ServiceCell @click="go(7)" type="rent-icon" text="可租单元"/>
+                        <ServiceCell @click="go(8)" type="building-icon" text="大厦服务"/>
+                    </ServiceCellGroup>
+                </Panel>
 
-            <Card v-if="data.rentableUnits.pageResult &&
-                    data.rentableUnits.pageResult.length"
-                  class-name="rent-card"
-                  details=""
-                  full
-                  :title="`可租单元(${data.rentableUnits.totalItem > 99 ? '99+' : data.rentableUnits.totalItem})`"
-                  viewDetails="/rent-building">
-                <div class="rent-wrap" @click="goRent(data.rentableUnits.pageResult[0].id)">
-                    <Icon class-name="rent-img" type="rent-img" size="0.35rem"/>
-                    <div class="rent-details">
-                        <div class="rent-title">{{data.rentableUnits.pageResult[0].title}}</div>
-                        <div class="rent-area">
-                            <p class="rent-area-p">{{data.rentableUnits.pageResult[0].area}}平米|{{data.rentableUnits.pageResult[0].location}}层</p>
-                            <p class="rent-area-p">{{data.rentableUnits.pageResult[0].capacity}}工位</p>
-                            <p class="rent-area-p">{{data.rentableUnits.pageResult[0].deck}}</p>
-                            <p class="rent-area-p">
-                                <span class="price">{{data.rentableUnits.pageResult[0].price}}元</span>
-                                <span>/平米</span>
-                            </p>
+                <Card v-if="data.rentableUnits.pageResult &&
+                        data.rentableUnits.pageResult.length"
+                      class-name="rent-card"
+                      details=""
+                      full
+                      :title="`可租单元(${data.rentableUnits.totalItem > 99 ? '99+' : data.rentableUnits.totalItem})`"
+                      viewDetails="/rent-building">
+                    <div class="rent-wrap" @click="goRent(data.rentableUnits.pageResult[0].id)">
+                        <Icon class-name="rent-img" type="rent-img" size="0.35rem"/>
+                        <div class="rent-details">
+                            <div class="rent-title">{{data.rentableUnits.pageResult[0].title}}</div>
+                            <div class="rent-area">
+                                <p class="rent-area-p">{{data.rentableUnits.pageResult[0].area}}平米|{{data.rentableUnits.pageResult[0].location}}层</p>
+                                <p class="rent-area-p">{{data.rentableUnits.pageResult[0].capacity}}工位</p>
+                                <p class="rent-area-p">{{data.rentableUnits.pageResult[0].deck}}</p>
+                                <p class="rent-area-p">
+                                    <span class="price">{{data.rentableUnits.pageResult[0].price}}元</span>
+                                    <span>/平米</span>
+                                </p>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </Card>
-            <Card v-if="data.activitys.pageResult && data.activitys.pageResult.length" full :title="`社区活动(${data.activitys.totalItem})`" viewDetails="/activity-list">
-                <swiper :options="swiperOption">
-                    <swiper-slide :class="data.activitys.pageResult.length === 1 ? 'slide-only' : ''" :key="'activity' + i.id" v-for="i in data.activitys.pageResult">
-                        <div @click="goActivity(i.id)" class="activity-item" :style="'background-image:url(' + i.image +')'">
-                            <div class="activity-item-title">{{i.name}}</div>
-                            <div class="activity-item-date">{{i.begin_time.split(' ')[0]}}</div>
-                        </div>
-                    </swiper-slide>
-                </swiper>
-            </Card>
+                </Card>
+                <Card v-if="data.activitys.pageResult && data.activitys.pageResult.length" full :title="`社区活动(${data.activitys.totalItem})`" viewDetails="/activity-list">
+                    <swiper :options="swiperOption">
+                        <swiper-slide :class="data.activitys.pageResult.length === 1 ? 'slide-only' : ''" :key="'activity' + i.id" v-for="i in data.activitys.pageResult">
+                            <div @click="goActivity(i.id)" class="activity-item" :style="'background-image:url(' + i.image +')'">
+                                <div class="activity-item-title">{{i.name}}</div>
+                                <div class="activity-item-date">{{i.begin_time.split(' ')[0]}}</div>
+                            </div>
+                        </swiper-slide>
+                    </swiper>
+                </Card>
+            </div>
+            <div v-show="!loaded" class="loading-bg" :style="'background-image:url(' + loading + ')'">
+
+            </div>
             <TabBar :active="0"/>
         </Scrollable>
     </LayoutBase>
@@ -146,6 +151,7 @@
     import requests from '../service/service'
     import API from '../service/api'
     import { swiper, swiperSlide } from 'vue-awesome-swiper'
+    import loading from '../assets/loading.png'
     export default {
         name: 'Home',
         components: {
@@ -187,8 +193,11 @@
                         pageResult:[{
                             begin_time: ' '
                         }]
-                    }
-                }
+                    },
+
+                },
+                loaded: false,
+                loading: loading
             }
         },
         methods: {
@@ -243,6 +252,7 @@
                 type: 'GET'
             }, (data) => {
                 this.data = data.data
+                this.loaded = true
             }, (data) => {
                 console.log(data)
                 this.$root.$children[0].toggleToast('fail', data.message)
@@ -254,6 +264,28 @@
     @import '../styles/var.styl';
     @import '../styles/hairline.styl';
     @import '~swiper/dist/css/swiper.min.css';
+    @keyframes opa {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+    .main {
+        opacity: 1;
+        animation: opa $transition-time ease-in-out;
+    }
+    .loading-bg {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-repeat: no-repeat;
+        background-size: auto 100%;
+        background-position: center bottom;
+        opacity: 0.5;
+        animation: opa $transition-time ease-in-out;
+    }
     .swiper-slide {
         width: 80%;
     }
