@@ -223,26 +223,54 @@
                     type: 'GET'
                 }, (data) => {
                     this.data = data.data;
-                    if (this.data.activityStatus === 0 &&
-                        (this.data.people_limit === -1 ||
-                            (this.data.people_limit !== -1 &&
-                                this.data.signupCount < this.data.people_limit
-                            )
-                        )
-                    ) {
-                        this.buttonText = '我要报名';
+                    let date = moment();
+                    if (this.data.activityStatus === 0 || this.data.activityStatus === 1) {
+                        if (this.data.signup_begin_time) {
+                            if (date.isAfter(moment(this.data.signup_begin_time))
+                                && date.isBefore(moment(this.data.signup_end_time))
+                            ) {
+                                this.buttonText = '我要报名'
+                            } else if (date.isBefore(moment(this.data.signup_begin_time))) {
+                                this.buttonText = this.data.signup_begin_time
+                            } else if (date.isAfter(moment(this.data.signup_end_time))) {
+                                this.buttonText = '活动已结束'
+                            }
+                        } else {
+                            if (this.data.activityStatus === 0) {
+                                this.buttonText = this.data.begin_time
+                            } else if (this.data.activityStatus === 1) {
+                                this.buttonText = '我要报名'
+                            }
+                        }
+                    } else {
+                        this.buttonText = '已报名'
                     }
-                    else if (this.data.activityStatus === 1) {
-                        this.buttonText = this.data.begin_time;
+                    if (date.isAfter(this.data.end_time)) {
+                        this.buttonText = '活动已结束'
                     }
-                    else if (this.data.activityStatus === 2) {
-                        this.buttonText = '活动已结束';
-                        this.color = '#DCDCDC';
-                    }
-                    else  if (this.data.activityStatus === 3) {
-                        this.buttonText = '已报名';
-                        this.color = '#ECC722';
-                    }
+                    // if (this.data.activityStatus === 0 &&
+                    //     (this.data.people_limit === -1 ||
+                    //         (this.data.people_limit !== -1 &&
+                    //             this.data.signupCount < this.data.people_limit
+                    //         )
+                    //     )
+                    // ) {
+                    //     this.buttonText = '我要报名';
+                    // }
+                    // else if (this.data.signupCount >= this.data.people_limit) {
+                    //     this.buttonText = '报名已满';
+                    // }
+                    // else if (this.data.activityStatus === 1) {
+                    //     this.buttonText = this.data.begin_time;
+                    // }
+                    // else if (this.data.activityStatus === 2) {
+                    //     this.buttonText = '活动已结束';
+                    //     this.color = '#DCDCDC';
+                    // }
+                    // else  if (this.data.activityStatus === 3) {
+                    //     this.buttonText = '已报名';
+                    //     this.color = '#ECC722';
+                    // }
                 }, (data) => {
                     this.$root.$children[0].toggleToast('fail', data.message);
                 })
