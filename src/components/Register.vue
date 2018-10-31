@@ -1,7 +1,7 @@
 <template>
     <LayoutWhite>
         <title>注册</title>
-        <Navbar no-avatar>注册</Navbar>
+        <Navbar no-avatar v-show="false">注册</Navbar>
         <Z13Icon/>
         <CellGroup class="cell-group">
             <Cell>

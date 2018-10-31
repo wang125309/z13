@@ -97,7 +97,7 @@
         <div class="sign-bar">
             <div class="sign-item-wrap">
                 <Icon @click="doComment" position="left" size="0.08rem" class="comment" type="comment"/>
-                <Button @onClick="sign_up" :color="color" size="small-padding" width="0.2rem" circle className="sign-up-button">{{buttonText}}</Button>
+                <Button @onClick="sign_up" :color="color" size="small-padding" circle className="sign-up-button">{{buttonText}}</Button>
             </div>
         </div>
     </LayoutBase>
@@ -181,7 +181,15 @@
                     }, (data) => {
                         this.refresh_comments();
                     }, (data) => {
-                        this.$root.$children[0].toggleToast('fail', data.message);
+                        if (data.data.message === 'Unauthorized') {
+                            this.$root.$children[0].toggleToast('fail', '登录后才能进行点赞');
+                            setTimeout(() => {
+                                this.$router.push({
+                                    path: '/login'
+                                })
+                            }, 1000)
+                        }
+
                     })
                 }
 
@@ -278,10 +286,12 @@
                     this.commentMessage = '';
                     this.refresh_comments();
                 }, (data) => {
-                    this.$router.push({
-                        path: '/login'
-                    })
-                    this.$root.$children[0].toggleToast('fail', data.message);
+                    setTimeout(() => {
+                        this.$router.push({
+                            path: '/login'
+                        })
+                    }, 1000)
+                    this.$root.$children[0].toggleToast('fail', '请登录后进行评论');
                 })
             },
             more_comment ($evt) {

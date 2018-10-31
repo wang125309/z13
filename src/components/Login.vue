@@ -1,7 +1,7 @@
 <template>
     <LayoutWhite>
         <title>CBD Z13</title>
-        <Navbar no-avatar arrow-left>登录</Navbar>
+        <Navbar no-avatar v-show="false" arrow-left>登录</Navbar>
         <Z13Icon/>
         <CellGroup class="cell-group">
             <Cell>
