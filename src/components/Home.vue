@@ -275,6 +275,7 @@
     .main {
         opacity: 1;
         animation: opa $transition-time ease-in-out;
+        margin-top: 0;
     }
     .loading-bg {
         position: absolute;
