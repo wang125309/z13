@@ -66,7 +66,10 @@
                                         <Icon @click="commentTo(i.id, i.userName)" size="0.06rem" class="comment-icon" type="comment-icon"/>
                                     </div>
                                 </div>
-                                <div @click="commentTo(i.id, i.userName)">{{i.content}}</div>
+                                <div @click="commentTo(i.id, i.userName)">
+                                    <span v-if="i.parent">@{{i.parent}}：</span>
+                                    {{i.content}}
+                                </div>
                             </div>
                         </div>
                         <div v-if="!showAllComments && comments.length > 3" @click="more_comment" class="more-comment">查看更多评论</div>
@@ -249,9 +252,20 @@
                 }, (data) => {
                     this.comments = pageResult(data.data, 1);
                     this.liked = false;
+                    let find = (comments, id) => {
+                        for (let i=0;i<comments.length;i++) {
+                            if (parseInt(comments[i].id) === parseInt(id)) {
+                                return comments[i].userName
+                            }
+                        }
+                    };
                     for (let i of this.comments) {
                         i.create_time = timeago().format(i.create_time, 'zh_CN')
+                        if (i.parent_id) {
+                            i.parent = find(this.comments, i.parent_id)
+                        }
                     }
+                    console.log(this.comments)
                 }, (data) => {
                     this.$root.$children[0].toggleToast('fail', data.message);
                 })
