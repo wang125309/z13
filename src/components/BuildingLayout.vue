@@ -46,7 +46,7 @@
         <div :class="roomPanelCls" v-if="i.companys.length" v-for="(i, index) in data" v-bind:key="index">
             <div @click="hidden(i.tid)" :class="floorCls">
                 <div>{{i.unit}}单元{{i.floor}}层</div>
-                <Icon :class="floorIcon" position="right" type="up-arrow" size="0.04rem"/>
+                <Icon :class="i.active ? floorIcon : floorDownIcon" position="right" type="up-arrow" size="0.04rem"/>
             </div>
             <div v-show="i.active" :class="roomPanelItemCls" v-for="(j, $index) in i.companys" v-bind:key="'company'+ $index">
                 <div v-if="j.logo" :class="cellImgCls" :style="'background-image:url(' + j.logo + ')'"></div>
@@ -180,6 +180,11 @@
             floorCls () {
                 return [
                     `${prefix}-floor`
+                ]
+            },
+            floorDownIcon () {
+                return [
+                    `${prefix}-floor-down-icon`
                 ]
             }
         },
@@ -332,7 +337,8 @@
     }
 
     .{$prefix}-cell-img {
-        padding: $padding-base;
+        margin-right: $padding-base;
+        padding: $padding-base $padding-base $padding-base $padding-base;
         width: 0.1rem;
         height: 0.1rem;
         background-color: cornsilk;
@@ -341,7 +347,7 @@
     }
     .{$prefix}-item-details {
         flex: 1;
-        padding: 0 0 0 $padding-base;
+
         &-head {
             display: flex;
             justify-content: space-between;
@@ -368,5 +374,9 @@
                 hairline-remove('bottom')
             }
         }
+    }
+    .{$prefix}-floor-down-icon {
+        transform: rotate(180deg);
+        padding-left: $padding-base;
     }
 </style>

@@ -66,7 +66,7 @@
                                         <Icon @click="commentTo(i.id, i.userName)" size="0.06rem" class="comment-icon" type="comment-icon"/>
                                     </div>
                                 </div>
-                                <div>{{i.content}}</div>
+                                <div @click="commentTo(i.id, i.userName)">{{i.content}}</div>
                             </div>
                         </div>
                         <div v-if="!showAllComments && comments.length > 3" @click="more_comment" class="more-comment">查看更多评论</div>
