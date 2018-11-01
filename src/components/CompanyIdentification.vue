@@ -12,7 +12,7 @@
                     <Input type="text" v-model="text" :email="user.email + '@' + email.split('@')[1]" send-code-email placeholder="请输入验证码"/>
                 </Cell>
                 <Cell v-if="invitation_code === '1'" without-border>
-                    <Input type="text" v-model="inviteCode" placeholder="请输入公司邀请码"/>
+                    <Input type="text" v-model="invitation_code" placeholder="请输入公司邀请码"/>
                 </Cell>
             </CellGroup>
         </Panel>
@@ -47,7 +47,6 @@
             return {
                 email: '',
                 text: '',
-                inviteCode: '',
                 invitation_code: '0',
                 companyId: '',
                 user: {
@@ -68,7 +67,7 @@
                         company_id: this.companyId,
                         emailCode: this.text,
                         email: this.user.email + '@' + this.email.split('@')[1],
-                        inviteCode: this.inviteCode,
+                        invitation_code: this.invitation_code,
                         busiType: 3 //1 修改昵称2 修改头像3 修改公司4 修改工位6修改手机号
                     }
                 }, (data) => {
