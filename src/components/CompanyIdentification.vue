@@ -49,6 +49,7 @@
                 text: '',
                 inviteCode: '',
                 invitation_code: '0',
+                companyId: '',
                 user: {
                     email: ''
                 }
@@ -57,24 +58,32 @@
         mounted () {
             this.invitation_code = this.$store.state.identification_company.invitation_code;
             this.email = this.$store.state.identification_company.email;
+            this.companyId = this.$store.state.identification_company.id;
         },
         methods: {
             confirm () {
-                request(API.verify_email_code, {
-                    type: 'POST',
-                    data: {
-                        busiType: 3,
-                        email: this.user.email + this.email,
-                        emailCode: this.text,
-                        inviteCode: this.inviteCode
-                    }
-                }, (data) => {
-                    this.$router.push({
-                        path: '/company-identification-success'
+
+                    request(API.get_user_info, {
+                        type: 'PUT',
+                        data: {
+                            company_id: this.companyId,
+                            emailCode: this.text,
+                            email: this.user.email + this.email,
+                            inviteCode: this.inviteCode,
+                            busiType: 3 //1 修改昵称2 修改头像3 修改公司4 修改工位6修改手机号
+                        }
+                    }, (data) => {
+                        this.$store.dispatch('SET_USER_INFO', this)
+                        // _this.$root.$children[0].toggleToast('success', data.message);
+                        setTimeout(() => {
+                            this.$router.push({
+                                path: '/company-identification-success'
+                            })
+                        }, 500)
+                    }, (data) => {
+                        this.$root.$children[0].toggleToast('fail', data.message);
                     })
-                }, (data) => {
-                    this.$root.$children[0].toggleToast('warning', data.message)
-                })
+
             }
         }
     }

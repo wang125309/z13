@@ -66,7 +66,10 @@
                                         <Icon @click="commentTo(i.id, i.userName)" size="0.06rem" class="comment-icon" type="comment-icon"/>
                                     </div>
                                 </div>
-                                <div @click="commentTo(i.id, i.userName)">{{i.content}}</div>
+                                <div @click="commentTo(i.id, i.userName)">
+                                    <span v-if="i.parent">@{{i.parent}}：</span>
+                                    {{i.content}}
+                                </div>
                             </div>
                         </div>
                         <div v-if="!showAllComments && comments.length > 3" @click="more_comment" class="more-comment">查看更多评论</div>
@@ -121,6 +124,7 @@
     import pageResult from "../service/pageResult";
     import Avatar from "./lib/Avatar";
     import timeago from 'timeago.js';
+    import moment from 'moment'
 
     export default {
         name: 'Activity',
@@ -219,25 +223,29 @@
                     type: 'GET'
                 }, (data) => {
                     this.data = data.data;
-                    if (this.data.activityStatus === 0 &&
-                        (this.data.people_limit === -1 ||
-                            (this.data.people_limit !== -1 &&
-                                this.data.signupCount < this.data.people_limit
-                            )
-                        )
-                    ) {
-                        this.buttonText = '我要报名';
+                    let date = moment();
+                    if (this.data.signup_begin_time) {
+                        if (date.isAfter(moment(this.data.signup_begin_time))
+                            && date.isBefore(moment(this.data.signup_end_time))
+                        ) {
+                            this.buttonText = '我要报名'
+                        } else if (date.isBefore(moment(this.data.signup_begin_time))) {
+                            this.buttonText = this.data.signup_begin_time
+                        } else if (date.isAfter(moment(this.data.signup_end_time))) {
+                            this.buttonText = '报名已结束'
+                        }
+                    } else {
+                        if (this.data.activityStatus === 0) {
+                            this.buttonText = this.data.begin_time
+                        } else if (this.data.activityStatus === 1) {
+                            this.buttonText = '我要报名'
+                        }
                     }
-                    else if (this.data.activityStatus === 1) {
-                        this.buttonText = this.data.begin_time;
+                    if (this.data.activityStatus === 3) {
+                        this.buttonText = '已报名'
                     }
-                    else if (this.data.activityStatus === 2) {
-                        this.buttonText = '活动已结束';
-                        this.color = '#DCDCDC';
-                    }
-                    else  if (this.data.activityStatus === 3) {
-                        this.buttonText = '已报名';
-                        this.color = '#ECC722';
+                    if (date.isAfter(this.data.end_time)) {
+                        this.buttonText = '活动已结束'
                     }
                 }, (data) => {
                     this.$root.$children[0].toggleToast('fail', data.message);
@@ -249,9 +257,20 @@
                 }, (data) => {
                     this.comments = pageResult(data.data, 1);
                     this.liked = false;
+                    let find = (comments, id) => {
+                        for (let i=0;i<comments.length;i++) {
+                            if (parseInt(comments[i].id) === parseInt(id)) {
+                                return comments[i].userName
+                            }
+                        }
+                    };
                     for (let i of this.comments) {
                         i.create_time = timeago().format(i.create_time, 'zh_CN')
+                        if (i.parent_id) {
+                            i.parent = find(this.comments, i.parent_id)
+                        }
                     }
+                    console.log(this.comments)
                 }, (data) => {
                     this.$root.$children[0].toggleToast('fail', data.message);
                 })
