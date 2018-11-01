@@ -175,6 +175,7 @@
                     spaceBetween: 10
                 },
                 bannerOptions: {
+                    loop: true,
                     slidesPerView: 'auto',
                     autoplay: true,
                     reverseDirection: false
