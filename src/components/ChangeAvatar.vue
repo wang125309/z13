@@ -128,7 +128,7 @@
                 })
             },
             uploadImage () {
-                this.$root.$children[0].toggleToast('success', '头像上传中')
+                this.$root.$children[0].toggleToast('success', '头像上传中', 1)
                 request(API.uploadImage, {
                     type: 'POST',
                     data: {
@@ -137,6 +137,7 @@
                 }, (data) => {
                     this.changeAvatar(data.data)
                 }, (data) => {
+                    this.$root.$children[0].hiddenToast()
                     this.$root.$children[0].toggleToast('fail', data.message)
                 })
             }

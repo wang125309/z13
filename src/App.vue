@@ -34,11 +34,15 @@
             }
         },
         methods: {
-            toggleToast(type, text) {
+            toggleToast(type, text, hold=0) {
                 let toast = this.$root.$children[0].$refs.toast;
                 toast.setType(type);
                 toast.setMessage(text);
-                toast.show();
+                toast.show(hold);
+            },
+            hiddenToast () {
+                let toast = this.$root.$children[0].$refs.toast;
+                toast.hide()
             }
         }
     }

@@ -51,11 +51,16 @@
             }
         },
         methods: {
-            show() {
+            show (hold) {
                 this.visible = true;
-                setTimeout(() => {
-                    this.visible = false;
-                }, 1500);
+                if (!hold) {
+                    setTimeout(() => {
+                        this.visible = false;
+                    }, 1500);
+                }
+            },
+            hide () {
+                this.visible = false
             },
             setMessage (val) {
                 this.toastMessage = val;

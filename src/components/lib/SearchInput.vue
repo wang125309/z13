@@ -1,6 +1,6 @@
 <template>
     <div :class="searchInputWrapCls">
-        <form :class="searchFormCls" action="javasript:;" type="search">
+        <form :class="searchFormCls" action="javascript:;" type="search">
             <Icon size="0.04rem" :class-name="searchInputIconCls" position="left" type="search"/>
             <input @input="inputChange" @keypress="enter" v-bind:value="value" :class="searchInputCls" type="text"/>
         </form>
