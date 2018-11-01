@@ -39,7 +39,7 @@
         },
         methods: {
             save () {
-                if (!/[a-zA-Z0-9]{6,16}/.test(this.user.newPassword)) {
+                if (!/^[a-zA-Z0-9]{6,16}$/.test(this.user.newPassword)) {
                     this.$root.$children[0].toggleToast('fail', '密码格式不正确，请输入6到16位字母或数字');
                     return;
                 }
