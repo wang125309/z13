@@ -241,7 +241,7 @@
                             this.buttonText = '我要报名'
                         }
                     }
-                    if (this.data.activityStatus === 3) {
+                    if (this.data.is_join === 1) {
                         this.buttonText = '已报名'
                     }
                     if (date.isAfter(this.data.end_time)) {
