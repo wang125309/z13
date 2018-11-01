@@ -36,7 +36,7 @@
             }, (data) => {
                 wx.config(data.data)
                 let share = () => {
-                    shareJson = {
+                    let shareJson = {
                         link: location.href,
                         imgUrl: "http://webapp.cbdz13.com/static/z13-logo.png",
                         title: "中国人寿金融中心 CBD Z13",
