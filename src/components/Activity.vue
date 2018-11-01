@@ -302,27 +302,18 @@
                 this.showAllComments = true;
             },
             sign_up () {
-                if (this.data.activityStatus === 0 &&
-                    this.data.people_limit !== -1
-                ) {
+                if (this.buttonText === '我要报名') {
                     requests(`${API.get_activitys}/${this.$route.params.id}/signups`, {
                         type: 'POST'
                     }, (data) => {
                         this.refresh();
                     }, (data) => {
-                        console.log(data)
-                        console.log(data.success)
-                        if (data.success === false) {
-                            this.$root.$children[0].toggleToast('fail', data.message);
-                        } else if (data.response.status === 401) {
+                        setTimeout(() => {
                             this.$router.push({
                                 path: '/login'
                             })
-                            this.$root.$children[0].toggleToast('fail', '报名活动请先登录');
-                        } else {
-                            this.$root.$children[0].toggleToast('fail', data.data.message);
-                        }
-
+                        }, 1000)
+                        this.$root.$children[0].toggleToast('fail', '报名活动请先登录');
                     })
                 }
             },
