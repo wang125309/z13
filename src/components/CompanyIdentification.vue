@@ -9,10 +9,10 @@
                     <div class="company-label">@{{email.split('@') ? email.split('@')[1] : ''}}</div>
                 </Cell>
                 <Cell>
-                    <Input type="text" v-model="text" :email="user.email + email" send-code-email placeholder="请输入验证码"/>
+                    <Input type="text" v-model="text" :email="user.email + '@' + email.split('@')[1]" send-code-email placeholder="请输入验证码"/>
                 </Cell>
-                <Cell v-if="invitation_code === '1'" without-border>
-                    <Input type="text" v-model="inviteCode" placeholder="请输入公司邀请码"/>
+                <Cell v-if="use_invitation_code === '1'" without-border>
+                    <Input type="text" v-model="invitation_code" placeholder="请输入公司邀请码"/>
                 </Cell>
             </CellGroup>
         </Panel>
@@ -47,8 +47,8 @@
             return {
                 email: '',
                 text: '',
-                inviteCode: '',
-                invitation_code: '0',
+                use_invitation_code: '0',
+                invitation_code: '',
                 companyId: '',
                 user: {
                     email: ''
@@ -56,34 +56,32 @@
             }
         },
         mounted () {
-            this.invitation_code = this.$store.state.identification_company.invitation_code;
+            this.use_invitation_code = this.$store.state.identification_company.invitation_code;
             this.email = this.$store.state.identification_company.email;
             this.companyId = this.$store.state.identification_company.id;
         },
         methods: {
             confirm () {
-
-                    request(API.get_user_info, {
-                        type: 'PUT',
-                        data: {
-                            company_id: this.companyId,
-                            emailCode: this.text,
-                            email: this.user.email + this.email,
-                            inviteCode: this.inviteCode,
-                            busiType: 3 //1 修改昵称2 修改头像3 修改公司4 修改工位6修改手机号
-                        }
-                    }, (data) => {
-                        this.$store.dispatch('SET_USER_INFO', this)
-                        // _this.$root.$children[0].toggleToast('success', data.message);
-                        setTimeout(() => {
-                            this.$router.push({
-                                path: '/company-identification-success'
-                            })
-                        }, 500)
-                    }, (data) => {
-                        this.$root.$children[0].toggleToast('fail', data.message);
-                    })
-
+                request(API.get_user_info, {
+                    type: 'PUT',
+                    data: {
+                        company_id: this.companyId,
+                        emailCode: this.text,
+                        email: this.user.email + '@' + this.email.split('@')[1],
+                        invitation_code: this.invitation_code,
+                        busiType: 3 //1 修改昵称2 修改头像3 修改公司4 修改工位6修改手机号
+                    }
+                }, (data) => {
+                    this.$store.dispatch('SET_USER_INFO', this)
+                    // _this.$root.$children[0].toggleToast('success', data.message);
+                    setTimeout(() => {
+                        this.$router.push({
+                            path: '/company-identification-success'
+                        })
+                    }, 500)
+                }, (data) => {
+                    this.$root.$children[0].toggleToast('fail', data.message);
+                })
             }
         }
     }

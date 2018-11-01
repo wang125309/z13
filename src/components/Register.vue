@@ -110,6 +110,11 @@
                 })
             },
             doRegister () {
+                if (!/^[a-zA-Z0-9]{6,16}$/.test(this.user.password)) {
+                    this.$root.$children[0].toggleToast('fail', '密码格式不正确，请输入6到16位字母或数字');
+                    return;
+                }
+
                 requests(API.do_register, {
                     type: 'POST',
                     data: this.user
@@ -120,7 +125,7 @@
                     }, (data) => {
                         this.$store.dispatch('SET_TOKEN', data.data);
                         cookies.setCookie(data.data);
-                        this.$root.$children[0].toggleToast('success', data.message);
+                        // this.$root.$children[0].toggleToast('success', data.message);
                         location.href = 'https://cbd-proxy.limijiaoyin.io' + API.wx_authorize + '?ukey=' + data.data;
                     }, (data) => {
                         this.$root.$children[0].toggleToast('fail', data.message);

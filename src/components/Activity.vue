@@ -7,7 +7,7 @@
             :title="data.name"
             :date="data.begin_time"
             :location="data.address"
-            :status="data.activityStatus === 0 ? '未开始' : data.activityStatus === 1 ? '进行中' : data.activityStatus === 2 ? '已结束' : '已报名'"
+            :status="data.activityStatus === 0 ? '未开始' : data.activityStatus === 1 ? '进行中' : '已结束'"
         />
         <Card noPadding>
             <CellGroup noMargin>
@@ -100,7 +100,7 @@
         <div class="sign-bar">
             <div class="sign-item-wrap">
                 <Icon @click="doComment" position="left" size="0.08rem" class="comment" type="comment"/>
-                <Button @onClick="sign_up" :color="color" size="small-padding" circle className="sign-up-button">{{buttonText}}</Button>
+                <Button @onClick="sign_up" :color="color" size="small-padding" circle class="sign-up-button">{{buttonText}}</Button>
             </div>
         </div>
     </LayoutBase>
@@ -241,7 +241,7 @@
                             this.buttonText = '我要报名'
                         }
                     }
-                    if (this.data.activityStatus === 3) {
+                    if (this.data.isJoin === 1) {
                         this.buttonText = '已报名'
                     }
                     if (date.isAfter(this.data.end_time)) {
@@ -321,27 +321,18 @@
                 this.showAllComments = true;
             },
             sign_up () {
-                if (this.data.activityStatus === 0 &&
-                    this.data.people_limit !== -1
-                ) {
+                if (this.buttonText === '我要报名') {
                     requests(`${API.get_activitys}/${this.$route.params.id}/signups`, {
                         type: 'POST'
                     }, (data) => {
                         this.refresh();
                     }, (data) => {
-                        console.log(data)
-                        console.log(data.success)
-                        if (data.success === false) {
-                            this.$root.$children[0].toggleToast('fail', data.message);
-                        } else if (data.response.status === 401) {
+                        setTimeout(() => {
                             this.$router.push({
                                 path: '/login'
                             })
-                            this.$root.$children[0].toggleToast('fail', '报名活动请先登录');
-                        } else {
-                            this.$root.$children[0].toggleToast('fail', data.data.message);
-                        }
-
+                        }, 1000)
+                        this.$root.$children[0].toggleToast('fail', '报名活动请先登录');
                     })
                 }
             },
@@ -467,6 +458,11 @@
         text-align: center;
         font-size: $font-size-base;
         color: $font-second;
+    }
+    .sign-up-button {
+        button {
+            padding: auto 0.04rem !important;
+        }
     }
     .comment-mask {
         position: fixed;
