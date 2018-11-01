@@ -1,7 +1,7 @@
 <template>
     <LayoutBase>
         <title>重置密码</title>
-        <Navbar arrowLeft>忘记密码</Navbar>
+        <Navbar v-show="false" arrowLeft>忘记密码</Navbar>
         <SituationLogo size="0.2rem" type="success"/>
         <div class="text-area">
             <p>您的密码已经修改成功</p>

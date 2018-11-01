@@ -94,6 +94,7 @@
             }
             &-circle {
                 border-radius: $padding-base * 3;
+                padding: $padding-base;
             }
             &-default {
                 border: 1px solid $border-color;
@@ -114,7 +115,7 @@
                 }
             }
             &-small-padding {
-                padding: $padding-small 0;
+                padding: $padding-small;
             }
             &-bottom-white {
                 position: fixed;

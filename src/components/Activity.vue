@@ -100,7 +100,7 @@
         <div class="sign-bar">
             <div class="sign-item-wrap">
                 <Icon @click="doComment" position="left" size="0.08rem" class="comment" type="comment"/>
-                <Button @onClick="sign_up" :color="color" size="small-padding" circle className="sign-up-button">{{buttonText}}</Button>
+                <Button @onClick="sign_up" :color="color" size="small-padding" circle class="sign-up-button">{{buttonText}}</Button>
             </div>
         </div>
     </LayoutBase>
@@ -458,6 +458,11 @@
         text-align: center;
         font-size: $font-size-base;
         color: $font-second;
+    }
+    .sign-up-button {
+        button {
+            padding: auto 0.04rem !important;
+        }
     }
     .comment-mask {
         position: fixed;
