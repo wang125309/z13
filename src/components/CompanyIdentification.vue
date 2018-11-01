@@ -11,7 +11,7 @@
                 <Cell>
                     <Input type="text" v-model="text" :email="user.email + '@' + email.split('@')[1]" send-code-email placeholder="请输入验证码"/>
                 </Cell>
-                <Cell v-if="invitation_code === '1'" without-border>
+                <Cell v-if="use_invitation_code === '1'" without-border>
                     <Input type="text" v-model="invitation_code" placeholder="请输入公司邀请码"/>
                 </Cell>
             </CellGroup>
@@ -47,6 +47,7 @@
             return {
                 email: '',
                 text: '',
+                use_invitation_code: '0',
                 invitation_code: '0',
                 companyId: '',
                 user: {
@@ -55,7 +56,7 @@
             }
         },
         mounted () {
-            this.invitation_code = this.$store.state.identification_company.invitation_code;
+            this.use_invitation_code = this.$store.state.identification_company.invitation_code;
             this.email = this.$store.state.identification_company.email;
             this.companyId = this.$store.state.identification_company.id;
         },
