@@ -24,7 +24,8 @@ const API = {
     news: '/front/news',
     rentableunits: '/front/rentableunits',
     uploadImage: '/common/file/base64/upload',
-    banners: '/front/banners'
+    banners: '/front/banners',
+    wx: '/common/wx/share'
 };
 
 export default API;
