@@ -5,9 +5,11 @@
         <SearchInput v-model="searchWord" @search="search"/>
         <Panel no-padding v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
             <div v-for="i in data" v-bind:key="'delivery' + i.id" @click="itemClick(i.id)" :class="deliveryItemCls">
-                <div :class="deliveryItemIconCls"
-                     :style="'background-image:url('+ i.image +')'"/>
-                <div :class="deliveryPanelCls">
+                <div
+                    v-if="i.image"
+                    :class="deliveryItemIconCls"
+                    :style="'background-image:url('+ i.image +')'"/>
+                <div :class="i.image ? deliveryPanelCls : deliveryPanelOnlyCls">
                     <a v-on:click.stop="'return false'" :href="'tel:' + i.phone">
                         <Icon :class="callCls" type="call" position="right" size="0.12rem"/>
                     </a>
@@ -135,6 +137,11 @@
                     `${prefix}-delivery-panel`
                 ]
             },
+            deliveryPanelOnlyCls () {
+                return [
+                    `${prefix}-delivery-panel-only`
+                ]
+            },
             deliveryTitleCls () {
                 return [
                     `${prefix}-delivery-title`
@@ -254,6 +261,10 @@
         margin-left: 0.21rem + $margin-base;
         min-height: 0.21rem;
         align-items: flex-start;
+        &-only {
+            min-height: 0.21rem;
+            align-items: flex-start;
+        }
     }
     .{$prefix}-delivery-title {
         display: flex;
