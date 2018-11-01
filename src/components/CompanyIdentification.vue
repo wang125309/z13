@@ -48,7 +48,7 @@
                 email: '',
                 text: '',
                 use_invitation_code: '0',
-                invitation_code: '0',
+                invitation_code: '',
                 companyId: '',
                 user: {
                     email: ''
