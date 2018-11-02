@@ -39,7 +39,7 @@
                 let share = () => {
                     const shareJson = {
                         link: location.href,
-                        imgUrl: "http://webapp.cbdz13.com/static/z13-logo.png",
+                        imgUrl: "http://webapp.cbdz13.com/static/share-logo.png",
                         title: "中国人寿金融中心 CBD Z13",
                         desc: "中国人寿金融中心 CBD Z13， 为您提供一站式写字楼服务"
                     };
