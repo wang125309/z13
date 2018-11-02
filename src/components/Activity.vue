@@ -265,7 +265,7 @@
                         }
                     };
                     for (let i of this.comments) {
-                        i.create_time = timeago().format(i.create_time, 'zh_CN')
+                        i.create_time = timeago().format(i.create_time1 * 1000, 'zh_CN')
                         if (i.parent_id) {
                             i.parent = find(this.comments, i.parent_id)
                         }
