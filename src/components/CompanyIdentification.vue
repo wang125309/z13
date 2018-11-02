@@ -11,7 +11,7 @@
                 <Cell>
                     <Input type="text" v-model="text" :email="user.email + '@' + email.split('@')[1]" send-code-email placeholder="请输入验证码"/>
                 </Cell>
-                <Cell v-if="use_invitation_code === '1'" without-border>
+                <Cell v-if="use_invitation_code" without-border>
                     <Input type="text" v-model="invitation_code" placeholder="请输入公司邀请码"/>
                 </Cell>
             </CellGroup>
