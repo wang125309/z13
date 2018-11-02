@@ -8,7 +8,7 @@
                 <div>{{i.nick_name}}</div>
             </div>
         </div>
-        <Button v-if="activity.activityStatus === 3" @onClick="cancel" type="circle" full width="92%">取消报名</Button>
+        <Button v-if="activity.isJoin === 1" @onClick="cancel" type="circle" full width="92%">取消报名</Button>
     </LayoutBase>
 </template>
 <script>
