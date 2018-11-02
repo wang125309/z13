@@ -226,6 +226,13 @@
                         cnt ++ ;
                         Object.assign(i, {tid: cnt, active: true})
                     }
+                    this.data.sort((a, b) => {
+                        if (a.unit === b.unit) {
+                            return parseInt(a.floor) - parseInt(b.floor)
+                        } else {
+                            return parseInt(a.unit) - parseInt(b.unit)
+                        }
+                    })
                 }, (data) => {
                     this.$root.$children[0].toggleToast('fail', data.message);
                 });
@@ -247,7 +254,6 @@
             hidden (tid) {
                 for (let i in this.data) {
                     if (this.data[i].tid === tid) {
-                        console.log(this.data[i].active);
                         this.data[i].active = !this.data[i].active;
                         this.data.splice(this.data.length)
                         break;

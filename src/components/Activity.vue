@@ -270,7 +270,6 @@
                             i.parent = find(this.comments, i.parent_id)
                         }
                     }
-                    console.log(this.comments)
                 }, (data) => {
                     this.$root.$children[0].toggleToast('fail', data.message);
                 })
