@@ -37,13 +37,13 @@
         </Card>
         <Panel noPadding>
             <ActivityCardItem v-if="data.description" title="活动介绍">
-                <div v-html="data.description"/>
+                <div v-html="data.description"></div>
             </ActivityCardItem>
             <ActivityCardItem v-if="data.rule_desc" title="规则">
-                <div v-html="data.rule_desc"/>
+                <div v-html="data.rule_desc"></div>
             </ActivityCardItem>
             <ActivityCardItem v-if="data.site_desc" title="场地">
-                <div v-html="data.site_desc"/>
+                <div v-html="data.site_desc"></div>
             </ActivityCardItem>
             <ActivityCardItem title="评论" noBorder>
                 <div class="activity-comment-area">
@@ -77,7 +77,7 @@
                 </div>
             </ActivityCardItem>
         </Panel>
-        <div v-show="commentToolsVisible" @click="hiddenComment" class="comment-mask"/>
+        <div v-show="commentToolsVisible" @click="hiddenComment" class="comment-mask"></div>
         <div v-show="commentToolsVisible" class="comment-tools">
             <form action="#" onsubmit="return false;">
                 <Input
@@ -96,7 +96,7 @@
                 </Input>
             </form>
         </div>
-        <div class="sign-bar-placeholder"/>
+        <div class="sign-bar-placeholder"></div>
         <div class="sign-bar">
             <div class="sign-item-wrap">
                 <Icon @click="doComment" position="left" size="0.08rem" class="comment" type="comment"/>

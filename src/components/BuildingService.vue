@@ -110,11 +110,15 @@
     @import '../styles/var.styl';
     @import '../styles/hairline.styl';
     .{$prefix}-panel {
+        position: relative;
+
         margin-top: $padding-base;
+
         .{$prefix}-service-item {
             position: relative;
             background-color: $background-body;
             padding: $padding-base;
+            hairline('bottom');
             height: 0.25rem;
             &:last-item {
                 hairline('bottom');

@@ -7,7 +7,7 @@
                 <Icon size="0.08rem" type="blands-icon-active"></Icon>
                 <div class="operation-text">百叶帘</div>
             </div>
-            <div class="operation-tab">
+            <div @click="go(10)" class="operation-tab">
                 <Icon size="0.08rem" type="operation"></Icon>
                 <div class="operation-text">物业报修</div>
             </div>
@@ -106,7 +106,7 @@
                 else if ( n === 2 ) {
                     url = '/express';
                 }
-                else if ( n === 3 ) {
+                else if ( n === 3 || n === 10 ) {
                     url = '/visitor'
                     this.$root.$children[0].toggleToast('warning', '即将上线，敬请期待')
                 }
@@ -128,7 +128,7 @@
                 else if ( n === 9 ) {
                     url = '/wash-car-list'
                 }
-                if (n !== 3) {
+                if (n !== 3 && n !== 10) {
                     this.$router.push({
                         path: url
                     })
