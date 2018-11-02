@@ -288,7 +288,7 @@
             },
             focus () {
                 setTimeout(() => {
-                    window.scrollTo(0, 1000000);
+                    document.body.scrollTop = document.body.scrollHeight;
                 }, 300)
             },
             sendComment ($evt) {
