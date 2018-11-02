@@ -2,7 +2,7 @@
     <LayoutBase>
         <title>大厦服务</title>
         <Navbar v-show="false" arrowLeft>活动详情</Navbar>
-        <SearchInput></SearchInput>
+        <SearchInput v-model="searchWord" @search="search"/>
         <div v-if="data" :class="panelCls">
             <div v-for="i in data" :class="serviceItemCls" @click="go(i.id)">
                 <div :class="messageCls">
@@ -42,7 +42,8 @@
         },
         data () {
             return {
-                data: []
+                data: [],
+                searchWord: ''
             }
         },
         methods: {
@@ -51,9 +52,17 @@
                     'path': '/service-details/' + id
                 })
             },
+            search () {
+                this.page = 1
+                this.refresh(this.page, this.searchWord)
+            },
             refresh (page) {
                 request(API.news, {
-                    type: 'GET'
+                    type: 'GET',
+                    data: {
+                        title: this.searchWord,
+                        pageNumber: page
+                    }
                 }, (data) => {
                     if (page === 1) this.data = [];
                     Object.assign(this.data, pageResult(data.data, page));
