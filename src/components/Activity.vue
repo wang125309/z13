@@ -288,7 +288,7 @@
             },
             focus () {
                 setTimeout(() => {
-                    document.body.scrollTop = document.body.scrollHeight;
+                    this.$refs.commentInput.$el.children[0].scrollIntoView(true);
                 }, 300)
             },
             sendComment ($evt) {
