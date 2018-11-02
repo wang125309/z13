@@ -34,6 +34,7 @@
                     url: location.href
                 }
             }, (data) => {
+                data.data.jsApiList = ['onMenuShareTimeline', 'onMenuShareAppMessage']
                 wx.config(data.data)
                 let share = () => {
                     const shareJson = {
