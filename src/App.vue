@@ -35,6 +35,7 @@
                 }
             }, (data) => {
                 data.data.jsApiList = ['onMenuShareTimeline', 'onMenuShareAppMessage']
+                data.data.debug = /debug/.test(window.location.href);
                 wx.config(data.data)
                 let share = () => {
                     const shareJson = {
