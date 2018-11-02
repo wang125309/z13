@@ -5,7 +5,7 @@
                 <title>CBD Z13</title>
                 <Navbar>中国人寿金融中心 CBD Z13</Navbar>
                 <Banner class="main-banner">
-                    <swiper class="banner-swiper" ref="bannerOptions" :options="bannerOptions" style="width: 100%" >
+                    <swiper id="banner-swiper" class="banner-swiper" style="width: 100%">
                         <swiper-slide style="width: 100%" class="banner-slide" v-bind:key="'bannerx' + i.id" v-for="i in data.banners">
                             <div class="banner" @click.stop="go_banner(i.link_url)" :style="'background-image:url(' + i.image + ')'"></div>
                         </swiper-slide>
@@ -150,6 +150,7 @@
     import requests from '../service/service'
     import API from '../service/api'
     import { swiper, swiperSlide } from 'vue-awesome-swiper'
+    import Swiper from 'swiper'
     import loading from '../assets/loading.png'
     export default {
         name: 'Home',
@@ -168,22 +169,16 @@
             swiper,
             swiperSlide
         },
+        mounted () {
+
+        },
         data () {
             return {
                 swiperOption: {
                     slidesPerView: 'auto',
                     spaceBetween: 10
                 },
-                bannerOptions: {
-                    speed: 900,
-                    autoplay: {
-                        delay: 3000, //3秒切换一次
-                        disableOnInteraction: false
-                    },
-                    observer: true,//修改swiper自己或子元素时，自动初始化swiper
-                    observeParents: true,//修改swiper的父元素时，自动初始化swiper
-                    slidesPerView: 'auto',
-                },
+
                 data: {
                     newsAndRunableUnit: {
                         news: [],
@@ -257,6 +252,16 @@
             }, (data) => {
                 this.data = data.data
                 this.loaded = true
+                this.$nextTick(() => {
+                    new Swiper('#banner-swiper', {
+                        autoplay: {
+                            delay: 3000, //3秒切换一次
+                        },
+                        slidesPerView: 'auto',
+                        loop: true
+                    })
+                })
+
             }, (data) => {
                 console.log(data)
                 this.$root.$children[0].toggleToast('fail', data.message)
