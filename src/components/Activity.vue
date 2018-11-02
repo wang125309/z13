@@ -397,6 +397,7 @@
     }
     .sign-bar-placeholder {
         height: $padding-base * 5;
+        padding-bottom: $padding-base;
     }
     .sign-item-wrap {
         padding: 0 $padding-base;
