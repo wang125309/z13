@@ -1,5 +1,5 @@
 <template>
-    <LayoutBase>
+    <LayoutBase v-show="visible">
         <title>用户详情</title>
         <Navbar v-show="false" arrowLeft>活动详情</Navbar>
         <div class="title">基本信息</div>
@@ -80,6 +80,7 @@
         data () {
             let _this = this;
             return {
+                visible: false,
                 options: [
                     {
                         title: '确定退出',
@@ -100,6 +101,14 @@
                 ],
                 quitVisible: false
             }
+        },
+        mounted () {
+            this.$nextTick(() => {
+                if (this.$store.state.user) {
+                    this.visible = true
+                }
+            })
+
         },
         computed: {
             user () {

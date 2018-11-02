@@ -1,5 +1,5 @@
 <template>
-    <LayoutBase>
+    <LayoutBase v-show="visible">
         <title>我的</title>
         <Navbar v-show="false"/>
         <Panel>
@@ -55,9 +55,17 @@
                 return this.$store.state.user;
             }
         },
+        mounted () {
+            this.$nextTick(() => {
+                if (this.$store.state.user) {
+                    this.visible = true;
+                }
+            })
+        },
         data () {
             return {
-                avatar: avatar
+                avatar: avatar,
+                visible: false
             }
         },
         methods: {
