@@ -289,7 +289,7 @@
             focus () {
                 setTimeout(() => {
                     window.scrollTo(0, 1000000);
-                }, 100)
+                }, 300)
             },
             sendComment ($evt) {
                 if (this.commentMessage.length) {
