@@ -24,7 +24,7 @@
                         所在楼层：
                     </div>
                     <div :class="rentSubPanelLineCellRightCls">
-                        {{data.location}}
+                        {{data.location}}层
                     </div>
                 </div>
                 <div :class="rentSubPanelLineCellCls">
@@ -32,7 +32,7 @@
                         所在单元：
                     </div>
                     <div :class="rentSubPanelLineCellRightCls">
-                        {{data.unit}}
+                        {{data.unit}}单元
                     </div>
                 </div>
 
