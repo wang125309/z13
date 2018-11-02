@@ -5,7 +5,7 @@
                 <title>CBD Z13</title>
                 <Navbar>中国人寿金融中心 CBD Z13</Navbar>
                 <Banner class="main-banner">
-                    <swiper class="banner-swiper" style="width: 100%" :options="bannerOptions">
+                    <swiper class="banner-swiper" ref="bannerOptions" :options="bannerOptions" style="width: 100%" >
                         <swiper-slide style="width: 100%" class="banner-slide" v-bind:key="'bannerx' + i.id" v-for="i in data.banners">
                             <div class="banner" @click.stop="go_banner(i.link_url)" :style="'background-image:url(' + i.image + ')'"></div>
                         </swiper-slide>
@@ -175,9 +175,15 @@
                     spaceBetween: 10
                 },
                 bannerOptions: {
+                    speed: 900,
+                    autoplay: {
+                        delay: 3000, //3秒切换一次
+                        disableOnInteraction: false
+                    },
+                    observer: true,//修改swiper自己或子元素时，自动初始化swiper
+                    observeParents: true,//修改swiper的父元素时，自动初始化swiper
                     slidesPerView: 'auto',
-                    autoplay: true,
-                    reverseDirection: false
+                    reverseDirection: true
                 },
                 data: {
                     newsAndRunableUnit: {
