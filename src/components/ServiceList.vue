@@ -30,7 +30,7 @@
             </ServiceCellGroup>
         </Panel>
         <Banner class="main-banner">
-            <swiper :options="bannerOptions">
+            <swiper id="#banner-swiper">
                 <swiper-slide class="banner-slide" v-bind:key="'bannerx' + i.id" v-for="i in banners">
                     <div class="banner" @click.stop="go_banner(i.link_url)" :style="'background-image:url(' + i.image + ')'"></div>
                 </swiper-slide>
@@ -55,6 +55,7 @@
     import API from '../service/api'
     import Banner from './lib/Banner'
     import { swiper, swiperSlide } from 'vue-awesome-swiper'
+    import Swiper from 'swiper';
     export default {
         components: {
             Banner,

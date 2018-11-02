@@ -200,7 +200,7 @@
             }
         },
         methods: {
-            go(n) {
+            go (n) {
                 let url = '/';
                 if (n === 1) {
                     url = '/operation'
