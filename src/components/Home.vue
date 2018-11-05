@@ -11,28 +11,32 @@
                         </swiper-slide>
                     </swiper>
                 </Banner>
-                <Card v-if="(data.newsAndRunableUnit.news &&
+                <div 
+                class="news-card"
+                v-if="(data.newsAndRunableUnit.news &&
                         data.newsAndRunableUnit.news.length) ||
                         (data.newsAndRunableUnit.rentablrUnits &&
                         data.newsAndRunableUnit.rentablrUnits.length)"
-                      className="news-card"
-                      :scroll="data.newsAndRunableUnit.news.length + data.newsAndRunableUnit.rentablrUnits.length > 3"
                 >
-                    <swiper-slide style="width: 100%" :key="'service' + i.id" v-for="i in data.newsAndRunableUnit.news">
+                <div style="margin: 0.04rem; padding: 0 0.03rem; background: #fff;">
+                <swiper id="news-swiper" style="width: 100%;">
+                    <swiper-slide style="width: 100%;" :key="'service' + i.id" v-for="i in data.newsAndRunableUnit.news">
                         <div class="news-list" @click.stop="goNews(i.id)">
                             <Tag class-name="tag" backgroundColor="red" color="#fff" borderColor="#fff">大厦服务</Tag>
                             <div class="news-details">{{i.title}}</div>
                             <div class="news-date">{{i.create_time.split(' ')[0].split('-')[1] + '.' + i.create_time.split(' ')[0].split('-')[2]}}</div>
                         </div>
                     </swiper-slide>
-                    <swiper-slide style="width: 100%" :key="'rent' + i.id"  v-for="i in data.newsAndRunableUnit.rentablrUnits">
+                    <swiper-slide style="width: 100%;" :key="'rent' + i.id"  v-for="i in data.newsAndRunableUnit.rentablrUnits">
                         <div class="news-list" @click="goRent(i.id)">
                             <Tag class-name="tag" backgroundColor="#F39900" color="#fff" borderColor="#fff">可租单元</Tag>
                             <div class="news-details">{{i.title}}</div>
                             <div class="news-date">{{i.create_time.split(' ')[0].split('-')[1] + '.' + i.create_time.split(' ')[0].split('-')[2]}}</div>
                         </div>
                     </swiper-slide>
-                </Card>
+                </swiper>
+                </div>
+                </div>
                 <div class="env-card">
                     <div class="temperature-area">
                         <div class="now-temperature">
@@ -279,6 +283,17 @@
                         slidesPerView: 'auto',
                         loop: true
                     })
+
+                    new Swiper('#news-swiper', {
+                        autoplay: {
+                            delay: 1000
+                        },
+                        height: 90,
+                        slidesPerView: 3,
+                        loop: true,
+                        direction: 'vertical',
+                        spaceBetween: 6
+                    })
                 })
 
             }, (data) => {
@@ -345,6 +360,8 @@
         margin-top: $banner-height - $padding-base;
         z-index: 100000;
         position: relative;
+        height: .29rem;
+        overflow: hidden;
     }
     .service-panel {
         margin-bottom: $margin-base;
