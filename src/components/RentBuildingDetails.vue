@@ -24,7 +24,7 @@
                         所在楼层：
                     </div>
                     <div :class="rentSubPanelLineCellRightCls">
-                        {{data.location}}层
+                        {{displayLocation}}
                     </div>
                 </div>
                 <div :class="rentSubPanelLineCellCls">
@@ -32,7 +32,7 @@
                         所在单元：
                     </div>
                     <div :class="rentSubPanelLineCellRightCls">
-                        {{data.unit}}单元
+                        {{displayUnit}}
                     </div>
                 </div>
 
@@ -137,6 +137,24 @@
             LayoutBase
         },
         computed: {
+            displayLocation() {
+                let location = this.data.location
+                const parts =  location.split('-');
+                if (parts.length < 2) {
+                    return ''
+                } else {
+                    return parts[1] + '层'
+                }
+            },
+            displayUnit() {
+                let location = this.data.location
+                const parts =  location.split('-');
+                if (parts.length < 1) {
+                    return ''
+                } else {
+                    return parts[0] + '单元'
+                }
+            },
             rentPanelCls () {
                 return [
                     `${prefix}-rent-panel`

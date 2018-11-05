@@ -106,7 +106,7 @@
                         <div class="rent-details">
                             <div class="rent-title">{{data.rentableUnits.pageResult[0].title}}</div>
                             <div class="rent-area">
-                                <p class="rent-area-p">{{data.rentableUnits.pageResult[0].area}}平米|{{data.rentableUnits.pageResult[0].location}}层</p>
+                                <p class="rent-area-p">{{data.rentableUnits.pageResult[0].area}}平米|{{displayRentableUnitLocation}}</p>
                                 <p class="rent-area-p">{{data.rentableUnits.pageResult[0].capacity}}</p>
                                 <p class="rent-area-p">{{data.rentableUnits.pageResult[0].deck}}</p>
                                 <p class="rent-area-p">
@@ -171,6 +171,25 @@
         },
         mounted () {
 
+        },
+        computed: {
+            displayRentableUnitLocation() {
+                if (this.data.rentableUnits.pageResult &&
+                        this.data.rentableUnits.pageResult.length) {
+                    
+                    let location = this.data.rentableUnits.pageResult[0].location;
+                    const parts =  location.split('-');
+                    if (parts.length === 1) {
+                        return location + '单元'
+                    } else if (parts.length == 2){
+                        return parts[parts.length - 1] + '层'
+                    } else {
+                        return parts[parts.length - 1] + '室'
+                    }
+                } else {
+                    return '';
+                }
+            }
         },
         data () {
             return {
