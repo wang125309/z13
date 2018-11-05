@@ -302,6 +302,13 @@
                         let expectWidth = _this.naturalWidth;
                         let expectHeight = _this.naturalHeight;
 
+                        if (expectWidth > 750) {
+                          console.log("reduce width to 750px");
+                          expectWidth = 750;
+                          expectHeight =
+                            (expectWidth * _this.naturalHeight) / _this.naturalWidth;
+                        }
+
                         _self.imageWidth = expectWidth;
                         _self.imageHeight = expectHeight;
                         let canvas = document.createElement("canvas");
