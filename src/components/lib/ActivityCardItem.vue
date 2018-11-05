@@ -65,6 +65,9 @@
     .{$prefix}-active-card-item {
         padding: $padding-base 0;
         position: relative;
+        img {
+            max-width: 100%;
+        }
         &-full {
             background-color: $white;
 
