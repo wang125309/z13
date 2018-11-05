@@ -39,7 +39,7 @@
                 <!--<Icon :class="rentImgCls" type="rent-img" position="left" size="0.25rem"/>-->
                 <div :class="rentImgCls" :style="'background-image:url(' + i.image + ')'"></div>
                 <div :class="rentBuildingItemInfoCls">
-                    <div :class="titleCls">{{i.area}} | {{i.location}}层</div>
+                    <div :class="titleCls">{{i.area}} | {{i.location}}</div>
                     <div :class="descAreaCls">
                         <div :class="descCls">
                             <span :class="subTitleCls">容纳人数：</span>
