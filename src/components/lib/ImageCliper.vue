@@ -227,7 +227,6 @@
                 this.top = pageY;
             },
             cutEnd ($evt) {
-                console.log($evt)
 
             },
             cut ($evt) {
@@ -335,6 +334,9 @@
                                     break;
                                 case 8: //逆时针（向右）90度旋转
                                     rotateImg(_this, 'right', canvas);
+                                    let temp = _self.imageHeight
+                                    _self.imageHeight = _self.imageWidth
+                                    _self.imageWidth = temp
                                     break;
                                 case 3: //180度旋转
                                     rotateImg(_this, 'right', canvas);//转两次
