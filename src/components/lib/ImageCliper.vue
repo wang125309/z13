@@ -36,17 +36,6 @@
         let degree = step * 90 * Math.PI / 180;
         let ctx = canvas.getContext('2d');
 
-        if (width > 1000) {
-
-            height = height * (width / 1000);
-            width = 1000;
-        }
-        if (height > 1000) {
-            width = width * (height / 1000)
-            height = 1000;
-        }
-        console.log(step)
-        console.log(width, height)
         switch (step) {
             case 0:
                 canvas.width = width;
