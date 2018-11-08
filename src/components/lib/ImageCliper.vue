@@ -45,7 +45,7 @@
             width = width * (height / 1000)
             height = 1000;
         }
-
+        console.log(step)
         console.log(width, height)
         switch (step) {
             case 0:
@@ -159,11 +159,11 @@
                     let expectWidth = _this.naturalWidth;
                     let expectHeight = _this.naturalHeight;
 
-                    if (_this.naturalWidth > _this.naturalHeight && _this.naturalWidth > 1500) {
-                        expectWidth = 1500;
+                    if (_this.naturalWidth > _this.naturalHeight && _this.naturalWidth > 750) {
+                        expectWidth = 750;
                         expectHeight = expectWidth * _this.naturalHeight / _this.naturalWidth;
-                    } else if (_this.naturalHeight > _this.naturalWidth && _this.naturalHeight > 1500) {
-                        expectHeight = 1500;
+                    } else if (_this.naturalHeight > _this.naturalWidth && _this.naturalHeight > 750) {
+                        expectHeight = 750;
                         expectWidth = expectHeight * _this.naturalWidth / _this.naturalHeight;
                     }
                     let canvas = document.createElement("canvas");
@@ -183,8 +183,8 @@
                     console.log(cutTop, cutLeft, cutWidth, cutHeight)
                     ctx.drawImage(_this, -cutLeft, -cutTop, cutWidth, cutWidth, 0, 0, canvas.width, canvas.width);
                     can = canvas;
-                    cc = canvas.toDataURL("image/jpeg", 0.9);
-                    base64 = can.toDataURL("image/jpeg", 0.9);
+                    cc = canvas.toDataURL("image/jpeg", 1);
+                    base64 = can.toDataURL("image/jpeg", 1);
                     _self.$emit('uploaded', base64)
                     _self.image = base64;
                     _self.cutVisible = false;
@@ -251,8 +251,7 @@
                     let pageY = $evt.touches[0].pageY;
                     let w = this.baseX - pageX + this.left;
                     let h = this.baseY - pageY + this.top;
-                    console.log(this.imageHeight)
-                    if (this.imageHeight >  this.imageWidth) {
+                    if (this.imageHeight > this.imageWidth) {
                         if (w < 0)
                             w = 0;
                         if (w > this.scale * this.imageWidth - this.imageWidth)
@@ -323,11 +322,11 @@
                         let expectWidth = _this.naturalWidth;
                         let expectHeight = _this.naturalHeight;
 
-                        if (_this.naturalWidth > _this.naturalHeight && _this.naturalWidth > 1500) {
-                            expectWidth = 1500;
+                        if (_this.naturalWidth > _this.naturalHeight && _this.naturalWidth > 750) {
+                            expectWidth = 750;
                             expectHeight = expectWidth * _this.naturalHeight / _this.naturalWidth;
-                        } else if (_this.naturalHeight > _this.naturalWidth && _this.naturalHeight > 1500) {
-                            expectHeight = 1500;
+                        } else if (_this.naturalHeight > _this.naturalWidth && _this.naturalHeight > 750) {
+                            expectHeight = 750;
                             expectWidth = expectHeight * _this.naturalWidth / _this.naturalHeight;
                         }
                         _self.imageWidth = expectWidth;
