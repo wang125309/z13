@@ -35,6 +35,18 @@
         }
         let degree = step * 90 * Math.PI / 180;
         let ctx = canvas.getContext('2d');
+
+        if (width > 1000) {
+
+            height = height * (width / 1000);
+            width = 1000;
+        }
+        if (height > 1000) {
+            width = width * (height / 1000)
+            height = 1000;
+        }
+
+        console.log(width, height)
         switch (step) {
             case 0:
                 canvas.width = width;
@@ -144,26 +156,35 @@
                     let _this = this;
                     let naturalWidth = _this.naturalWidth;
                     let naturalHeight = _this.naturalHeight;
+                    let expectWidth = _this.naturalWidth;
+                    let expectHeight = _this.naturalHeight;
 
+                    if (_this.naturalWidth > _this.naturalHeight && _this.naturalWidth > 1500) {
+                        expectWidth = 1500;
+                        expectHeight = expectWidth * _this.naturalHeight / _this.naturalWidth;
+                    } else if (_this.naturalHeight > _this.naturalWidth && _this.naturalHeight > 1500) {
+                        expectHeight = 1500;
+                        expectWidth = expectHeight * _this.naturalWidth / _this.naturalHeight;
+                    }
                     let canvas = document.createElement("canvas");
                     let ctx = canvas.getContext("2d");
-                    canvas.width = naturalWidth;
-                    canvas.height = naturalHeight;
+                    canvas.width = expectWidth;
+                    canvas.height = expectHeight;
                     let cutLeft, cutTop, cutWidth, cutHeight;
-                    cutWidth = _self.$refs.cutArea.clientWidth / _self.$refs.avatarArea.clientWidth * naturalWidth;
-                    cutHeight = _self.$refs.cutArea.clientHeight /  _self.$refs.avatarArea.clientWidth * naturalWidth;
+                    cutWidth = _self.$refs.cutArea.clientWidth / _self.$refs.avatarArea.clientWidth * canvas.width * naturalWidth / expectWidth;
+                    cutHeight = _self.$refs.cutArea.clientHeight /  _self.$refs.avatarArea.clientWidth * canvas.width * naturalWidth / expectWidth;
                     // cutTop = _self.baseY;
                     // cutLeft = _self.baseX;
 
                     let w =  _self.$refs.cutArea.clientHeight / _self.imageHeight * _self.imageWidth;
                     let h =  _self.$refs.cutArea.clientWidth / _self.imageWidth * _self.imageHeight;
-                    cutTop = _self.baseY * _self.imageHeight / h;
-                    cutLeft = _self.baseX * _self.imageWidth / w;
+                    cutTop = _self.baseY * _self.imageHeight / h ;
+                    cutLeft = _self.baseX * _self.imageWidth / w ;
                     console.log(cutTop, cutLeft, cutWidth, cutHeight)
-                    ctx.drawImage(_this, -cutLeft, -cutTop, cutWidth, cutWidth, 0, 0, _this.naturalWidth, _this.naturalWidth);
+                    ctx.drawImage(_this, -cutLeft, -cutTop, cutWidth, cutWidth, 0, 0, canvas.width, canvas.width);
                     can = canvas;
-                    cc = canvas.toDataURL("image/jpeg", 0.5);
-                    base64 = can.toDataURL("image/jpeg", 0.5);
+                    cc = canvas.toDataURL("image/jpeg", 0.9);
+                    base64 = can.toDataURL("image/jpeg", 0.9);
                     _self.$emit('uploaded', base64)
                     _self.image = base64;
                     _self.cutVisible = false;
@@ -302,6 +323,13 @@
                         let expectWidth = _this.naturalWidth;
                         let expectHeight = _this.naturalHeight;
 
+                        if (_this.naturalWidth > _this.naturalHeight && _this.naturalWidth > 1500) {
+                            expectWidth = 1500;
+                            expectHeight = expectWidth * _this.naturalHeight / _this.naturalWidth;
+                        } else if (_this.naturalHeight > _this.naturalWidth && _this.naturalHeight > 1500) {
+                            expectHeight = 1500;
+                            expectWidth = expectHeight * _this.naturalWidth / _this.naturalHeight;
+                        }
                         _self.imageWidth = expectWidth;
                         _self.imageHeight = expectHeight;
                         let canvas = document.createElement("canvas");
