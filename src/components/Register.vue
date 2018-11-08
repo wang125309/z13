@@ -123,10 +123,20 @@
                         type: 'POST',
                         data: this.user
                     }, (data) => {
+                        const ukey = data.data
                         this.$store.dispatch('SET_TOKEN', data.data);
                         cookies.setCookie(data.data);
                         // this.$root.$children[0].toggleToast('success', data.message);
-                        location.href = 'https://cbd-proxy.limijiaoyin.io' + API.wx_authorize + '?ukey=' + data.data;
+                        this.$router.push({
+                            path: '/'
+                        }, () => {
+                            requests(API.get_user_info, {type: 'GET'}, data => {
+                                if (data.success && !data.data.nick_name) {
+                                    location.href = 'https://cbd-proxy.limijiaoyin.io' + API.wx_authorize + '?ukey=' + ukey;
+                                }
+                            })
+                        })
+                        // location.href = 'https://cbd-proxy.limijiaoyin.io' + API.wx_authorize + '?ukey=' + data.data;
                     }, (data) => {
                         this.$root.$children[0].toggleToast('fail', data.message);
                     });

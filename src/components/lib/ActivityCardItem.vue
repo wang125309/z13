@@ -92,7 +92,7 @@
                 padding: 0;
             }
             position: relative;
-            margin: 0 0 0 $margin-base;
+            margin: 0 $margin-base 0 $margin-base;
             padding: $padding-base 0 $padding-base 0;
             //border-bottom: 1px solid $border-color;
         }
