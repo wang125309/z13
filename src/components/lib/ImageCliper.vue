@@ -319,7 +319,7 @@
 
 <style scoped lang="stylus">
     @import '../../styles/var.styl';
-    @import '~cropperjs/dist/cropper.min.css';
+
     .{$prefix}-avatar {
         width: 100%;
         height: 1rem;
@@ -384,5 +384,20 @@
         left: 0;
         width: 1rem;
         height: 1rem;
+    }
+
+</style>
+
+<style lang="stylus">
+    @import '~cropperjs/dist/cropper.min.css';
+    .cropper-view-box {
+        outline-color: rgba(255, 255, 255, 0.8) !important;
+        outline: 1px solid rgba(255, 255, 255, 0.9) !important;
+    }
+    .cropper-line {
+        background-color: rgba(255, 255, 255, 0.9) !important;
+    }
+    .cropper-point {
+        background-color: rgba(255, 255, 255, 0.9) !important;
     }
 </style>
