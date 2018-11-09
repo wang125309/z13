@@ -144,6 +144,28 @@
                 let _self = this;
                 let base64 = cropper.getCroppedCanvas().toDataURL();
                 console.log(base64)
+                let img = new Image()
+                img.src = base64
+                let expectWidth, expectHeight
+                img.onload = function () {
+                    let _this = this;
+                    if (_this.naturalWidth > _this.naturalHeight && _this.naturalWidth > 750) {
+                        expectWidth = 750;
+                        expectHeight = expectWidth * _this.naturalHeight / _this.naturalWidth;
+                    } else if (_this.naturalHeight > _this.naturalWidth && _this.naturalHeight > 750) {
+                        expectHeight = 750;
+                        expectWidth = expectHeight * _this.naturalWidth / _this.naturalHeight;
+                    }
+                    _self.imageWidth = expectWidth;
+                    _self.imageHeight = expectHeight;
+                    let canvas = document.createElement("canvas");
+                    let ctx = canvas.getContext("2d");
+                    canvas.width = expectWidth;
+                    canvas.height = expectHeight;
+                    ctx.drawImage(_this, 0, 0, expectWidth, expectHeight);
+                    base64 = canvas.toDataURL()
+                }
+
                 _self.$emit('uploaded', base64)
                 _self.image = base64;
             },
@@ -283,7 +305,6 @@
                                 aspectRatio: 1 / 1,
                                 minCanvasHeight: document.body.clientWidth,
                                 minContainerHeight: document.body.clientWidth,
-                                minCropBoxHeight: document.body.clientWidth,
                                 crop(event) {
                                 },
                             });
