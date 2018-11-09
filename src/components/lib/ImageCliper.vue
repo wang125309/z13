@@ -212,27 +212,6 @@
                     }
                     this.baseX = parseFloat(cutAreaAvatar.style.backgroundPositionX);
                     this.baseY = parseFloat(cutAreaAvatar.style.backgroundPositionY);
-                    // let w = (pageX - this.left);
-                    // let h = (pageY - this.top);
-                    // if (w + cutTools.clientWidth > avatarArea.clientWidth) {
-                    //     w = avatarArea.clientWidth - cutTools.clientWidth;
-                    // }
-                    // if (h + cutTools.clientHeight > avatarArea.clientHeight) {
-                    //     h = avatarArea.clientHeight - cutTools.clientHeight;
-                    // }
-                    // if (w < 0) {
-                    //     w = 0;
-                    // }
-                    // if (h < 0) {
-                    //     h = 0;
-                    // }
-                    // cutTools.style.left = 0;
-                    // cutTools.style.top = 0;
-                    // cutAreaAvatar.style.backgroundPositionX = '-' + w + 'px';
-                    // cutAreaAvatar.style.backgroundPositionY = '-' + h + 'px';
-                    // let cutArea = this.$refs.cutArea;
-                    // cutArea.style.left = w + 'px';
-                    // cutArea.style.top = h + 'px';
                 }
             },
             reRotate (uploadType) {
@@ -306,13 +285,6 @@
                                 minContainerHeight: document.body.clientWidth,
                                 minCropBoxHeight: document.body.clientWidth,
                                 crop(event) {
-                                    console.log(event.detail.x);
-                                    console.log(event.detail.y);
-                                    console.log(event.detail.width);
-                                    console.log(event.detail.height);
-                                    console.log(event.detail.rotate);
-                                    console.log(event.detail.scaleX);
-                                    console.log(event.detail.scaleY);
                                 },
                             });
                         })
