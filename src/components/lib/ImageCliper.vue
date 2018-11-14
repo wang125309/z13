@@ -274,24 +274,24 @@
                         if (Orientation !== "" && Orientation !== 1) {
                             switch (Orientation) {
                                 case 6: //顺时针（向左）90度旋转
-                                    rotateImg(_this, 'left', canvas);
+                                    rotateImg(_this, 'left', can);
                                     let temp = _self.imageHeight
                                     _self.imageHeight = _self.imageWidth
                                     _self.imageWidth = temp
                                     break;
                                 case 8: //逆时针（向右）90度旋转
-                                    rotateImg(_this, 'right', canvas);
+                                    rotateImg(_this, 'right', can);
                                     let temp1 = _self.imageHeight
                                     _self.imageHeight = _self.imageWidth
                                     _self.imageWidth = temp1
                                     break;
                                 case 3: //180度旋转
-                                    rotateImg(_this, 'right', canvas);//转两次
-                                    rotateImg(_this, 'right', canvas);
+                                    rotateImg(_this, 'right', can);//转两次
+                                    rotateImg(_this, 'right', can);
                                     break;
                             }
                         }
-                        base64 = can.toDataURL("image/jpeg", 1);
+                        base64 = can.toDataURL("image/jpeg", 0.9);
                         _self.image = base64;
                         new Promise((resolve, reject) => {
                             let img = new Image()
