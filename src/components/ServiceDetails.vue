@@ -77,11 +77,9 @@
     .{$prefix}-title {
         font-size: $font-size-head;
         padding: $padding-base;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
     }
     .{$prefix}-author-area {
+        background: #fff;
         .{$prefix}-author {
             &-time {
                 color: $font-second;
