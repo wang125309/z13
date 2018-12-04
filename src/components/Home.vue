@@ -11,7 +11,7 @@
                         </swiper-slide>
                     </swiper>
                 </Banner>
-                <div 
+                <div
                 class="news-card"
                 v-if="(data.newsAndRunableUnit.news &&
                         data.newsAndRunableUnit.news.length) ||
@@ -180,7 +180,7 @@
             displayRentableUnitLocation() {
                 if (this.data.rentableUnits.pageResult &&
                         this.data.rentableUnits.pageResult.length) {
-                    
+
                     let location = this.data.rentableUnits.pageResult[0].location;
                     const parts =  location.split('-');
                     if (parts.length === 1) {
@@ -283,17 +283,28 @@
                         slidesPerView: 'auto',
                         loop: true
                     })
-
-                    new Swiper('#news-swiper', {
-                        autoplay: {
-                            delay: 1000
-                        },
-                        height: 90,
-                        slidesPerView: 3,
-                        loop: true,
-                        direction: 'vertical',
-                        spaceBetween: 6
-                    })
+                    if (data.newsAndRunableUnit.news.length + data.newsAndRunableUnit.rentablrUnits.length > 3) {
+                        new Swiper('#news-swiper', {
+                            autoplay: {
+                                delay: 1000
+                            },
+                            height: 90,
+                            slidesPerView: 3,
+                            loop: true,
+                            direction: 'vertical',
+                            spaceBetween: 6
+                        })
+                    } else {
+                        new Swiper('#news-swiper', {
+                            autoplay: {
+                                delay: 1000
+                            },
+                            height: 90,
+                            slidesPerView: 3,
+                            direction: 'vertical',
+                            spaceBetween: 6
+                        })
+                    }
                 })
 
             }, (data) => {
