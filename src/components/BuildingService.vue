@@ -120,7 +120,7 @@
     @import '../styles/hairline.styl';
     .{$prefix}-panel {
         position: relative;
-
+        padding: 0 !important;
         margin-top: $padding-base;
 
         .{$prefix}-service-item {
@@ -129,7 +129,7 @@
             padding: $padding-base;
             hairline('bottom');
             height: 0.25rem;
-            &:last-item {
+            &:last-child {
                 hairline('bottom');
             }
             .{$prefix}-message {

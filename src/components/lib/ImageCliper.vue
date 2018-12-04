@@ -1,18 +1,22 @@
 <template>
     <div ref="avatarArea"  :class="avatarAreaCls">
-        <div :class="avatarCls" :style="getImage">
-            <div v-show="cutVisible" :class="avatarMaskCls"></div>
-            <div v-show="cutVisible" ref="cutArea" :class="cutAreaCls">
-                <div ref="cutAreaAvatar" :style="getImage" :class="cutAreaAvatarCls"></div>
-                <div @touchstart="cutStart" @touchend="cutEnd" @touchmove="cut" ref="cutTools" :class="cutToolsCls">
-                </div>
-            </div>
+        <div v-show="!cutVisible" :class="avatarCls" :style="getImage">
+
+            <!--<div v-show="cutVisible" :class="avatarMaskCls"></div>-->
+            <!--<div v-show="cutVisible" ref="cutArea" :class="cutAreaCls">-->
+                <!--<div ref="cutAreaAvatar" :style="getImage" :class="cutAreaAvatarCls"></div>-->
+                <!--<div @touchstart="cutStart" @touchend="cutEnd" @touchmove="cut" ref="cutTools" :class="cutToolsCls">-->
+                <!--</div>-->
+            <!--</div>-->
         </div>
+        <img id="clipArea" :src="image" ref="clipArea" v-show="cutVisible"/>
     </div>
 </template>
 
 <script>
-    import AlloyFinger from 'alloyfinger'
+    import Cropper from 'cropperjs'
+
+
     import EXIF from 'exif-js/exif'
     const prefix = 'z13';
     const rotateImg = (img, direction, canvas) => {
@@ -35,6 +39,7 @@
         }
         let degree = step * 90 * Math.PI / 180;
         let ctx = canvas.getContext('2d');
+
         switch (step) {
             case 0:
                 canvas.width = width;
@@ -137,68 +142,38 @@
         methods: {
             completeCliper (uploadType) {
                 let _self = this;
-                let image = new Image();
-                let base64, cc, can = null;
-                image.src = _self.image;
-                image.onload = function () {
+                let base64 = cropper.getCroppedCanvas().toDataURL();
+                console.log(base64)
+                let img = new Image()
+                img.src = base64
+                let expectWidth, expectHeight
+                img.onload = function () {
                     let _this = this;
-                    let naturalWidth = _this.naturalWidth;
-                    let naturalHeight = _this.naturalHeight;
-
+                    if (_this.naturalWidth > _this.naturalHeight && _this.naturalWidth > 750) {
+                        expectWidth = 750;
+                        expectHeight = expectWidth * _this.naturalHeight / _this.naturalWidth;
+                    } else if (_this.naturalHeight > _this.naturalWidth && _this.naturalHeight > 750) {
+                        expectHeight = 750;
+                        expectWidth = expectHeight * _this.naturalWidth / _this.naturalHeight;
+                    }
+                    _self.imageWidth = expectWidth;
+                    _self.imageHeight = expectHeight;
                     let canvas = document.createElement("canvas");
                     let ctx = canvas.getContext("2d");
-                    canvas.width = naturalWidth;
-                    canvas.height = naturalHeight;
-                    let cutLeft, cutTop, cutWidth, cutHeight;
-                    cutWidth = _self.$refs.cutArea.clientWidth / _self.$refs.avatarArea.clientWidth * naturalWidth;
-                    cutHeight = _self.$refs.cutArea.clientHeight /  _self.$refs.avatarArea.clientWidth * naturalWidth;
-                    // cutTop = _self.baseY;
-                    // cutLeft = _self.baseX;
-
-                    let w =  _self.$refs.cutArea.clientHeight / _self.imageHeight * _self.imageWidth;
-                    let h =  _self.$refs.cutArea.clientWidth / _self.imageWidth * _self.imageHeight;
-                    cutTop = _self.baseY * _self.imageHeight / h;
-                    cutLeft = _self.baseX * _self.imageWidth / w;
-                    console.log(cutTop, cutLeft, cutWidth, cutHeight)
-                    ctx.drawImage(_this, -cutLeft, -cutTop, cutWidth, cutWidth, 0, 0, _this.naturalWidth, _this.naturalWidth);
-                    can = canvas;
-                    cc = canvas.toDataURL("image/jpeg", 0.5);
-                    base64 = can.toDataURL("image/jpeg", 0.5);
-                    _self.$emit('uploaded', base64)
-                    _self.image = base64;
-                    _self.cutVisible = false;
+                    canvas.width = expectWidth;
+                    canvas.height = expectHeight;
+                    ctx.drawImage(_this, 0, 0, expectWidth, expectHeight);
+                    base64 = canvas.toDataURL()
                 }
 
+                _self.$emit('uploaded', base64)
+                _self.image = base64;
             },
             startCliper (imgId) {
                 let _self = this;
-                this.reRotate(imgId)
+                this.reRotate(imgId);
                 _self.cutVisible = true;
-                new AlloyFinger(_self.$refs.cutTools, {
-                    pinch: (evt) => {
-                        let zoom = evt.zoom;
-                        if (zoom > 1) {
-                            zoom = (zoom - 1) / 100 + 1;
-                        }
-                        if (zoom < 1) {
-                            zoom = 1 - zoom / 100;
-                        }
-                        let ele = _self.$refs.cutTools;
-                        let avatarArea = this.$refs.avatarArea;
-                        if (zoom * ele.clientWidth + ele.clientLeft > avatarArea.clientWidth) {
-                            _self.$refs.cutArea.style.width = avatarArea.clientWidth + 'px';
-                            _self.$refs.cutArea.style.height = avatarArea.clientHeight + 'px';
-                        }
-                        else if (zoom * ele.clientHeight + ele.clientTop > avatarArea.clientHeight) {
-                            _self.$refs.cutArea.style.width = avatarArea.clientWidth + 'px';
-                            _self.$refs.cutArea.style.height = avatarArea.clientHeight+ 'px';
-                        }
-                        else {
-                            _self.$refs.cutArea.style.width = zoom * _self.$refs.cutArea.clientWidth + 'px';
-                            _self.$refs.cutArea.style.height = zoom * _self.$refs.cutArea.clientHeight + 'px';
-                        }
-                    }
-                });
+
             },
             cutStart ($evt) {
                 if (this.left === 0 && this.top === 0) {
@@ -217,7 +192,6 @@
                 this.top = pageY;
             },
             cutEnd ($evt) {
-                console.log($evt)
 
             },
             cut ($evt) {
@@ -230,8 +204,7 @@
                     let pageY = $evt.touches[0].pageY;
                     let w = this.baseX - pageX + this.left;
                     let h = this.baseY - pageY + this.top;
-                    console.log(this.imageHeight)
-                    if (this.imageHeight >  this.imageWidth) {
+                    if (this.imageHeight > this.imageWidth) {
                         if (w < 0)
                             w = 0;
                         if (w > this.scale * this.imageWidth - this.imageWidth)
@@ -261,27 +234,6 @@
                     }
                     this.baseX = parseFloat(cutAreaAvatar.style.backgroundPositionX);
                     this.baseY = parseFloat(cutAreaAvatar.style.backgroundPositionY);
-                    // let w = (pageX - this.left);
-                    // let h = (pageY - this.top);
-                    // if (w + cutTools.clientWidth > avatarArea.clientWidth) {
-                    //     w = avatarArea.clientWidth - cutTools.clientWidth;
-                    // }
-                    // if (h + cutTools.clientHeight > avatarArea.clientHeight) {
-                    //     h = avatarArea.clientHeight - cutTools.clientHeight;
-                    // }
-                    // if (w < 0) {
-                    //     w = 0;
-                    // }
-                    // if (h < 0) {
-                    //     h = 0;
-                    // }
-                    // cutTools.style.left = 0;
-                    // cutTools.style.top = 0;
-                    // cutAreaAvatar.style.backgroundPositionX = '-' + w + 'px';
-                    // cutAreaAvatar.style.backgroundPositionY = '-' + h + 'px';
-                    // let cutArea = this.$refs.cutArea;
-                    // cutArea.style.left = w + 'px';
-                    // cutArea.style.top = h + 'px';
                 }
             },
             reRotate (uploadType) {
@@ -302,13 +254,13 @@
                         let expectWidth = _this.naturalWidth;
                         let expectHeight = _this.naturalHeight;
 
-                        if (expectWidth > 750) {
-                          console.log("reduce width to 750px");
-                          expectWidth = 750;
-                          expectHeight =
-                            (expectWidth * _this.naturalHeight) / _this.naturalWidth;
+                        if (_this.naturalWidth > _this.naturalHeight && _this.naturalWidth > 750) {
+                            expectWidth = 750;
+                            expectHeight = expectWidth * _this.naturalHeight / _this.naturalWidth;
+                        } else if (_this.naturalHeight > _this.naturalWidth && _this.naturalHeight > 750) {
+                            expectHeight = 750;
+                            expectWidth = expectHeight * _this.naturalWidth / _this.naturalHeight;
                         }
-
                         _self.imageWidth = expectWidth;
                         _self.imageHeight = expectHeight;
                         let canvas = document.createElement("canvas");
@@ -322,19 +274,41 @@
                         if (Orientation !== "" && Orientation !== 1) {
                             switch (Orientation) {
                                 case 6: //顺时针（向左）90度旋转
-                                    rotateImg(_this, 'left', canvas);
+                                    rotateImg(_this, 'left', can);
+                                    let temp = _self.imageHeight
+                                    _self.imageHeight = _self.imageWidth
+                                    _self.imageWidth = temp
                                     break;
                                 case 8: //逆时针（向右）90度旋转
-                                    rotateImg(_this, 'right', canvas);
+                                    rotateImg(_this, 'right', can);
+                                    let temp1 = _self.imageHeight
+                                    _self.imageHeight = _self.imageWidth
+                                    _self.imageWidth = temp1
                                     break;
                                 case 3: //180度旋转
-                                    rotateImg(_this, 'right', canvas);//转两次
-                                    rotateImg(_this, 'right', canvas);
+                                    rotateImg(_this, 'right', can);//转两次
+                                    rotateImg(_this, 'right', can);
                                     break;
                             }
                         }
-                        base64 = can.toDataURL("image/jpeg", 1);
+                        base64 = can.toDataURL("image/jpeg", 0.9);
                         _self.image = base64;
+                        new Promise((resolve, reject) => {
+                            let img = new Image()
+                            img.src = _self.image
+                            img.onload = () => {
+                                resolve()
+                            }
+                        }).then(() => {
+                            const image = _self.$refs.clipArea;
+                            window.cropper = new Cropper(image, {
+                                aspectRatio: 1 / 1,
+                                minCanvasHeight: document.body.clientWidth,
+                                minContainerHeight: document.body.clientWidth,
+                                crop(event) {
+                                },
+                            });
+                        })
                     }
                 }
                 freader.readAsDataURL(file);
@@ -403,5 +377,27 @@
     }
     .{$prefix}-avatar-area {
         overflow: hidden;
+    }
+    #clipArea {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1rem;
+        height: 1rem;
+    }
+
+</style>
+
+<style lang="stylus">
+    @import '~cropperjs/dist/cropper.min.css';
+    .cropper-view-box {
+        outline-color: rgba(255, 255, 255, 0.8) !important;
+        outline: 1px solid rgba(255, 255, 255, 0.9) !important;
+    }
+    .cropper-line {
+        background-color: rgba(255, 255, 255, 0.9) !important;
+    }
+    .cropper-point {
+        background-color: rgba(255, 255, 255, 0.9) !important;
     }
 </style>
