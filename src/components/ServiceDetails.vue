@@ -68,7 +68,8 @@
             },
             mainCls () {
                 return [
-                    `${prefix}-main`
+                    `${prefix}-main`,
+                    'rich-content'
                 ]
             }
         }
@@ -94,8 +95,13 @@
         padding: $padding-base;
     }
 
-    .{$prefix}-main img {
+    
+</style>
+
+<style lang="stylus">
+.{$prefix}-main.rich-content img {
         display: block;
         max-width: 100%;
-    }
+}
 </style>
+
