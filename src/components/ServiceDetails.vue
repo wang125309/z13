@@ -68,7 +68,8 @@
             },
             mainCls () {
                 return [
-                    `${prefix}-main`
+                    `${prefix}-main`,
+                    'rich-content'
                 ]
             }
         }
@@ -95,10 +96,14 @@
         padding: $padding-base;
     }
 
-    .{$prefix}-main img {
-        display: block;
-        max-width: 100%;
-    }
+
+</style>
+
+<style>
+.rich-content img {
+    display: block;
+    max-width: 100%;
+}
 </style>
 <style lang="stylus">
     .{$prefix}-author-area {
