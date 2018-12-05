@@ -101,10 +101,10 @@
     
 </style>
 
-<style lang="stylus">
-.{$prefix}-main.rich-content img {
-        display: block;
-        max-width: 100%;
+<style>
+.rich-content img {
+    display: block;
+    max-width: 100%;
 }
 </style>
 
