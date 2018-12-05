@@ -18,7 +18,7 @@
                         (data.newsAndRunableUnit.rentablrUnits &&
                         data.newsAndRunableUnit.rentablrUnits.length)"
                 >
-                <div style="margin: 0.04rem; padding: 0 0.03rem; background: #fff;">
+                <div style="margin: 0.04rem; padding: 0 0.03rem; background: #fff; min-height: 0.3rem;">
                 <swiper id="news-swiper" style="width: 100%;">
                     <swiper-slide style="width: 100%;" :key="'service' + i.id" v-for="i in data.newsAndRunableUnit.news">
                         <div class="news-list" @click.stop="goNews(i.id)">

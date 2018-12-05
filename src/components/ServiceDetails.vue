@@ -84,9 +84,7 @@
     .{$prefix}-author-area {
         background: #fff;
         .{$prefix}-author {
-            img {
-                max-width: 100%;
-            }
+
             &-time {
                 color: $font-second;
             }
@@ -100,5 +98,15 @@
     .{$prefix}-main img {
         display: block;
         max-width: 100%;
+    }
+</style>
+<style lang="stylus">
+    .{$prefix}-author-area {
+        background: #fff;
+        .{$prefix}-author {
+            img {
+                max-width: 100%;
+            }
+        }
     }
 </style>
